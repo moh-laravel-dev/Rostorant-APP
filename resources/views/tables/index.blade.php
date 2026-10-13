@@ -1,22 +1,6 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>طاولات المطعم</title>
-
     <style>
         * {
             box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 30px;
-            font-family: Arial, sans-serif;
-            background: #f3f6f4;
-            color: #24332d;
         }
 
         .container {
@@ -442,119 +426,131 @@
             transform: translateY(-1px);
         }
     </style>
-</head>
 
-<body>
-    <div class="container">
+    @extends('admin.layouts.main-layout')
 
-        <div class="header">
-            <h1>طاولات المطعم</h1>
-            <form method="GET" action="{{ route('tables.index') }}" class="search-form">
-                <input type="text" name="search" value="{{ request('search') }}"
-                    placeholder="ابحث برقم الطاولة أو كود QR..." autocomplete="off">
+    @section('title', 'الطاولات')
+    @section('page-title', 'إدارة الطاولات')
 
-                <button type="submit">بحث</button>
+    @section('content')
+        <div class="container">
 
-                @if (request()->filled('search'))
-                    <a href="{{ route('tables.index') }}">إلغاء البحث</a>
-                @endif
-            </form>
-        </div>
+            <div class="header">
+                <h1>طاولات المطعم</h1>
+                <form method="GET" action="{{ route('tables.index') }}" class="search-form">
+                    <input type="text" name="search" value="{{ request('search') }}"
+                        placeholder="ابحث برقم الطاولة أو كود QR..." autocomplete="off">
 
-        @php
-            $totalTables = $tables->count();
-            $availableTables = $tables->where('status', 1)->count();
-            $busyTables = $tables->where('status', 0)->count();
-        @endphp
+                    <button type="submit">بحث</button>
 
-        <div class="stats">
-            <div class="stat-card total">
-                <div class="label">إجمالي الطاولات</div>
-                <div class="number">{{ $totalTables }}</div>
+                    @if (request()->filled('search'))
+                        <a href="{{ route('tables.index') }}">إلغاء البحث</a>
+                    @endif
+                </form>
             </div>
 
-            <div class="stat-card available">
-                <div class="label">الطاولات المتاحة</div>
-                <div class="number">{{ $availableTables }}</div>
-            </div>
+            @php
+                $totalTables = $tables->count();
+                $availableTables = $tables->where('status', 1)->count();
+                $busyTables = $tables->where('status', 0)->count();
+            @endphp
 
-            <div class="stat-card busy">
-                <div class="label">الطاولات المشغولة</div>
-                <div class="number">{{ $busyTables }}</div>
-            </div>
-        </div>
+            <div class="stats">
+                <div class="stat-card total">
+                    <div class="label">إجمالي الطاولات</div>
+                    <div class="number">{{ $totalTables }}</div>
+                </div>
 
-        @if ($tables->isNotEmpty())
-            <div class="tables-grid">
-                @foreach ($tables as $table)
-                    <div class="table-card {{ $table->status ? '' : 'busy' }}" id="table-card-{{ $table->id }}">
-                        <div class="table-card-header">
-                            <div class="table-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                                    stroke-linecap="round" stroke-linejoin="round" aria-label="أيقونة طاولة">
-                                    <path d="M3 8h18v3H3z" />
-                                    <path d="M5 11v9M19 11v9" />
-                                    <path d="M8 8V5h8v3" />
-                                </svg>
+                <div class="stat-card available">
+                    <div class="label">الطاولات المتاحة</div>
+                    <div class="number">{{ $availableTables }}</div>
+                </div>
+
+                <div class="stat-card busy">
+                    <div class="label">الطاولات المشغولة</div>
+                    <div class="number">{{ $busyTables }}</div>
+                </div>
+            </div>
+            <a href="{{ route('tables.create') }}"
+                class="inline-flex items-center gap-2 rounded-xl bg-[#174c3c] px-5 py-3 text-sm font-bold text-white shadow-md shadow-[#174c3c]/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#103a2e] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-[#174c3c]/20 active:translate-y-0 mb-5">
+
+                <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 5v14M5 12h14" />
+                </svg>
+
+                <span>إضافة طاولة</span>
+            </a>
+            @if ($tables->isNotEmpty())
+                <div class="tables-grid">
+                    @foreach ($tables as $table)
+                        <div class="table-card {{ $table->status ? '' : 'busy' }}" id="table-card-{{ $table->id }}">
+                            <div class="table-card-header">
+                                <div class="table-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" stroke-linejoin="round" aria-label="أيقونة طاولة">
+                                        <path d="M3 8h18v3H3z" />
+                                        <path d="M5 11v9M19 11v9" />
+                                        <path d="M8 8V5h8v3" />
+                                    </svg>
+                                </div>
+
+                                <a href="{{ route('tables.edit', $table->code) }}"
+                                    class="btn {{ $table->status ? 'btn-edit' : 'btn-edit-red' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M12 20h9" />
+                                        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z" />
+                                    </svg>
+                                    تعديل
+                                </a>
                             </div>
 
-                            <a href="" class="btn {{ $table->status ? 'btn-edit' : 'btn-edit-red' }}">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M12 20h9" />
-                                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z" />
-                                </svg>
-                                تعديل
-                            </a>
-                        </div>
+                            <div class="table-name">
+                                {{ $table->name }}
+                            </div>
 
-                        <div class="table-name">
-                            {{ $table->name }}
-                        </div>
+                            <div class="table-number">
+                                رقم الطاولة: {{ $table->number }}
+                            </div>
 
-                        <div class="table-number">
-                            رقم الطاولة: {{ $table->number }}
-                        </div>
+                            <div class="table-code">
+                                {{ $table->code }}
+                            </div>
 
-                        <div class="table-code">
-                            {{ $table->code }}
-                        </div>
+                            <span class="status {{ $table->status ? 'available' : 'busy' }}">
+                                {{ $table->status ? 'متاحة' : 'مشغولة' }}
+                            </span>
 
-                        <span class="status {{ $table->status ? 'available' : 'busy' }}">
-                            {{ $table->status ? 'متاحة' : 'مشغولة' }}
-                        </span>
-
-                        <div class="actions">
-                            <a href="{{ route('tables.qr', $table->id) }}"
-                                class="btn {{ $table->status ? 'btn-show' : 'btn-show-red' }}"> <svg
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="3" width="7" height="7" rx="1" />
-                                    <rect x="14" y="3" width="7" height="7" rx="1" />
-                                    <rect x="3" y="14" width="7" height="7" rx="1" />
-                                    <path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20v1" />
-                                </svg>
-                                عرض QR
-                            </a>
-
-                            @if (!$table->status)
-                                <a href="" class="btn btn-print">
-
-                                    عرض الفاتورة الحالية
+                            <div class="actions">
+                                <a href="{{ route('tables.qr', $table->id) }}"
+                                    class="btn {{ $table->status ? 'btn-show' : 'btn-show-red' }}"> <svg
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                                        <path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20v1" />
+                                    </svg>
+                                    عرض QR
                                 </a>
-                            @endif
+
+                                @if (!$table->status)
+                                    <a href="" class="btn btn-print">
+
+                                        عرض الفاتورة الحالية
+                                    </a>
+                                @endif
+                            </div>
+
                         </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="empty">
+                    <h2>لا توجد طاولات</h2>
+                    <p>لم تتم إضافة أي طاولات حتى الآن.</p>
+                </div>
+            @endif
 
-                    </div>
-                @endforeach
-            </div>
-        @else
-            <div class="empty">
-                <h2>لا توجد طاولات</h2>
-                <p>لم تتم إضافة أي طاولات حتى الآن.</p>
-            </div>
-        @endif
-
-    </div>
-</body>
-
-</html>
+        </div>
+    @endsection

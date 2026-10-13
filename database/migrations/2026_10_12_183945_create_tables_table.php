@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('number')->unique();
+            $table->unsignedInteger('number')->startingValue(1)->unique();
             $table->string('code')->unique(); //as auto generate #A4T56G
             $table->boolean('status')->default(true);
             $table->timestamps();

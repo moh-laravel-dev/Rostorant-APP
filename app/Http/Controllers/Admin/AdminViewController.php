@@ -15,4 +15,9 @@ class AdminViewController extends Controller
     {
         return view('admin.login');
     }
+
+    public function settings()
+    {
+        return view('admin.settings');
+    }
 }

@@ -23,8 +23,9 @@ class Table extends Model
             do {
                 $code = '#' . strtoupper(Str::random(6));
             } while (static::where('code', $code)->exists());
-
+            $number = static::max('number') + 1;
             $table->code = $code;
+            $table->number = $number;
         });
     }
 }

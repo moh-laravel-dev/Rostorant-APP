@@ -50,6 +50,18 @@
             cursor: pointer;
         }
 
+        .red-btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 8px;
+            border: 0;
+            border-radius: 8px;
+            background: #4c1717;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         @media print {
             body {
                 background: white;
@@ -65,11 +77,33 @@
                 display: none;
             }
         }
+
+        .status-alert {
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px solid #f59e0b;
+            border-radius: 10px;
+            background: #fffbeb;
+            color: #92400e;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        @media print {
+            .status-alert {
+                display: none !important;
+            }
+        }
     </style>
-</head>
+</head>s
 
 <body>
     <div class="qr-card">
+        @if ((int) $table->status === 0)
+            <div class="status-alert">
+                ⚠️ تنبيه: هذه الطاولة مشغولة حاليًا
+            </div>
+        @endif
         <h1>{{ $table->name }}</h1>
         <p>رقم الطاولة: {{ $table->number }}</p>
 

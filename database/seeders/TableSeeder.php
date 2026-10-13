@@ -11,8 +11,7 @@ class TableSeeder extends Seeder
     {
         for ($i = 1; $i <= 50; $i++) {
             Table::create([
-                'name' => 'Table ' . $i,
-                'number' => $i,
+                'name' => 'طاولة رقم ' . $i,
                 'status' => true,
             ]);
         }

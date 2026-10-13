@@ -266,7 +266,7 @@
                             كلمة المرور
                         </label>
 
-                        <div class="relative">
+                        <div class="relative w-full">
                             <span
                                 class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#174c3c]/60">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
@@ -279,10 +279,10 @@
 
                             <input id="password" :type="showPassword ? 'text' : 'password'" name="password" required
                                 autocomplete="current-password" placeholder="أدخل كلمة المرور" dir="ltr"
-                                class="login-input w-full rounded-xl border border-gray-200 bg-[#faf7f0]/60 py-3.5 pl-16 pr-12 text-left text-gray-800 outline-none placeholder:text-gray-400">
+                                class="login-input w-full rounded-xl border border-gray-200 bg-[#faf7f0]/60 py-3.5 pl-20 pr-12 text-left text-gray-800 outline-none placeholder:text-gray-400">
 
                             <button type="button" @click="showPassword = !showPassword"
-                                class="absolute left-3 top-1/2 -translate-y-1/2 rounded-lg px-2 py-1 text-xs font-bold text-[#174c3c] transition hover:bg-[#174c3c]/5"
+                                class="absolute left-2 top-1/2 z-20 -translate-y-1/2 whitespace-nowrap rounded-lg px-2 py-2 text-xs font-bold text-[#174c3c] hover:bg-[#174c3c]/10"
                                 x-text="showPassword ? 'إخفاء' : 'إظهار'"></button>
                         </div>
 
@@ -290,56 +290,57 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
+            </div>
 
-                    {{-- Remember / Forgot --}}
-                    <div class="flex flex-wrap items-center justify-between gap-3">
-                        {{-- <label class="flex cursor-pointer items-center gap-2 text-sm text-gray-600">
+            {{-- Remember / Forgot --}}
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                {{-- <label class="flex cursor-pointer items-center gap-2 text-sm text-gray-600">
                             <input type="checkbox" name="remember" value="1" @checked(old('remember'))
                                 class="h-4 w-4 rounded border-gray-300 accent-[#174c3c] focus:ring-[#174c3c]">
                             <span>تذكّرني</span>
                         </label> --}}
 
 
-                        <a href="{{ route('password.request') }}"
-                            class="text-sm font-bold text-[#174c3c] transition hover:text-[#b28743]">
-                            نسيت كلمة المرور؟
-                        </a>
+                <a href="{{ route('password.request') }}"
+                    class="text-sm font-bold text-[#174c3c] transition hover:text-[#b28743] mb-3 mr-3">
+                    نسيت كلمة المرور؟
+                </a>
 
-                    </div>
-
-                    {{-- Submit --}}
-                    <button type="submit"
-                        class="login-button flex w-full items-center justify-center gap-3 rounded-xl px-5 py-4 font-bold text-white">
-                        <span>تسجيل الدخول</span>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14" />
-                            <path d="m12 5 7 7-7 7" />
-                        </svg>
-                    </button>
-                </form>
-
-                {{-- Support --}}
-                <div class="mt-7 flex items-center gap-3">
-                    <div class="h-px flex-1 bg-gray-100"></div>
-
-                    <span class="text-[10px] font-semibold text-gray-400">
-                        مخصص للموظفين المصرّح لهم
-                    </span>
-
-                    <div class="h-px flex-1 bg-gray-100"></div>
-                </div>
-
-                <p class="mt-5 text-center text-xs leading-7 text-gray-500">
-                    هل تواجه مشكلة في الدخول؟
-
-                    <a href="mailto:muhamedawad2000@gmail.com"
-                        class="font-bold text-[#174c3c] underline decoration-[#d7a85b] underline-offset-4 hover:text-[#b28743]">
-                        تواصل مع الدعم الفني
-                    </a>
-                </p>
             </div>
+
+            {{-- Submit --}}
+            <button type="submit"
+                class="login-button flex w-full items-center justify-center gap-3 rounded-xl px-5 py-4 font-bold text-white">
+                <span>تسجيل الدخول</span>
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                </svg>
+            </button>
+            </form>
+
+            {{-- Support --}}
+            <div class="mt-7 flex items-center gap-3">
+                <div class="h-px flex-1 bg-gray-100"></div>
+
+                <span class="text-[10px] font-semibold text-gray-400">
+                    مخصص للموظفين المصرّح لهم
+                </span>
+
+                <div class="h-px flex-1 bg-gray-100"></div>
+            </div>
+
+            <p class="mt-5 text-center text-xs leading-7 text-gray-500">
+                هل تواجه مشكلة في الدخول؟
+
+                <a href="mailto:muhamedawad2000@gmail.com"
+                    class="font-bold text-[#174c3c] underline decoration-[#d7a85b] underline-offset-4 hover:text-[#b28743]">
+                    تواصل مع الدعم الفني
+                </a>
+            </p>
+        </div>
         </div>
 
         {{-- Footer --}}
