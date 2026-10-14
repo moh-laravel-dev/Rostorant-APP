@@ -21,4 +21,9 @@ class CategoryFood extends Model
             'is_active' => 'boolean',
         ];
     }
+
+    public function foods()
+    {
+        return $this->hasMany(Food::class, 'category_food_id');
+    }
 }

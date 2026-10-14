@@ -7,10 +7,15 @@ use App\Http\Controllers\Admin\CategoryFoodController;
 use App\Http\Controllers\Admin\TableController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TableServiceController;
+use App\Http\Controllers\Admin\FoodController;
+use App\Http\Controllers\MenuController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+
+Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 Route::prefix('admin')->group(function () {
 
     ///////////////////////////////  Auth  ///////////////////////////////
@@ -56,6 +61,23 @@ Route::prefix('admin')->group(function () {
         Route::patch('category-food/{categoryFood}/toggle-status', [CategoryFoodController::class, 'toggleStatus',])->name('admin.category-food.toggle-status');
 
         /////////////////////////////  Category Food  ///////////////////////////////
+
+        /////////////////////////////  Food  ///////////////////////////////
+
+        // مسارات الوجبات التابعة لتصنيف معين
+        Route::prefix('category-food/{category}')->name('admin.category-food.food.')->group(function () {
+            Route::get('food', [FoodController::class, 'index'])->name('index');
+            Route::get('food/create', [FoodController::class, 'create'])->name('create');
+            Route::post('food', [FoodController::class, 'store'])->name('store');
+            Route::get('food/{food}', [FoodController::class, 'show'])->name('show');
+            Route::get('food/{food}/edit', [FoodController::class, 'edit'])->name('edit');
+            Route::put('food/{food}', [FoodController::class, 'update'])->name('update');
+            Route::delete('food/{food}', [FoodController::class, 'destroy'])->name('destroy');
+            Route::patch('food/{food}/toggle-status', [FoodController::class, 'toggleStatus'])->name('toggle-status');
+        });
+
+        /////////////////////////////  Food  ///////////////////////////////
+
     });
 });
 

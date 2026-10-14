@@ -13,11 +13,54 @@ use Throwable;
 
 class CategoryFoodController extends Controller
 {
-    public function index(): View
-    {
-        $categories = CategoryFood::latest()->paginate(10);
 
-        return view('admin.category-food.index', compact('categories'));
+    public function index(Request $request)
+    {
+        $allowedLimits = [5, 10, 25, 50, 100];
+
+        $limit = (int) $request->input('limit', 10);
+
+        if (!in_array($limit, $allowedLimits, true)) {
+            $limit = 10;
+        }
+
+        $query = CategoryFood::query()->withCount('foods');
+
+        // Search by name or description
+        if ($request->filled('search')) {
+            $search = trim($request->input('search'));
+
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        // Filter by status
+        if ($request->input('status') === 'active') {
+            $query->where('is_active', true);
+        } elseif ($request->input('status') === 'inactive') {
+            $query->where('is_active', false);
+        }
+
+        $categories = $query
+            ->latest()
+            ->paginate($limit)
+            ->withQueryString();
+
+        // Global statistics (unaffected by filters)
+        $totalCategories = CategoryFood::count();
+
+        $activeCategories = CategoryFood::where('is_active', true)->count();
+
+        $inactiveCategories = CategoryFood::where('is_active', false)->count();
+
+        return view('admin.category-food.index', compact(
+            'categories',
+            'totalCategories',
+            'activeCategories',
+            'inactiveCategories'
+        ));
     }
 
     public function create(): View

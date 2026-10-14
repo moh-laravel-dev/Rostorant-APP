@@ -27,7 +27,7 @@ class TableServiceController extends Controller
                         'id' => (string) $key,
                         'name' => $service['name'] ?? '',
                         'value' => $service['value'] ?? 0,
-                        'currency' => $service['currency'] ?? 'SYP',
+                        'currency' => $service['currency'] ?? 'ل.س',
                         'active' => true,
                     ];
                 })

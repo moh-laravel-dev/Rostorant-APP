@@ -6,64 +6,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#174c3c">
     <title>تسجيل دخول الإدارة</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.5/build/css/intlTelInput.css">
 
     <style>
         :root {
             --primary: #174c3c;
             --primary-dark: #10382d;
+            --primary-light: #eaf2ee;
             --gold: #d7a85b;
             --cream: #faf7f0;
         }
 
         * {
-            font-family: 'Cairo', sans-serif;
             box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        html {
+            min-height: 100%;
+            scroll-behavior: smooth;
         }
 
         body {
+            min-height: 100vh;
+            margin: 0;
             background: var(--cream);
         }
 
         .login-background {
             background:
-                radial-gradient(circle at 10% 15%, rgba(215, 168, 91, .18), transparent 30%),
-                radial-gradient(circle at 90% 85%, rgba(23, 76, 60, .15), transparent 35%),
-                var(--cream);
+                radial-gradient(ellipse at 0% 0%, rgba(215, 168, 91, .17), transparent 36%),
+                radial-gradient(ellipse at 100% 100%, rgba(23, 76, 60, .13), transparent 38%),
+                linear-gradient(135deg, #fcfaf5 0%, #f4f3eb 50%, #f8f7f1 100%);
         }
 
         .login-card {
-            box-shadow: 0 25px 80px rgba(16, 56, 45, .12);
+            box-shadow:
+                0 30px 80px rgba(16, 56, 45, .10),
+                0 8px 24px rgba(16, 56, 45, .05);
+        }
+
+        .login-header {
+            background:
+                radial-gradient(circle at 100% 0%, rgba(215, 168, 91, .15), transparent 36%),
+                linear-gradient(145deg, #1b5945 0%, #174c3c 48%, #10382d 100%);
         }
 
         .login-button {
-            background: var(--primary);
-            transition: all .25s ease;
+            background: linear-gradient(135deg, #1b5945, #174c3c 60%, #10382d);
+            box-shadow: 0 8px 18px rgba(23, 76, 60, .16);
+            transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
         }
 
         .login-button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(23, 76, 60, .2);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(23, 76, 60, .23);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
         }
 
         .login-input {
-            transition: all .2s ease;
+            transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
         }
 
         .login-input:focus {
             border-color: var(--primary);
+            background: #fff;
             box-shadow: 0 0 0 4px rgba(23, 76, 60, .09);
+            outline: none;
         }
 
         .gold-line {
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .decorative-ring {
+            pointer-events: none;
+            position: absolute;
+            border: 1px solid rgba(215, 168, 91, .22);
+            border-radius: 50%;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, .9);
+            border: 1px solid rgba(255, 255, 255, .22);
+            background: rgba(255, 255, 255, .09);
+            transition: background .2s ease, border-color .2s ease;
+        }
+
+        .back-home:hover {
+            background: rgba(255, 255, 255, .17);
+            border-color: rgba(255, 255, 255, .4);
         }
 
         [x-cloak] {
@@ -79,21 +127,21 @@
         .iti input#phone {
             width: 100%;
             height: 54px;
-            box-sizing: border-box;
             border: 1px solid #e5e7eb;
             border-radius: 12px;
-            background: rgba(250, 247, 240, 0.6);
+            background: rgba(250, 247, 240, .65);
             padding-left: 120px !important;
             padding-right: 16px !important;
             text-align: left;
             color: #1f2937;
-            font-size: 18px;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            font-size: 16px;
+            transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
         }
 
         .iti input#phone:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(23, 76, 60, 0.09);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(23, 76, 60, .09);
             outline: none;
         }
 
@@ -107,13 +155,13 @@
             height: 42px;
             padding: 0 9px;
             border-radius: 8px;
-            background: rgba(23, 76, 60, 0.06);
-            transition: background 0.2s ease;
+            background: rgba(23, 76, 60, .06);
+            transition: background .2s ease;
         }
 
         .iti__selected-country:hover,
         .iti__selected-country:focus {
-            background: rgba(23, 76, 60, 0.12);
+            background: rgba(23, 76, 60, .12);
         }
 
         .iti__selected-country-primary {
@@ -129,12 +177,8 @@
             margin-top: 6px;
             border: 1px solid #e5e7eb;
             border-radius: 14px;
-            box-shadow: 0 15px 40px rgba(16, 56, 45, 0.16);
+            box-shadow: 0 15px 40px rgba(16, 56, 45, .16);
             overflow: hidden;
-        }
-
-        [dir=rtl] .iti__search-input {
-            padding: 10px 30px;
         }
 
         .iti__search-input {
@@ -150,16 +194,12 @@
 
         .iti__search-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(23, 76, 60, 0.08);
+            box-shadow: 0 0 0 3px rgba(23, 76, 60, .08);
         }
 
         .iti__country-list {
             scrollbar-width: thin;
             scrollbar-color: #d7a85b #faf7f0;
-        }
-
-        [dir=rtl] .iti__search-icon {
-            right: 20px;
         }
 
         .iti__country.iti__highlight {
@@ -175,66 +215,128 @@
             font-weight: 700;
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 480px) {
+            .login-card {
+                border-radius: 22px;
+            }
+
+            .login-header {
+                padding: 30px 22px 28px;
+            }
+
+            .login-form-content {
+                padding: 25px 20px;
+            }
+
             .iti input#phone {
-                padding-left: 115px !important;
+                padding-left: 112px !important;
+                font-size: 15px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
             }
         }
     </style>
 </head>
 
-<body class="login-background flex min-h-screen items-center justify-center overflow-x-hidden px-4 py-10">
+<body
+    class="login-background relative flex min-h-screen items-center justify-center overflow-x-hidden px-4 py-8 sm:px-6 sm:py-12">
 
-    <div class="fixed -right-24 -top-24 h-72 w-72 rounded-full border border-[#d7a85b]/20"></div>
-    <div class="fixed -right-16 -top-16 h-56 w-56 rounded-full border border-[#d7a85b]/20"></div>
-    <div class="fixed -bottom-28 -left-24 h-80 w-80 rounded-full border border-[#174c3c]/10"></div>
-    <div class="fixed -bottom-16 -left-12 h-56 w-56 rounded-full border border-[#174c3c]/10"></div>
+    {{-- Background Decorations --}}
+    <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
+        <div class="decorative-ring -right-28 -top-28 h-80 w-80"></div>
+        <div class="decorative-ring -right-16 -top-16 h-56 w-56"></div>
+        <div class="decorative-ring -bottom-32 -left-28 h-96 w-96" style="border-color: rgba(23, 76, 60, .12)"></div>
+        <div class="decorative-ring -bottom-16 -left-12 h-64 w-64" style="border-color: rgba(23, 76, 60, .09)"></div>
+        <div class="absolute left-[12%] top-[18%] h-2 w-2 rounded-full bg-[#d7a85b]/50"></div>
+        <div class="absolute bottom-[22%] right-[10%] h-3 w-3 rounded-full bg-[#174c3c]/20"></div>
+    </div>
 
-    <main class="relative z-10 w-full max-w-md">
+    <main class="relative z-10 mx-auto w-full max-w-md">
 
-        <div class="login-card overflow-hidden rounded-3xl border border-white bg-white">
+        {{-- Brand --}}
+        <div class="mb-6 text-center sm:mb-8">
+            <div
+                class="mb-3 inline-flex items-center gap-2 rounded-full border border-[#174c3c]/10 bg-white/70 px-4 py-2 shadow-sm">
+                <span class="h-2 w-2 rounded-full bg-[#d7a85b]"></span>
+                <span class="text-xs font-bold tracking-wide text-[#174c3c]">بوابة الإدارة الرسمية</span>
+            </div>
+            <p class="text-sm font-medium text-gray-500">
+                تسجيل دخول آمن وسهل إلى لوحة التحكم
+            </p>
+        </div>
+
+        <section class="login-card overflow-hidden rounded-3xl border border-white/90 bg-white">
 
             {{-- Header --}}
-            <div class="relative overflow-hidden bg-[#174c3c] px-8 pb-9 pt-10 text-center text-white">
-
-                <div class="absolute -left-10 -top-10 h-36 w-36 rounded-full border border-white/10"></div>
-                <div class="absolute -left-5 -top-5 h-24 w-24 rounded-full border border-[#d7a85b]/30"></div>
+            <header
+                class="login-header relative overflow-hidden px-7 pb-8 pt-8 text-center text-white sm:px-9 sm:pb-9 sm:pt-9">
 
                 <div
-                    class="relative mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-2xl border border-[#d7a85b]/60 bg-white/10 shadow-lg backdrop-blur">
-                    <span class="text-4xl font-extrabold text-[#d7a85b]">A</span>
+                    class="pointer-events-none absolute -left-12 -top-12 h-40 w-40 rounded-full border border-white/10">
+                </div>
+                <div
+                    class="pointer-events-none absolute -left-5 -top-5 h-24 w-24 rounded-full border border-[#d7a85b]/30">
+                </div>
+                <div
+                    class="pointer-events-none absolute -bottom-16 -right-8 h-36 w-36 rounded-full border border-white/10">
                 </div>
 
-                <p class="mb-2 text-xs font-bold tracking-[3px] text-[#d7a85b]">
-                    بوابة الإدارة
+                <a href="{{ route('welcome') }}"
+                    class="back-home absolute right-4 top-4 z-20 rounded-xl px-3 py-2 text-xs font-bold sm:right-6 sm:top-6 sm:px-3.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    الرئيسية
+                </a>
+
+                <div
+                    class="relative mx-auto mb-5 mt-8 flex h-[76px] w-[76px] items-center justify-center rounded-2xl border border-[#d7a85b]/60 bg-white/10 shadow-lg backdrop-blur sm:mt-5 sm:h-20 sm:w-20">
+                    <span class="text-4xl font-black text-[#d7a85b]">A</span>
+                    <span
+                        class="absolute -bottom-1.5 -left-1.5 h-5 w-5 rounded-full border-2 border-[#174c3c] bg-[#d7a85b]"></span>
+                </div>
+
+                <p class="mb-2 text-xs font-bold tracking-[3px] text-[#e8c98e]">
+                    ADMIN PORTAL
                 </p>
 
-                <h1 class="text-3xl font-extrabold">
+                <h1 class="text-2xl font-extrabold sm:text-3xl">
                     أهلاً بعودتك
                 </h1>
 
-                <p class="mt-3 text-sm leading-7 text-white/70">
-                    سجّل دخولك للوصول إلى لوحة التحكم.
+                <p class="mx-auto mt-3 max-w-xs text-sm leading-7 text-white/75">
+                    سجّل دخولك للمتابعة والوصول إلى لوحة التحكم.
                 </p>
 
-                <div class="gold-line mx-auto mt-7 h-px w-28"></div>
-            </div>
+                <div class="gold-line mx-auto mt-6 h-px w-28"></div>
+            </header>
 
-            {{-- Form --}}
-            <div class="px-6 py-8 sm:px-9">
+            {{-- Form Content --}}
+            <div class="login-form-content px-6 py-7 sm:px-9 sm:py-8">
 
                 @if (session('status'))
-                    <div
+                    <div role="status"
                         class="mb-5 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800">
-                        <span class="mt-0.5">✓</span>
+                        <span class="mt-0.5 font-bold">✓</span>
                         <p>{{ session('status') }}</p>
                     </div>
                 @endif
 
                 @if ($errors->any())
-                    <div
+                    <div role="alert"
                         class="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-                        <span class="mt-0.5">!</span>
+                        <span class="mt-0.5 font-bold">!</span>
                         <p>{{ $errors->first() }}</p>
                     </div>
                 @endif
@@ -248,25 +350,34 @@
                             رقم الهاتف
                         </label>
 
-                        <input id="phone" type="tel" name="phone" value="{{ old('phone') }}" required
-                            autofocus autocomplete="tel" inputmode="numeric" placeholder="أدخل رقم الهاتف"
-                            class="login-input w-full rounded-xl border border-gray-200 bg-[#faf7f0]/60 px-4 py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
+                        <div class="relative">
+                            <input id="phone" type="tel" name="phone" value="{{ old('phone') }}" required
+                                autofocus autocomplete="tel" inputmode="numeric" placeholder="أدخل رقم الهاتف"
+                                class="login-input w-full rounded-xl border border-gray-200 bg-[#faf7f0]/60 px-4 py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
 
-                        <input type="hidden" name="country_code" id="country_code"
-                            value="{{ old('country_code', '+963') }}">
+                            <input type="hidden" name="country_code" id="country_code"
+                                value="{{ old('country_code', '+963') }}">
+                        </div>
 
                         @error('phone')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-1.5 text-xs font-semibold text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- Password --}}
                     <div x-data="{ showPassword: false }">
-                        <label for="password" class="mb-2 block text-sm font-bold text-[#174c3c]">
-                            كلمة المرور
-                        </label>
+                        <div class="mb-2 flex items-center justify-between gap-3">
+                            <label for="password" class="block text-sm font-bold text-[#174c3c]">
+                                كلمة المرور
+                            </label>
 
-                        <div class="relative w-full">
+                            <a href="{{ route('password.request') }}"
+                                class="text-xs font-bold text-[#174c3c] transition hover:text-[#b28743]">
+                                نسيت كلمة المرور؟
+                            </a>
+                        </div>
+
+                        <div class="relative">
                             <span
                                 class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#174c3c]/60">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
@@ -282,111 +393,126 @@
                                 class="login-input w-full rounded-xl border border-gray-200 bg-[#faf7f0]/60 py-3.5 pl-20 pr-12 text-left text-gray-800 outline-none placeholder:text-gray-400">
 
                             <button type="button" @click="showPassword = !showPassword"
-                                class="absolute left-2 top-1/2 z-20 -translate-y-1/2 whitespace-nowrap rounded-lg px-2 py-2 text-xs font-bold text-[#174c3c] hover:bg-[#174c3c]/10"
-                                x-text="showPassword ? 'إخفاء' : 'إظهار'"></button>
+                                :aria-label="showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'"
+                                class="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-lg px-2.5 py-2 text-xs font-bold text-[#174c3c] transition hover:bg-[#174c3c]/10 focus:outline-none focus:ring-2 focus:ring-[#174c3c]/30"
+                                x-text="showPassword ? 'إخفاء' : 'إظهار'">
+                            </button>
                         </div>
 
                         @error('password')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-1.5 text-xs font-semibold text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    {{-- Remember Me --}}
+                    {{--
+                    <label class="flex cursor-pointer items-center gap-2 text-sm text-gray-600">
+                        <input type="checkbox" name="remember" value="1" @checked(old('remember'))
+                            class="h-4 w-4 rounded border-gray-300 accent-[#174c3c] focus:ring-[#174c3c]">
+                        <span>تذكّرني</span>
+                    </label>
+                    --}}
+
+                    {{-- Submit --}}
+                    <button type="submit"
+                        class="login-button group flex min-h-[54px] w-full items-center justify-center gap-3 rounded-xl px-5 py-3.5 font-bold text-white focus:outline-none focus:ring-4 focus:ring-[#174c3c]/20">
+                        <span>تسجيل الدخول</span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14" stroke-linecap="round" />
+                            <path d="m12 5 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </form>
+
+                {{-- Security Notice --}}
+                <div
+                    class="mt-6 flex items-center justify-center gap-2 rounded-xl border border-[#174c3c]/[0.08] bg-[#174c3c]/[0.035] px-3 py-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0 text-[#174c3c]/70"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="m9 12 2 2 4-4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span class="text-center text-[11px] font-semibold leading-5 text-gray-500">
+                        هذه البوابة مخصصة للموظفين المصرّح لهم فقط
+                    </span>
+                </div>
+
+                {{-- Support --}}
+                <div class="mt-6 flex items-center gap-3">
+                    <div class="h-px flex-1 bg-gray-100"></div>
+                    <span class="text-[10px] font-semibold text-gray-400">الدعم الفني</span>
+                    <div class="h-px flex-1 bg-gray-100"></div>
+                </div>
+
+                <p class="mt-4 text-center text-xs leading-7 text-gray-500">
+                    هل تواجه مشكلة في الدخول؟
+                    <a href="mailto:muhamedawad2000@gmail.com"
+                        class="font-bold text-[#174c3c] underline decoration-[#d7a85b] underline-offset-4 transition hover:text-[#b28743]">
+                        تواصل معنا
+                    </a>
+                </p>
             </div>
-
-            {{-- Remember / Forgot --}}
-            <div class="flex flex-wrap items-center justify-between gap-3">
-                {{-- <label class="flex cursor-pointer items-center gap-2 text-sm text-gray-600">
-                            <input type="checkbox" name="remember" value="1" @checked(old('remember'))
-                                class="h-4 w-4 rounded border-gray-300 accent-[#174c3c] focus:ring-[#174c3c]">
-                            <span>تذكّرني</span>
-                        </label> --}}
-
-
-                <a href="{{ route('password.request') }}"
-                    class="text-sm font-bold text-[#174c3c] transition hover:text-[#b28743] mb-3 mr-3">
-                    نسيت كلمة المرور؟
-                </a>
-
-            </div>
-
-            {{-- Submit --}}
-            <button type="submit"
-                class="login-button flex w-full items-center justify-center gap-3 rounded-xl px-5 py-4 font-bold text-white">
-                <span>تسجيل الدخول</span>
-
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                </svg>
-            </button>
-            </form>
-
-            {{-- Support --}}
-            <div class="mt-7 flex items-center gap-3">
-                <div class="h-px flex-1 bg-gray-100"></div>
-
-                <span class="text-[10px] font-semibold text-gray-400">
-                    مخصص للموظفين المصرّح لهم
-                </span>
-
-                <div class="h-px flex-1 bg-gray-100"></div>
-            </div>
-
-            <p class="mt-5 text-center text-xs leading-7 text-gray-500">
-                هل تواجه مشكلة في الدخول؟
-
-                <a href="mailto:muhamedawad2000@gmail.com"
-                    class="font-bold text-[#174c3c] underline decoration-[#d7a85b] underline-offset-4 hover:text-[#b28743]">
-                    تواصل مع الدعم الفني
-                </a>
-            </p>
-        </div>
-        </div>
+        </section>
 
         {{-- Footer --}}
-        <p class="mt-6 text-center text-xs leading-6 text-gray-500">
-            © {{ date('Y') }} لوحة الإدارة. جميع الحقوق محفوظة.
-        </p>
+        <footer class="mt-6 text-center">
+            <p class="text-xs leading-6 text-gray-500">
+                © {{ date('Y') }} لوحة الإدارة. جميع الحقوق محفوظة.
+            </p>
+        </footer>
 
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.5/build/js/intlTelInput.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.querySelector('#phone');
+            const countryCodeInput = document.querySelector('#country_code');
+            const loginForm = document.querySelector('form');
+
+            if (!phoneInput || !countryCodeInput || !loginForm || !window.intlTelInput) {
+                return;
+            }
+
+            const iti = window.intlTelInput(phoneInput, {
+                initialCountry: 'sy',
+                separateDialCode: true,
+                nationalMode: true,
+                showFlags: true,
+                countrySearch: true,
+                useFullscreenPopup: false,
+                loadUtils: () => import(
+                    'https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.5/build/js/utils.js'
+                ),
+            });
+
+            function updateCountryCode() {
+                const country = iti.getSelectedCountryData();
+                countryCodeInput.value = country && country.dialCode ?
+                    '+' + country.dialCode :
+                    '';
+            }
+
+            phoneInput.addEventListener('input', function() {
+                this.value = this.value.replace(/\D/g, '');
+            });
+
+            phoneInput.addEventListener('countrychange', updateCountryCode);
+
+            loginForm.addEventListener('submit', function() {
+                updateCountryCode();
+                phoneInput.value = phoneInput.value.replace(/\D/g, '');
+            });
+
+            updateCountryCode();
+        });
+    </script>
+
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.5/build/js/intlTelInput.min.js"></script>
-
-<script>
-    const phoneInput = document.querySelector('#phone');
-    const countryCodeInput = document.querySelector('#country_code');
-
-    const iti = window.intlTelInput(phoneInput, {
-        initialCountry: 'sy',
-        separateDialCode: true,
-        nationalMode: true,
-        showFlags: true,
-        countrySearch: true,
-        useFullscreenPopup: false,
-        loadUtils: () => import(
-            'https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.5/build/js/utils.js'
-        ),
-    });
-
-    function updateCountryCode() {
-        const country = iti.getSelectedCountryData();
-        countryCodeInput.value = country.dialCode ? '+' + country.dialCode : '';
-    }
-
-    phoneInput.addEventListener('input', function() {
-        this.value = this.value.replace(/\D/g, '');
-    });
-
-    phoneInput.addEventListener('countrychange', updateCountryCode);
-
-    document.querySelector('form').addEventListener('submit', function() {
-        updateCountryCode();
-        phoneInput.value = phoneInput.value.replace(/\D/g, '');
-    });
-
-    updateCountryCode();
-</script>
 
 </html>
