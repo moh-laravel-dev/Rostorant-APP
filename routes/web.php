@@ -15,7 +15,13 @@ Route::get('/', function () {
 })->name('welcome');
 
 
-Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+Route::get('/menu/bill/{number}', [MenuController::class, 'index'])->middleware('table.session')->name('menu.index');
+Route::post('/bill/new/orders', [MenuController::class, 'newOrders'])
+    ->name('bill.new.orders');
+Route::get('menu/{code}', [MenuController::class, 'createToken'])->name('menu.login');
+Route::get('login/wiht-code', [MenuController::class, 'loginWithCode'])->name('login.with_code');
+
+
 Route::prefix('admin')->group(function () {
 
     ///////////////////////////////  Auth  ///////////////////////////////

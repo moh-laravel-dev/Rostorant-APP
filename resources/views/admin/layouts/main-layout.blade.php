@@ -347,7 +347,7 @@
                 </a>
 
                 {{-- Categories --}}
-                <a href="#" @click="navigateSidebar()" class="sidebar-link"
+                {{-- <a href="#" @click="navigateSidebar()" class="sidebar-link"
                     :class="!sidebarOpen && !mobile ? 'justify-center px-0' : ''" title="التصنيفات">
 
                     <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -360,7 +360,7 @@
                         class="whitespace-nowrap text-sm font-semibold">التصنيفات</span>
 
                     <span x-cloak x-show="!sidebarOpen && !mobile" class="sidebar-tooltip">التصنيفات</span>
-                </a>
+                </a> --}}
 
                 {{-- Tables --}}
                 <a href="{{ route('tables.index') }}" @click="navigateSidebar()"

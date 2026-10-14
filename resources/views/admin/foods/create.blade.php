@@ -1,4 +1,5 @@
 @extends('admin.layouts.main-layout')
+@section('title','إدارة قائمة الطعام')
 
 @section('content')
     <div class="mx-auto w-full max-w-5xl space-y-6 sm:space-y-8" dir="rtl">
@@ -188,13 +189,13 @@
                     fileName: '',
                     chooseFile(event) {
                         const file = event.target.files[0];
-                
+
                         if (!file) return;
-                
+
                         if (this.preview) {
                             URL.revokeObjectURL(this.preview);
                         }
-                
+
                         this.preview = URL.createObjectURL(file);
                         this.fileName = file.name;
                     },
@@ -202,7 +203,7 @@
                         if (this.preview) {
                             URL.revokeObjectURL(this.preview);
                         }
-                
+
                         this.preview = null;
                         this.fileName = '';
                         this.$refs.imageInput.value = '';

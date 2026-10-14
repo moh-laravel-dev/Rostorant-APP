@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckAdminToLogin;
+use App\Http\Middleware\EnsureTableSession;
 use App\Http\Middleware\RedirectAdminToLogin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin.auth' => RedirectAdminToLogin::class,
             'check.auth' => CheckAdminToLogin::class,
+            'table.session' => EnsureTableSession::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -34,22 +34,22 @@ class TableController extends Controller
             QrCode::format('svg')
                 ->size(300)
                 ->margin(2)
-                ->generate(url(env('QR_URL') . $table->code))
+                ->generate(url(env('QR_URL') . ltrim($table->code, '#')))
         );
 
         return view('tables.qr', compact('table', 'qrCode'));
     }
-    public function qrPrint(Table $table)
-    {
-        $qrCode = base64_encode(
-            QrCode::format('svg')
-                ->size(300)
-                ->margin(2)
-                ->generate(url(env('QR_URL') . $table->code))
-        );
-
-
-    }
+    // public function qrPrint(Table $table)
+    // {
+    //     $qrCode = base64_encode(
+    //         QrCode::format('svg')
+    //             ->size(300)
+    //             ->margin(2)
+    //             ->generate(url(env('QR_URL') . $table->code))
+    //     );
+//
+//
+    // }
     public function edit(string $code)
     {
         $table = Table::where('code', $code)->firstOrFail();

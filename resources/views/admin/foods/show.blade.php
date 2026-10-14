@@ -1,4 +1,5 @@
  @extends('admin.layouts.main-layout')
+ @section('title', 'إدارة قائمة الطعام')
 
  @section('content')
      <div class="mx-auto w-full max-w-5xl space-y-6 sm:space-y-8" dir="rtl">
