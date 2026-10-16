@@ -9,98 +9,224 @@ use App\Models\Order;
 use App\Models\Table;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class MenuController extends Controller
 {
+
+    private function filePath(): string
+    {
+        return storage_path('app/table_services.json');
+    }
     public function index(string $billNumber): View
     {
         $categories = CategoryFood::query()
-            ->where('is_active', 1)
+            // ->where('is_active', 1)
             ->orderBy('name')
             ->with([
-                'foods' => function ($query) {
-                    $query->where('is_active', 1);
-                },
+                'foods'
             ])
             ->get();
-        $bill = Bill::where('number', $billNumber)->with('orders.food')->first();
+
+
+        $bill = Bill::where('number', $billNumber)
+            ->with('orders.food')
+            ->first();
+
+
+
         if (!$bill) {
-            abort(404, "هذه الفاتورة غير صحيحة");
-        }
-        $data = [];
-        foreach ($bill->orders as $i => $order) {
-            $data[$i]['food_name'] = $order->food->name;
-            $data[$i]['amount'] = $order->amount;
-            $data[$i]['total_price'] = $order->total_price;
-            $data[$i]['food_price'] = $order->food->price;
-            $data[$i]['status'] = config('status.order.' . $order->status);
-            $data[$i]['created_at'] = Carbon::parse($order->created_at)->format('Y-m-d h:i:s A');
-            $data[$i]['expected_time'] = $order->expected_time;
+            abort(404, 'هذه الفاتورة غير صحيحة');
         }
 
+        $data = $bill->orders
+            ->groupBy('food_id')
+            ->map(function ($orders) {
+                $firstOrder = $orders->first();
 
-        return view('Menu.menu', compact('categories', 'billNumber', 'data'));
+                $formatDuration = function ($totalSeconds) {
+                    return sprintf(
+                        '%02d:%02d:%02d',
+                        intdiv((int) $totalSeconds, 3600),
+                        intdiv((int) $totalSeconds % 3600, 60),
+                        (int) $totalSeconds % 60
+                    );
+                };
+
+                $getDurationInSeconds = function ($order) {
+                    $parts = array_map(
+                        'intval',
+                        explode(':', (string) $order->expected_time)
+                    );
+
+                    if (count($parts) !== 3) {
+                        return 0;
+                    }
+
+                    return ($parts[0] * 3600)
+                        + ($parts[1] * 60)
+                        + $parts[2];
+                };
+
+                $statuses = $orders
+                    ->groupBy('status')
+                    ->map(function ($statusOrders, $status) use ($formatDuration, $getDurationInSeconds) {
+                        $totalSeconds = $statusOrders->sum($getDurationInSeconds);
+
+                        return [
+                            'status' => config('status.order.' . $status),
+                            'amount' => $statusOrders->sum('amount'),
+                            'amount_price' => $statusOrders->sum('total_price'),
+                            'expected_time' => $formatDuration($totalSeconds),
+                            'created_at' => Carbon::parse(
+                                $statusOrders->min('created_at')
+                            )->format('Y-m-d h:i:s A'),
+                        ];
+                    })
+                    ->values();
+
+                $totalSeconds = $orders->sum($getDurationInSeconds);
+
+                return [
+                    'food_id' => $firstOrder->food_id,
+                    'food_name' => $firstOrder->food->name,
+                    'food_price' => $firstOrder->food->price,
+
+                    'amount' => $orders->sum('amount'),
+                    'total_price' => $orders->sum('total_price'),
+                    'expected_time' => $formatDuration($totalSeconds),
+
+                    'statuses' => $statuses,
+
+                    'created_at' => Carbon::parse(
+                        $orders->min('created_at')
+                    )->format('Y-m-d h:i:s A'),
+                ];
+            })
+            ->values()
+            ->toArray();
+        $tableName = $bill->table->name;
+        $tableNumber = $bill->table->number;
+        $billCode = $bill->code;
+        $path = $this->filePath();
+
+        $services = [];
+
+        if (File::exists($path)) {
+            $services = collect(json_decode(File::get($path), true) ?? [])
+                ->filter(fn($service) => $service['active'] ?? false)
+                ->map(fn($service) => [
+                    'name' => $service['name'] ?? '',
+                    'price' => ($service['value'] ?? 0),
+                    'currency' => $service['currency'],
+                ])
+                ->values()
+                ->all();
+        }
+        return view('Menu.menu', compact('categories', 'services', 'billNumber', 'billCode', 'tableName', 'tableNumber', 'data'));
     }
 
-    public function createToken(string $code): RedirectResponse|Response
+    public function createToken(string $code)
     {
-        $table = Table::where('code', '#' . $code)->firstOrFail();
 
-        $ipAddress = request()->ip();
+        $bill = Bill::where('code', $code)->first();
+        if (!$bill) {
+            $table = Table::where('code', '#' . $code)->firstOrFail();
 
-        $tableId = session('table_id');
-        $tableCode = session('table_code');
-        $expiresAt = session('table_session_expires_at');
+            $ipAddress = request()->ip();
 
-        if ($tableId && $tableCode && $expiresAt && now()->timestamp < $expiresAt) {
-            $currentTableExists = Table::where('id', $tableId)
-                ->where('code', $tableCode)
-                ->exists();
+            $tableId = session('table_id');
+            $tableCode = session('table_code');
+            $expiresAt = session('table_session_expires_at');
 
-            if ($currentTableExists) {
-                if (session('table_ip_address') !== $ipAddress) {
-                    return response()->view('errors.403', [], 403);
+            if (
+                $tableId &&
+                $tableCode &&
+                $expiresAt &&
+                now()->timestamp < $expiresAt
+            ) {
+                $currentTableExists = Table::where('id', $tableId)
+                    ->where('code', $tableCode)
+                    ->exists();
+
+                if ($currentTableExists) {
+                    // منع استخدام QR لطاولة مختلفة عن الطاولة المرتبطة بالجلسة
+                    if (
+                        (int) $tableId !== (int) $table->id ||
+                        $tableCode !== $table->code
+                    ) {
+                        return response()->view(
+                            'errors.table-session-active',
+                            ['tableCode' => $code],
+                            403
+                        );
+                    }
+
+                    // التحقق من عنوان IP للجلسة الحالية
+                    if (session('table_ip_address') !== $ipAddress) {
+                        return response()->view('errors.403', [], 403);
+                    }
+
+                    $bill = Bill::where('table_id', $table->id)
+                        ->where('status', 'active')
+                        ->first();
+
+                    if (!$bill) {
+                        abort(404);
+                    }
+
+                    return redirect()->route('menu.index', $bill->number);
                 }
-                $bill = Bill::where('table_id', $tableId)->first();
-
-                return redirect()->route('menu.index', $bill->number);
-            }
-        }
-
-        if ($tableId && $tableCode) {
-            session()->forget([
-                'table_id',
-                'table_code',
-                'table_session_expires_at',
-                'table_ip_address',
-            ]);
-        }
-
-        $opened = DB::transaction(function () use ($table) {
-            $lockedTable = Table::whereKey($table->id)
-                ->lockForUpdate()
-                ->firstOrFail();
-
-            if (!$lockedTable->status) {
-                return false;
             }
 
-            $lockedTable->update([
-                'status' => false,
+            $opened = DB::transaction(function () use ($table) {
+                $lockedTable = Table::whereKey($table->id)
+                    ->lockForUpdate()
+                    ->firstOrFail();
+
+                if (!$lockedTable->status) {
+                    return false;
+                }
+
+                $lockedTable->update([
+                    'status' => false,
+                ]);
+
+                return true;
+            });
+
+            if (!$opened) {
+                return response()->view(
+                    'errors.table-session-active',
+                    ['tableCode' => $code],
+                    403
+                );
+            }
+
+            session()->regenerate();
+
+            session([
+                'table_id' => $table->id,
+                'table_code' => $table->code,
+                'table_ip_address' => $ipAddress,
+                'table_session_expires_at' => now()->addDay()->timestamp,
             ]);
 
-            return true;
-        });
+            $bill = Bill::create([
+                'start_time' => now(),
+                'code' => Str::upper(Str::random(12)),
+                'number' => now()->format('YmdHis') . Str::upper(Str::random(18)),
+                'table_id' => $table->id,
+            ]);
 
-        if (!$opened) {
-            return response()->view('errors.table-session-active', [], 403);
+            return redirect()->route('menu.index', $bill->number);
         }
+        $table = Table::find($bill->table_id);
+        $ipAddress = request()->ip();
 
         session()->regenerate();
 
@@ -110,18 +236,8 @@ class MenuController extends Controller
             'table_ip_address' => $ipAddress,
             'table_session_expires_at' => now()->addDay()->timestamp,
         ]);
-        $bill = Bill::create([
-            'start_time' => now(),
-            'number' => now()->format('YmdHis') . Str::upper(Str::random(18)),
-            'table_id' => $tableId,
-        ]);
 
         return redirect()->route('menu.index', $bill->number);
-    }
-
-    public function loginWithCode()
-    {
-        return "code";
     }
 
     public function newOrders(Request $request)
@@ -133,7 +249,6 @@ class MenuController extends Controller
             'items.*.quantity' => ['required', 'integer', 'min:1'],
         ]);
 
-        Log::info('New order received', $validated);
 
         $bill = Bill::where('number', $validated['billNumber'])->first();
 
@@ -150,6 +265,7 @@ class MenuController extends Controller
             $order = Order::firstOrNew([
                 'food_id' => $food->id,
                 'bill_id' => $bill->id,
+                'status' => '0',
             ]);
 
             $order->amount = ($order->amount ?? 0) + $item['quantity'];
@@ -160,6 +276,83 @@ class MenuController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'تمت إضافة الوجبات إلى الطلب بنجاح.',
+        ]);
+    }
+
+    public function updateData(string $number)
+    {
+        $bill = Bill::where('number', $number)->firstOrFail();
+
+        $data = $bill->orders
+            ->groupBy('food_id')
+            ->map(function ($orders) {
+                $firstOrder = $orders->first();
+
+                $formatDuration = function ($totalSeconds) {
+                    return sprintf(
+                        '%02d:%02d:%02d',
+                        intdiv((int) $totalSeconds, 3600),
+                        intdiv((int) $totalSeconds % 3600, 60),
+                        (int) $totalSeconds % 60
+                    );
+                };
+
+                $getDurationInSeconds = function ($order) {
+                    $parts = array_map(
+                        'intval',
+                        explode(':', (string) $order->expected_time)
+                    );
+
+                    if (count($parts) !== 3) {
+                        return 0;
+                    }
+
+                    return ($parts[0] * 3600)
+                        + ($parts[1] * 60)
+                        + $parts[2];
+                };
+
+                $statuses = $orders
+                    ->groupBy('status')
+                    ->map(function ($statusOrders, $status) use ($formatDuration, $getDurationInSeconds) {
+                        $totalSeconds = $statusOrders->sum($getDurationInSeconds);
+
+                        return [
+                            'status' => config('status.order.' . $status),
+                            'amount' => $statusOrders->sum('amount'),
+                            'amount_price' => $statusOrders->sum('total_price'),
+                            'expected_time' => $formatDuration($totalSeconds),
+                            'created_at' => Carbon::parse(
+                                $statusOrders->min('created_at')
+                            )->format('Y-m-d h:i:s A'),
+                        ];
+                    })
+                    ->values();
+
+                $totalSeconds = $orders->sum($getDurationInSeconds);
+
+                return [
+                    'food_id' => $firstOrder->food_id,
+                    'food_name' => $firstOrder->food->name,
+                    'food_price' => $firstOrder->food->price,
+
+                    'amount' => $orders->sum('amount'),
+                    'total_price' => $orders->sum('total_price'),
+                    'expected_time' => $formatDuration($totalSeconds),
+
+                    'statuses' => $statuses,
+
+                    'created_at' => Carbon::parse(
+                        $orders->min('created_at')
+                    )->format('Y-m-d h:i:s A'),
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        return response()->json([
+            'success' => true,
+            'data' => $data,
         ]);
     }
 }

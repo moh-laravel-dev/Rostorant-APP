@@ -49,15 +49,9 @@
                     التحقق مرة أخرى
                 </button>
 
-                <a href="{{ route('login.with_code') }}"
-                    class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-emerald-700 bg-emerald-700 px-5 py-3 font-bold text-white shadow-sm transition duration-200 hover:bg-emerald-800 active:scale-[0.98]">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="1.8">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM5 20a7 7 0 0 1 14 0M19 8h3m-1.5-1.5v3" />
-                    </svg>
-                    الدخول باستخدام رمز الشريك
-                </a>
+                <div class="mt-4 text-center text-sm leading-7 text-gray-600">
+                    للانضمام إلى فاتورة أصدقائك، يرجى مسح رمز QR الموجود على الفاتورة باستخدام كاميرا هاتفك.
+                </div>
 
             </div>
 
@@ -73,4 +67,3 @@
 </body>
 
 </html>
-

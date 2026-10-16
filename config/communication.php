@@ -17,7 +17,7 @@ return [
         // 'friday',
     ],
 
-    'open_time' => '09:00',
+    'open_time' => '08:00',
     'close_time' => '23:00',
 
     'timezone' => 'Asia/Damascus',

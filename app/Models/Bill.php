@@ -11,6 +11,7 @@ class Bill extends Model
     protected $fillable = [
         'start_time',
         'end_time',
+        'code',
         'number',
         'status',
         'table_id',

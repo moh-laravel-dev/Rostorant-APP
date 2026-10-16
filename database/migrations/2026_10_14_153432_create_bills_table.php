@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->string('number',50)->unique();
             $table->dateTime('start_time')->nullable();
             $table->dateTime('end_time')->nullable();
+            $table->string('code');
             $table->enum('status', ['payment', 'active'])->default('active');
             $table->foreignId('table_id')
                 ->nullable()

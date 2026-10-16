@@ -3,64 +3,103 @@
 namespace Database\Seeders;
 
 use App\Models\CategoryFood;
+use App\Models\Food;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CategoryFoodSeeder extends Seeder
 {
     public function run(): void
     {
-        $categories = [
-            [
-                'name' => 'المقبلات',
-                'description' => 'ابدأ تجربتك بنكهات شهية تفتح الشهية، من المقبلات المقرمشة إلى الأطباق الغنية بالنكهات المميزة.',
-            ],
-            [
-                'name' => 'السلطات',
-                'description' => 'انتعاش الطبيعة في كل لقمة، خضروات طازجة ومكونات مختارة بعناية مع تتبيلات تضيف لمسة من التميز.',
-            ],
-            [
-                'name' => 'الوجبات الرئيسية',
-                'description' => 'أطباق متكاملة تجمع بين النكهة الغنية والمكونات المميزة، لتمنحك وجبة مشبعة تستحق كل لحظة.',
-            ],
-            [
-                'name' => 'المشاوي',
-                'description' => 'رائحة الفحم ونكهة الشواء الأصيل، لحوم متبلة بعناية ومشوية بإتقان لتصل إليك ساخنة وغنية بالطعم.',
-            ],
-            [
-                'name' => 'الوجبات السريعة',
-                'description' => 'لذة لا تنتظر! سندويشات وبرغر محضرة بمكونات شهية، تجمع بين القرمشة والطراوة والنكهات التي تحبها.',
-            ],
-            [
-                'name' => 'البيتزا',
-                'description' => 'عجينة ذهبية، جبنة ذائبة، وإضافات غنية تمنح كل قطعة مزيجًا مثاليًا من النكهة والمتعة.',
-            ],
-            [
-                'name' => 'المعجنات',
-                'description' => 'مخبوزات طازجة بعجينة هشة وحشوات متنوعة، محضرة بعناية لتمنحك مذاقًا منزليًا دافئًا في كل قضمة.',
-            ],
-            [
-                'name' => 'الحلويات',
-                'description' => 'النهاية الحلوة لكل وجبة، تشكيلة من الحلويات الشهية التي تجمع بين المذاق الرائع والتقديم الأنيق.',
-            ],
-            [
-                'name' => 'المشروبات الساخنة',
-                'description' => 'لحظات من الدفء والاسترخاء مع فنجان قهوة غني أو كوب شاي عطِر، مثالية لبداية يومك أو ختام وجبتك.',
-            ],
-            [
-                'name' => 'المشروبات الباردة',
-                'description' => 'انتعاش يروي عطشك ويجدد طاقتك، من العصائر المنعشة إلى المشروبات الباردة التي تضيف لمسة من الانتعاش لكل لحظة.',
-            ],
-        ];
-
-        foreach ($categories as $category) {
-            CategoryFood::firstOrCreate(
-                ['name' => $category['name']],
+        DB::transaction(function () {
+            $categories = [
                 [
-                    'description' => $category['description'],
-                    'photo' => 'Home/about-1.avif',
-                    'is_active' => true,
-                ]
-            );
-        }
+                    'name' => 'المقبلات',
+                    'description' => 'أشهى المقبلات والأطباق الجانبية',
+                    'photo' => null,
+                    'foods' => [
+                        ['name' => 'بطاطا مقلية', 'description' => 'بطاطا ذهبية مقرمشة', 'price' => 250],
+                        ['name' => 'حمص', 'description' => 'حمص بالطحينة وزيت الزيتون', 'price' => 300],
+                        ['name' => 'متبل باذنجان', 'description' => 'باذنجان مشوي مع الطحينة', 'price' => 350],
+                        ['name' => 'سلطة خضراء', 'description' => 'خضار طازجة مع الليمون', 'price' => 300],
+                        ['name' => 'فتوش', 'description' => 'سلطة فتوش مع الخبز المحمص', 'price' => 400],
+                    ],
+                ],
+                [
+                    'name' => 'الوجبات الرئيسية',
+                    'description' => 'وجبات رئيسية شهية ومميزة',
+                    'photo' => null,
+                    'foods' => [
+                        ['name' => 'شاورما دجاج', 'description' => 'شاورما دجاج مع الثوم والمخلل', 'price' => 600],
+                        ['name' => 'شاورما لحم', 'description' => 'شاورما لحم مع الصلصة الخاصة', 'price' => 750],
+                        ['name' => 'برغر لحم', 'description' => 'برغر لحم مع الجبن والخضار', 'price' => 800],
+                        ['name' => 'برغر دجاج', 'description' => 'برغر دجاج مقرمش مع الصلصة', 'price' => 700],
+                        ['name' => 'دجاج مشوي', 'description' => 'دجاج مشوي مع البطاطا والأرز', 'price' => 1000],
+                        ['name' => 'بيتزا خضار', 'description' => 'بيتزا بالخضار والجبن', 'price' => 700],
+                        ['name' => 'بيتزا بيبروني', 'description' => 'بيتزا بالجبن والبيبروني', 'price' => 900],
+                    ],
+                ],
+                [
+                    'name' => 'المشروبات الباردة',
+                    'description' => 'مجموعة من المشروبات المنعشة',
+                    'photo' => null,
+                    'foods' => [
+                        ['name' => 'مياه معدنية', 'description' => 'مياه معدنية باردة', 'price' => 100],
+                        ['name' => 'كولا', 'description' => 'مشروب غازي بارد', 'price' => 150],
+                        ['name' => 'عصير برتقال', 'description' => 'عصير برتقال منعش', 'price' => 250],
+                        ['name' => 'ليمون ونعناع', 'description' => 'ليمون طازج مع النعناع', 'price' => 300],
+                    ],
+                ],
+                [
+                    'name' => 'المشروبات الساخنة',
+                    'description' => 'مشروبات ساخنة لتحسين تجربتك',
+                    'photo' => null,
+                    'foods' => [
+                        ['name' => 'قهوة تركية', 'description' => 'قهوة تركية محضرة بعناية', 'price' => 200],
+                        ['name' => 'إسبريسو', 'description' => 'قهوة إسبريسو مركزة', 'price' => 250],
+                        ['name' => 'كابتشينو', 'description' => 'قهوة بالحليب ورغوة ناعمة', 'price' => 300],
+                        ['name' => 'شاي', 'description' => 'شاي ساخن', 'price' => 150],
+                    ],
+                ],
+                [
+                    'name' => 'الحلويات',
+                    'description' => 'حلويات لذيذة بعد الوجبة',
+                    'photo' => null,
+                    'foods' => [
+                        ['name' => 'تشيز كيك', 'description' => 'تشيز كيك كريمي', 'price' => 400],
+                        ['name' => 'براونيز', 'description' => 'كيك شوكولاتة غني', 'price' => 350],
+                        ['name' => 'آيس كريم', 'description' => 'آيس كريم بنكهات متنوعة', 'price' => 250],
+                    ],
+                ],
+            ];
+
+            foreach ($categories as $categoryData) {
+                $foods = $categoryData['foods'];
+
+                $category = CategoryFood::updateOrCreate(
+                    ['name' => $categoryData['name']],
+                    [
+                        'description' => $categoryData['description'],
+                        'photo' => $categoryData['photo'],
+                        'is_active' => true,
+                    ]
+                );
+
+                foreach ($foods as $foodData) {
+                    Food::updateOrCreate(
+                        [
+                            'category_food_id' => $category->id,
+                            'name' => $foodData['name'],
+                        ],
+                        [
+                            'description' => $foodData['description'],
+                            'price' => $foodData['price'],
+                            'image' => null,
+                            'is_active' => true,
+                        ]
+                    );
+                }
+            }
+        });
     }
 }
