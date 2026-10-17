@@ -5,7 +5,7 @@
     <div class="mx-auto w-full max-w-5xl space-y-6 p-3 sm:p-5 lg:p-7" dir="rtl">
 
         {{-- Header --}}
-        <div class="relative overflow-hidden rounded-3xl bg-[#174c3c] p-6 text-white shadow-lg sm:p-8">
+        <div class="relative overflow-hidden rounded-3xl bg-[var(--restaurant-color-hex-174c3c)] p-6 text-white shadow-lg sm:p-8">
             <div class="pointer-events-none absolute -left-12 -top-16 h-48 w-48 rounded-full bg-white/5"></div>
             <div class="pointer-events-none absolute -bottom-20 right-1/3 h-56 w-56 rounded-full bg-white/5"></div>
 
@@ -129,7 +129,7 @@
             <div class="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm lg:col-span-3">
 
                 <div class="flex items-center gap-3 border-b border-gray-100 px-5 py-4 sm:px-6">
-                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#174c3c]/10 text-[#174c3c]">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-174c3c)]/10 text-[var(--restaurant-color-hex-174c3c)]">
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
                                 d="M4 4h16v16H4zM4 9h16M9 4v5" />
@@ -182,7 +182,7 @@
                     {{-- Description --}}
                     <div>
                         <div class="mb-2 flex items-center gap-2">
-                            <span class="h-5 w-1 rounded-full bg-[#174c3c]"></span>
+                            <span class="h-5 w-1 rounded-full bg-[var(--restaurant-color-hex-174c3c)]"></span>
                             <h3 class="text-sm font-bold text-gray-700">وصف التصنيف</h3>
                         </div>
 
@@ -239,11 +239,11 @@
 
                     <div class="mb-3 flex items-center justify-between gap-3">
                         <span class="text-sm font-semibold text-gray-600">نسبة الوجبات النشطة</span>
-                        <span class="text-sm font-extrabold text-[#174c3c]">{{ $activePercentage }}%</span>
+                        <span class="text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">{{ $activePercentage }}%</span>
                     </div>
 
                     <div class="h-3 overflow-hidden rounded-full bg-gray-100">
-                        <div class="h-full rounded-full bg-gradient-to-l from-[#174c3c] to-emerald-500 transition-all duration-700"
+                        <div class="h-full rounded-full bg-gradient-to-l from-[var(--restaurant-color-hex-174c3c)] to-emerald-500 transition-all duration-700"
                             style="width: {{ $activePercentage }}%">
                         </div>
                     </div>
@@ -275,9 +275,9 @@
                     <div class="mt-5 space-y-3">
 
                         <a href="{{ route('admin.category-food.food.index', $category) }}"
-                            class="group flex items-center gap-3 rounded-2xl border border-[#174c3c]/15 bg-[#174c3c]/5 p-4 transition hover:border-[#174c3c]/30 hover:bg-[#174c3c]/10">
+                            class="group flex items-center gap-3 rounded-2xl border border-[var(--restaurant-color-hex-174c3c)]/15 bg-[var(--restaurant-color-hex-174c3c)]/5 p-4 transition hover:border-[var(--restaurant-color-hex-174c3c)]/30 hover:bg-[var(--restaurant-color-hex-174c3c)]/10">
                             <div
-                                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#174c3c] text-white transition group-hover:scale-105">
+                                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-174c3c)] text-white transition group-hover:scale-105">
                                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
                                         d="M3 5h18M3 12h18M3 19h18" />
@@ -285,11 +285,11 @@
                             </div>
 
                             <div class="min-w-0 flex-1">
-                                <p class="text-sm font-extrabold text-[#174c3c]">إدارة الوجبات</p>
+                                <p class="text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">إدارة الوجبات</p>
                                 <p class="mt-1 text-xs leading-5 text-gray-500">عرض وإدارة جميع وجبات التصنيف</p>
                             </div>
 
-                            <svg class="h-4 w-4 shrink-0 text-[#174c3c] transition group-hover:-translate-x-1"
+                            <svg class="h-4 w-4 shrink-0 text-[var(--restaurant-color-hex-174c3c)] transition group-hover:-translate-x-1"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -349,13 +349,13 @@
         <div
             class="flex flex-col items-center justify-between gap-2 rounded-2xl border border-gray-100 bg-white px-5 py-4 text-center sm:flex-row sm:text-right">
             <p class="text-xs leading-6 text-gray-500">
-                <span class="font-bold text-[#174c3c]">{{ $category->name }}</span>
+                <span class="font-bold text-[var(--restaurant-color-hex-174c3c)]">{{ $category->name }}</span>
                 <span class="mx-1 text-gray-300">|</span>
                 ملخص بيانات التصنيف
             </p>
 
             <a href="{{ route('admin.category-food.index') }}"
-                class="inline-flex items-center gap-2 text-xs font-bold text-[#174c3c] transition hover:text-[#10382c]">
+                class="inline-flex items-center gap-2 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:text-[var(--restaurant-color-hex-10382c)]">
                 العودة إلى القائمة
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />

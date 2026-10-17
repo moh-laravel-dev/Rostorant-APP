@@ -8,46 +8,46 @@
 
         <style>
             .add-table-page {
-                --table-green: #174c3c;
-                --table-dark: #10382d;
-                --table-mint: #e8f3ed;
-                --table-gold: #d8ad60;
+                --table-green: var(--restaurant-color-hex-174c3c);
+                --table-dark: var(--restaurant-color-hex-10382d);
+                --table-mint: var(--restaurant-color-hex-e8f3ed);
+                --table-gold: var(--restaurant-color-hex-d8ad60);
             }
 
             .add-table-page .table-panel {
-                background: #fff;
-                border: 1px solid #e8eee9;
+                background: var(--restaurant-color-hex-fff);
+                border: 1px solid var(--restaurant-color-hex-e8eee9);
                 border-radius: 24px;
-                box-shadow: 0 12px 40px rgba(16, 56, 45, .06);
+                box-shadow: 0 12px 40px var(--restaurant-color-rgb-16-56-45-point-06);
             }
 
             .add-table-page .table-field {
                 width: 100%;
                 min-height: 52px;
-                border: 1px solid #e0e7e2;
+                border: 1px solid var(--restaurant-color-hex-e0e7e2);
                 border-radius: 14px;
                 padding: 12px 15px;
-                background: #fbfcfb;
-                color: #19392f;
+                background: var(--restaurant-color-hex-fbfcfb);
+                color: var(--restaurant-color-hex-19392f);
                 font-size: 14px;
                 outline: none;
                 transition: border-color .2s, box-shadow .2s, background .2s;
             }
 
             .add-table-page .table-field::placeholder {
-                color: #a0aaa4;
+                color: var(--restaurant-color-hex-a0aaa4);
             }
 
             .add-table-page .table-field:focus {
-                background: #fff;
+                background: var(--restaurant-color-hex-fff);
                 border-color: var(--table-green);
-                box-shadow: 0 0 0 4px rgba(23, 76, 60, .08);
+                box-shadow: 0 0 0 4px var(--restaurant-color-rgb-23-76-60-point-08);
             }
 
             .add-table-page .field-label {
                 display: block;
                 margin-bottom: 9px;
-                color: #244c3d;
+                color: var(--restaurant-color-hex-244c3d);
                 font-size: 13px;
                 font-weight: 800;
             }
@@ -67,25 +67,25 @@
             }
 
             .add-table-page .table-btn-primary {
-                color: #fff;
+                color: var(--restaurant-color-hex-fff);
                 background: var(--table-green);
-                box-shadow: 0 7px 18px rgba(23, 76, 60, .16);
+                box-shadow: 0 7px 18px var(--restaurant-color-rgb-23-76-60-point-16);
             }
 
             .add-table-page .table-btn-primary:hover {
                 background: var(--table-dark);
                 transform: translateY(-1px);
-                box-shadow: 0 10px 22px rgba(23, 76, 60, .2);
+                box-shadow: 0 10px 22px var(--restaurant-color-rgb-23-76-60-point-2);
             }
 
             .add-table-page .table-btn-secondary {
-                color: #40534a;
-                background: #f2f5f2;
-                border: 1px solid #e5ebe6;
+                color: var(--restaurant-color-hex-40534a);
+                background: var(--restaurant-color-hex-f2f5f2);
+                border: 1px solid var(--restaurant-color-hex-e5ebe6);
             }
 
             .add-table-page .table-btn-secondary:hover {
-                background: #e8eee9;
+                background: var(--restaurant-color-hex-e8eee9);
             }
 
             .add-table-page .table-status-toggle {
@@ -107,7 +107,7 @@
                 position: absolute;
                 inset: 0;
                 border-radius: 999px;
-                background: #d6ddd8;
+                background: var(--restaurant-color-hex-d6ddd8);
                 transition: .25s;
                 cursor: pointer;
             }
@@ -120,8 +120,8 @@
                 top: 4px;
                 right: 4px;
                 border-radius: 50%;
-                background: #fff;
-                box-shadow: 0 2px 5px #00000018;
+                background: var(--restaurant-color-hex-fff);
+                box-shadow: 0 2px 5px var(--restaurant-color-hex-00000018);
                 transition: .25s;
             }
 
@@ -134,16 +134,16 @@
             }
 
             .add-table-page .table-status-toggle input:focus-visible+.table-status-slider {
-                outline: 3px solid rgba(23, 76, 60, .2);
+                outline: 3px solid var(--restaurant-color-rgb-23-76-60-point-2);
                 outline-offset: 3px;
             }
 
             .add-table-page .table-number-card {
                 position: relative;
                 overflow: hidden;
-                border: 1px solid #dcebe1;
+                border: 1px solid var(--restaurant-color-hex-dcebe1);
                 border-radius: 18px;
-                background: linear-gradient(135deg, #f0f8f2, #e5f1e8);
+                background: linear-gradient(135deg, var(--restaurant-color-hex-f0f8f2), var(--restaurant-color-hex-e5f1e8));
             }
 
             .add-table-page .table-number-card::after {
@@ -153,7 +153,7 @@
                 height: 115px;
                 left: -32px;
                 bottom: -65px;
-                border: 18px solid rgba(23, 76, 60, .055);
+                border: 18px solid var(--restaurant-color-rgb-23-76-60-point-055);
                 border-radius: 50%;
                 pointer-events: none;
             }
@@ -186,7 +186,7 @@
         </style>
 
         {{-- Header --}}
-        <div class="relative overflow-hidden rounded-3xl bg-[#10382d] p-5 text-white shadow-lg sm:p-8">
+        <div class="relative overflow-hidden rounded-3xl bg-[var(--restaurant-color-hex-10382d)] p-5 text-white shadow-lg sm:p-8">
             <div
                 class="pointer-events-none absolute -left-10 -top-16 h-48 w-48 rounded-full border-[28px] border-white/[0.04]">
             </div>
@@ -196,7 +196,7 @@
                 <div class="flex items-start gap-4">
                     <div
                         class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/10 sm:h-16 sm:w-16">
-                        <svg class="h-8 w-8 text-[#d8ad60]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg class="h-8 w-8 text-[var(--restaurant-color-hex-d8ad60)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 10h18M5 10V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4" />
                             <path d="M5 10v10M19 10v10M3 15h18M8 20v-5M16 20v-5" />
@@ -207,7 +207,7 @@
                     <div class="min-w-0">
                         <div class="mb-2 flex flex-wrap items-center gap-2">
                             <span
-                                class="rounded-full border border-[#d8ad60]/30 bg-[#d8ad60]/10 px-3 py-1 text-[11px] font-bold text-[#f0d5a1]">
+                                class="rounded-full border border-[var(--restaurant-color-hex-d8ad60)]/30 bg-[var(--restaurant-color-hex-d8ad60)]/10 px-3 py-1 text-[11px] font-bold text-[var(--restaurant-color-hex-f0d5a1)]">
                                 إدارة الطاولات
                             </span>
                             <span class="text-xs text-white/45">/ إضافة جديدة</span>
@@ -271,14 +271,14 @@
             {{-- Form --}}
             <section class="table-panel min-w-0 p-5 sm:p-8">
                 <div class="mb-7 flex items-center gap-3 border-b border-gray-100 pb-5">
-                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#e8f3ed] text-[#174c3c]">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-e8f3ed)] text-[var(--restaurant-color-hex-174c3c)]">
                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 3v18M3 12h18" />
                         </svg>
                     </div>
                     <div>
-                        <h2 class="text-lg font-black text-[#174c3c]">بيانات الطاولة</h2>
+                        <h2 class="text-lg font-black text-[var(--restaurant-color-hex-174c3c)]">بيانات الطاولة</h2>
                         <p class="mt-1 text-xs text-gray-500">أدخل المعلومات الأساسية للطاولة الجديدة.</p>
                     </div>
                 </div>
@@ -319,7 +319,7 @@
                         <div class="table-number-card flex items-center justify-between gap-4 p-4 sm:p-5">
                             <div class="flex min-w-0 items-center gap-3">
                                 <div
-                                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-[#174c3c] shadow-sm">
+                                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-[var(--restaurant-color-hex-174c3c)] shadow-sm">
                                     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                         <rect x="4" y="4" width="16" height="16" rx="3" />
@@ -327,13 +327,13 @@
                                     </svg>
                                 </div>
                                 <div class="min-w-0">
-                                    <p class="text-xs font-semibold text-[#547263]">الرقم التالي المتاح</p>
-                                    <p class="mt-1 text-sm font-bold text-[#174c3c]">سيتم تخصيصه تلقائياً</p>
+                                    <p class="text-xs font-semibold text-[var(--restaurant-color-hex-547263)]">الرقم التالي المتاح</p>
+                                    <p class="mt-1 text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">سيتم تخصيصه تلقائياً</p>
                                 </div>
                             </div>
 
                             <div
-                                class="relative z-10 flex h-14 min-w-14 shrink-0 items-center justify-center rounded-2xl border border-[#d7e7dc] bg-white px-4 text-2xl font-black tabular-nums text-[#174c3c] shadow-sm">
+                                class="relative z-10 flex h-14 min-w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--restaurant-color-hex-d7e7dc)] bg-white px-4 text-2xl font-black tabular-nums text-[var(--restaurant-color-hex-174c3c)] shadow-sm">
                                 {{ $nextNumber }}
                             </div>
                         </div>
@@ -343,7 +343,7 @@
                         <label class="field-label">حالة الطاولة عند الإنشاء</label>
 
                         <div
-                            class="flex flex-col justify-between gap-4 rounded-2xl border border-gray-100 bg-[#fafcfb] p-4 sm:flex-row sm:items-center sm:p-5">
+                            class="table-status-card flex flex-col justify-between gap-4 rounded-2xl border border-gray-100 bg-[var(--restaurant-color-hex-fafcfb)] p-4 sm:flex-row sm:items-center sm:p-5">
                             <div class="flex items-center gap-3">
                                 <div id="status-icon"
                                     class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 transition-colors">
@@ -353,7 +353,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p id="status-label" class="text-sm font-extrabold text-[#174c3c]">
+                                    <p id="status-label" class="text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
                                         {{ old('status', '1') == '1' ? 'متاحة لاستقبال الزبائن' : 'غير متاحة حالياً' }}
                                     </p>
                                     <p id="status-description" class="mt-1 text-xs leading-5 text-gray-500">
@@ -370,7 +370,7 @@
                                         @checked(old('status', '1') == '1') aria-label="تحديد حالة الطاولة">
                                     <span class="table-status-slider"></span>
                                 </span>
-                                <span class="text-xs font-bold text-[#174c3c]">متاحة</span>
+                                <span class="text-xs font-bold text-[var(--restaurant-color-hex-174c3c)]">متاحة</span>
                             </label>
                         </div>
 
@@ -404,8 +404,8 @@
             {{-- Side information --}}
             <aside class="space-y-4">
                 <div class="table-panel overflow-hidden">
-                    <div class="bg-[#174c3c] p-5 text-white">
-                        <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-[#e7c98e]">
+                    <div class="bg-[var(--restaurant-color-hex-174c3c)] p-5 text-white">
+                        <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-[var(--restaurant-color-hex-e7c98e)]">
                             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="9" />
@@ -421,7 +421,7 @@
                     <div class="space-y-4 p-5">
                         <div class="flex items-start gap-3">
                             <div
-                                class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#e8f3ed] text-[#174c3c]">
+                                class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--restaurant-color-hex-e8f3ed)] text-[var(--restaurant-color-hex-174c3c)]">
                                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="m5 12 4 4L19 6" />
@@ -466,17 +466,17 @@
                     </div>
                 </div>
 
-                <div class="rounded-2xl border border-[#e8e1d2] bg-[#faf7f0] p-5">
+                <div class="table-note rounded-2xl border border-[var(--restaurant-color-hex-e8e1d2)] bg-[var(--restaurant-color-hex-faf7f0)] p-5">
                     <div class="flex items-start gap-3">
-                        <svg class="mt-0.5 h-5 w-5 shrink-0 text-[#a47b37]" viewBox="0 0 24 24" fill="none"
+                        <svg class="mt-0.5 h-5 w-5 shrink-0 text-[var(--restaurant-color-hex-a47b37)]" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 9v4m0 4h.01" />
                             <path
                                 d="M10.3 3.9 1.8 18.5A1.7 1.7 0 0 0 3.3 21h17.4a1.7 1.7 0 0 0 1.5-2.5L13.7 3.9a2 2 0 0 0-3.4 0Z" />
                         </svg>
                         <div>
-                            <p class="text-sm font-extrabold text-[#765b2e]">ملاحظة مهمة</p>
-                            <p class="mt-1 text-xs leading-6 text-[#8d7956]">
+                            <p class="text-sm font-extrabold text-[var(--restaurant-color-hex-765b2e)]">ملاحظة مهمة</p>
+                            <p class="mt-1 text-xs leading-6 text-[var(--restaurant-color-hex-8d7956)]">
                                 تأكد من أن اسم الطاولة يعكس موقعها أو رقمها الفعلي داخل المطعم.
                             </p>
                         </div>
@@ -501,7 +501,7 @@
                 if (statusSwitch.checked) {
                     statusLabel.textContent = 'متاحة لاستقبال الزبائن';
                     statusDescription.textContent = 'يمكن استخدامها لاستقبال الطلبات.';
-                    statusLabel.className = 'text-sm font-extrabold text-[#174c3c]';
+                    statusLabel.className = 'text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]';
                     statusIcon.className =
                         'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 transition-colors';
                     statusIcon.innerHTML =

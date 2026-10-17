@@ -6,7 +6,7 @@
 
         {{-- Hero Header --}}
         <div
-            class="relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-[#10382c] via-[#174c3c] to-[#26745a] p-5 text-white shadow-xl sm:p-8">
+            class="relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-[var(--restaurant-color-hex-10382c)] via-[var(--restaurant-color-hex-174c3c)] to-[var(--restaurant-color-hex-26745a)] p-5 text-white shadow-xl sm:p-8">
             <div
                 class="pointer-events-none absolute -left-12 -top-20 h-64 w-64 rounded-full border-[35px] border-white/[0.04]">
             </div>
@@ -47,8 +47,8 @@
                 </div>
 
                 <a href="{{ route('admin.category-food.create') }}"
-                    class="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3.5 text-sm font-extrabold text-[#174c3c] shadow-lg transition hover:-translate-y-0.5 hover:bg-emerald-50 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-white/30 sm:w-auto">
-                    <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-[#174c3c]/10">
+                    class="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3.5 text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)] shadow-lg transition hover:-translate-y-0.5 hover:bg-emerald-50 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-white/30 sm:w-auto">
+                    <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--restaurant-color-hex-174c3c)]/10">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14" />
                         </svg>
@@ -151,7 +151,7 @@
 
                             <input type="search" id="search" name="search" value="{{ request('search') }}"
                                 placeholder="ابحث باسم التصنيف أو الوصف..."
-                                class="w-full rounded-xl border border-gray-200 bg-gray-50 py-3 pr-10 pl-4 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                                class="w-full rounded-xl border border-gray-200 bg-gray-50 py-3 pr-10 pl-4 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@
                         </label>
 
                         <select id="status" name="status"
-                            class="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-700 outline-none transition focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                            class="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-700 outline-none transition focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                             <option value="">جميع الحالات</option>
                             <option value="active" {{ request('status') === 'active' ? 'selected' : '' }}>
                                 فعال
@@ -176,7 +176,7 @@
                     {{-- Filter Actions --}}
                     <div class="flex flex-wrap items-center gap-2">
                         <button type="submit"
-                            class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#174c3c] px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#10382c] focus:outline-none focus:ring-4 focus:ring-[#174c3c]/15 sm:flex-none">
+                            class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[var(--restaurant-color-hex-10382c)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/15 sm:flex-none">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                 stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -205,7 +205,7 @@
 
                         @if (request()->filled('search'))
                             <span
-                                class="inline-flex max-w-full items-center gap-1.5 rounded-lg border border-[#174c3c]/10 bg-[#174c3c]/5 px-2.5 py-1.5 text-xs font-semibold text-[#174c3c]">
+                                class="inline-flex max-w-full items-center gap-1.5 rounded-lg border border-[var(--restaurant-color-hex-174c3c)]/10 bg-[var(--restaurant-color-hex-174c3c)]/5 px-2.5 py-1.5 text-xs font-semibold text-[var(--restaurant-color-hex-174c3c)]">
                                 <icon name="search" size="xs" />
                                 <span class="break-all">{{ request('search') }}</span>
                             </span>
@@ -282,7 +282,7 @@
                 </div>
                 <div
                     class="inline-flex w-fit items-center gap-2 rounded-xl bg-gray-50 px-3 py-2 text-xs font-semibold text-gray-500 ring-1 ring-gray-200/80">
-                    <span class="h-2 w-2 rounded-full bg-[#174c3c]"></span>
+                    <span class="h-2 w-2 rounded-full bg-[var(--restaurant-color-hex-174c3c)]"></span>
                     {{ $categories->count() }} تصنيف في هذه الصفحة
                 </div>
             </div>
@@ -292,7 +292,7 @@
                 <div class="space-y-3 p-3 sm:hidden">
                     @foreach ($categories as $category)
                         <article
-                            class="overflow-hidden rounded-2xl border border-gray-200 bg-white transition hover:border-[#174c3c]/25 hover:shadow-md">
+                            class="overflow-hidden rounded-2xl border border-gray-200 bg-white transition hover:border-[var(--restaurant-color-hex-174c3c)]/25 hover:shadow-md">
                             <div class="flex gap-3 p-3">
                                 <div
                                     class="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border border-gray-100 bg-gray-50">
@@ -335,7 +335,7 @@
                                     </p>
 
                                     <a href="{{ route('admin.category-food.food.index', $category) }}"
-                                        class="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-[#174c3c]/5 px-2.5 py-1.5 text-xs font-bold text-[#174c3c] transition hover:bg-[#174c3c]/10">
+                                        class="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-[var(--restaurant-color-hex-174c3c)]/5 px-2.5 py-1.5 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:bg-[var(--restaurant-color-hex-174c3c)]/10">
                                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                             stroke-width="1.8">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -426,7 +426,7 @@
 
                                     <td class="px-5 py-4">
                                         <div
-                                            class="relative h-16 w-16 overflow-hidden rounded-2xl border border-gray-200 bg-gray-50 shadow-sm transition duration-300 group-hover:border-[#174c3c]/30 group-hover:shadow-md">
+                                            class="relative h-16 w-16 overflow-hidden rounded-2xl border border-gray-200 bg-gray-50 shadow-sm transition duration-300 group-hover:border-[var(--restaurant-color-hex-174c3c)]/30 group-hover:shadow-md">
                                             @if ($category->photo)
                                                 <img src="{{ asset('storage/' . $category->photo) }}"
                                                     alt="{{ $category->name }}" loading="lazy"
@@ -446,7 +446,7 @@
                                     </td>
 
                                     <td class="min-w-[170px] px-5 py-4">
-                                        <div class="font-extrabold text-gray-800 transition group-hover:text-[#174c3c]">
+                                        <div class="font-extrabold text-gray-800 transition group-hover:text-[var(--restaurant-color-hex-174c3c)]">
                                             {{ $category->name }}
                                         </div>
                                         <div class="mt-1 text-[11px] text-gray-400">تصنيف
@@ -463,7 +463,7 @@
                                             </p>
                                             @if (mb_strlen($category->description) > 55)
                                                 <button type="button" @click="expanded = !expanded"
-                                                    class="mt-1 text-xs font-bold text-[#174c3c] transition hover:underline">
+                                                    class="mt-1 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:underline">
                                                     <span x-show="!expanded">عرض المزيد</span>
                                                     <span x-cloak x-show="expanded">عرض أقل</span>
                                                 </button>
@@ -475,7 +475,7 @@
 
                                     <td class="px-5 py-4">
                                         <a href="{{ route('admin.category-food.food.index', $category) }}"
-                                            class="inline-flex items-center gap-2 rounded-xl border border-[#174c3c]/10 bg-[#174c3c]/5 px-3 py-2 font-bold text-[#174c3c] transition hover:border-[#174c3c]/20 hover:bg-[#174c3c]/10">
+                                            class="inline-flex items-center gap-2 rounded-xl border border-[var(--restaurant-color-hex-174c3c)]/10 bg-[var(--restaurant-color-hex-174c3c)]/5 px-3 py-2 font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:border-[var(--restaurant-color-hex-174c3c)]/20 hover:bg-[var(--restaurant-color-hex-174c3c)]/10">
                                             <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-white">
                                                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                                     stroke="currentColor" stroke-width="1.8">
@@ -558,7 +558,7 @@
                 {{-- Empty State --}}
                 <div class="px-5 py-16 text-center sm:py-20">
                     <div
-                        class="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-[#174c3c]/5 text-[#174c3c] ring-1 ring-[#174c3c]/10">
+                        class="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-[var(--restaurant-color-hex-174c3c)]/5 text-[var(--restaurant-color-hex-174c3c)] ring-1 ring-[var(--restaurant-color-hex-174c3c)]/10">
                         <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             stroke-width="1.4">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -570,7 +570,7 @@
                     <p class="mx-auto mt-2 max-w-sm text-sm leading-6 text-gray-500">ابدأ بإضافة أول تصنيف لتنظيم الوجبات
                         والمشروبات في قائمتك.</p>
                     <a href="{{ route('admin.category-food.create') }}"
-                        class="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-[#174c3c] px-5 py-3 text-sm font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[#10382c]">
+                        class="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-5 py-3 text-sm font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[var(--restaurant-color-hex-10382c)]">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14" />
                         </svg>
@@ -582,7 +582,7 @@
             <div class="mt-8 overflow-hidden rounded-3xl border border-gray-200/80 bg-white shadow-sm" dir="rtl">
 
                 {{-- Top Accent --}}
-                <div class="h-1 bg-gradient-to-l from-[#174c3c] via-emerald-500 to-emerald-100"></div>
+                <div class="h-1 bg-gradient-to-l from-[var(--restaurant-color-hex-174c3c)] via-emerald-500 to-emerald-100"></div>
 
                 <div class="p-4 sm:p-5">
                     <div class="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
@@ -590,7 +590,7 @@
                         {{-- Results Summary --}}
                         <div class="flex items-center gap-3">
                             <div
-                                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#174c3c]/[0.07] text-[#174c3c]">
+                                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-174c3c)]/[0.07] text-[var(--restaurant-color-hex-174c3c)]">
                                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                     stroke-width="1.7">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -604,9 +604,9 @@
                                 <p class="mt-1 text-xs text-gray-500">
                                     @if ($categories->total() > 0)
                                         عرض
-                                        <span class="font-bold text-[#174c3c]">{{ $categories->firstItem() }}</span>
+                                        <span class="font-bold text-[var(--restaurant-color-hex-174c3c)]">{{ $categories->firstItem() }}</span>
                                         إلى
-                                        <span class="font-bold text-[#174c3c]">{{ $categories->lastItem() }}</span>
+                                        <span class="font-bold text-[var(--restaurant-color-hex-174c3c)]">{{ $categories->lastItem() }}</span>
                                         من أصل
                                         <span class="font-bold text-gray-700">{{ $categories->total() }}</span>
                                         تصنيف
@@ -638,7 +638,7 @@
 
                                 <label for="categories-limit"
                                     class="flex items-center gap-2 pr-1 text-xs font-semibold text-gray-600">
-                                    <svg class="h-4 w-4 text-[#174c3c]" fill="none" viewBox="0 0 24 24"
+                                    <svg class="h-4 w-4 text-[var(--restaurant-color-hex-174c3c)]" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor" stroke-width="1.8">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
@@ -647,7 +647,7 @@
                                 </label>
 
                                 <select id="categories-limit" name="limit" onchange="this.form.submit()"
-                                    class="min-w-[76px] cursor-pointer rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-bold text-[#174c3c] outline-none transition hover:border-[#174c3c]/40 focus:border-[#174c3c] focus:ring-4 focus:ring-[#174c3c]/10">
+                                    class="min-w-[76px] cursor-pointer rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-bold text-[var(--restaurant-color-hex-174c3c)] outline-none transition hover:border-[var(--restaurant-color-hex-174c3c)]/40 focus:border-[var(--restaurant-color-hex-174c3c)] focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                                     @foreach ([5, 10, 25, 50, 100] as $limit)
                                         <option value="{{ $limit }}"
                                             {{ (int) $categories->perPage() === $limit ? 'selected' : '' }}>
@@ -673,7 +673,7 @@
                                 @else
                                     <a href="{{ $categories->previousPageUrl() }}" rel="prev"
                                         aria-label="الصفحة السابقة"
-                                        class="inline-flex min-h-10 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 transition hover:border-[#174c3c]/30 hover:bg-[#174c3c]/5 hover:text-[#174c3c] focus:outline-none focus:ring-4 focus:ring-[#174c3c]/10 sm:px-4">
+                                        class="inline-flex min-h-10 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 transition hover:border-[var(--restaurant-color-hex-174c3c)]/30 hover:bg-[var(--restaurant-color-hex-174c3c)]/5 hover:text-[var(--restaurant-color-hex-174c3c)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10 sm:px-4">
                                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                             stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6 6-6-6" />
@@ -684,7 +684,7 @@
 
                                 {{-- Page Indicator --}}
                                 <div
-                                    class="flex min-h-10 items-center gap-2 rounded-xl bg-[#174c3c] px-4 text-sm font-bold text-white shadow-sm shadow-[#174c3c]/15">
+                                    class="flex min-h-10 items-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-4 text-sm font-bold text-white shadow-sm shadow-[var(--restaurant-color-hex-174c3c)]/15">
                                     <span>{{ $categories->currentPage() }}</span>
                                     <span class="text-emerald-200/70">من</span>
                                     <span>{{ max(1, $categories->lastPage()) }}</span>
@@ -694,7 +694,7 @@
                                 @if ($categories->hasMorePages())
                                     <a href="{{ $categories->nextPageUrl() }}" rel="next"
                                         aria-label="الصفحة التالية"
-                                        class="inline-flex min-h-10 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 transition hover:border-[#174c3c]/30 hover:bg-[#174c3c]/5 hover:text-[#174c3c] focus:outline-none focus:ring-4 focus:ring-[#174c3c]/10 sm:px-4">
+                                        class="inline-flex min-h-10 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 text-sm font-semibold text-gray-700 transition hover:border-[var(--restaurant-color-hex-174c3c)]/30 hover:bg-[var(--restaurant-color-hex-174c3c)]/5 hover:text-[var(--restaurant-color-hex-174c3c)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10 sm:px-4">
                                         <span>التالي</span>
                                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                             stroke-width="2">
@@ -728,10 +728,10 @@
                             <div class="mb-2 flex items-center justify-between gap-3 text-[11px] text-gray-400">
                                 <span>تقدم الصفحات</span>
                                 <span
-                                    class="font-bold tabular-nums text-[#174c3c]">{{ number_format($progress, 0) }}%</span>
+                                    class="font-bold tabular-nums text-[var(--restaurant-color-hex-174c3c)]">{{ number_format($progress, 0) }}%</span>
                             </div>
                             <div class="h-1.5 overflow-hidden rounded-full bg-gray-100">
-                                <div class="h-full rounded-full bg-gradient-to-l from-[#174c3c] to-emerald-400 transition-all duration-300"
+                                <div class="h-full rounded-full bg-gradient-to-l from-[var(--restaurant-color-hex-174c3c)] to-emerald-400 transition-all duration-300"
                                     style="width: {{ $progress }}%"></div>
                             </div>
                         </div>

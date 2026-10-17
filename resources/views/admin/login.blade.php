@@ -9,6 +9,7 @@
     <meta name="theme-color" content="#174c3c">
     <title>تسجيل دخول الإدارة</title>
 
+    @include('components.theme-mode')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,11 +20,11 @@
 
     <style>
         :root {
-            --primary: #174c3c;
-            --primary-dark: #10382d;
-            --primary-light: #eaf2ee;
-            --gold: #d7a85b;
-            --cream: #faf7f0;
+            --primary: var(--restaurant-color-hex-174c3c);
+            --primary-dark: var(--restaurant-color-hex-10382d);
+            --primary-light: var(--restaurant-color-hex-eaf2ee);
+            --gold: var(--restaurant-color-hex-d7a85b);
+            --cream: var(--restaurant-color-hex-faf7f0);
         }
 
         * {
@@ -44,32 +45,32 @@
 
         .login-background {
             background:
-                radial-gradient(ellipse at 0% 0%, rgba(215, 168, 91, .17), transparent 36%),
-                radial-gradient(ellipse at 100% 100%, rgba(23, 76, 60, .13), transparent 38%),
-                linear-gradient(135deg, #fcfaf5 0%, #f4f3eb 50%, #f8f7f1 100%);
+                radial-gradient(ellipse at 0% 0%, var(--restaurant-color-rgb-215-168-91-point-17), transparent 36%),
+                radial-gradient(ellipse at 100% 100%, var(--restaurant-color-rgb-23-76-60-point-13), transparent 38%),
+                linear-gradient(135deg, var(--restaurant-color-hex-fcfaf5) 0%, var(--restaurant-color-hex-f4f3eb) 50%, var(--restaurant-color-hex-f8f7f1) 100%);
         }
 
         .login-card {
             box-shadow:
-                0 30px 80px rgba(16, 56, 45, .10),
-                0 8px 24px rgba(16, 56, 45, .05);
+                0 30px 80px var(--restaurant-color-rgb-16-56-45-point-10),
+                0 8px 24px var(--restaurant-color-rgb-16-56-45-point-05);
         }
 
         .login-header {
             background:
-                radial-gradient(circle at 100% 0%, rgba(215, 168, 91, .15), transparent 36%),
-                linear-gradient(145deg, #1b5945 0%, #174c3c 48%, #10382d 100%);
+                radial-gradient(circle at 100% 0%, var(--restaurant-color-rgb-215-168-91-point-15), transparent 36%),
+                linear-gradient(145deg, var(--restaurant-color-hex-1b5945) 0%, var(--restaurant-color-hex-174c3c) 48%, var(--restaurant-color-hex-10382d) 100%);
         }
 
         .login-button {
-            background: linear-gradient(135deg, #1b5945, #174c3c 60%, #10382d);
-            box-shadow: 0 8px 18px rgba(23, 76, 60, .16);
+            background: linear-gradient(135deg, var(--restaurant-color-hex-1b5945), var(--restaurant-color-hex-174c3c) 60%, var(--restaurant-color-hex-10382d));
+            box-shadow: 0 8px 18px var(--restaurant-color-rgb-23-76-60-point-16);
             transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
         }
 
         .login-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(23, 76, 60, .23);
+            box-shadow: 0 12px 25px var(--restaurant-color-rgb-23-76-60-point-23);
         }
 
         .login-button:active {
@@ -82,8 +83,8 @@
 
         .login-input:focus {
             border-color: var(--primary);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(23, 76, 60, .09);
+            background: var(--restaurant-color-hex-fff);
+            box-shadow: 0 0 0 4px var(--restaurant-color-rgb-23-76-60-point-09);
             outline: none;
         }
 
@@ -94,7 +95,7 @@
         .decorative-ring {
             pointer-events: none;
             position: absolute;
-            border: 1px solid rgba(215, 168, 91, .22);
+            border: 1px solid var(--restaurant-color-rgb-215-168-91-point-22);
             border-radius: 50%;
         }
 
@@ -103,15 +104,15 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            color: rgba(255, 255, 255, .9);
-            border: 1px solid rgba(255, 255, 255, .22);
-            background: rgba(255, 255, 255, .09);
+            color: var(--restaurant-color-rgb-255-255-255-point-9);
+            border: 1px solid var(--restaurant-color-rgb-255-255-255-point-22);
+            background: var(--restaurant-color-rgb-255-255-255-point-09);
             transition: background .2s ease, border-color .2s ease;
         }
 
         .back-home:hover {
-            background: rgba(255, 255, 255, .17);
-            border-color: rgba(255, 255, 255, .4);
+            background: var(--restaurant-color-rgb-255-255-255-point-17);
+            border-color: var(--restaurant-color-rgb-255-255-255-point-4);
         }
 
         [x-cloak] {
@@ -127,21 +128,21 @@
         .iti input#phone {
             width: 100%;
             height: 54px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--restaurant-color-hex-e5e7eb);
             border-radius: 12px;
-            background: rgba(250, 247, 240, .65);
+            background: var(--restaurant-color-rgb-250-247-240-point-65);
             padding-left: 120px !important;
             padding-right: 16px !important;
             text-align: left;
-            color: #1f2937;
+            color: var(--restaurant-color-hex-1f2937);
             font-size: 16px;
             transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
         }
 
         .iti input#phone:focus {
             border-color: var(--primary);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(23, 76, 60, .09);
+            background: var(--restaurant-color-hex-fff);
+            box-shadow: 0 0 0 4px var(--restaurant-color-rgb-23-76-60-point-09);
             outline: none;
         }
 
@@ -155,13 +156,13 @@
             height: 42px;
             padding: 0 9px;
             border-radius: 8px;
-            background: rgba(23, 76, 60, .06);
+            background: var(--restaurant-color-rgb-23-76-60-point-06);
             transition: background .2s ease;
         }
 
         .iti__selected-country:hover,
         .iti__selected-country:focus {
-            background: rgba(23, 76, 60, .12);
+            background: var(--restaurant-color-rgb-23-76-60-point-12);
         }
 
         .iti__selected-country-primary {
@@ -175,9 +176,9 @@
         .iti__dropdown-content {
             z-index: 100;
             margin-top: 6px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--restaurant-color-hex-e5e7eb);
             border-radius: 14px;
-            box-shadow: 0 15px 40px rgba(16, 56, 45, .16);
+            box-shadow: 0 15px 40px var(--restaurant-color-rgb-16-56-45-point-16);
             overflow: hidden;
         }
 
@@ -185,7 +186,7 @@
             width: calc(100% - 16px);
             margin: 8px;
             padding: 10px 30px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--restaurant-color-hex-e5e7eb);
             border-radius: 8px;
             outline: none;
             direction: ltr;
@@ -194,20 +195,20 @@
 
         .iti__search-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(23, 76, 60, .08);
+            box-shadow: 0 0 0 3px var(--restaurant-color-rgb-23-76-60-point-08);
         }
 
         .iti__country-list {
             scrollbar-width: thin;
-            scrollbar-color: #d7a85b #faf7f0;
+            scrollbar-color: var(--restaurant-color-hex-d7a85b) var(--restaurant-color-hex-faf7f0);
         }
 
         .iti__country.iti__highlight {
-            background: #f0f5f2;
+            background: var(--restaurant-color-hex-f0f5f2);
         }
 
         .iti__country-name {
-            color: #374151;
+            color: var(--restaurant-color-hex-374151);
         }
 
         .iti__dial-code {
@@ -255,10 +256,10 @@
     <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
         <div class="decorative-ring -right-28 -top-28 h-80 w-80"></div>
         <div class="decorative-ring -right-16 -top-16 h-56 w-56"></div>
-        <div class="decorative-ring -bottom-32 -left-28 h-96 w-96" style="border-color: rgba(23, 76, 60, .12)"></div>
-        <div class="decorative-ring -bottom-16 -left-12 h-64 w-64" style="border-color: rgba(23, 76, 60, .09)"></div>
-        <div class="absolute left-[12%] top-[18%] h-2 w-2 rounded-full bg-[#d7a85b]/50"></div>
-        <div class="absolute bottom-[22%] right-[10%] h-3 w-3 rounded-full bg-[#174c3c]/20"></div>
+        <div class="decorative-ring -bottom-32 -left-28 h-96 w-96" style="border-color: var(--restaurant-color-rgb-23-76-60-point-12)"></div>
+        <div class="decorative-ring -bottom-16 -left-12 h-64 w-64" style="border-color: var(--restaurant-color-rgb-23-76-60-point-09)"></div>
+        <div class="absolute left-[12%] top-[18%] h-2 w-2 rounded-full bg-[var(--restaurant-color-hex-d7a85b)]/50"></div>
+        <div class="absolute bottom-[22%] right-[10%] h-3 w-3 rounded-full bg-[var(--restaurant-color-hex-174c3c)]/20"></div>
     </div>
 
     <main class="relative z-10 mx-auto w-full max-w-md">
@@ -266,9 +267,9 @@
         {{-- Brand --}}
         <div class="mb-6 text-center sm:mb-8">
             <div
-                class="mb-3 inline-flex items-center gap-2 rounded-full border border-[#174c3c]/10 bg-white/70 px-4 py-2 shadow-sm">
-                <span class="h-2 w-2 rounded-full bg-[#d7a85b]"></span>
-                <span class="text-xs font-bold tracking-wide text-[#174c3c]">بوابة الإدارة الرسمية</span>
+                class="mb-3 inline-flex items-center gap-2 rounded-full border border-[var(--restaurant-color-hex-174c3c)]/10 bg-white/70 px-4 py-2 shadow-sm">
+                <span class="h-2 w-2 rounded-full bg-[var(--restaurant-color-hex-d7a85b)]"></span>
+                <span class="text-xs font-bold tracking-wide text-[var(--restaurant-color-hex-174c3c)]">بوابة الإدارة الرسمية</span>
             </div>
             <p class="text-sm font-medium text-gray-500">
                 تسجيل دخول آمن وسهل إلى لوحة التحكم
@@ -285,7 +286,7 @@
                     class="pointer-events-none absolute -left-12 -top-12 h-40 w-40 rounded-full border border-white/10">
                 </div>
                 <div
-                    class="pointer-events-none absolute -left-5 -top-5 h-24 w-24 rounded-full border border-[#d7a85b]/30">
+                    class="pointer-events-none absolute -left-5 -top-5 h-24 w-24 rounded-full border border-[var(--restaurant-color-hex-d7a85b)]/30">
                 </div>
                 <div
                     class="pointer-events-none absolute -bottom-16 -right-8 h-36 w-36 rounded-full border border-white/10">
@@ -301,13 +302,13 @@
                 </a>
 
                 <div
-                    class="relative mx-auto mb-5 mt-8 flex h-[76px] w-[76px] items-center justify-center rounded-2xl border border-[#d7a85b]/60 bg-white/10 shadow-lg backdrop-blur sm:mt-5 sm:h-20 sm:w-20">
-                    <span class="text-4xl font-black text-[#d7a85b]">A</span>
+                    class="relative mx-auto mb-5 mt-8 flex h-[76px] w-[76px] items-center justify-center rounded-2xl border border-[var(--restaurant-color-hex-d7a85b)]/60 bg-white/10 shadow-lg backdrop-blur sm:mt-5 sm:h-20 sm:w-20">
+                    <span class="text-4xl font-black text-[var(--restaurant-color-hex-d7a85b)]">A</span>
                     <span
-                        class="absolute -bottom-1.5 -left-1.5 h-5 w-5 rounded-full border-2 border-[#174c3c] bg-[#d7a85b]"></span>
+                        class="absolute -bottom-1.5 -left-1.5 h-5 w-5 rounded-full border-2 border-[var(--restaurant-color-hex-174c3c)] bg-[var(--restaurant-color-hex-d7a85b)]"></span>
                 </div>
 
-                <p class="mb-2 text-xs font-bold tracking-[3px] text-[#e8c98e]">
+                <p class="mb-2 text-xs font-bold tracking-[3px] text-[var(--restaurant-color-hex-e8c98e)]">
                     ADMIN PORTAL
                 </p>
 
@@ -346,14 +347,14 @@
 
                     {{-- Phone --}}
                     <div>
-                        <label for="phone" class="mb-2 block text-sm font-bold text-[#174c3c]">
+                        <label for="phone" class="mb-2 block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
                             رقم الهاتف
                         </label>
 
                         <div class="relative">
                             <input id="phone" type="tel" name="phone" value="{{ old('phone') }}" required
                                 autofocus autocomplete="tel" inputmode="numeric" placeholder="أدخل رقم الهاتف"
-                                class="login-input w-full rounded-xl border border-gray-200 bg-[#faf7f0]/60 px-4 py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
+                                class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 px-4 py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
 
                             <input type="hidden" name="country_code" id="country_code"
                                 value="{{ old('country_code', '+963') }}">
@@ -367,19 +368,19 @@
                     {{-- Password --}}
                     <div x-data="{ showPassword: false }">
                         <div class="mb-2 flex items-center justify-between gap-3">
-                            <label for="password" class="block text-sm font-bold text-[#174c3c]">
+                            <label for="password" class="block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
                                 كلمة المرور
                             </label>
 
                             <a href="{{ route('password.request') }}"
-                                class="text-xs font-bold text-[#174c3c] transition hover:text-[#b28743]">
+                                class="text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:text-[var(--restaurant-color-hex-b28743)]">
                                 نسيت كلمة المرور؟
                             </a>
                         </div>
 
                         <div class="relative">
                             <span
-                                class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#174c3c]/60">
+                                class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[var(--restaurant-color-hex-174c3c)]/60">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="1.8">
                                     <rect x="4" y="10" width="16" height="11" rx="2" />
@@ -390,11 +391,11 @@
 
                             <input id="password" :type="showPassword ? 'text' : 'password'" name="password" required
                                 autocomplete="current-password" placeholder="أدخل كلمة المرور" dir="ltr"
-                                class="login-input w-full rounded-xl border border-gray-200 bg-[#faf7f0]/60 py-3.5 pl-20 pr-12 text-left text-gray-800 outline-none placeholder:text-gray-400">
+                                class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 py-3.5 pl-20 pr-12 text-left text-gray-800 outline-none placeholder:text-gray-400">
 
                             <button type="button" @click="showPassword = !showPassword"
                                 :aria-label="showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'"
-                                class="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-lg px-2.5 py-2 text-xs font-bold text-[#174c3c] transition hover:bg-[#174c3c]/10 focus:outline-none focus:ring-2 focus:ring-[#174c3c]/30"
+                                class="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-lg px-2.5 py-2 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:bg-[var(--restaurant-color-hex-174c3c)]/10 focus:outline-none focus:ring-2 focus:ring-[var(--restaurant-color-hex-174c3c)]/30"
                                 x-text="showPassword ? 'إخفاء' : 'إظهار'">
                             </button>
                         </div>
@@ -408,14 +409,14 @@
                     {{--
                     <label class="flex cursor-pointer items-center gap-2 text-sm text-gray-600">
                         <input type="checkbox" name="remember" value="1" @checked(old('remember'))
-                            class="h-4 w-4 rounded border-gray-300 accent-[#174c3c] focus:ring-[#174c3c]">
+                            class="h-4 w-4 rounded border-gray-300 accent-[var(--restaurant-color-hex-174c3c)] focus:ring-[var(--restaurant-color-hex-174c3c)]">
                         <span>تذكّرني</span>
                     </label>
                     --}}
 
                     {{-- Submit --}}
                     <button type="submit"
-                        class="login-button group flex min-h-[54px] w-full items-center justify-center gap-3 rounded-xl px-5 py-3.5 font-bold text-white focus:outline-none focus:ring-4 focus:ring-[#174c3c]/20">
+                        class="login-button group flex min-h-[54px] w-full items-center justify-center gap-3 rounded-xl px-5 py-3.5 font-bold text-white focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20">
                         <span>تسجيل الدخول</span>
 
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -429,8 +430,8 @@
 
                 {{-- Security Notice --}}
                 <div
-                    class="mt-6 flex items-center justify-center gap-2 rounded-xl border border-[#174c3c]/[0.08] bg-[#174c3c]/[0.035] px-3 py-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0 text-[#174c3c]/70"
+                    class="mt-6 flex items-center justify-center gap-2 rounded-xl border border-[var(--restaurant-color-hex-174c3c)]/[0.08] bg-[var(--restaurant-color-hex-174c3c)]/[0.035] px-3 py-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0 text-[var(--restaurant-color-hex-174c3c)]/70"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                         <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" stroke-linecap="round"
                             stroke-linejoin="round" />
@@ -451,7 +452,7 @@
                 <p class="mt-4 text-center text-xs leading-7 text-gray-500">
                     هل تواجه مشكلة في الدخول؟
                     <a href="mailto:muhamedawad2000@gmail.com"
-                        class="font-bold text-[#174c3c] underline decoration-[#d7a85b] underline-offset-4 transition hover:text-[#b28743]">
+                        class="font-bold text-[var(--restaurant-color-hex-174c3c)] underline decoration-[var(--restaurant-color-hex-d7a85b)] underline-offset-4 transition hover:text-[var(--restaurant-color-hex-b28743)]">
                         تواصل معنا
                     </a>
                 </p>

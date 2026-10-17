@@ -6,12 +6,12 @@
 @section('content')
     <style>
         .tables-page {
-            --primary: #174c3c;
-            --primary-dark: #10382c;
-            --primary-light: #e8f4ed;
-            --border: #e3ebe6;
-            --muted: #718078;
-            color: #20372c;
+            --primary: var(--restaurant-color-hex-174c3c);
+            --primary-dark: var(--restaurant-color-hex-10382c);
+            --primary-light: var(--restaurant-color-hex-e8f4ed);
+            --border: var(--restaurant-color-hex-e3ebe6);
+            --muted: var(--restaurant-color-hex-718078);
+            color: var(--restaurant-color-hex-20372c);
         }
 
         .tables-page * {
@@ -42,8 +42,8 @@
             flex-shrink: 0;
             color: white;
             border-radius: 19px;
-            background: linear-gradient(145deg, #26745a, #10382c);
-            box-shadow: 0 8px 20px rgb(23 76 60 / 18%);
+            background: linear-gradient(145deg, var(--restaurant-color-hex-26745a), var(--restaurant-color-hex-10382c));
+            box-shadow: 0 8px 20px var(--restaurant-color-rgb-23-76-60-opacity-18-percent);
         }
 
         .tables-page .heading-icon svg {
@@ -75,18 +75,18 @@
             padding: 12px 19px;
             border: 1px solid transparent;
             border-radius: 14px;
-            background: linear-gradient(135deg, #26745a, #174c3c);
+            background: linear-gradient(135deg, var(--restaurant-color-hex-26745a), var(--restaurant-color-hex-174c3c));
             color: white;
             font-size: 14px;
             font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 6px 16px rgb(23 76 60 / 17%);
+            box-shadow: 0 6px 16px var(--restaurant-color-rgb-23-76-60-opacity-17-percent);
             transition: .2s ease;
         }
 
         .tables-page .btn-add:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 22px rgb(23 76 60 / 23%);
+            box-shadow: 0 10px 22px var(--restaurant-color-rgb-23-76-60-opacity-23-percent);
         }
 
         .tables-page .btn-add svg {
@@ -111,14 +111,14 @@
             padding: 22px;
             border: 1px solid var(--border);
             border-radius: 20px;
-            background: #fff;
-            box-shadow: 0 5px 20px rgb(23 76 60 / 4%);
+            background: var(--restaurant-color-hex-fff);
+            box-shadow: 0 5px 20px var(--restaurant-color-rgb-23-76-60-opacity-4-percent);
             transition: transform .2s ease, box-shadow .2s ease;
         }
 
         .tables-page .stat-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgb(23 76 60 / 8%);
+            box-shadow: 0 10px 25px var(--restaurant-color-rgb-23-76-60-opacity-8-percent);
         }
 
         .tables-page .stat-card::after {
@@ -149,38 +149,38 @@
         }
 
         .tables-page .stat-total {
-            color: #174c3c;
+            color: var(--restaurant-color-hex-174c3c);
         }
 
         .tables-page .stat-total .stat-icon {
-            background: #e7f3ec;
+            background: var(--restaurant-color-hex-e7f3ec);
         }
 
         .tables-page .stat-available {
-            color: #16804a;
+            color: var(--restaurant-color-hex-16804a);
         }
 
         .tables-page .stat-available .stat-icon {
-            background: #e2f7e9;
+            background: var(--restaurant-color-hex-e2f7e9);
         }
 
         .tables-page .stat-busy {
-            color: #c43b3b;
+            color: var(--restaurant-color-hex-c43b3b);
         }
 
         .tables-page .stat-busy .stat-icon {
-            background: #fff0ef;
+            background: var(--restaurant-color-hex-fff0ef);
         }
 
         .tables-page .stat-label {
             margin-bottom: 7px;
-            color: #748178;
+            color: var(--restaurant-color-hex-748178);
             font-size: 13px;
             font-weight: 600;
         }
 
         .tables-page .stat-number {
-            color: #173d2f;
+            color: var(--restaurant-color-hex-173d2f);
             font-size: clamp(25px, 3vw, 32px);
             font-weight: 850;
             line-height: 1.2;
@@ -197,8 +197,8 @@
             padding: 17px;
             border: 1px solid var(--border);
             border-radius: 19px;
-            background: #fff;
-            box-shadow: 0 4px 16px rgb(23 76 60 / 3%);
+            background: var(--restaurant-color-hex-fff);
+            box-shadow: 0 4px 16px var(--restaurant-color-rgb-23-76-60-opacity-3-percent);
         }
 
         .tables-page .search-title {
@@ -213,7 +213,7 @@
         .tables-page .search-title svg {
             width: 20px;
             height: 20px;
-            color: #26745a;
+            color: var(--restaurant-color-hex-26745a);
         }
 
         .tables-page .search-form {
@@ -237,7 +237,7 @@
             right: 14px;
             width: 19px;
             height: 19px;
-            color: #8a9a90;
+            color: var(--restaurant-color-hex-8a9a90);
             transform: translateY(-50%);
             pointer-events: none;
         }
@@ -246,19 +246,19 @@
             width: 100%;
             min-height: 45px;
             padding: 11px 43px 11px 13px;
-            border: 1px solid #dce7df;
+            border: 1px solid var(--restaurant-color-hex-dce7df);
             border-radius: 12px;
             outline: none;
-            background: #fbfdfb;
-            color: #20372c;
+            background: var(--restaurant-color-hex-fbfdfb);
+            color: var(--restaurant-color-hex-20372c);
             font-size: 13px;
             transition: .2s ease;
         }
 
         .tables-page .search-input:focus {
-            border-color: #43866a;
-            background: #fff;
-            box-shadow: 0 0 0 4px rgb(38 116 90 / 9%);
+            border-color: var(--restaurant-color-hex-43866a);
+            background: var(--restaurant-color-hex-fff);
+            box-shadow: 0 0 0 4px var(--restaurant-color-rgb-38-116-90-opacity-9-percent);
         }
 
         .tables-page .btn-search,
@@ -281,7 +281,7 @@
 
         .tables-page .btn-search {
             background: var(--primary);
-            color: #fff;
+            color: var(--restaurant-color-hex-fff);
         }
 
         .tables-page .btn-search:hover {
@@ -289,12 +289,12 @@
         }
 
         .tables-page .btn-reset {
-            background: #edf3ef;
-            color: #496454;
+            background: var(--restaurant-color-hex-edf3ef);
+            color: var(--restaurant-color-hex-496454);
         }
 
         .tables-page .btn-reset:hover {
-            background: #e1ebe4;
+            background: var(--restaurant-color-hex-e1ebe4);
         }
 
         .tables-page .section-heading {
@@ -320,16 +320,16 @@
             width: 5px;
             height: 23px;
             border-radius: 5px;
-            background: #2b8964;
+            background: var(--restaurant-color-hex-2b8964);
             content: "";
         }
 
         .tables-page .results-count {
             padding: 7px 12px;
-            border: 1px solid #e1ebe4;
+            border: 1px solid var(--restaurant-color-hex-e1ebe4);
             border-radius: 10px;
-            background: #f5faf6;
-            color: #41634e;
+            background: var(--restaurant-color-hex-f5faf6);
+            color: var(--restaurant-color-hex-41634e);
             font-size: 12px;
             font-weight: 700;
         }
@@ -345,10 +345,10 @@
             min-width: 0;
             overflow: hidden;
             padding: 20px;
-            border: 1px solid #e4ece6;
+            border: 1px solid var(--restaurant-color-hex-e4ece6);
             border-radius: 21px;
-            background: #fff;
-            box-shadow: 0 5px 18px rgb(23 76 60 / 4%);
+            background: var(--restaurant-color-hex-fff);
+            box-shadow: 0 5px 18px var(--restaurant-color-rgb-23-76-60-opacity-4-percent);
             transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
         }
 
@@ -358,18 +358,18 @@
             right: 0;
             left: 0;
             height: 4px;
-            background: linear-gradient(90deg, #57ad7a, #1a704d);
+            background: linear-gradient(90deg, var(--restaurant-color-hex-57ad7a), var(--restaurant-color-hex-1a704d));
             content: "";
         }
 
         .tables-page .table-card.busy::before {
-            background: linear-gradient(90deg, #f29b91, #c52e35);
+            background: linear-gradient(90deg, var(--restaurant-color-hex-f29b91), var(--restaurant-color-hex-c52e35));
         }
 
         .tables-page .table-card:hover {
             transform: translateY(-4px);
-            border-color: #cbded1;
-            box-shadow: 0 13px 28px rgb(23 76 60 / 9%);
+            border-color: var(--restaurant-color-hex-cbded1);
+            box-shadow: 0 13px 28px var(--restaurant-color-rgb-23-76-60-opacity-9-percent);
         }
 
         .tables-page .table-card-header {
@@ -387,10 +387,10 @@
             width: 57px;
             height: 57px;
             flex-shrink: 0;
-            border: 1px solid #d9eee0;
+            border: 1px solid var(--restaurant-color-hex-d9eee0);
             border-radius: 18px;
-            background: linear-gradient(145deg, #f0faf3, #e0f1e6);
-            color: #23784d;
+            background: linear-gradient(145deg, var(--restaurant-color-hex-f0faf3), var(--restaurant-color-hex-e0f1e6));
+            color: var(--restaurant-color-hex-23784d);
         }
 
         .tables-page .table-icon svg {
@@ -399,15 +399,15 @@
         }
 
         .tables-page .table-card.busy .table-icon {
-            border-color: #f4d7d4;
-            background: linear-gradient(145deg, #fff5f4, #fee7e5);
-            color: #c33838;
+            border-color: var(--restaurant-color-hex-f4d7d4);
+            background: linear-gradient(145deg, var(--restaurant-color-hex-fff5f4), var(--restaurant-color-hex-fee7e5));
+            color: var(--restaurant-color-hex-c33838);
         }
 
         .tables-page .table-name {
             overflow-wrap: anywhere;
             margin-bottom: 8px;
-            color: #173d2f;
+            color: var(--restaurant-color-hex-173d2f);
             font-size: 19px;
             font-weight: 850;
             line-height: 1.5;
@@ -418,7 +418,7 @@
             align-items: center;
             gap: 7px;
             margin-bottom: 17px;
-            color: #7a8980;
+            color: var(--restaurant-color-hex-7a8980);
             font-size: 13px;
         }
 
@@ -430,7 +430,7 @@
 
         .tables-page .code-label {
             margin-bottom: 8px;
-            color: #7b8980;
+            color: var(--restaurant-color-hex-7b8980);
             font-size: 11px;
             font-weight: 700;
         }
@@ -439,10 +439,10 @@
             overflow-wrap: anywhere;
             margin-bottom: 15px;
             padding: 13px 10px;
-            border: 1px dashed #d8e5dc;
+            border: 1px dashed var(--restaurant-color-hex-d8e5dc);
             border-radius: 12px;
-            background: #f7faf8;
-            color: #244b38;
+            background: var(--restaurant-color-hex-f7faf8);
+            color: var(--restaurant-color-hex-244b38);
             text-align: center;
             direction: ltr;
             font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -465,10 +465,10 @@
             align-items: center;
             gap: 7px;
             padding: 8px 11px;
-            border: 1px solid #d6eddf;
+            border: 1px solid var(--restaurant-color-hex-d6eddf);
             border-radius: 10px;
-            background: #edfaf1;
-            color: #197444;
+            background: var(--restaurant-color-hex-edfaf1);
+            color: var(--restaurant-color-hex-197444);
             font-size: 12px;
             font-weight: 800;
         }
@@ -482,9 +482,9 @@
         }
 
         .tables-page .status.busy {
-            border-color: #f5d7d4;
-            background: #fff0ef;
-            color: #bd3030;
+            border-color: var(--restaurant-color-hex-f5d7d4);
+            background: var(--restaurant-color-hex-fff0ef);
+            color: var(--restaurant-color-hex-bd3030);
         }
 
         .tables-page .btn-edit,
@@ -494,10 +494,10 @@
             justify-content: center;
             gap: 6px;
             padding: 9px 12px;
-            border: 1px solid #d5e5dc;
+            border: 1px solid var(--restaurant-color-hex-d5e5dc);
             border-radius: 11px;
-            background: #edf7f1;
-            color: #176344;
+            background: var(--restaurant-color-hex-edf7f1);
+            color: var(--restaurant-color-hex-176344);
             font-size: 12px;
             font-weight: 750;
             text-decoration: none;
@@ -506,21 +506,21 @@
         }
 
         .tables-page .btn-edit:hover {
-            border-color: #176344;
-            background: #176344;
-            color: #fff;
+            border-color: var(--restaurant-color-hex-176344);
+            background: var(--restaurant-color-hex-176344);
+            color: var(--restaurant-color-hex-fff);
         }
 
         .tables-page .btn-edit-red {
-            border-color: #f1d3d0;
-            background: #fff1f0;
-            color: #b91c1c;
+            border-color: var(--restaurant-color-hex-f1d3d0);
+            background: var(--restaurant-color-hex-fff1f0);
+            color: var(--restaurant-color-hex-b91c1c);
         }
 
         .tables-page .btn-edit-red:hover {
-            border-color: #b91c1c;
-            background: #b91c1c;
-            color: #fff;
+            border-color: var(--restaurant-color-hex-b91c1c);
+            background: var(--restaurant-color-hex-b91c1c);
+            color: var(--restaurant-color-hex-fff);
         }
 
         .tables-page .btn-edit svg,
@@ -565,35 +565,35 @@
         }
 
         .tables-page .btn-show:hover {
-            background: #10382c;
-            box-shadow: 0 5px 12px rgb(23 76 60 / 15%);
+            background: var(--restaurant-color-hex-10382c);
+            box-shadow: 0 5px 12px var(--restaurant-color-rgb-23-76-60-opacity-15-percent);
         }
 
         .tables-page .btn-show-red {
-            background: #b92f35;
+            background: var(--restaurant-color-hex-b92f35);
             color: white;
         }
 
         .tables-page .btn-show-red:hover {
-            background: #922329;
+            background: var(--restaurant-color-hex-922329);
         }
 
         .tables-page .btn-print {
-            border-color: #f1d6d3;
-            background: #fff3f1;
-            color: #ad3434;
+            border-color: var(--restaurant-color-hex-f1d6d3);
+            background: var(--restaurant-color-hex-fff3f1);
+            color: var(--restaurant-color-hex-ad3434);
         }
 
         .tables-page .btn-print:hover {
-            border-color: #eabbb6;
-            background: #ffe7e4;
+            border-color: var(--restaurant-color-hex-eabbb6);
+            background: var(--restaurant-color-hex-ffe7e4);
         }
 
         .tables-page .empty {
             padding: 55px 20px;
-            border: 1px dashed #cddfd2;
+            border: 1px dashed var(--restaurant-color-hex-cddfd2);
             border-radius: 22px;
-            background: linear-gradient(145deg, #fff, #f7fbf8);
+            background: linear-gradient(145deg, var(--restaurant-color-hex-fff), var(--restaurant-color-hex-f7fbf8));
             text-align: center;
         }
 
@@ -605,8 +605,8 @@
             height: 75px;
             margin: 0 auto 18px;
             border-radius: 24px;
-            background: #e7f4eb;
-            color: #26745a;
+            background: var(--restaurant-color-hex-e7f4eb);
+            color: var(--restaurant-color-hex-26745a);
         }
 
         .tables-page .empty-icon svg {
@@ -616,14 +616,14 @@
 
         .tables-page .empty h2 {
             margin: 0 0 9px;
-            color: #174c3c;
+            color: var(--restaurant-color-hex-174c3c);
             font-size: 20px;
             font-weight: 850;
         }
 
         .tables-page .empty p {
             margin: 0 0 20px;
-            color: #75847a;
+            color: var(--restaurant-color-hex-75847a);
             font-size: 14px;
             line-height: 1.8;
         }
@@ -859,7 +859,7 @@
 
         @media print {
             body {
-                background: #fff !important;
+                background: var(--restaurant-color-hex-fff) !important;
             }
 
             .tables-page .page-heading,
@@ -895,8 +895,8 @@
 
             .tables-page .table-code {
                 border: 0;
-                background: #fff;
-                color: #000;
+                background: var(--restaurant-color-hex-fff);
+                color: var(--restaurant-color-hex-000);
                 font-size: 22px;
             }
         }

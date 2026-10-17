@@ -5,12 +5,12 @@
 @section('title', 'قائمة الطعام')
 
 @section('content')
-    <div class="restaurant-menu min-h-screen overflow-hidden bg-[#f7f8f5] pb-28 text-gray-800" dir="rtl">
+    <div class="restaurant-menu min-h-screen overflow-hidden bg-[var(--restaurant-color-hex-f7f8f5)] pb-28 text-gray-800" dir="rtl">
         @include('Menu.components.styles')
 
         <div id="order-notification" role="status" aria-live="polite"
             style="display:none; position:fixed; top:20px; right:20px;
-            z-index:99999; background:#174c3c; color:white;
+            z-index:99999; background:var(--restaurant-color-hex-174c3c); color:white;
             padding:16px 22px; border-radius:12px;">
         </div>
 

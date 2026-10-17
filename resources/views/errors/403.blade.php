@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>403 - الوصول مرفوض</title>
+    @include('components.theme-mode')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 

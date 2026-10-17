@@ -6,7 +6,7 @@
 
          {{-- Header --}}
          <div
-             class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#174c3c] via-[#1c604b] to-[#10382c] p-5 text-white shadow-lg sm:p-8">
+             class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[var(--restaurant-color-hex-174c3c)] via-[var(--restaurant-color-hex-1c604b)] to-[var(--restaurant-color-hex-10382c)] p-5 text-white shadow-lg sm:p-8">
              <div class="pointer-events-none absolute -left-12 -top-16 h-48 w-48 rounded-full bg-white/5"></div>
              <div class="pointer-events-none absolute -bottom-20 left-1/3 h-56 w-56 rounded-full bg-white/5"></div>
 
@@ -113,7 +113,7 @@
                                  <p class="mt-1 text-xs text-gray-500">معاينة مباشرة للصورة</p>
                              </div>
                              <span
-                                 class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#174c3c]/5 text-[#174c3c]">
+                                 class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-174c3c)]/5 text-[var(--restaurant-color-hex-174c3c)]">
                                  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
                                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M4 4h16v16H4z" />
@@ -123,7 +123,7 @@
 
                          <div class="p-4 sm:p-5">
                              <div id="image-drop-zone"
-                                 class="group relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl border-2 border-dashed border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 transition duration-300 hover:border-[#174c3c]/40">
+                                 class="group relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl border-2 border-dashed border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 transition duration-300 hover:border-[var(--restaurant-color-hex-174c3c)]/40">
 
                                  <img id="food-image-preview"
                                      src="{{ $food->image ? asset('storage/' . $food->image) : '' }}"
@@ -133,7 +133,7 @@
                                  <div id="food-image-placeholder"
                                      class="{{ $food->image ? 'hidden' : '' }} absolute inset-0 flex flex-col items-center justify-center gap-3 p-5 text-center">
                                      <div
-                                         class="flex h-20 w-20 items-center justify-center rounded-3xl bg-white text-[#174c3c]/50 shadow-sm">
+                                         class="flex h-20 w-20 items-center justify-center rounded-3xl bg-white text-[var(--restaurant-color-hex-174c3c)]/50 shadow-sm">
                                          <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M4 4h16v16H4z" />
@@ -153,7 +153,7 @@
                                  </div>
 
                                  <label for="image"
-                                     class="absolute left-3 top-3 inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/70 bg-white/90 px-3 py-2 text-xs font-extrabold text-[#174c3c] shadow-lg backdrop-blur transition hover:bg-white">
+                                     class="absolute left-3 top-3 inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/70 bg-white/90 px-3 py-2 text-xs font-extrabold text-[var(--restaurant-color-hex-174c3c)] shadow-lg backdrop-blur transition hover:bg-white">
                                      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 4v12m0-12L7 9m5-5l5 5" />
@@ -196,7 +196,7 @@
                          </div>
 
                          <label for="is_active"
-                             class="flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-gray-100 bg-gray-50 p-4 transition hover:border-[#174c3c]/20 hover:bg-[#174c3c]/5">
+                             class="flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-gray-100 bg-gray-50 p-4 transition hover:border-[var(--restaurant-color-hex-174c3c)]/20 hover:bg-[var(--restaurant-color-hex-174c3c)]/5">
                              <div class="min-w-0">
                                  <span id="status-title" class="block text-sm font-extrabold text-gray-800">
                                      {{ old('is_active', $food->is_active) ? 'الوجبة متاحة' : 'الوجبة غير متاحة' }}
@@ -223,7 +223,7 @@
                      <div class="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
                          <div class="flex items-center gap-3 border-b border-gray-100 px-5 py-5 sm:px-7">
                              <span
-                                 class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#174c3c]/5 text-[#174c3c]">
+                                 class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-174c3c)]/5 text-[var(--restaurant-color-hex-174c3c)]">
                                  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
                                          d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
@@ -256,7 +256,7 @@
                                      <input type="text" name="name" id="name"
                                          value="{{ old('name', $food->name) }}" required
                                          placeholder="مثال: برغر لحم مشوي"
-                                         class="w-full rounded-xl border border-gray-200 bg-gray-50/70 py-3.5 pr-12 pl-4 text-sm outline-none transition placeholder:text-gray-400 focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                                         class="w-full rounded-xl border border-gray-200 bg-gray-50/70 py-3.5 pr-12 pl-4 text-sm outline-none transition placeholder:text-gray-400 focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                                  </div>
 
                                  @error('name')
@@ -278,7 +278,7 @@
                                          </svg>
                                      </span>
                                      <select name="category_food_id" id="category_food_id" required
-                                         class="w-full appearance-none rounded-xl border border-gray-200 bg-gray-50/70 py-3.5 pr-12 pl-10 text-sm outline-none transition focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                                         class="w-full appearance-none rounded-xl border border-gray-200 bg-gray-50/70 py-3.5 pr-12 pl-10 text-sm outline-none transition focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                                          @foreach ($categories as $cat)
                                              <option value="{{ $cat->id }}"
                                                  {{ old('category_food_id', $food->category_food_id) == $cat->id ? 'selected' : '' }}>
@@ -312,10 +312,10 @@
                                      <input type="number" step="1" min="0" name="price" id="price"
                                          value="{{ old('price', number_format($food->price, 0)) }}" required
                                          placeholder="000"
-                                         class="mr-1 w-full rounded-xl border border-gray-200 bg-gray-50/70 py-3.5 pr-12 pl-20 text-sm outline-none transition focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                                         class="mr-1 w-full rounded-xl border border-gray-200 bg-gray-50/70 py-3.5 pr-12 pl-20 text-sm outline-none transition focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
 
                                      <span
-                                         class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 rounded-lg bg-[#174c3c]/5 px-2 py-1 text-xs font-extrabold text-[#174c3c]">
+                                         class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 rounded-lg bg-[var(--restaurant-color-hex-174c3c)]/5 px-2 py-1 text-xs font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
                                          ل.س
                                      </span>
                                  </div>
@@ -333,7 +333,7 @@
                                  </div>
                                  <textarea name="description" id="description" rows="5" maxlength="1000"
                                      placeholder="اكتب وصفًا شهيًا يوضح مكونات الوجبة وما يميزها..."
-                                     class="w-full resize-y rounded-xl border border-gray-200 bg-gray-50/70 px-4 py-3.5 text-sm leading-7 outline-none transition placeholder:text-gray-400 focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">{{ old('description', $food->description) }}</textarea>
+                                     class="w-full resize-y rounded-xl border border-gray-200 bg-gray-50/70 px-4 py-3.5 text-sm leading-7 outline-none transition placeholder:text-gray-400 focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">{{ old('description', $food->description) }}</textarea>
                                  <div class="mt-2 flex items-center justify-between gap-3">
                                      @error('description')
                                          <p class="text-xs font-semibold text-red-500">{{ $message }}</p>
@@ -381,7 +381,7 @@
                          </a>
 
                          <button type="submit" id="save-food-button"
-                             class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-[#174c3c] to-[#23674f] px-7 py-3 text-sm font-extrabold text-white shadow-lg shadow-[#174c3c]/20 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#174c3c]/25 focus:outline-none focus:ring-4 focus:ring-[#174c3c]/20 active:translate-y-0 sm:w-auto">
+                             class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-[var(--restaurant-color-hex-174c3c)] to-[var(--restaurant-color-hex-23674f)] px-7 py-3 text-sm font-extrabold text-white shadow-lg shadow-[var(--restaurant-color-hex-174c3c)]/20 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[var(--restaurant-color-hex-174c3c)]/25 focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20 active:translate-y-0 sm:w-auto">
                              <svg id="save-food-icon" class="h-5 w-5" fill="none" stroke="currentColor"
                                  viewBox="0 0 24 24">
                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -453,7 +453,7 @@
                  preview.classList.remove('hidden');
                  placeholder.classList.add('hidden');
                  fileName.textContent = `الصورة الجديدة: ${file.name}`;
-                 dropZone.classList.add('border-[#174c3c]/40');
+                 dropZone.classList.add('border-[var(--restaurant-color-hex-174c3c)]/40');
              }
 
              input.addEventListener('change', function() {
@@ -471,16 +471,16 @@
 
              dropZone.addEventListener('dragover', function(event) {
                  event.preventDefault();
-                 dropZone.classList.add('border-[#174c3c]', 'bg-emerald-50');
+                 dropZone.classList.add('border-[var(--restaurant-color-hex-174c3c)]', 'bg-emerald-50');
              });
 
              dropZone.addEventListener('dragleave', function() {
-                 dropZone.classList.remove('border-[#174c3c]', 'bg-emerald-50');
+                 dropZone.classList.remove('border-[var(--restaurant-color-hex-174c3c)]', 'bg-emerald-50');
              });
 
              dropZone.addEventListener('drop', function(event) {
                  event.preventDefault();
-                 dropZone.classList.remove('border-[#174c3c]', 'bg-emerald-50');
+                 dropZone.classList.remove('border-[var(--restaurant-color-hex-174c3c)]', 'bg-emerald-50');
 
                  const file = event.dataTransfer.files && event.dataTransfer.files[0];
                  if (!file) return;

@@ -30,12 +30,7 @@ class TableController extends Controller
 
     public function qr(Table $table)
     {
-        $qrCode = base64_encode(
-            QrCode::format('svg')
-                ->size(300)
-                ->margin(2)
-                ->generate(url(env('QR_URL') . ltrim($table->code, '#')))
-        );
+        $qrCode = $this->generateQrCode($table);
 
         return view('tables.qr', compact('table', 'qrCode'));
     }
@@ -53,7 +48,19 @@ class TableController extends Controller
     public function edit(string $code)
     {
         $table = Table::where('code', $code)->firstOrFail();
-        return view('tables.edit', compact('table'));
+        $qrCode = $this->generateQrCode($table);
+
+        return view('tables.edit', compact('table', 'qrCode'));
+    }
+
+    private function generateQrCode(Table $table): string
+    {
+        return base64_encode(
+            QrCode::format('svg')
+                ->size(300)
+                ->margin(2)
+                ->generate(url(env('QR_URL') . ltrim($table->code, '#')))
+        );
     }
 
     public function create()

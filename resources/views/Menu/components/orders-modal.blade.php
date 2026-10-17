@@ -15,9 +15,9 @@
         class="orders-dialog my-auto flex max-h-[94dvh] w-full max-w-lg flex-col overflow-hidden rounded-3xl bg-white shadow-2xl">
 
         {{-- Header --}}
-        <div class="flex shrink-0 items-center justify-between gap-4 border-b border-gray-100 bg-[#f7f8f5] p-4 sm:p-6">
+        <div class="flex shrink-0 items-center justify-between gap-4 border-b border-gray-100 bg-[var(--restaurant-color-hex-f7f8f5)] p-4 sm:p-6">
             <div class="flex min-w-0 items-center gap-3">
-                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#174c3c] text-[#e8c98c]">
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-174c3c)] text-[var(--restaurant-color-hex-e8c98c)]">
                     {{-- Food Icon --}}
                     <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="min-w-0">
-                    <h2 id="orders-modal-title" class="text-lg font-black text-[#174c3c] sm:text-xl">
+                    <h2 id="orders-modal-title" class="text-lg font-black text-[var(--restaurant-color-hex-174c3c)] sm:text-xl">
                         قائمة طلباتي
                     </h2>
                     <p class="mt-1 text-xs text-gray-500 sm:text-sm">
@@ -55,18 +55,18 @@
             <section id="previous-orders-section" class="space-y-3">
                 <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                     <div class="flex min-w-0 items-center gap-2">
-                        <h3 class="text-sm font-extrabold text-[#174c3c]">
+                        <h3 class="text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
                             الطلبات السابقة
                         </h3>
 
                         <span id="previous-orders-count"
-                            class="rounded-full bg-[#e8f0e8] px-3 py-1 text-xs font-bold text-[#174c3c]">
+                            class="rounded-full bg-[var(--restaurant-color-hex-e8f0e8)] px-3 py-1 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)]">
                             {{ count($data ?? []) }} صنف
                         </span>
                     </div>
 
                     <button id="refresh-previous-orders" type="button"
-                        class="inline-flex shrink-0 items-center gap-2 rounded-xl border border-[#174c3c]/15 bg-white px-3 py-2 text-xs font-bold text-[#174c3c] transition hover:bg-[#e8f0e8] disabled:cursor-not-allowed disabled:opacity-50">
+                        class="inline-flex shrink-0 items-center gap-2 rounded-xl border border-[var(--restaurant-color-hex-174c3c)]/15 bg-white px-3 py-2 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:bg-[var(--restaurant-color-hex-e8f0e8)] disabled:cursor-not-allowed disabled:opacity-50">
                         <svg id="refresh-previous-orders-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5" />
@@ -96,12 +96,12 @@
             {{-- Current Orders: JavaScript renders items here --}}
             <section id="current-orders-section" class="hidden space-y-3">
                 <div class="flex items-center justify-between border-b border-gray-200 pb-3">
-                    <h3 class="text-sm font-extrabold text-[#174c3c]">
+                    <h3 class="text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
                         الطلبات الحالية
                     </h3>
 
                     <span id="current-orders-count"
-                        class="rounded-full bg-[#e8f0e8] px-3 py-1 text-xs font-bold text-[#174c3c]">
+                        class="rounded-full bg-[var(--restaurant-color-hex-e8f0e8)] px-3 py-1 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)]">
                         0 وجبة
                     </span>
                 </div>
@@ -117,11 +117,11 @@
             </section>
 
             {{-- Table Services --}}
-            <section id="order-services" class="rounded-2xl border border-[#174c3c]/10 bg-[#e8f0e8]/50 p-4">
+            <section id="order-services" class="rounded-2xl border border-[var(--restaurant-color-hex-174c3c)]/10 bg-[var(--restaurant-color-hex-e8f0e8)]/50 p-4">
 
-                <div class="mb-3 flex items-center justify-between border-b border-[#174c3c]/10 pb-3">
+                <div class="mb-3 flex items-center justify-between border-b border-[var(--restaurant-color-hex-174c3c)]/10 pb-3">
                     <div class="flex items-center gap-2">
-                        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-[#174c3c]">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-[var(--restaurant-color-hex-174c3c)]">
                             {{-- Services Icon --}}
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -130,7 +130,7 @@
                             </svg>
                         </div>
 
-                        <h3 class="text-sm font-extrabold text-[#174c3c]">
+                        <h3 class="text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
                             خدمات الطاولة
                         </h3>
                     </div>
@@ -148,7 +148,7 @@
                                     {{ $service['name'] ?? 'خدمة' }}
                                 </span>
 
-                                <span class="shrink-0 text-sm font-extrabold text-[#174c3c]">
+                                <span class="shrink-0 text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
                                     {{ number_format((float) ($service['price'] ?? 0), 0) }}
                                     {{ $service['currency'] ?? 'ل.س' }}
                                 </span>
@@ -161,9 +161,9 @@
                     </p>
                 @endif
 
-                <div class="mt-3 flex items-center justify-between border-t border-[#174c3c]/10 pt-3">
+                <div class="mt-3 flex items-center justify-between border-t border-[var(--restaurant-color-hex-174c3c)]/10 pt-3">
                     <span class="text-sm font-bold text-gray-600">مجموع الخدمات</span>
-                    <span id="order-services-total" class="font-black text-[#174c3c]">
+                    <span id="order-services-total" class="font-black text-[var(--restaurant-color-hex-174c3c)]">
                         {{ number_format($servicesTotal, 0) }} ل.س
                     </span>
                 </div>
@@ -172,7 +172,7 @@
             {{-- Empty Current Basket --}}
             <div id="orders-empty" class="flex flex-col items-center justify-center px-4 py-7 text-center">
                 {{-- Food Icon --}}
-                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#e8f0e8] text-[#174c3c]">
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-e8f0e8)] text-[var(--restaurant-color-hex-174c3c)]">
                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 11h18" />
@@ -187,14 +187,14 @@
                 </p>
 
                 <button id="browse-menu" type="button"
-                    class="mt-4 rounded-xl bg-[#e8f0e8] px-4 py-2.5 text-xs font-extrabold text-[#174c3c] transition hover:bg-[#dce9dc]">
+                    class="mt-4 rounded-xl bg-[var(--restaurant-color-hex-e8f0e8)] px-4 py-2.5 text-xs font-extrabold text-[var(--restaurant-color-hex-174c3c)] transition hover:bg-[var(--restaurant-color-hex-dce9dc)]">
                     تصفح قائمة الطعام
                 </button>
             </div>
         </div>
 
         {{-- Footer --}}
-        <div class="shrink-0 border-t border-gray-100 bg-[#f9faf7] p-4 sm:p-5">
+        <div class="shrink-0 border-t border-gray-100 bg-[var(--restaurant-color-hex-f9faf7)] p-4 sm:p-5">
             <div class="mb- flex items-center justify-between gap-3">
                 <span class="text-sm font-bold text-gray-600">الطلبات السابقة</span>
                 <span id="footer-previous-orders-total" class="font-bold text-gray-700">
@@ -226,14 +226,14 @@
                     </span>
                 </div>
 
-                <span class="whitespace-nowrap text-xl font-black text-[#174c3c]">
+                <span class="whitespace-nowrap text-xl font-black text-[var(--restaurant-color-hex-174c3c)]">
                     <span id="modal-order-total">{{ number_format($initialFinalTotal, 0) }}</span>
                     <span class="text-xs">ل.س</span>
                 </span>
             </div>
 
             <button id="confirm-order-list" type="button" disabled
-                class="confirm-order-button flex w-full items-center justify-center gap-2 rounded-2xl bg-[#174c3c] px-5 py-4 text-sm font-black text-white shadow-lg shadow-[#174c3c]/15 transition hover:bg-[#10382c] focus:outline-none focus:ring-4 focus:ring-[#174c3c]/20 disabled:cursor-not-allowed disabled:opacity-50">
+                class="confirm-order-button flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--restaurant-color-hex-174c3c)] px-5 py-4 text-sm font-black text-white shadow-lg shadow-[var(--restaurant-color-hex-174c3c)]/15 transition hover:bg-[var(--restaurant-color-hex-10382c)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20 disabled:cursor-not-allowed disabled:opacity-50">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="m5 12 4 4L19 6" />

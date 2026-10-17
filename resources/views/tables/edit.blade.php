@@ -6,12 +6,12 @@
 @section('content')
     <style>
         .edit-table-page {
-            --primary: #174c3c;
-            --primary-dark: #10382c;
-            --primary-light: #e8f4ed;
-            --border: #e2ebe5;
-            --muted: #77867d;
-            color: #20372c;
+            --primary: var(--restaurant-color-hex-174c3c);
+            --primary-dark: var(--restaurant-color-hex-10382c);
+            --primary-light: var(--restaurant-color-hex-e8f4ed);
+            --border: var(--restaurant-color-hex-e2ebe5);
+            --muted: var(--restaurant-color-hex-77867d);
+            color: var(--restaurant-color-hex-20372c);
         }
 
         .edit-table-page * {
@@ -33,9 +33,9 @@
             height: 58px;
             flex-shrink: 0;
             border-radius: 19px;
-            background: linear-gradient(145deg, #26745a, #10382c);
-            color: #fff;
-            box-shadow: 0 8px 20px rgb(23 76 60 / 16%);
+            background: linear-gradient(145deg, var(--restaurant-color-hex-26745a), var(--restaurant-color-hex-10382c));
+            color: var(--restaurant-color-hex-fff);
+            box-shadow: 0 8px 20px var(--restaurant-color-rgb-23-76-60-opacity-16-percent);
         }
 
         .edit-table-page .header-icon svg {
@@ -64,10 +64,10 @@
             gap: 12px;
             margin-bottom: 22px;
             padding: 15px 17px;
-            border: 1px solid #f3d6a2;
+            border: 1px solid var(--restaurant-color-hex-f3d6a2);
             border-radius: 15px;
-            background: linear-gradient(120deg, #fffaf0, #fff5dc);
-            color: #895714;
+            background: linear-gradient(120deg, var(--restaurant-color-hex-fffaf0), var(--restaurant-color-hex-fff5dc));
+            color: var(--restaurant-color-hex-895714);
             font-size: 13px;
             line-height: 1.8;
         }
@@ -89,8 +89,8 @@
             overflow: hidden;
             border: 1px solid var(--border);
             border-radius: 23px;
-            background: #fff;
-            box-shadow: 0 8px 30px rgb(23 76 60 / 5%);
+            background: var(--restaurant-color-hex-fff);
+            box-shadow: 0 8px 30px var(--restaurant-color-rgb-23-76-60-opacity-5-percent);
         }
 
         .edit-table-page .card-header {
@@ -98,8 +98,8 @@
             align-items: center;
             gap: 13px;
             padding: 22px 25px;
-            border-bottom: 1px solid #eaf0ec;
-            background: linear-gradient(120deg, #fbfdfb, #f1f8f3);
+            border-bottom: 1px solid var(--restaurant-color-hex-eaf0ec);
+            background: linear-gradient(120deg, var(--restaurant-color-hex-fbfdfb), var(--restaurant-color-hex-f1f8f3));
         }
 
         .edit-table-page .card-header-icon {
@@ -109,10 +109,10 @@
             width: 43px;
             height: 43px;
             flex-shrink: 0;
-            border: 1px solid #d9eae0;
+            border: 1px solid var(--restaurant-color-hex-d9eae0);
             border-radius: 14px;
-            background: #e6f4eb;
-            color: #23734d;
+            background: var(--restaurant-color-hex-e6f4eb);
+            color: var(--restaurant-color-hex-23734d);
         }
 
         .edit-table-page .card-header-icon svg {
@@ -122,14 +122,14 @@
 
         .edit-table-page .card-heading {
             margin: 0;
-            color: #174c3c;
+            color: var(--restaurant-color-hex-174c3c);
             font-size: 16px;
             font-weight: 850;
         }
 
         .edit-table-page .card-subheading {
             margin: 5px 0 0;
-            color: #7b8980;
+            color: var(--restaurant-color-hex-7b8980);
             font-size: 12px;
             line-height: 1.7;
         }
@@ -157,7 +157,7 @@
             align-items: center;
             gap: 8px;
             margin-bottom: 9px;
-            color: #244d39;
+            color: var(--restaurant-color-hex-244d39);
             font-size: 13px;
             font-weight: 800;
         }
@@ -166,11 +166,11 @@
             width: 17px;
             height: 17px;
             flex-shrink: 0;
-            color: #448364;
+            color: var(--restaurant-color-hex-448364);
         }
 
         .edit-table-page .required-mark {
-            color: #dc4545;
+            color: var(--restaurant-color-hex-dc4545);
         }
 
         .edit-table-page .form-input {
@@ -178,29 +178,29 @@
             width: 100%;
             min-height: 48px;
             padding: 12px 14px;
-            border: 1px solid #dce6df;
+            border: 1px solid var(--restaurant-color-hex-dce6df);
             border-radius: 13px;
             outline: none;
-            background: #fbfdfb;
-            color: #233d2e;
+            background: var(--restaurant-color-hex-fbfdfb);
+            color: var(--restaurant-color-hex-233d2e);
             font-size: 14px;
             transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
         }
 
         .edit-table-page .form-input:hover {
-            border-color: #c4d8ca;
+            border-color: var(--restaurant-color-hex-c4d8ca);
         }
 
         .edit-table-page .form-input:focus {
-            border-color: #398260;
-            background: #fff;
-            box-shadow: 0 0 0 4px rgb(23 76 60 / 9%);
+            border-color: var(--restaurant-color-hex-398260);
+            background: var(--restaurant-color-hex-fff);
+            box-shadow: 0 0 0 4px var(--restaurant-color-rgb-23-76-60-opacity-9-percent);
         }
 
         .edit-table-page .form-input[readonly] {
-            border-color: #e5ebe6;
-            background: #f4f7f5;
-            color: #66786c;
+            border-color: var(--restaurant-color-hex-e5ebe6);
+            background: var(--restaurant-color-hex-f4f7f5);
+            color: var(--restaurant-color-hex-66786c);
             cursor: default;
         }
 
@@ -211,14 +211,14 @@
 
         .edit-table-page .field-help {
             margin: 8px 0 0;
-            color: #859189;
+            color: var(--restaurant-color-hex-859189);
             font-size: 11px;
             line-height: 1.8;
         }
 
         .edit-table-page .field-error {
             margin: 7px 0 0;
-            color: #c52e35;
+            color: var(--restaurant-color-hex-c52e35);
             font-size: 12px;
             font-weight: 600;
         }
@@ -230,20 +230,20 @@
             gap: 15px;
             min-height: 84px;
             padding: 17px 18px;
-            border: 1px solid #dce9df;
+            border: 1px solid var(--restaurant-color-hex-dce9df);
             border-radius: 16px;
-            background: #f8fbf8;
+            background: var(--restaurant-color-hex-f8fbf8);
             transition: background .2s ease, border-color .2s ease;
         }
 
         .edit-table-page .status-box.is-available {
-            border-color: #cde8d5;
-            background: #f0faf3;
+            border-color: var(--restaurant-color-hex-cde8d5);
+            background: var(--restaurant-color-hex-f0faf3);
         }
 
         .edit-table-page .status-box.is-busy {
-            border-color: #f0d7d5;
-            background: #fff6f5;
+            border-color: var(--restaurant-color-hex-f0d7d5);
+            background: var(--restaurant-color-hex-fff6f5);
         }
 
         .edit-table-page .status-info {
@@ -261,13 +261,13 @@
             height: 43px;
             flex-shrink: 0;
             border-radius: 14px;
-            background: #e0f3e6;
-            color: #18834a;
+            background: var(--restaurant-color-hex-e0f3e6);
+            color: var(--restaurant-color-hex-18834a);
         }
 
         .edit-table-page .status-box.is-busy .status-icon {
-            background: #ffe7e5;
-            color: #c53535;
+            background: var(--restaurant-color-hex-ffe7e5);
+            color: var(--restaurant-color-hex-c53535);
         }
 
         .edit-table-page .status-icon svg {
@@ -277,14 +277,14 @@
 
         .edit-table-page .status-title {
             margin: 0 0 4px;
-            color: #294837;
+            color: var(--restaurant-color-hex-294837);
             font-size: 13px;
             font-weight: 850;
         }
 
         .edit-table-page .status-description {
             margin: 0;
-            color: #7b8980;
+            color: var(--restaurant-color-hex-7b8980);
             font-size: 11px;
             line-height: 1.7;
         }
@@ -298,14 +298,14 @@
 
         .edit-table-page .status-label {
             min-width: 57px;
-            color: #18834a;
+            color: var(--restaurant-color-hex-18834a);
             font-size: 12px;
             font-weight: 850;
             text-align: center;
         }
 
         .edit-table-page .status-box.is-busy .status-label {
-            color: #c53535;
+            color: var(--restaurant-color-hex-c53535);
         }
 
         .edit-table-page .switch {
@@ -328,7 +328,7 @@
             position: absolute;
             inset: 0;
             border-radius: 30px;
-            background: #cbd5ce;
+            background: var(--restaurant-color-hex-cbd5ce);
             transition: background .25s ease;
         }
 
@@ -340,13 +340,13 @@
             height: 21px;
             border-radius: 50%;
             background: white;
-            box-shadow: 0 1px 4px rgb(0 0 0 / 18%);
+            box-shadow: 0 1px 4px var(--restaurant-color-rgb-0-0-0-opacity-18-percent);
             content: "";
             transition: transform .25s ease;
         }
 
         .edit-table-page .switch input:checked + .switch-track {
-            background: #218653;
+            background: var(--restaurant-color-hex-218653);
         }
 
         .edit-table-page .switch input:checked + .switch-track::after {
@@ -354,16 +354,16 @@
         }
 
         .edit-table-page .switch input:focus-visible + .switch-track {
-            outline: 3px solid rgb(23 76 60 / 25%);
+            outline: 3px solid var(--restaurant-color-rgb-23-76-60-opacity-25-percent);
             outline-offset: 3px;
         }
 
         .edit-table-page .code-panel {
             position: relative;
             padding: 18px;
-            border: 1px dashed #cbded0;
+            border: 1px dashed var(--restaurant-color-hex-cbded0);
             border-radius: 16px;
-            background: linear-gradient(130deg, #f7fbf8, #edf6f0);
+            background: linear-gradient(130deg, var(--restaurant-color-hex-f7fbf8), var(--restaurant-color-hex-edf6f0));
         }
 
         .edit-table-page .code-top {
@@ -378,7 +378,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #315b43;
+            color: var(--restaurant-color-hex-315b43);
             font-size: 13px;
             font-weight: 850;
         }
@@ -393,10 +393,10 @@
             align-items: center;
             gap: 5px;
             padding: 6px 9px;
-            border: 1px solid #d5e9db;
+            border: 1px solid var(--restaurant-color-hex-d5e9db);
             border-radius: 8px;
-            background: #e7f5eb;
-            color: #267448;
+            background: var(--restaurant-color-hex-e7f5eb);
+            color: var(--restaurant-color-hex-267448);
             font-size: 10px;
             font-weight: 800;
             white-space: nowrap;
@@ -404,14 +404,50 @@
 
         .edit-table-page .code-input {
             min-height: 49px;
-            border-color: #dce9df;
-            background: #fff;
+            border-color: var(--restaurant-color-hex-dce9df);
+            background: var(--restaurant-color-hex-fff);
             text-align: center;
             direction: ltr;
             font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
             font-size: 16px;
             font-weight: 800;
             letter-spacing: 1px;
+        }
+
+        .edit-table-page .code-qr-preview {
+            display: grid;
+            justify-items: center;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .edit-table-page .code-qr-frame {
+            display: flex;
+            width: 300px;
+            height: 300px;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border: 1px solid var(--restaurant-color-hex-dce6df);
+            border-radius: 14px;
+            background: var(--restaurant-color-hex-fff);
+        }
+
+        .edit-table-page .code-qr-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .edit-table-page .code-qr-link {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .edit-table-page .code-qr-link:hover {
+            text-decoration: underline;
         }
 
         .edit-table-page .form-actions {
@@ -422,7 +458,7 @@
             gap: 12px;
             margin-top: 28px;
             padding-top: 22px;
-            border-top: 1px solid #edf1ee;
+            border-top: 1px solid var(--restaurant-color-hex-edf1ee);
         }
 
         .edit-table-page .action-group {
@@ -455,38 +491,38 @@
         }
 
         .edit-table-page .btn-save {
-            background: linear-gradient(135deg, #26745a, #174c3c);
-            color: #fff;
-            box-shadow: 0 5px 14px rgb(23 76 60 / 16%);
+            background: linear-gradient(135deg, var(--restaurant-color-hex-26745a), var(--restaurant-color-hex-174c3c));
+            color: var(--restaurant-color-hex-fff);
+            box-shadow: 0 5px 14px var(--restaurant-color-rgb-23-76-60-opacity-16-percent);
         }
 
         .edit-table-page .btn-save:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgb(23 76 60 / 23%);
+            box-shadow: 0 8px 20px var(--restaurant-color-rgb-23-76-60-opacity-23-percent);
         }
 
         .edit-table-page .btn-cancel {
-            border-color: #dfe8e2;
-            background: #f5f8f6;
-            color: #53665a;
+            border-color: var(--restaurant-color-hex-dfe8e2);
+            background: var(--restaurant-color-hex-f5f8f6);
+            color: var(--restaurant-color-hex-53665a);
         }
 
         .edit-table-page .btn-cancel:hover {
-            border-color: #cbdad0;
-            background: #eaf1ec;
+            border-color: var(--restaurant-color-hex-cbdad0);
+            background: var(--restaurant-color-hex-eaf1ec);
         }
 
         .edit-table-page .btn-delete {
-            border-color: #f0d6d4;
-            background: #fff3f2;
-            color: #b52c32;
+            border-color: var(--restaurant-color-hex-f0d6d4);
+            background: var(--restaurant-color-hex-fff3f2);
+            color: var(--restaurant-color-hex-b52c32);
         }
 
         .edit-table-page .btn-delete:hover {
             transform: translateY(-1px);
-            border-color: #b52c32;
-            background: #b52c32;
-            color: #fff;
+            border-color: var(--restaurant-color-hex-b52c32);
+            background: var(--restaurant-color-hex-b52c32);
+            color: var(--restaurant-color-hex-fff);
         }
 
         .edit-table-page .flash-message {
@@ -509,15 +545,15 @@
         }
 
         .edit-table-page .flash-error {
-            border-color: #f3cece;
-            background: #fff3f3;
-            color: #a82828;
+            border-color: var(--restaurant-color-hex-f3cece);
+            background: var(--restaurant-color-hex-fff3f3);
+            color: var(--restaurant-color-hex-a82828);
         }
 
         .edit-table-page .flash-success {
-            border-color: #cce8d4;
-            background: #effaf2;
-            color: #176b3d;
+            border-color: var(--restaurant-color-hex-cce8d4);
+            background: var(--restaurant-color-hex-effaf2);
+            color: var(--restaurant-color-hex-176b3d);
         }
 
         @media (max-width: 640px) {
@@ -609,6 +645,12 @@
 
             .edit-table-page .code-panel {
                 padding: 13px;
+            }
+
+            .edit-table-page .code-qr-frame {
+                width: min(100%, 260px);
+                height: auto;
+                aspect-ratio: 1;
             }
 
             .edit-table-page .form-actions {
@@ -904,6 +946,19 @@
                                     aria-label="كود الطاولة"
                                 >
 
+                                <div class="code-qr-preview">
+                                    <div class="code-qr-frame">
+                                        <img
+                                            src="data:image/svg+xml;base64,{{ $qrCode }}"
+                                            alt="رمز QR للطاولة {{ $table->number }}"
+                                            class="code-qr-image"
+                                        >
+                                    </div>
+                                    <a href="{{ route('tables.qr', $table->id) }}" class="code-qr-link">
+                                        عرض وطباعة رمز QR
+                                    </a>
+                                </div>
+
                                 <p class="field-help">
                                     يُستخدم هذا الكود للتعرّف على الطاولة وربطها برمز QR، ولا يمكن تعديله.
                                 </p>
@@ -993,4 +1048,3 @@
         });
     </script>
 @endsection
-

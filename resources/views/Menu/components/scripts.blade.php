@@ -638,7 +638,7 @@
             const row = document.createElement('div');
 
             row.className =
-                'flex w-full min-w-0 flex-col gap-3 rounded-2xl border border-[#d1d5db] bg-[#f5faf6] p-3 sm:p-4';
+                'flex w-full min-w-0 flex-col gap-3 rounded-2xl border border-[var(--restaurant-color-hex-d1d5db)] bg-[var(--restaurant-color-hex-f5faf6)] p-3 sm:p-4';
 
             const name = document.createElement('p');
 
@@ -695,7 +695,7 @@
             const statusContainer = document.createElement('div');
 
             statusContainer.className =
-                'flex flex-col gap-2 border-t border-[#d1d5db] pt-3';
+                'flex flex-col gap-2 border-t border-[var(--restaurant-color-hex-d1d5db)] pt-3';
 
             const statusLine = document.createElement('div');
 
@@ -1003,8 +1003,8 @@
                 'order-item flex w-full min-w-0 flex-col gap-3 rounded-2xl border p-3 sm:p-4 ' +
                 (
                     isNew ?
-                    'border-[#174c3c]/20 bg-[#f5faf6]' :
-                    'border-[#d1d5db] bg-[#f5faf6]'
+                    'border-[var(--restaurant-color-hex-174c3c)]/20 bg-[var(--restaurant-color-hex-f5faf6)]' :
+                    'border-[var(--restaurant-color-hex-d1d5db)] bg-[var(--restaurant-color-hex-f5faf6)]'
                 );
 
             row.dataset.orderId = String(id ?? '');
@@ -1036,7 +1036,7 @@
                 'inline-flex shrink-0 items-center rounded-full px-2 py-1 text-[10px] font-bold ' +
                 (
                     isNew ?
-                    'bg-[#174c3c] text-white' :
+                    'bg-[var(--restaurant-color-hex-174c3c)] text-white' :
                     'bg-gray-200 text-gray-700'
                 );
 
@@ -1087,7 +1087,7 @@
                 createPriceBox(
                     'إجمالي الصنف',
                     `${formatPrice(total)} ل.س`,
-                    'bg-[#e8f0e8]'
+                    'bg-[var(--restaurant-color-hex-e8f0e8)]'
                 )
             );
 
@@ -1097,7 +1097,7 @@
                 const actions = document.createElement('div');
 
                 actions.className =
-                    'flex w-full items-center justify-between gap-3 border-t border-[#174c3c]/10 pt-3';
+                    'flex w-full items-center justify-between gap-3 border-t border-[var(--restaurant-color-hex-174c3c)]/10 pt-3';
 
                 const quantityControls = document.createElement('div');
 
@@ -1146,7 +1146,7 @@
                 increase.type = 'button';
 
                 increase.className =
-                    'flex h-9 w-9 items-center justify-center rounded-lg bg-[#e8f0e8] text-lg font-black text-[#174c3c]';
+                    'flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--restaurant-color-hex-e8f0e8)] text-lg font-black text-[var(--restaurant-color-hex-174c3c)]';
 
                 increase.textContent = '+';
 
@@ -1664,7 +1664,7 @@
                 right: 0;
                 bottom: 0;
                 width: 0%;
-                background: rgba(255,255,255,.30);
+                background: var(--restaurant-color-rgb-255-255-255-point-30);
                 border-radius: inherit;
                 pointer-events: none;
                 z-index: 1;

@@ -12,6 +12,7 @@
     <meta name="description" content="@yield('description', 'اكتشف قائمة الطعام واختر وجبتك المفضلة.')">
     <meta name="theme-color" content="#174c3c">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('components.theme-mode')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -25,7 +26,7 @@
     </style>
 </head>
 
-<body class="min-h-screen bg-[#f7f9f7] text-gray-800 antialiased">
+<body class="min-h-screen bg-[var(--restaurant-color-hex-f7f9f7)] text-gray-800 antialiased">
 
 
 
@@ -35,7 +36,7 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="mt-16 border-t border-gray-200 bg-[#10382c] text-white">
+    <footer class="mt-16 border-t border-gray-200 bg-[var(--restaurant-color-hex-10382c)] text-white">
         <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
 
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">

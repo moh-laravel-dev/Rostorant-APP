@@ -6,7 +6,7 @@
 
          {{-- Header --}}
          <div
-             class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#174c3c] via-[#1c604b] to-[#10382c] p-5 text-white shadow-lg sm:p-8">
+             class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[var(--restaurant-color-hex-174c3c)] via-[var(--restaurant-color-hex-1c604b)] to-[var(--restaurant-color-hex-10382c)] p-5 text-white shadow-lg sm:p-8">
              <div class="pointer-events-none absolute -left-12 -top-16 h-48 w-48 rounded-full bg-white/5"></div>
              <div class="pointer-events-none absolute -bottom-20 left-1/3 h-56 w-56 rounded-full bg-white/5"></div>
 
@@ -63,7 +63,7 @@
 
                  <div class="flex w-full flex-col gap-2 sm:w-auto sm:shrink-0">
                      <a href="{{ route('admin.category-food.food.edit', [$category, $food]) }}"
-                         class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-extrabold text-[#174c3c] shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-50">
+                         class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)] shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-50">
                          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
                              aria-hidden="true">
                              <path stroke-linecap="round" stroke-linejoin="round"
@@ -116,7 +116,7 @@
                      {{-- Price --}}
                      <div
                          class="absolute bottom-4 right-4 flex items-center gap-3 rounded-2xl border border-white/70 bg-white/95 px-4 py-3 shadow-lg backdrop-blur sm:bottom-6 sm:right-6 sm:px-5">
-                         <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#174c3c]/10 text-[#174c3c]">
+                         <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-174c3c)]/10 text-[var(--restaurant-color-hex-174c3c)]">
                              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"
                                  viewBox="0 0 24 24" aria-hidden="true">
                                  <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -126,7 +126,7 @@
                          </div>
                          <div>
                              <p class="text-xs font-medium text-gray-500">سعر الوجبة</p>
-                             <p class="mt-0.5 text-lg font-extrabold text-[#174c3c] sm:text-xl">
+                             <p class="mt-0.5 text-lg font-extrabold text-[var(--restaurant-color-hex-174c3c)] sm:text-xl">
                                  {{ number_format($food->price, 2) }}
                                  <span class="text-sm font-bold">ل.س</span>
                              </p>
@@ -153,7 +153,7 @@
                      <div class="min-w-0">
                          <div class="mb-3 flex flex-wrap items-center gap-2">
                              <span
-                                 class="inline-flex items-center gap-1.5 rounded-lg bg-[#174c3c]/10 px-3 py-1.5 text-xs font-bold text-[#174c3c]">
+                                 class="inline-flex items-center gap-1.5 rounded-lg bg-[var(--restaurant-color-hex-174c3c)]/10 px-3 py-1.5 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)]">
                                  <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8"
                                      viewBox="0 0 24 24" aria-hidden="true">
                                      <path stroke-linecap="round" stroke-linejoin="round"
@@ -187,7 +187,7 @@
 
                      <div class="flex shrink-0 items-center gap-2 rounded-2xl border border-gray-100 bg-gray-50 px-4 py-3">
                          <div
-                             class="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-[#174c3c] shadow-sm">
+                             class="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-[var(--restaurant-color-hex-174c3c)] shadow-sm">
                              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"
                                  viewBox="0 0 24 24" aria-hidden="true">
                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2" />
@@ -205,7 +205,7 @@
                  <div class="rounded-2xl border border-gray-100 bg-gray-50/70 p-4 sm:p-5">
                      <div class="mb-3 flex items-center gap-2.5">
                          <div
-                             class="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-[#174c3c] shadow-sm">
+                             class="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-[var(--restaurant-color-hex-174c3c)] shadow-sm">
                              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"
                                  viewBox="0 0 24 24" aria-hidden="true">
                                  <path stroke-linecap="round" stroke-linejoin="round"
@@ -263,7 +263,7 @@
              <div
                  class="flex flex-col gap-3 border-t border-gray-100 bg-gray-50/70 p-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
                  <p class="flex items-center gap-2 text-xs leading-5 text-gray-500">
-                     <svg class="h-4 w-4 shrink-0 text-[#174c3c]" fill="none" stroke="currentColor"
+                     <svg class="h-4 w-4 shrink-0 text-[var(--restaurant-color-hex-174c3c)]" fill="none" stroke="currentColor"
                          stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
                          <path stroke-linecap="round" stroke-linejoin="round"
                              d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" />
@@ -283,7 +283,7 @@
                      </a>
 
                      <a href="{{ route('admin.category-food.food.edit', [$category, $food]) }}"
-                         class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#174c3c] px-5 py-3 text-sm font-extrabold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#10382c] hover:shadow-md">
+                         class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-5 py-3 text-sm font-extrabold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[var(--restaurant-color-hex-10382c)] hover:shadow-md">
                          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8"
                              viewBox="0 0 24 24" aria-hidden="true">
                              <path stroke-linecap="round" stroke-linejoin="round"

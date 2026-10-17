@@ -8,16 +8,16 @@
 
         <style>
             .table-qr-page {
-                --qr-green: #174c3c;
-                --qr-dark: #10382d;
-                --qr-gold: #d8ad60;
+                --qr-green: var(--restaurant-color-hex-174c3c);
+                --qr-dark: var(--restaurant-color-hex-10382d);
+                --qr-gold: var(--restaurant-color-hex-d8ad60);
             }
 
             .table-qr-page .qr-surface {
-                border: 1px solid #e7eee8;
+                border: 1px solid var(--restaurant-color-hex-e7eee8);
                 border-radius: 24px;
-                background: #fff;
-                box-shadow: 0 12px 40px rgba(16, 56, 45, .06);
+                background: var(--restaurant-color-hex-fff);
+                box-shadow: 0 12px 40px var(--restaurant-color-rgb-16-56-45-point-06);
             }
 
             .table-qr-page .qr-action {
@@ -36,9 +36,9 @@
             }
 
             .table-qr-page .qr-action-primary {
-                color: #fff;
+                color: var(--restaurant-color-hex-fff);
                 background: var(--qr-green);
-                box-shadow: 0 6px 16px rgba(23, 76, 60, .15);
+                box-shadow: 0 6px 16px var(--restaurant-color-rgb-23-76-60-point-15);
             }
 
             .table-qr-page .qr-action-primary:hover {
@@ -47,28 +47,28 @@
             }
 
             .table-qr-page .qr-action-light {
-                border: 1px solid #e2e9e3;
-                background: #fff;
-                color: #345244;
+                border: 1px solid var(--restaurant-color-hex-e2e9e3);
+                background: var(--restaurant-color-hex-fff);
+                color: var(--restaurant-color-hex-345244);
             }
 
             .table-qr-page .qr-action-light:hover {
-                background: #f2f7f3;
+                background: var(--restaurant-color-hex-f2f7f3);
             }
 
             .table-qr-page .qr-poster {
                 position: relative;
                 overflow: hidden;
                 border-radius: 25px;
-                background: #fff;
-                border: 1px solid #e1e8e2;
+                background: var(--restaurant-color-hex-fff);
+                border: 1px solid var(--restaurant-color-hex-e1e8e2);
             }
 
             .table-qr-page .qr-poster-head {
                 position: relative;
                 overflow: hidden;
-                background: linear-gradient(135deg, #10382d, #1d6049);
-                color: #fff;
+                background: linear-gradient(135deg, var(--restaurant-color-hex-10382d), var(--restaurant-color-hex-1d6049));
+                color: var(--restaurant-color-hex-fff);
             }
 
             .table-qr-page .qr-poster-head::before {
@@ -78,7 +78,7 @@
                 height: 230px;
                 left: -75px;
                 top: -145px;
-                border: 35px solid rgba(255, 255, 255, .055);
+                border: 35px solid var(--restaurant-color-rgb-255-255-255-point-055);
                 border-radius: 50%;
             }
 
@@ -89,7 +89,7 @@
                 height: 160px;
                 right: -80px;
                 bottom: -100px;
-                border: 24px solid rgba(216, 173, 96, .14);
+                border: 24px solid var(--restaurant-color-rgb-216-173-96-point-14);
                 border-radius: 50%;
             }
 
@@ -101,10 +101,10 @@
                 justify-content: center;
                 margin-inline: auto;
                 padding: 15px;
-                border: 1px solid #e7eee8;
+                border: 1px solid var(--restaurant-color-hex-e7eee8);
                 border-radius: 23px;
-                background: #fff;
-                box-shadow: 0 8px 28px rgba(16, 56, 45, .07);
+                background: var(--restaurant-color-hex-fff);
+                box-shadow: 0 8px 28px var(--restaurant-color-rgb-16-56-45-point-07);
             }
 
             .table-qr-page .qr-code-image {
@@ -115,7 +115,7 @@
             }
 
             .table-qr-page .qr-dash {
-                background-image: linear-gradient(to right, #dfe8e1 50%, transparent 50%);
+                background-image: linear-gradient(to right, var(--restaurant-color-hex-dfe8e1) 50%, transparent 50%);
                 background-size: 8px 1px;
                 background-repeat: repeat-x;
             }
@@ -134,8 +134,8 @@
                 align-items: center;
                 justify-content: center;
                 border-radius: 12px;
-                background: #edf5ef;
-                color: #174c3c;
+                background: var(--restaurant-color-hex-edf5ef);
+                color: var(--restaurant-color-hex-174c3c);
             }
 
             @media (max-width: 640px) {
@@ -160,7 +160,7 @@
                 }
 
                 body {
-                    background: #fff !important;
+                    background: var(--restaurant-color-hex-fff) !important;
                     -webkit-print-color-adjust: exact !important;
                     print-color-adjust: exact !important;
                 }
@@ -190,7 +190,7 @@
                     width: 100% !important;
                     max-width: 120mm !important;
                     margin: 0 auto !important;
-                    border: 1px solid #dfe7e0 !important;
+                    border: 1px solid var(--restaurant-color-hex-dfe7e0) !important;
                     border-radius: 5mm !important;
                     box-shadow: none !important;
                     break-inside: avoid !important;
@@ -240,7 +240,7 @@
         </style>
 
         {{-- Page Header --}}
-        <div class="relative overflow-hidden rounded-3xl bg-[#10382d] p-5 text-white shadow-lg sm:p-8">
+        <div class="relative overflow-hidden rounded-3xl bg-[var(--restaurant-color-hex-10382d)] p-5 text-white shadow-lg sm:p-8">
             <div
                 class="pointer-events-none absolute -left-10 -top-16 h-48 w-48 rounded-full border-[28px] border-white/[0.04]">
             </div>
@@ -249,7 +249,7 @@
                 <div class="flex items-start gap-4">
                     <div
                         class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/10">
-                        <svg class="h-8 w-8 text-[#d8ad60]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg class="h-8 w-8 text-[var(--restaurant-color-hex-d8ad60)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="3" width="7" height="7" rx="1" />
                             <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -261,7 +261,7 @@
                     <div>
                         <div class="mb-2 flex flex-wrap items-center gap-2">
                             <span
-                                class="rounded-full border border-[#d8ad60]/30 bg-[#d8ad60]/10 px-3 py-1 text-[11px] font-bold text-[#f0d5a1]">
+                                class="rounded-full border border-[var(--restaurant-color-hex-d8ad60)]/30 bg-[var(--restaurant-color-hex-d8ad60)]/10 px-3 py-1 text-[11px] font-bold text-[var(--restaurant-color-hex-f0d5a1)]">
                                 إدارة الطاولات
                             </span>
                             <span class="text-xs text-white/45">/ رمز الاستجابة السريعة</span>
@@ -316,13 +316,13 @@
                     <div class="qr-poster-head px-5 py-6 text-center sm:px-8 sm:py-8">
                         <div
                             class="relative z-10 mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/15 bg-white/10">
-                            <svg class="h-7 w-7 text-[#e9cc91]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg class="h-7 w-7 text-[var(--restaurant-color-hex-e9cc91)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M3 10h18M5 10V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 10v10M19 10v10M3 15h18" />
                             </svg>
                         </div>
 
-                        <p class="relative z-10 text-xs font-bold tracking-[.2em] text-[#e9cc91]">
+                        <p class="relative z-10 text-xs font-bold tracking-[.2em] text-[var(--restaurant-color-hex-e9cc91)]">
                             أهلاً وسهلاً بكم
                         </p>
 
@@ -334,13 +334,13 @@
                         <div
                             class="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2">
                             <span class="text-xs font-semibold text-white/65">رقم الطاولة</span>
-                            <span class="qr-print-number text-lg font-black text-[#f0d5a1]">{{ $table->number }}</span>
+                            <span class="qr-print-number text-lg font-black text-[var(--restaurant-color-hex-f0d5a1)]">{{ $table->number }}</span>
                         </div>
                     </div>
 
                     {{-- QR Code --}}
                     <div class="qr-poster-content px-4 py-6 text-center sm:px-8 sm:py-8">
-                        <p class="qr-print-instruction mb-5 text-sm font-bold text-[#174c3c]">
+                        <p class="qr-print-instruction mb-5 text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
                             امسح الرمز بكاميرا هاتفك
                         </p>
 
@@ -360,7 +360,7 @@
                                 TABLE ACCESS CODE
                             </p>
 
-                            <div class="qr-print-code mt-2 break-all rounded-xl border border-dashed border-[#d9e4db] bg-[#f7faf7] px-3 py-3 font-mono text-base font-bold tracking-wider text-[#174c3c] sm:text-lg"
+                            <div class="qr-print-code mt-2 break-all rounded-xl border border-dashed border-[var(--restaurant-color-hex-d9e4db)] bg-[var(--restaurant-color-hex-f7faf7)] px-3 py-3 font-mono text-base font-bold tracking-wider text-[var(--restaurant-color-hex-174c3c)] sm:text-lg"
                                 dir="ltr">
                                 {{ $table->code }}
                             </div>
@@ -401,7 +401,7 @@
                 <div class="qr-surface overflow-hidden">
                     <div class="border-b border-gray-100 px-5 py-5">
                         <div class="flex items-center gap-3">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#e8f3ed] text-[#174c3c]">
+                            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-e8f3ed)] text-[var(--restaurant-color-hex-174c3c)]">
                                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="12" cy="12" r="9" />
@@ -409,7 +409,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="font-extrabold text-[#174c3c]">كيف تستخدم الرمز؟</h3>
+                                <h3 class="font-extrabold text-[var(--restaurant-color-hex-174c3c)]">كيف تستخدم الرمز؟</h3>
                                 <p class="mt-1 text-xs text-gray-400">ثلاث خطوات بسيطة</p>
                             </div>
                         </div>
@@ -446,8 +446,8 @@
                 </div>
 
                 <div class="qr-surface p-5">
-                    <h3 class="mb-4 flex items-center gap-2 text-sm font-extrabold text-[#174c3c]">
-                        <svg class="h-5 w-5 text-[#d0a34f]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    <h3 class="mb-4 flex items-center gap-2 text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
+                        <svg class="h-5 w-5 text-[var(--restaurant-color-hex-d0a34f)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 3 14.8 8.7 21 9.6l-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" />
                         </svg>
@@ -466,7 +466,7 @@
 
                         <div class="flex items-center justify-between gap-3">
                             <span class="text-xs text-gray-500">رقم الطاولة</span>
-                            <span class="text-sm font-black tabular-nums text-[#174c3c]">{{ $table->number }}</span>
+                            <span class="text-sm font-black tabular-nums text-[var(--restaurant-color-hex-174c3c)]">{{ $table->number }}</span>
                         </div>
 
                         <div class="h-px bg-gray-100"></div>
@@ -490,17 +490,17 @@
                     </div>
                 </div>
 
-                <div class="rounded-2xl border border-[#e8e1d2] bg-[#faf7f0] p-5">
+                <div class="qr-tip rounded-2xl border border-[var(--restaurant-color-hex-e8e1d2)] bg-[var(--restaurant-color-hex-faf7f0)] p-5">
                     <div class="flex items-start gap-3">
-                        <svg class="mt-0.5 h-5 w-5 shrink-0 text-[#a47b37]" viewBox="0 0 24 24" fill="none"
+                        <svg class="mt-0.5 h-5 w-5 shrink-0 text-[var(--restaurant-color-hex-a47b37)]" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 9v4m0 4h.01" />
                             <path
                                 d="M10.3 3.9 1.8 18.5A1.7 1.7 0 0 0 3.3 21h17.4a1.7 1.7 0 0 0 1.5-2.5L13.7 3.9a2 2 0 0 0-3.4 0Z" />
                         </svg>
                         <div>
-                            <p class="text-sm font-extrabold text-[#765b2e]">حافظ على وضوح الرمز</p>
-                            <p class="mt-1 text-xs leading-6 text-[#8d7956]">
+                            <p class="text-sm font-extrabold text-[var(--restaurant-color-hex-765b2e)]">حافظ على وضوح الرمز</p>
+                            <p class="mt-1 text-xs leading-6 text-[var(--restaurant-color-hex-8d7956)]">
                                 اطبع الرمز بجودة عالية، وتجنب تغطيته أو وضعه على سطح يعكس الضوء حتى يسهل مسحه بالهاتف.
                             </p>
                         </div>

@@ -7,6 +7,46 @@
     <title>{{ config('app.name', config('restaurant.brand.name', 'مطعمنا')) }}</title>
     <meta name="description" content="{{ config('restaurant.hero.description') }}">
 
+    @include('components.theme-mode')
+    @vite(['resources/css/colors.css'])
+    <script>
+        window.tailwind = window.tailwind || {};
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gray: {
+                            100: 'rgb(var(--restaurant-cdn-gray-100) / <alpha-value>)',
+                            200: 'rgb(var(--restaurant-cdn-gray-200) / <alpha-value>)',
+                            300: 'rgb(var(--restaurant-cdn-gray-300) / <alpha-value>)',
+                            400: 'rgb(var(--restaurant-cdn-gray-400) / <alpha-value>)',
+                            500: 'rgb(var(--restaurant-cdn-gray-500) / <alpha-value>)',
+                            600: 'rgb(var(--restaurant-cdn-gray-600) / <alpha-value>)',
+                            700: 'rgb(var(--restaurant-cdn-gray-700) / <alpha-value>)',
+                        },
+                        green: {
+                            50: 'rgb(var(--restaurant-cdn-green-50) / <alpha-value>)',
+                            400: 'rgb(var(--restaurant-cdn-green-400) / <alpha-value>)',
+                            500: 'rgb(var(--restaurant-cdn-green-500) / <alpha-value>)',
+                            700: 'rgb(var(--restaurant-cdn-green-700) / <alpha-value>)',
+                            900: 'rgb(var(--restaurant-cdn-green-900) / <alpha-value>)',
+                        },
+                        red: {
+                            50: 'rgb(var(--restaurant-cdn-red-50) / <alpha-value>)',
+                            100: 'rgb(var(--restaurant-cdn-red-100) / <alpha-value>)',
+                            400: 'rgb(var(--restaurant-cdn-red-400) / <alpha-value>)',
+                            500: 'rgb(var(--restaurant-cdn-red-500) / <alpha-value>)',
+                            600: 'rgb(var(--restaurant-cdn-red-600) / <alpha-value>)',
+                        },
+                        slate: {
+                            800: 'rgb(var(--restaurant-cdn-slate-800) / <alpha-value>)',
+                        },
+                        white: 'rgb(var(--restaurant-cdn-white) / <alpha-value>)',
+                    },
+                },
+            },
+        };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
@@ -18,10 +58,10 @@
 
     <style>
         :root {
-            --primary: #174c3c;
-            --primary-dark: #10382d;
-            --gold: #d7a85b;
-            --cream: #faf7f0;
+            --primary: var(--restaurant-color-hex-174c3c);
+            --primary-dark: var(--restaurant-color-hex-10382d);
+            --gold: var(--restaurant-color-hex-d7a85b);
+            --cream: var(--restaurant-color-hex-faf7f0);
         }
 
         * {
@@ -36,7 +76,7 @@
             margin: 0;
             font-family: 'Cairo', sans-serif;
             background: var(--cream);
-            color: #25352d;
+            color: var(--restaurant-color-hex-25352d);
         }
 
         .heading-font {
@@ -45,7 +85,7 @@
 
         .hero-bg {
             background:
-                linear-gradient(270deg, #0d2b20f0, rgba(13, 43, 32, 0.58)),
+                linear-gradient(270deg, var(--restaurant-color-hex-0d2b20f0), var(--restaurant-color-rgb-13-43-32-0-point-58)),
                 url("{{ asset('storage/Home/hero-bg.avif') }}") center / cover no-repeat;
         }
 
@@ -55,12 +95,12 @@
 
         .gold-button {
             background: var(--gold);
-            color: #19382c;
+            color: var(--restaurant-color-hex-19382c);
             transition: .25s ease;
         }
 
         .gold-button:hover {
-            background: #e6bb76;
+            background: var(--restaurant-color-hex-e6bb76);
             transform: translateY(-1px);
         }
 
@@ -76,8 +116,8 @@
         .form-input {
             width: 100%;
             padding: 13px 15px;
-            background: #fff;
-            border: 1px solid #e5e5dc;
+            background: var(--restaurant-color-hex-fff);
+            border: 1px solid var(--restaurant-color-hex-e5e5dc);
             border-radius: 10px;
             outline: none;
             transition: .2s;
@@ -86,7 +126,7 @@
 
         .form-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(23, 76, 60, .1);
+            box-shadow: 0 0 0 3px var(--restaurant-color-rgb-23-76-60-point-1);
         }
 
         .food-card {
@@ -103,10 +143,10 @@
 
 
         #main-header.scrolled {
-            background: #0d2b20b5;
+            background: var(--restaurant-color-hex-0d2b20b5);
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom-color: rgba(255, 255, 255, 0.1);
+            border-bottom-color: var(--restaurant-color-rgb-255-255-255-0-point-1);
         }
     </style>
 </head>
@@ -119,7 +159,7 @@
         <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
 
             <a href="#home" class="flex items-center gap-3 text-white">
-                <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-[#d7a85b] text-2xl">
+                <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--restaurant-color-hex-d7a85b)] text-2xl">
                     <i class="fa-solid fa-utensils"></i>
                 </div>
 
@@ -127,7 +167,7 @@
                     <span class="heading-font block text-2xl font-bold">
                         {{ config('app.name', config('restaurant.brand.name', 'مطعمنا')) }}
                     </span>
-                    <span class="text-[10px] tracking-widest text-[#d7a85b]">
+                    <span class="text-[10px] tracking-widest text-[var(--restaurant-color-hex-d7a85b)]">
                         {{ config('restaurant.brand.tagline') }}
                     </span>
                 </div>
@@ -135,26 +175,26 @@
 
             {{-- Desktop Navigation --}}
             <div class="hidden items-center gap-7 text-sm font-semibold text-white/90 md:flex">
-                <a href="#home" class="transition hover:text-[#d7a85b]">
+                <a href="#home" class="transition hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.home') }}
                 </a>
-                <a href="#about" class="transition hover:text-[#d7a85b]">
+                <a href="#about" class="transition hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.about') }}
                 </a>
-                <a href="#specialties" class="transition hover:text-[#d7a85b]">
+                <a href="#specialties" class="transition hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.specialties') }}
                 </a>
-                <a href="#contact" class="transition hover:text-[#d7a85b]">
+                <a href="#contact" class="transition hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.contact') }}
                 </a>
-                <a href="{{ route('admin.login') }}" class="transition hover:text-[#d7a85b]">
+                <a href="{{ route('admin.login') }}" class="transition hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.login') }}
                 </a>
             </div>
 
             {{-- Mobile Menu Button --}}
             <button id="mobile-menu-button" type="button"
-                class="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 text-white transition hover:border-[#d7a85b] hover:text-[#d7a85b] md:hidden"
+                class="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 text-white transition hover:border-[var(--restaurant-color-hex-d7a85b)] hover:text-[var(--restaurant-color-hex-d7a85b)] md:hidden"
                 aria-label="فتح القائمة" aria-expanded="false">
                 <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
             </button>
@@ -162,26 +202,26 @@
 
         {{-- Mobile Navigation --}}
         <div id="mobile-menu"
-            class="hidden border-t border-white/10 bg-[#0d2b20f0] px-5 py-4 backdrop-blur-xl md:hidden">
+            class="hidden border-t border-white/10 bg-[var(--restaurant-color-hex-0d2b20f0)] px-5 py-4 backdrop-blur-xl md:hidden">
             <div class="mx-auto flex max-w-7xl flex-col gap-1 text-sm font-semibold text-white/90">
                 <a href="#home"
-                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[#d7a85b]">
+                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.home') }}
                 </a>
                 <a href="#about"
-                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[#d7a85b]">
+                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.about') }}
                 </a>
                 <a href="#specialties"
-                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[#d7a85b]">
+                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.specialties') }}
                 </a>
                 <a href="#contact"
-                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[#d7a85b]">
+                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.contact') }}
                 </a>
                 <a href="{{ route('admin.login') }}"
-                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[#d7a85b]">
+                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.login') }}
                 </a>
             </div>
@@ -197,7 +237,7 @@
 
             <div class="max-w-2xl">
                 <p class="gold-text mb-6 flex items-center gap-3 text-sm font-bold">
-                    <span class="h-px w-10 bg-[#d7a85b]"></span>
+                    <span class="h-px w-10 bg-[var(--restaurant-color-hex-d7a85b)]"></span>
                     {{ config('restaurant.hero.eyebrow') }}
                 </p>
 
@@ -242,18 +282,18 @@
             {{-- Login Card --}}
             {{--
             <div id="login" class="mx-auto w-full max-w-md scroll-mt-24 lg:mr-auto">
-                <div class="rounded-2xl border border-white/50 bg-[#faf7f0] p-6 text-slate-800 shadow-2xl sm:p-8">
+                <div class="rounded-2xl border border-white/50 bg-[var(--restaurant-color-hex-faf7f0)] p-6 text-slate-800 shadow-2xl sm:p-8">
 
                     <div class="mb-7 text-center">
-                        <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#174c3c] text-2xl text-white">
+                        <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--restaurant-color-hex-174c3c)] text-2xl text-white">
                             <i class="fa-solid fa-user"></i>
                         </div>
 
-                        <p class="mb-2 text-xs font-bold tracking-widest text-[#b28743]">
+                        <p class="mb-2 text-xs font-bold tracking-widest text-[var(--restaurant-color-hex-b28743)]">
                             {{ config('restaurant.login.eyebrow') }}
                         </p>
 
-                        <h2 class="heading-font text-3xl font-bold text-[#174c3c]">
+                        <h2 class="heading-font text-3xl font-bold text-[var(--restaurant-color-hex-174c3c)]">
                             {{ config('restaurant.login.title') }}
                         </h2>
 
@@ -302,7 +342,7 @@
                                 </label>
 
                                 <a href="/admin/forgot-password"
-                                    class="text-xs font-semibold text-[#174c3c] hover:underline">
+                                    class="text-xs font-semibold text-[var(--restaurant-color-hex-174c3c)] hover:underline">
                                     {{ config('restaurant.login.forgot_password') }}
                                 </a>
                             </div>
@@ -321,7 +361,7 @@
                                 <button
                                     type="button"
                                     @click="showPassword = !showPassword"
-                                    class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-bold text-[#174c3c]"
+                                    class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)]"
                                     x-text="showPassword
                                         ? @js(config('restaurant.login.hide_password'))
                                         : @js(config('restaurant.login.show_password'))">
@@ -335,7 +375,7 @@
                                 name="remember"
                                 type="checkbox"
                                 value="1"
-                                class="h-4 w-4 rounded border-gray-300 accent-[#174c3c]">
+                                class="h-4 w-4 rounded border-gray-300 accent-[var(--restaurant-color-hex-174c3c)]">
 
                             <label for="remember" class="mr-2 text-sm text-gray-600">
                                 {{ config('restaurant.login.remember_me') }}
@@ -363,7 +403,7 @@
                         {{ config('restaurant.login.support_question') }}
 
                         <a href="mailto:{{ config('communication.email') }}"
-                            class="font-semibold text-[#174c3c] hover:underline">
+                            class="font-semibold text-[var(--restaurant-color-hex-174c3c)] hover:underline">
                             {{ config('restaurant.login.support_link') }}
                         </a>
                     </p>
@@ -388,11 +428,11 @@
             </div>
 
             <div>
-                <p class="mb-4 text-xs font-bold tracking-widest text-[#b28743]">
+                <p class="mb-4 text-xs font-bold tracking-widest text-[var(--restaurant-color-hex-b28743)]">
                     {{ config('restaurant.about.eyebrow') }}
                 </p>
 
-                <h2 class="heading-font text-4xl font-bold leading-tight text-[#174c3c] sm:text-5xl">
+                <h2 class="heading-font text-4xl font-bold leading-tight text-[var(--restaurant-color-hex-174c3c)] sm:text-5xl">
                     {{ config('restaurant.about.title') }}
 
                     <span class="block italic">
@@ -407,7 +447,7 @@
                 @endforeach
 
                 <a href="#specialties"
-                    class="mt-7 inline-flex items-center gap-3 font-bold text-[#174c3c] hover:text-[#b28743]">
+                    class="mt-7 inline-flex items-center gap-3 font-bold text-[var(--restaurant-color-hex-174c3c)] hover:text-[var(--restaurant-color-hex-b28743)]">
                     {{ config('restaurant.about.button') }}
                     <i class="fa-solid fa-arrow-left"></i>
                 </a>
@@ -420,11 +460,11 @@
         <div class="mx-auto max-w-7xl">
 
             <div class="mb-12 text-center">
-                <p class="mb-3 text-xs font-bold tracking-widest text-[#b28743]">
+                <p class="mb-3 text-xs font-bold tracking-widest text-[var(--restaurant-color-hex-b28743)]">
                     {{ config('restaurant.specialties.eyebrow') }}
                 </p>
 
-                <h2 class="heading-font text-4xl font-bold text-[#174c3c] sm:text-5xl">
+                <h2 class="heading-font text-4xl font-bold text-[var(--restaurant-color-hex-174c3c)] sm:text-5xl">
                     {{ config('restaurant.specialties.title') }}
                 </h2>
 
@@ -440,17 +480,17 @@
             <div class="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach (config('restaurant.specialties.items', []) as $index => $item)
                     <article
-                        class="food-card overflow-hidden rounded-2xl border border-gray-100 bg-[#faf7f0] {{ $loop->last && $loop->count === 3 ? 'sm:col-span-2 lg:col-span-1' : '' }}">
+                        class="food-card overflow-hidden rounded-2xl border border-gray-100 bg-[var(--restaurant-color-hex-faf7f0)] {{ $loop->last && $loop->count === 3 ? 'sm:col-span-2 lg:col-span-1' : '' }}">
 
                         <img src="{{ asset('storage/Home/' . ($specialtyImages[$index] ?? $specialtyImages[0])) }}"
                             alt="{{ $item['image_alt'] }}" class="h-56 w-full object-cover" loading="lazy">
 
                         <div class="p-6">
-                            <span class="text-xs font-bold text-[#b28743]">
+                            <span class="text-xs font-bold text-[var(--restaurant-color-hex-b28743)]">
                                 {{ $item['number'] }} / {{ $item['category'] }}
                             </span>
 
-                            <h3 class="heading-font mt-3 text-2xl font-bold text-[#174c3c]">
+                            <h3 class="heading-font mt-3 text-2xl font-bold text-[var(--restaurant-color-hex-174c3c)]">
                                 {{ $item['title'] }}
                             </h3>
 
@@ -465,9 +505,9 @@
     </section>
 
     {{-- Contact Section --}}
-    <section id="contact" class="bg-[#174c3c] px-5 py-16 text-center text-white sm:px-8 lg:py-20">
+    <section id="contact" class="bg-[var(--restaurant-color-hex-174c3c)] px-5 py-16 text-center text-white sm:px-8 lg:py-20">
 
-        <p class="mb-4 text-xs font-bold tracking-widest text-[#d7a85b]">
+        <p class="mb-4 text-xs font-bold tracking-widest text-[var(--restaurant-color-hex-d7a85b)]">
             {{ config('restaurant.contact.eyebrow') }}
         </p>
 
@@ -500,7 +540,7 @@
                     {{ config('communication.whatsapp') }}
                 </p>
 
-                <span class="mt-3 inline-block text-sm font-semibold text-[#d7a85b]">
+                <span class="mt-3 inline-block text-sm font-semibold text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.contact.whatsapp.button') }}
                     <i class="fa-solid fa-arrow-left mr-1"></i>
                 </span>
@@ -511,12 +551,12 @@
                 class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:-translate-y-1 hover:bg-white/10">
 
                 <div
-                    class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#5bc0d7]/20 text-3xl">
-                    <i class="fa-solid fa-phone text-[#5bc0d7]"></i>
+                    class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--restaurant-color-hex-5bc0d7)]/20 text-3xl">
+                    <i class="fa-solid fa-phone text-[var(--restaurant-color-hex-5bc0d7)]"></i>
                 </div>
 
                 <h3 class="mb-2 text-lg font-bold">
-                    <i class="fa-solid fa-phone ml-2 text-[#5bc0d7]"></i>
+                    <i class="fa-solid fa-phone ml-2 text-[var(--restaurant-color-hex-5bc0d7)]"></i>
                     {{ config('restaurant.contact.phone.title') }}
                 </h3>
 
@@ -524,7 +564,7 @@
                     {{ config('communication.phone') }}
                 </p>
 
-                <span class="mt-3 inline-block text-sm font-semibold text-[#5bc0d7]">
+                <span class="mt-3 inline-block text-sm font-semibold text-[var(--restaurant-color-hex-5bc0d7)]">
                     {{ config('restaurant.contact.phone.button') }}
                     <i class="fa-solid fa-arrow-left mr-1"></i>
                 </span>
@@ -535,12 +575,12 @@
                 class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:-translate-y-1 hover:bg-white/10">
 
                 <div
-                    class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#d7a85b]/20 text-3xl">
-                    <i class="fa-solid fa-envelope text-[#d7a85b]"></i>
+                    class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--restaurant-color-hex-d7a85b)]/20 text-3xl">
+                    <i class="fa-solid fa-envelope text-[var(--restaurant-color-hex-d7a85b)]"></i>
                 </div>
 
                 <h3 class="mb-2 text-lg font-bold">
-                    <i class="fa-solid fa-envelope ml-2 text-[#d7a85b]"></i>
+                    <i class="fa-solid fa-envelope ml-2 text-[var(--restaurant-color-hex-d7a85b)]"></i>
                     {{ config('restaurant.contact.email.title') }}
                 </h3>
 
@@ -548,7 +588,7 @@
                     {{ config('communication.email') }}
                 </p>
 
-                <span class="mt-3 inline-block text-sm font-semibold text-[#d7a85b]">
+                <span class="mt-3 inline-block text-sm font-semibold text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.contact.email.button') }}
                     <i class="fa-solid fa-arrow-left mr-1"></i>
                 </span>
@@ -573,7 +613,7 @@
                     {{ config('restaurant.contact.location.description') }}
                 </p>
 
-                <span class="mt-3 inline-block text-sm font-semibold text-[#d7a85b]">
+                <span class="mt-3 inline-block text-sm font-semibold text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.contact.location.button') }}
                     <i class="fa-solid fa-arrow-left mr-1"></i>
                 </span>
@@ -583,7 +623,7 @@
     </section>
 
     {{-- Footer --}}
-    <footer class="bg-[#10382d] px-5 py-6 text-center text-sm text-white/60">
+    <footer class="bg-[var(--restaurant-color-hex-10382d)] px-5 py-6 text-center text-sm text-white/60">
         <p>
             © {{ date('Y') }}
             {{ config('app.name', config('restaurant.brand.name', 'مطعمنا')) }}.

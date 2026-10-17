@@ -2,11 +2,11 @@
 @section('title','إدارة قائمة الطعام')
 
 @section('content')
-    <div class="mx-auto max-w-5xl space-y-6 p-4 sm:p-6 lg:p-8" dir="rtl">
+    <div class="category-create-page mx-auto max-w-5xl space-y-6 p-4 sm:p-6 lg:p-8" dir="rtl">
 
         {{-- Header / Breadcrumb Links --}}
         <div
-            class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#174c3c] via-[#1d604b] to-[#10382c] p-5 text-white shadow-xl sm:p-8">
+            class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[var(--restaurant-color-hex-174c3c)] via-[var(--restaurant-color-hex-1d604b)] to-[var(--restaurant-color-hex-10382c)] p-5 text-white shadow-xl sm:p-8">
             <div class="pointer-events-none absolute -left-12 -top-16 h-48 w-48 rounded-full border-[24px] border-white/5">
             </div>
             <div class="pointer-events-none absolute -bottom-20 right-1/3 h-56 w-56 rounded-full bg-white/5 blur-2xl"></div>
@@ -78,12 +78,12 @@
         @endif
 
         <form action="{{ route('admin.category-food.store') }}" method="POST" enctype="multipart/form-data"
-            class="overflow-hidden rounded-3xl border border-gray-200/80 bg-white shadow-sm">
+            class="category-create-form overflow-hidden rounded-3xl border border-gray-200/80 bg-white shadow-sm">
             @csrf
 
             <div class="border-b border-gray-100 bg-gray-50/70 px-5 py-5 sm:px-8">
                 <div class="flex items-center gap-3">
-                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#174c3c]/10 text-[#174c3c]">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-174c3c)]/10 text-[var(--restaurant-color-hex-174c3c)]">
                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11Z" />
@@ -102,7 +102,7 @@
                 {{-- Name --}}
                 <div>
                     <label for="name" class="mb-2.5 flex items-center gap-2 text-sm font-bold text-gray-700">
-                        <svg class="h-5 w-5 text-[#174c3c]" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        <svg class="h-5 w-5 text-[var(--restaurant-color-hex-174c3c)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5v-13Z" />
@@ -113,7 +113,7 @@
 
                     <input id="name" name="name" type="text" required value="{{ old('name') }}"
                         placeholder="مثال: الوجبات الرئيسية، المشروبات، الحلويات"
-                        class="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 hover:border-gray-300 focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                        class="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 hover:border-gray-300 focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
 
                     @error('name')
                         <p class="mt-2 text-sm font-medium text-red-600">{{ $message }}</p>
@@ -123,7 +123,7 @@
                 {{-- Image --}}
                 <div>
                     <label for="photo" class="mb-2.5 flex items-center gap-2 text-sm font-bold text-gray-700">
-                        <svg class="h-5 w-5 text-[#174c3c]" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        <svg class="h-5 w-5 text-[var(--restaurant-color-hex-174c3c)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             stroke-width="1.8">
                             <rect x="3" y="3" width="18" height="18" rx="3" />
                             <circle cx="8.5" cy="8.5" r="1.5" />
@@ -137,27 +137,27 @@
                         onchange="previewCategoryImage(event)">
 
                     <label for="photo" id="upload-area"
-                        class="group relative block cursor-pointer overflow-hidden rounded-3xl border-2 border-dashed border-gray-200 bg-gradient-to-br from-gray-50 to-white p-4 transition hover:border-[#174c3c]/50 hover:shadow-lg hover:shadow-[#174c3c]/5 sm:p-6">
+                        class="category-image-upload group relative block cursor-pointer overflow-hidden rounded-3xl border-2 border-dashed border-gray-200 bg-gradient-to-br from-gray-50 to-white p-4 transition hover:border-[var(--restaurant-color-hex-174c3c)]/50 hover:shadow-lg hover:shadow-[var(--restaurant-color-hex-174c3c)]/5 sm:p-6">
 
                         <div
                             class="grid grid-cols-1 items-center gap-5 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:gap-7">
                             {{-- 1:1 image preview --}}
                             <div
-                                class="relative mx-auto aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-inner sm:max-w-none">
+                                class="category-image-frame relative mx-auto aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-inner sm:max-w-none">
                                 <img id="image-preview" src="" alt="معاينة صورة التصنيف"
                                     class="absolute inset-0 hidden h-full w-full object-contain p-1">
 
                                 <div id="image-placeholder"
-                                    class="absolute inset-0 flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#174c3c]/5 via-white to-emerald-50 p-5 text-center">
+                                    class="absolute inset-0 flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--restaurant-color-hex-174c3c)]/5 via-white to-emerald-50 p-5 text-center">
                                     <div
-                                        class="pointer-events-none absolute -left-8 -top-8 h-28 w-28 rounded-full bg-[#174c3c]/5">
+                                        class="pointer-events-none absolute -left-8 -top-8 h-28 w-28 rounded-full bg-[var(--restaurant-color-hex-174c3c)]/5">
                                     </div>
                                     <div
                                         class="pointer-events-none absolute -bottom-10 -right-10 h-36 w-36 rounded-full bg-emerald-100/60">
                                     </div>
 
                                     <div
-                                        class="relative mb-4 flex h-20 w-20 items-center justify-center rounded-3xl bg-white text-[#174c3c] shadow-lg shadow-[#174c3c]/10 ring-1 ring-[#174c3c]/10 transition group-hover:-translate-y-1">
+                                        class="relative mb-4 flex h-20 w-20 items-center justify-center rounded-3xl bg-white text-[var(--restaurant-color-hex-174c3c)] shadow-lg shadow-[var(--restaurant-color-hex-174c3c)]/10 ring-1 ring-[var(--restaurant-color-hex-174c3c)]/10 transition group-hover:-translate-y-1">
                                         <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                             stroke-width="1.4">
                                             <rect x="3" y="3" width="18" height="18" rx="3" />
@@ -177,7 +177,7 @@
                                 </div>
 
                                 <div
-                                    class="pointer-events-none absolute right-3 top-3 rounded-lg border border-white/80 bg-white/90 px-2.5 py-1 text-[10px] font-extrabold text-[#174c3c] shadow-sm backdrop-blur">
+                                    class="pointer-events-none absolute right-3 top-3 rounded-lg border border-white/80 bg-white/90 px-2.5 py-1 text-[10px] font-extrabold text-[var(--restaurant-color-hex-174c3c)] shadow-sm backdrop-blur">
                                     1:1
                                 </div>
                             </div>
@@ -185,7 +185,7 @@
                             {{-- Upload instructions --}}
                             <div class="flex flex-col items-center text-center sm:items-start sm:text-right">
                                 <div
-                                    class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#174c3c]/10 text-[#174c3c] transition group-hover:scale-105">
+                                    class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-174c3c)]/10 text-[var(--restaurant-color-hex-174c3c)] transition group-hover:scale-105">
                                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                         stroke-width="1.8">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -204,7 +204,7 @@
                                 </p>
 
                                 <span
-                                    class="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-[#174c3c] px-5 py-3 text-sm font-bold text-white shadow-md shadow-[#174c3c]/15 transition group-hover:-translate-y-0.5 group-hover:bg-[#10382c]">
+                                    class="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-5 py-3 text-sm font-bold text-white shadow-md shadow-[var(--restaurant-color-hex-174c3c)]/15 transition group-hover:-translate-y-0.5 group-hover:bg-[var(--restaurant-color-hex-10382c)]">
                                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                         stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14" />
@@ -255,7 +255,7 @@
                 {{-- Description --}}
                 <div>
                     <label for="description" class="mb-2.5 flex items-center gap-2 text-sm font-bold text-gray-700">
-                        <svg class="h-5 w-5 text-[#174c3c]" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        <svg class="h-5 w-5 text-[var(--restaurant-color-hex-174c3c)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8 6h12M8 10h12M8 14h8M8 18h5" />
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -267,7 +267,7 @@
 
                     <textarea id="description" name="description" rows="4"
                         placeholder="أضف وصفاً مختصراً يساعد العملاء على معرفة محتويات هذا التصنيف..."
-                        class="w-full resize-y rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-sm leading-7 text-gray-800 outline-none transition placeholder:text-gray-400 hover:border-gray-300 focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">{{ old('description') }}</textarea>
+                        class="w-full resize-y rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3.5 text-sm leading-7 text-gray-800 outline-none transition placeholder:text-gray-400 hover:border-gray-300 focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">{{ old('description') }}</textarea>
 
                     @error('description')
                         <p class="mt-2 text-sm font-medium text-red-600">{{ $message }}</p>
@@ -275,11 +275,11 @@
                 </div>
 
                 {{-- Fixed status switch --}}
-                <div class="rounded-2xl border border-[#174c3c]/15 bg-[#174c3c]/[0.035] p-4 sm:p-5">
+                <div class="category-status-card rounded-2xl border border-[var(--restaurant-color-hex-174c3c)]/15 bg-[var(--restaurant-color-hex-174c3c)]/[0.035] p-4 sm:p-5">
                     <div class="flex items-center justify-between gap-4">
                         <div class="flex min-w-0 items-center gap-3">
                             <div
-                                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#174c3c]/10 text-[#174c3c]">
+                                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-174c3c)]/10 text-[var(--restaurant-color-hex-174c3c)]">
                                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                     stroke-width="1.8">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -300,7 +300,7 @@
                                 @checked(old('is_active', '1') == '1') class="peer sr-only">
 
                             <span
-                                class="h-7 w-12 rounded-full bg-gray-300 transition-colors duration-200 peer-checked:bg-[#174c3c] peer-focus-visible:outline-none peer-focus-visible:ring-4 peer-focus-visible:ring-[#174c3c]/20"></span>
+                                class="h-7 w-12 rounded-full bg-gray-300 transition-colors duration-200 peer-checked:bg-[var(--restaurant-color-hex-174c3c)] peer-focus-visible:outline-none peer-focus-visible:ring-4 peer-focus-visible:ring-[var(--restaurant-color-hex-174c3c)]/20"></span>
                             <span
                                 class="pointer-events-none absolute left-1 top-1 h-5 w-5 rounded-full bg-white shadow-md transition-transform duration-200 peer-checked:translate-x-5"></span>
                         </label>
@@ -310,7 +310,7 @@
 
             {{-- Actions --}}
             <div
-                class="flex flex-col-reverse gap-3 border-t border-gray-100 bg-gray-50/70 p-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-6">
+                class="category-create-actions flex flex-col-reverse gap-3 border-t border-gray-100 bg-gray-50/70 p-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-6">
                 <a href="{{ route('admin.category-food.index') }}"
                     class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-6 py-3.5 text-sm font-bold text-gray-600 transition hover:border-gray-300 hover:bg-gray-100 sm:w-auto">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
@@ -320,7 +320,7 @@
                 </a>
 
                 <button type="submit"
-                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#174c3c] px-7 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-[#174c3c]/15 transition hover:-translate-y-0.5 hover:bg-[#10382c] hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#174c3c]/20 sm:w-auto">
+                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-7 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-[var(--restaurant-color-hex-174c3c)]/15 transition hover:-translate-y-0.5 hover:bg-[var(--restaurant-color-hex-10382c)] hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20 sm:w-auto">
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                     </svg>

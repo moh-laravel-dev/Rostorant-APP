@@ -6,7 +6,7 @@
 
          {{-- Header --}}
          <div
-             class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#174c3c] via-[#1c604b] to-[#10382c] p-5 text-white shadow-lg sm:p-7">
+             class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[var(--restaurant-color-hex-174c3c)] via-[var(--restaurant-color-hex-1c604b)] to-[var(--restaurant-color-hex-10382c)] p-5 text-white shadow-lg sm:p-7">
              <div class="pointer-events-none absolute -left-12 -top-16 h-48 w-48 rounded-full bg-white/5"></div>
              <div class="pointer-events-none absolute -bottom-20 left-1/3 h-56 w-56 rounded-full bg-white/5"></div>
 
@@ -62,7 +62,7 @@
                      </a>
 
                      <a href="{{ route('admin.category-food.food.create', $category) }}"
-                         class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-extrabold text-[#174c3c] shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-50 hover:shadow-md">
+                         class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)] shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-50 hover:shadow-md">
                          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 5v14m-7-7h14" />
                          </svg>
@@ -91,7 +91,7 @@
 
                          <input type="search" id="search" name="search" value="{{ request('search') }}"
                              placeholder="ابحث باسم الوجبة أو الوصف..."
-                             class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 py-3 pr-10 pl-4 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                             class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 py-3 pr-10 pl-4 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                      </div>
                  </div>
 
@@ -102,7 +102,7 @@
                      </label>
 
                      <select id="status" name="status"
-                         class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-800 outline-none transition focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                         class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-800 outline-none transition focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                          <option value="">جميع الوجبات</option>
                          <option value="active" @selected(request('status') === 'active')>
                              الوجبات المتاحة
@@ -120,7 +120,7 @@
                      </label>
 
                      <select id="sort" name="sort"
-                         class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-800 outline-none transition focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                         class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-800 outline-none transition focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                          <option value="latest" @selected(request('sort', 'latest') === 'latest')>
                              الأحدث أولاً
                          </option>
@@ -151,7 +151,7 @@
                      </a>
 
                      <button type="submit"
-                         class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#174c3c] px-6 py-3 text-sm font-extrabold text-white shadow-sm transition hover:bg-[#10382c] focus:outline-none focus:ring-4 focus:ring-[#174c3c]/20">
+                         class="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-6 py-3 text-sm font-extrabold text-white shadow-sm transition hover:bg-[var(--restaurant-color-hex-10382c)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20">
                          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
                                  d="M3 4h18l-7 8v6l-4 2v-8L3 4z" />
@@ -267,7 +267,7 @@
                              </svg>
                              سعر الوجبة
                          </div>
-                         <div class="mt-0.5 truncate text-base font-extrabold tabular-nums text-[#174c3c] sm:text-lg">
+                         <div class="mt-0.5 truncate text-base font-extrabold tabular-nums text-[var(--restaurant-color-hex-174c3c)] sm:text-lg">
                              {{ number_format($food->price, 0) }}
                              <span class="text-xs font-bold">ل.س</span>
                          </div>
@@ -337,7 +337,7 @@
                  <div
                      class="col-span-full overflow-hidden rounded-3xl border border-dashed border-gray-300 bg-white px-5 py-14 text-center sm:py-20">
                      <div
-                         class="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-emerald-50 text-[#174c3c]">
+                         class="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-emerald-50 text-[var(--restaurant-color-hex-174c3c)]">
                          <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
                                  d="M3 3v7a4 4 0 004 4h1V3M7 3v18M17 3v7a4 4 0 004 4h-4V3zm0 11v7" />
@@ -350,7 +350,7 @@
                      </p>
 
                      <a href="{{ route('admin.category-food.food.create', $category) }}"
-                         class="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#174c3c] px-5 py-3 text-sm font-extrabold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#10382c] hover:shadow-md">
+                         class="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-5 py-3 text-sm font-extrabold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[var(--restaurant-color-hex-10382c)] hover:shadow-md">
                          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                  d="M12 5v14m-7-7h14" />

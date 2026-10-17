@@ -4,10 +4,10 @@
     }
 
     .restaurant-menu {
-        --menu-green: #174c3c;
-        --menu-dark: #10382c;
-        --menu-gold: #e8c98c;
-        --menu-muted: #708078;
+        --menu-green: var(--restaurant-color-hex-174c3c);
+        --menu-dark: var(--restaurant-color-hex-10382c);
+        --menu-gold: var(--restaurant-color-hex-e8c98c);
+        --menu-muted: var(--restaurant-color-hex-708078);
         scroll-behavior: smooth;
     }
 
@@ -23,14 +23,14 @@
 
     .restaurant-menu .menu-hero {
         background:
-            radial-gradient(ellipse at 10% 15%, rgba(232, 201, 140, .13), transparent 32%),
-            radial-gradient(ellipse at 85% 100%, rgba(94, 171, 126, .17), transparent 36%),
-            linear-gradient(125deg, #09271e 0%, #174c3c 55%, #286b50 100%);
+            radial-gradient(ellipse at 10% 15%, var(--restaurant-color-rgb-232-201-140-point-13), transparent 32%),
+            radial-gradient(ellipse at 85% 100%, var(--restaurant-color-rgb-94-171-126-point-17), transparent 36%),
+            linear-gradient(125deg, var(--restaurant-color-hex-09271e) 0%, var(--restaurant-color-hex-174c3c) 55%, var(--restaurant-color-hex-286b50) 100%);
     }
 
     .restaurant-menu .menu-glass {
-        border: 1px solid rgba(255, 255, 255, .15);
-        background: rgba(255, 255, 255, .07);
+        border: 1px solid var(--restaurant-color-rgb-255-255-255-point-15);
+        background: var(--restaurant-color-rgb-255-255-255-point-07);
         backdrop-filter: blur(12px);
     }
 
@@ -56,18 +56,18 @@
         align-items: center;
         justify-content: center;
         gap: 9px;
-        border: 1px solid #e5eae4;
+        border: 1px solid var(--restaurant-color-hex-e5eae4);
         border-radius: 15px;
-        background: #fff;
+        background: var(--restaurant-color-hex-fff);
         padding: 12px 17px;
-        color: #647168;
+        color: var(--restaurant-color-hex-647168);
         font-size: 13px;
         font-weight: 800;
         transition: all .22s ease;
     }
 
     .restaurant-menu .menu-category:hover {
-        border-color: #a9c5b2;
+        border-color: var(--restaurant-color-hex-a9c5b2);
         color: var(--menu-green);
         transform: translateY(-1px);
     }
@@ -75,29 +75,29 @@
     .restaurant-menu .menu-category.active {
         border-color: var(--menu-green);
         background: var(--menu-green);
-        color: #fff;
-        box-shadow: 0 7px 18px rgba(23, 76, 60, .16);
+        color: var(--restaurant-color-hex-fff);
+        box-shadow: 0 7px 18px var(--restaurant-color-rgb-23-76-60-point-16);
     }
 
     .restaurant-menu .food-card {
         min-width: 0;
-        border: 1px solid #e9eee8;
+        border: 1px solid var(--restaurant-color-hex-e9eee8);
         border-radius: 22px;
-        background: #fff;
-        box-shadow: 0 3px 12px rgba(20, 55, 38, .025);
+        background: var(--restaurant-color-hex-fff);
+        box-shadow: 0 3px 12px var(--restaurant-color-rgb-20-55-38-point-025);
         transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
     }
 
     .restaurant-menu .food-card:hover {
         transform: translateY(-5px);
-        border-color: #d5e3d8;
-        box-shadow: 0 18px 38px rgba(20, 55, 38, .09);
+        border-color: var(--restaurant-color-hex-d5e3d8);
+        box-shadow: 0 18px 38px var(--restaurant-color-rgb-20-55-38-point-09);
     }
 
     .restaurant-menu .food-image-wrap {
         position: relative;
         overflow: hidden;
-        background: linear-gradient(135deg, #eef2eb, #e4eae1);
+        background: linear-gradient(135deg, var(--restaurant-color-hex-eef2eb), var(--restaurant-color-hex-e4eae1));
     }
 
     .restaurant-menu .food-image {
@@ -120,35 +120,35 @@
         min-height: 54px;
         border: 1px solid transparent;
         border-radius: 15px;
-        background: #f6f8f5;
+        background: var(--restaurant-color-hex-f6f8f5);
         padding: 14px 48px 14px 45px;
-        color: #1c392d;
+        color: var(--restaurant-color-hex-1c392d);
         font-size: 14px;
         outline: none;
         transition: all .2s ease;
     }
 
     .restaurant-menu .menu-search:focus {
-        border-color: rgba(23, 76, 60, .24);
-        background: #fff;
-        box-shadow: 0 0 0 4px rgba(23, 76, 60, .055);
+        border-color: var(--restaurant-color-rgb-23-76-60-point-24);
+        background: var(--restaurant-color-hex-fff);
+        box-shadow: 0 0 0 4px var(--restaurant-color-rgb-23-76-60-point-055);
     }
 
     .restaurant-menu .menu-search::placeholder {
-        color: #9aa69d;
+        color: var(--restaurant-color-hex-9aa69d);
     }
 
     .restaurant-menu .menu-section-title {
-        color: #183d2e;
+        color: var(--restaurant-color-hex-183d2e);
         font-weight: 900;
         letter-spacing: -.025em;
     }
 
     .restaurant-menu .menu-feature {
-        border: 1px solid #e5eae3;
+        border: 1px solid var(--restaurant-color-hex-e5eae3);
         border-radius: 22px;
-        background: #fff;
-        box-shadow: 0 8px 30px rgba(20, 55, 38, .045);
+        background: var(--restaurant-color-hex-fff);
+        box-shadow: 0 8px 30px var(--restaurant-color-rgb-20-55-38-point-045);
     }
 
     .restaurant-menu .food-add {
@@ -161,7 +161,7 @@
         border-radius: 12px;
         background: var(--menu-green);
         padding: 10px 13px;
-        color: #fff;
+        color: var(--restaurant-color-hex-fff);
         font-size: 12px;
         font-weight: 800;
         transition: all .2s ease;
@@ -169,7 +169,7 @@
 
     .restaurant-menu .food-add:hover {
         background: var(--menu-dark);
-        box-shadow: 0 5px 14px rgba(23, 76, 60, .15);
+        box-shadow: 0 5px 14px var(--restaurant-color-rgb-23-76-60-point-15);
     }
 
     .restaurant-menu .food-add:disabled {
@@ -182,13 +182,13 @@
     }
 
     .restaurant-menu .menu-dot-pattern {
-        background-image: radial-gradient(rgba(255, 255, 255, .15) 1px, transparent 1px);
+        background-image: radial-gradient(var(--restaurant-color-rgb-255-255-255-point-15) 1px, transparent 1px);
         background-size: 17px 17px;
     }
 
     .restaurant-menu .menu-divider {
         height: 1px;
-        background: linear-gradient(to left, #dfe8df, transparent);
+        background: linear-gradient(to left, var(--restaurant-color-hex-dfe8df), transparent);
     }
 
     #orders-modal {
@@ -313,19 +313,19 @@
         0% {
             opacity: 0;
             transform: translateY(14px) scale(0.96);
-            box-shadow: 0 0 0 0 rgba(23, 76, 60, 0);
+            box-shadow: 0 0 0 0 var(--restaurant-color-rgb-23-76-60-0);
         }
 
         55% {
             opacity: 1;
             transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 0 0 5px rgba(23, 76, 60, 0.12);
+            box-shadow: 0 0 0 5px var(--restaurant-color-rgb-23-76-60-0-point-12);
         }
 
         100% {
             opacity: 1;
             transform: translateY(0) scale(1);
-            box-shadow: 0 0 0 0 rgba(23, 76, 60, 0);
+            box-shadow: 0 0 0 0 var(--restaurant-color-rgb-23-76-60-0);
         }
     }
 
@@ -349,8 +349,8 @@
     .bill-code-card {
         isolation: isolate;
         background:
-            radial-gradient(ellipse at 50% 100%, rgba(232, 201, 140, .09), transparent 55%),
-            linear-gradient(135deg, #183e32 0%, #102f25 48%, #091e18 100%);
+            radial-gradient(ellipse at 50% 100%, var(--restaurant-color-rgb-232-201-140-point-09), transparent 55%),
+            linear-gradient(135deg, var(--restaurant-color-hex-183e32) 0%, var(--restaurant-color-hex-102f25) 48%, var(--restaurant-color-hex-091e18) 100%);
     }
 
     /* Ambient light */
@@ -369,13 +369,13 @@
     .bill-code-orb-one {
         top: -90px;
         left: -40px;
-        background: #e8c98c;
+        background: var(--restaurant-color-hex-e8c98c);
     }
 
     .bill-code-orb-two {
         right: -70px;
         bottom: -100px;
-        background: #30a783;
+        background: var(--restaurant-color-hex-30a783);
         animation-delay: -3.5s;
     }
 
@@ -394,13 +394,13 @@
     /* Icon animation */
     .bill-code-icon {
         animation: billIconFloat 3s ease-in-out infinite;
-        box-shadow: 0 0 25px rgba(232, 201, 140, .04);
+        box-shadow: 0 0 25px var(--restaurant-color-rgb-232-201-140-point-04);
         transition: box-shadow .3s ease, border-color .3s ease;
     }
 
     .bill-code-card:hover .bill-code-icon {
-        border-color: rgba(232, 201, 140, .7);
-        box-shadow: 0 0 28px rgba(232, 201, 140, .15);
+        border-color: var(--restaurant-color-rgb-232-201-140-point-7);
+        box-shadow: 0 0 28px var(--restaurant-color-rgb-232-201-140-point-15);
     }
 
     @keyframes billIconFloat {
@@ -435,12 +435,12 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        border: 1px solid rgba(232, 201, 140, .28);
+        border: 1px solid var(--restaurant-color-rgb-232-201-140-point-28);
         border-radius: 11px;
-        background: linear-gradient(145deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .025));
+        background: linear-gradient(145deg, var(--restaurant-color-rgb-255-255-255-point-09), var(--restaurant-color-rgb-255-255-255-point-025));
         box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, .06),
-            0 5px 14px rgba(0, 0, 0, .12);
+            inset 0 1px 0 var(--restaurant-color-rgb-255-255-255-point-06),
+            0 5px 14px var(--restaurant-color-rgb-0-0-0-point-12);
         transform-style: preserve-3d;
         transition:
             border-color .3s ease,
@@ -456,8 +456,8 @@
         font-size: clamp(17px, 4vw, 22px);
         font-weight: 900;
         line-height: 1;
-        color: #f3d9a5;
-        text-shadow: 0 0 12px rgba(232, 201, 140, .18);
+        color: var(--restaurant-color-hex-f3d9a5);
+        text-shadow: 0 0 12px var(--restaurant-color-rgb-232-201-140-point-18);
         animation: billCharacterGlow 3s ease-in-out infinite;
         animation-delay: calc(var(--i) * 120ms + 1s);
     }
@@ -469,7 +469,7 @@
         width: 55%;
         background: linear-gradient(90deg,
                 transparent,
-                rgba(255, 255, 255, .2),
+                var(--restaurant-color-rgb-255-255-255-point-2),
                 transparent);
         transform: skewX(-20deg);
         animation: billTileShine 4s ease-in-out infinite;
@@ -485,7 +485,7 @@
         left: 15%;
         height: 8px;
         border-radius: 50%;
-        background: #e8c98c;
+        background: var(--restaurant-color-hex-e8c98c);
         filter: blur(10px);
         opacity: 0;
         animation: billTileGlow 3s ease-in-out infinite;
@@ -494,16 +494,16 @@
 
     .bill-code-tile:hover .bill-code-tile-inner {
         transform: translateY(-6px) rotateX(8deg) scale(1.07);
-        border-color: #e8c98c;
-        background: rgba(232, 201, 140, .13);
+        border-color: var(--restaurant-color-hex-e8c98c);
+        background: var(--restaurant-color-rgb-232-201-140-point-13);
         box-shadow:
-            0 0 22px rgba(232, 201, 140, .14),
-            inset 0 0 15px rgba(232, 201, 140, .05);
+            0 0 22px var(--restaurant-color-rgb-232-201-140-point-14),
+            inset 0 0 15px var(--restaurant-color-rgb-232-201-140-point-05);
     }
 
     .bill-code-tile:hover .bill-code-character {
-        color: #fff3d5;
-        text-shadow: 0 0 16px rgba(232, 201, 140, .65);
+        color: var(--restaurant-color-hex-fff3d5);
+        text-shadow: 0 0 16px var(--restaurant-color-rgb-232-201-140-point-65);
     }
 
     @keyframes billTileEnter {
@@ -527,13 +527,13 @@
 
         0%,
         100% {
-            text-shadow: 0 0 5px rgba(232, 201, 140, .12);
+            text-shadow: 0 0 5px var(--restaurant-color-rgb-232-201-140-point-12);
         }
 
         50% {
             text-shadow:
-                0 0 8px rgba(232, 201, 140, .6),
-                0 0 20px rgba(232, 201, 140, .25);
+                0 0 8px var(--restaurant-color-rgb-232-201-140-point-6),
+                0 0 20px var(--restaurant-color-rgb-232-201-140-point-25);
         }
     }
 
@@ -576,9 +576,9 @@
         opacity: 0;
         background: linear-gradient(90deg,
                 transparent,
-                rgba(232, 201, 140, .08),
-                rgba(255, 238, 197, .32),
-                rgba(232, 201, 140, .08),
+                var(--restaurant-color-rgb-232-201-140-point-08),
+                var(--restaurant-color-rgb-255-238-197-point-32),
+                var(--restaurant-color-rgb-232-201-140-point-08),
                 transparent);
         filter: blur(5px);
         transform: skewX(-15deg);
@@ -612,8 +612,8 @@
     /* Progress line */
     .bill-code-progress {
         width: 35%;
-        background: linear-gradient(90deg, transparent, #e8c98c, #fff1cb, transparent);
-        box-shadow: 0 0 10px rgba(232, 201, 140, .4);
+        background: linear-gradient(90deg, transparent, var(--restaurant-color-hex-e8c98c), var(--restaurant-color-hex-fff1cb), transparent);
+        box-shadow: 0 0 10px var(--restaurant-color-rgb-232-201-140-point-4);
         animation: billProgressMove 3s ease-in-out infinite;
     }
 
@@ -629,7 +629,7 @@
 
     /* Status indicator */
     .bill-code-status-dot {
-        box-shadow: 0 0 8px rgba(110, 231, 183, .6);
+        box-shadow: 0 0 8px var(--restaurant-color-rgb-110-231-183-point-6);
     }
 
     /* Animated border accent */
@@ -639,7 +639,7 @@
         left: -70%;
         width: 45%;
         height: 1px;
-        background: linear-gradient(90deg, transparent, #e8c98c, transparent);
+        background: linear-gradient(90deg, transparent, var(--restaurant-color-hex-e8c98c), transparent);
         opacity: .65;
         animation: billBorderMove 6s linear infinite;
         pointer-events: none;

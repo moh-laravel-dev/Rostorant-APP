@@ -1,0 +1,1658 @@
+@theme {
+    --color-amber-100: oklch(96.2% 0.059 95.617);
+    --color-amber-200: oklch(92.4% 0.12 95.746);
+    --color-amber-300: oklch(87.9% 0.169 91.605);
+    --color-amber-400: oklch(82.8% 0.189 84.429);
+    --color-amber-50: oklch(98.7% 0.022 95.277);
+    --color-amber-500: oklch(76.9% 0.188 70.08);
+    --color-amber-600: oklch(66.6% 0.179 58.318);
+    --color-amber-700: oklch(55.5% 0.163 48.998);
+    --color-amber-800: oklch(47.3% 0.137 46.201);
+    --color-amber-900: oklch(41.4% 0.112 45.904);
+    --color-amber-950: oklch(27.9% 0.077 45.635);
+    --color-black: #000;
+    --color-blue-100: oklch(93.2% 0.032 255.585);
+    --color-blue-200: oklch(88.2% 0.059 254.128);
+    --color-blue-50: oklch(97% 0.014 254.604);
+    --color-blue-600: oklch(54.6% 0.245 262.881);
+    --color-blue-700: oklch(48.8% 0.243 264.376);
+    --color-blue-800: oklch(42.4% 0.199 265.638);
+    --color-emerald-100: oklch(95% 0.052 163.051);
+    --color-emerald-200: oklch(90.5% 0.093 164.15);
+    --color-emerald-300: oklch(84.5% 0.143 164.978);
+    --color-emerald-400: oklch(76.5% 0.177 163.223);
+    --color-emerald-50: oklch(97.9% 0.021 166.113);
+    --color-emerald-500: oklch(69.6% 0.17 162.48);
+    --color-emerald-600: oklch(59.6% 0.145 163.225);
+    --color-emerald-700: oklch(50.8% 0.118 165.612);
+    --color-emerald-800: oklch(43.2% 0.095 166.913);
+    --color-emerald-900: oklch(37.8% 0.077 168.94);
+    --color-gray-100: oklch(96.7% 0.003 264.542);
+    --color-gray-200: oklch(92.8% 0.006 264.531);
+    --color-gray-300: oklch(87.2% 0.01 258.338);
+    --color-gray-400: oklch(70.7% 0.022 261.325);
+    --color-gray-50: oklch(98.5% 0.002 247.839);
+    --color-gray-500: oklch(55.1% 0.027 264.364);
+    --color-gray-600: oklch(44.6% 0.03 256.802);
+    --color-gray-700: oklch(37.3% 0.034 259.733);
+    --color-gray-800: oklch(27.8% 0.033 256.848);
+    --color-gray-900: oklch(21% 0.034 264.665);
+    --color-green-100: oklch(96.2% 0.044 156.743);
+    --color-green-200: oklch(92.5% 0.084 155.995);
+    --color-green-400: oklch(79.2% 0.209 151.711);
+    --color-green-50: oklch(98.2% 0.018 155.826);
+    --color-green-500: oklch(72.3% 0.219 149.579);
+    --color-green-600: oklch(62.7% 0.194 149.214);
+    --color-green-700: oklch(52.7% 0.154 150.069);
+    --color-green-800: oklch(44.8% 0.119 151.328);
+    --color-green-900: oklch(39.3% 0.095 152.535);
+    --color-purple-100: oklch(94.6% 0.033 307.174);
+    --color-purple-600: oklch(55.8% 0.288 302.321);
+    --color-red-100: oklch(93.6% 0.032 17.717);
+    --color-red-200: oklch(88.5% 0.062 18.334);
+    --color-red-300: oklch(80.8% 0.114 19.571);
+    --color-red-400: oklch(70.4% 0.191 22.216);
+    --color-red-50: oklch(97.1% 0.013 17.38);
+    --color-red-500: oklch(63.7% 0.237 25.331);
+    --color-red-600: oklch(57.7% 0.245 27.325);
+    --color-red-700: oklch(50.5% 0.213 27.518);
+    --color-red-800: oklch(44.4% 0.177 26.899);
+    --color-red-900: oklch(39.6% 0.141 25.723);
+    --color-rose-50: oklch(96.9% 0.015 12.422);
+    --color-rose-500: oklch(64.5% 0.246 16.439);
+    --color-rose-600: oklch(58.6% 0.253 17.585);
+    --color-slate-100: oklch(96.8% 0.007 247.896);
+    --color-slate-200: oklch(92.9% 0.013 255.508);
+    --color-slate-300: oklch(86.9% 0.022 252.894);
+    --color-slate-400: oklch(70.4% 0.04 256.788);
+    --color-slate-50: oklch(98.4% 0.003 247.858);
+    --color-slate-500: oklch(55.4% 0.046 257.417);
+    --color-slate-600: oklch(44.6% 0.043 257.281);
+    --color-slate-700: oklch(37.2% 0.044 257.287);
+    --color-slate-800: oklch(27.9% 0.041 260.031);
+    --color-teal-400: oklch(77.7% 0.152 181.912);
+    --color-teal-500: oklch(70.4% 0.14 182.503);
+    --color-teal-600: oklch(60% 0.118 184.704);
+    --color-teal-700: oklch(51.1% 0.096 186.391);
+    --color-white: #fff;
+}
+
+:root {
+    --restaurant-color-hex-000: #000;
+    --restaurant-color-hex-00000018: #00000018;
+    --restaurant-color-hex-071b14: #071b14;
+    --restaurant-color-hex-091e18: #091e18;
+    --restaurant-color-hex-09271e: #09271e;
+    --restaurant-color-hex-0c241d: #0c241d;
+    --restaurant-color-hex-0d2b20b5: #0d2b20b5;
+    --restaurant-color-hex-0d2b20f0: #0d2b20f0;
+    --restaurant-color-hex-0d3027: #0d3027;
+    --restaurant-color-hex-10291e: #10291e;
+    --restaurant-color-hex-102f25: #102f25;
+    --restaurant-color-hex-10382c: #10382c;
+    --restaurant-color-hex-10382d: #10382d;
+    --restaurant-color-hex-103a2d: #103a2d;
+    --restaurant-color-hex-123e32: #123e32;
+    --restaurant-color-hex-16804a: #16804a;
+    --restaurant-color-hex-173d2f: #173d2f;
+    --restaurant-color-hex-174c3c: #174c3c;
+    --restaurant-color-hex-176344: #176344;
+    --restaurant-color-hex-176b3d: #176b3d;
+    --restaurant-color-hex-183d2e: #183d2e;
+    --restaurant-color-hex-183e32: #183e32;
+    --restaurant-color-hex-18834a: #18834a;
+    --restaurant-color-hex-19382c: #19382c;
+    --restaurant-color-hex-19392f: #19392f;
+    --restaurant-color-hex-197444: #197444;
+    --restaurant-color-hex-1a5743: #1a5743;
+    --restaurant-color-hex-1a704d: #1a704d;
+    --restaurant-color-hex-1b5945: #1b5945;
+    --restaurant-color-hex-1c392d: #1c392d;
+    --restaurant-color-hex-1c604b: #1c604b;
+    --restaurant-color-hex-1d6049: #1d6049;
+    --restaurant-color-hex-1d604b: #1d604b;
+    --restaurant-color-hex-1d634b: #1d634b;
+    --restaurant-color-hex-1f2937: #1f2937;
+    --restaurant-color-hex-20372c: #20372c;
+    --restaurant-color-hex-218653: #218653;
+    --restaurant-color-hex-233d2e: #233d2e;
+    --restaurant-color-hex-23674f: #23674f;
+    --restaurant-color-hex-23734d: #23734d;
+    --restaurant-color-hex-23784d: #23784d;
+    --restaurant-color-hex-244b38: #244b38;
+    --restaurant-color-hex-244c3d: #244c3d;
+    --restaurant-color-hex-244d39: #244d39;
+    --restaurant-color-hex-25352d: #25352d;
+    --restaurant-color-hex-26372b: #26372b;
+    --restaurant-color-hex-267448: #267448;
+    --restaurant-color-hex-26745a: #26745a;
+    --restaurant-color-hex-286b50: #286b50;
+    --restaurant-color-hex-294837: #294837;
+    --restaurant-color-hex-2b8964: #2b8964;
+    --restaurant-color-hex-30a783: #30a783;
+    --restaurant-color-hex-315b43: #315b43;
+    --restaurant-color-hex-333: #333;
+    --restaurant-color-hex-345244: #345244;
+    --restaurant-color-hex-34b69a: #34b69a;
+    --restaurant-color-hex-374151: #374151;
+    --restaurant-color-hex-398260: #398260;
+    --restaurant-color-hex-40534a: #40534a;
+    --restaurant-color-hex-41634e: #41634e;
+    --restaurant-color-hex-43866a: #43866a;
+    --restaurant-color-hex-448364: #448364;
+    --restaurant-color-hex-45a099: #45a099;
+    --restaurant-color-hex-47685c: #47685c;
+    --restaurant-color-hex-496454: #496454;
+    --restaurant-color-hex-53665a: #53665a;
+    --restaurant-color-hex-547263: #547263;
+    --restaurant-color-hex-57ad7a: #57ad7a;
+    --restaurant-color-hex-59816d: #59816d;
+    --restaurant-color-hex-5bc0d7: #5bc0d7;
+    --restaurant-color-hex-60736a: #60736a;
+    --restaurant-color-hex-647168: #647168;
+    --restaurant-color-hex-66786c: #66786c;
+    --restaurant-color-hex-6ee7b7: #6ee7b7;
+    --restaurant-color-hex-708078: #708078;
+    --restaurant-color-hex-718078: #718078;
+    --restaurant-color-hex-748178: #748178;
+    --restaurant-color-hex-75847a: #75847a;
+    --restaurant-color-hex-765b2e: #765b2e;
+    --restaurant-color-hex-777: #777;
+    --restaurant-color-hex-77867d: #77867d;
+    --restaurant-color-hex-7a8980: #7a8980;
+    --restaurant-color-hex-7b8980: #7b8980;
+    --restaurant-color-hex-7e8d80: #7e8d80;
+    --restaurant-color-hex-859189: #859189;
+    --restaurant-color-hex-895714: #895714;
+    --restaurant-color-hex-8a9a90: #8a9a90;
+    --restaurant-color-hex-8ca294: #8ca294;
+    --restaurant-color-hex-8d7956: #8d7956;
+    --restaurant-color-hex-8eae96: #8eae96;
+    --restaurant-color-hex-922329: #922329;
+    --restaurant-color-hex-95743a: #95743a;
+    --restaurant-color-hex-9aa69d: #9aa69d;
+    --restaurant-color-hex-9aab9d: #9aab9d;
+    --restaurant-color-hex-a0aaa4: #a0aaa4;
+    --restaurant-color-hex-a47b37: #a47b37;
+    --restaurant-color-hex-a7f3d0: #a7f3d0;
+    --restaurant-color-hex-a82828: #a82828;
+    --restaurant-color-hex-a9c5b2: #a9c5b2;
+    --restaurant-color-hex-ad3434: #ad3434;
+    --restaurant-color-hex-b28743: #b28743;
+    --restaurant-color-hex-b42318: #b42318;
+    --restaurant-color-hex-b52c32: #b52c32;
+    --restaurant-color-hex-b6c8bf: #b6c8bf;
+    --restaurant-color-hex-b91c1c: #b91c1c;
+    --restaurant-color-hex-b92f35: #b92f35;
+    --restaurant-color-hex-bd3030: #bd3030;
+    --restaurant-color-hex-c33838: #c33838;
+    --restaurant-color-hex-c43b3b: #c43b3b;
+    --restaurant-color-hex-c4d8ca: #c4d8ca;
+    --restaurant-color-hex-c52e35: #c52e35;
+    --restaurant-color-hex-c53535: #c53535;
+    --restaurant-color-hex-cbd5ce: #cbd5ce;
+    --restaurant-color-hex-cbd8ca: #cbd8ca;
+    --restaurant-color-hex-cbdad0: #cbdad0;
+    --restaurant-color-hex-cbded0: #cbded0;
+    --restaurant-color-hex-cbded1: #cbded1;
+    --restaurant-color-hex-cce8d4: #cce8d4;
+    --restaurant-color-hex-cddfd2: #cddfd2;
+    --restaurant-color-hex-cde8d5: #cde8d5;
+    --restaurant-color-hex-d0a34f: #d0a34f;
+    --restaurant-color-hex-d1d5db: #d1d5db;
+    --restaurant-color-hex-d5e3d8: #d5e3d8;
+    --restaurant-color-hex-d5e5dc: #d5e5dc;
+    --restaurant-color-hex-d5e9db: #d5e9db;
+    --restaurant-color-hex-d5e9dd: #d5e9dd;
+    --restaurant-color-hex-d6ddd8: #d6ddd8;
+    --restaurant-color-hex-d6eddf: #d6eddf;
+    --restaurant-color-hex-d7a85b: #d7a85b;
+    --restaurant-color-hex-d7e7dc: #d7e7dc;
+    --restaurant-color-hex-d8ad60: #d8ad60;
+    --restaurant-color-hex-d8b36c: #d8b36c;
+    --restaurant-color-hex-d8e5dc: #d8e5dc;
+    --restaurant-color-hex-d9e4db: #d9e4db;
+    --restaurant-color-hex-d9eae0: #d9eae0;
+    --restaurant-color-hex-d9eee0: #d9eee0;
+    --restaurant-color-hex-dc4545: #dc4545;
+    --restaurant-color-hex-dce6df: #dce6df;
+    --restaurant-color-hex-dce7df: #dce7df;
+    --restaurant-color-hex-dce8dc: #dce8dc;
+    --restaurant-color-hex-dce8dd: #dce8dd;
+    --restaurant-color-hex-dce9dc: #dce9dc;
+    --restaurant-color-hex-dce9df: #dce9df;
+    --restaurant-color-hex-dcebe1: #dcebe1;
+    --restaurant-color-hex-ddd: #ddd;
+    --restaurant-color-hex-dfe7e0: #dfe7e0;
+    --restaurant-color-hex-dfe8df: #dfe8df;
+    --restaurant-color-hex-dfe8e1: #dfe8e1;
+    --restaurant-color-hex-dfe8e2: #dfe8e2;
+    --restaurant-color-hex-dfe9df: #dfe9df;
+    --restaurant-color-hex-e0e7e2: #e0e7e2;
+    --restaurant-color-hex-e0f1e6: #e0f1e6;
+    --restaurant-color-hex-e0f3e6: #e0f3e6;
+    --restaurant-color-hex-e1e8e2: #e1e8e2;
+    --restaurant-color-hex-e1ebe4: #e1ebe4;
+    --restaurant-color-hex-e2e9e3: #e2e9e3;
+    --restaurant-color-hex-e2ebe5: #e2ebe5;
+    --restaurant-color-hex-e2f7e9: #e2f7e9;
+    --restaurant-color-hex-e3ebe6: #e3ebe6;
+    --restaurant-color-hex-e4eae1: #e4eae1;
+    --restaurant-color-hex-e4ece6: #e4ece6;
+    --restaurant-color-hex-e5e5dc: #e5e5dc;
+    --restaurant-color-hex-e5e7eb: #e5e7eb;
+    --restaurant-color-hex-e5eae3: #e5eae3;
+    --restaurant-color-hex-e5eae4: #e5eae4;
+    --restaurant-color-hex-e5ebe3: #e5ebe3;
+    --restaurant-color-hex-e5ebe6: #e5ebe6;
+    --restaurant-color-hex-e5f1e8: #e5f1e8;
+    --restaurant-color-hex-e6bb76: #e6bb76;
+    --restaurant-color-hex-e6f4eb: #e6f4eb;
+    --restaurant-color-hex-e7c98e: #e7c98e;
+    --restaurant-color-hex-e7eee5: #e7eee5;
+    --restaurant-color-hex-e7eee8: #e7eee8;
+    --restaurant-color-hex-e7f3ec: #e7f3ec;
+    --restaurant-color-hex-e7f4eb: #e7f4eb;
+    --restaurant-color-hex-e7f5eb: #e7f5eb;
+    --restaurant-color-hex-e8c98c: #e8c98c;
+    --restaurant-color-hex-e8c98e: #e8c98e;
+    --restaurant-color-hex-e8e1d2: #e8e1d2;
+    --restaurant-color-hex-e8eee9: #e8eee9;
+    --restaurant-color-hex-e8eeea: #e8eeea;
+    --restaurant-color-hex-e8efe7: #e8efe7;
+    --restaurant-color-hex-e8efe8: #e8efe8;
+    --restaurant-color-hex-e8f0e8: #e8f0e8;
+    --restaurant-color-hex-e8f3ed: #e8f3ed;
+    --restaurant-color-hex-e8f4ed: #e8f4ed;
+    --restaurant-color-hex-e8f4ee: #e8f4ee;
+    --restaurant-color-hex-e9cc91: #e9cc91;
+    --restaurant-color-hex-e9eee8: #e9eee8;
+    --restaurant-color-hex-eabbb6: #eabbb6;
+    --restaurant-color-hex-eaf0ec: #eaf0ec;
+    --restaurant-color-hex-eaf1e9: #eaf1e9;
+    --restaurant-color-hex-eaf1ec: #eaf1ec;
+    --restaurant-color-hex-eaf2ee: #eaf2ee;
+    --restaurant-color-hex-edf1ee: #edf1ee;
+    --restaurant-color-hex-edf3ef: #edf3ef;
+    --restaurant-color-hex-edf5ef: #edf5ef;
+    --restaurant-color-hex-edf6f0: #edf6f0;
+    --restaurant-color-hex-edf7f1: #edf7f1;
+    --restaurant-color-hex-edfaf1: #edfaf1;
+    --restaurant-color-hex-eef2eb: #eef2eb;
+    --restaurant-color-hex-effaf2: #effaf2;
+    --restaurant-color-hex-f0d5a1: #f0d5a1;
+    --restaurant-color-hex-f0d6d4: #f0d6d4;
+    --restaurant-color-hex-f0d7d5: #f0d7d5;
+    --restaurant-color-hex-f0f4ef: #f0f4ef;
+    --restaurant-color-hex-f0f5f2: #f0f5f2;
+    --restaurant-color-hex-f0f8f2: #f0f8f2;
+    --restaurant-color-hex-f0f8f4: #f0f8f4;
+    --restaurant-color-hex-f0faf3: #f0faf3;
+    --restaurant-color-hex-f1d3d0: #f1d3d0;
+    --restaurant-color-hex-f1d6d3: #f1d6d3;
+    --restaurant-color-hex-f1f8f3: #f1f8f3;
+    --restaurant-color-hex-f29b91: #f29b91;
+    --restaurant-color-hex-f2f5f2: #f2f5f2;
+    --restaurant-color-hex-f2f7f3: #f2f7f3;
+    --restaurant-color-hex-f3cece: #f3cece;
+    --restaurant-color-hex-f3d6a2: #f3d6a2;
+    --restaurant-color-hex-f3d9a5: #f3d9a5;
+    --restaurant-color-hex-f3dba9: #f3dba9;
+    --restaurant-color-hex-f3f5f0: #f3f5f0;
+    --restaurant-color-hex-f3f6f4: #f3f6f4;
+    --restaurant-color-hex-f4d7d4: #f4d7d4;
+    --restaurant-color-hex-f4f3eb: #f4f3eb;
+    --restaurant-color-hex-f4f7f2: #f4f7f2;
+    --restaurant-color-hex-f4f7f5: #f4f7f5;
+    --restaurant-color-hex-f4f8f4: #f4f8f4;
+    --restaurant-color-hex-f5d7d4: #f5d7d4;
+    --restaurant-color-hex-f5ead4: #f5ead4;
+    --restaurant-color-hex-f5f7f6: #f5f7f6;
+    --restaurant-color-hex-f5f8f6: #f5f8f6;
+    --restaurant-color-hex-f5faf6: #f5faf6;
+    --restaurant-color-hex-f6f8f5: #f6f8f5;
+    --restaurant-color-hex-f7f8f5: #f7f8f5;
+    --restaurant-color-hex-f7f9f7: #f7f9f7;
+    --restaurant-color-hex-f7faf7: #f7faf7;
+    --restaurant-color-hex-f7faf8: #f7faf8;
+    --restaurant-color-hex-f7fbf8: #f7fbf8;
+    --restaurant-color-hex-f8f6ef: #f8f6ef;
+    --restaurant-color-hex-f8f7f1: #f8f7f1;
+    --restaurant-color-hex-f8fbf8: #f8fbf8;
+    --restaurant-color-hex-f9faf7: #f9faf7;
+    --restaurant-color-hex-faf7f0: #faf7f0;
+    --restaurant-color-hex-fafcfb: #fafcfb;
+    --restaurant-color-hex-fbfcfb: #fbfcfb;
+    --restaurant-color-hex-fbfdfb: #fbfdfb;
+    --restaurant-color-hex-fcfaf5: #fcfaf5;
+    --restaurant-color-hex-fee7e5: #fee7e5;
+    --restaurant-color-hex-ffe7e4: #ffe7e4;
+    --restaurant-color-hex-ffe7e5: #ffe7e5;
+    --restaurant-color-hex-fff: #fff;
+    --restaurant-color-hex-fff0ef: #fff0ef;
+    --restaurant-color-hex-fff0f0: #fff0f0;
+    --restaurant-color-hex-fff1cb: #fff1cb;
+    --restaurant-color-hex-fff1f0: #fff1f0;
+    --restaurant-color-hex-fff3d5: #fff3d5;
+    --restaurant-color-hex-fff3f1: #fff3f1;
+    --restaurant-color-hex-fff3f2: #fff3f2;
+    --restaurant-color-hex-fff3f3: #fff3f3;
+    --restaurant-color-hex-fff5dc: #fff5dc;
+    --restaurant-color-hex-fff5f4: #fff5f4;
+    --restaurant-color-hex-fff6f5: #fff6f5;
+    --restaurant-color-hex-fffaf0: #fffaf0;
+    --restaurant-color-hex-ffffff: #ffffff;
+    --restaurant-color-rgb-0-0-0-0-point-08: rgba(0,0,0,0.08);
+    --restaurant-color-rgb-0-0-0-opacity-10-percent: rgb(0 0 0 / 10%);
+    --restaurant-color-rgb-0-0-0-opacity-15-percent: rgb(0 0 0 / 15%);
+    --restaurant-color-rgb-0-0-0-opacity-18-percent: rgb(0 0 0 / 18%);
+    --restaurant-color-rgb-0-0-0-point-08: rgba(0,0,0,.08);
+    --restaurant-color-rgb-0-0-0-point-12: rgba(0, 0, 0, .12);
+    --restaurant-color-rgb-110-231-183-opacity-18-percent: rgb(110 231 183 / 18%);
+    --restaurant-color-rgb-110-231-183-point-6: rgba(110, 231, 183, .6);
+    --restaurant-color-rgb-13-43-32-0-point-58: rgba(13, 43, 32, 0.58);
+    --restaurant-color-rgb-16-56-44-opacity-12-percent: rgb(16 56 44 / 12%);
+    --restaurant-color-rgb-16-56-44-opacity-3-percent: rgb(16 56 44 / 3%);
+    --restaurant-color-rgb-16-56-44-opacity-4-percent: rgb(16 56 44 / 4%);
+    --restaurant-color-rgb-16-56-44-opacity-5-percent: rgb(16 56 44 / 5%);
+    --restaurant-color-rgb-16-56-45-point-05: rgba(16, 56, 45, .05);
+    --restaurant-color-rgb-16-56-45-point-06: rgba(16, 56, 45, .06);
+    --restaurant-color-rgb-16-56-45-point-07: rgba(16, 56, 45, .07);
+    --restaurant-color-rgb-16-56-45-point-10: rgba(16, 56, 45, .10);
+    --restaurant-color-rgb-16-56-45-point-12: rgba(16, 56, 45, .12);
+    --restaurant-color-rgb-16-56-45-point-16: rgba(16, 56, 45, .16);
+    --restaurant-color-rgb-20-55-38-point-025: rgba(20, 55, 38, .025);
+    --restaurant-color-rgb-20-55-38-point-045: rgba(20, 55, 38, .045);
+    --restaurant-color-rgb-20-55-38-point-09: rgba(20, 55, 38, .09);
+    --restaurant-color-rgb-215-168-91-point-15: rgba(215, 168, 91, .15);
+    --restaurant-color-rgb-215-168-91-point-17: rgba(215, 168, 91, .17);
+    --restaurant-color-rgb-215-168-91-point-18: rgba(215, 168, 91, .18);
+    --restaurant-color-rgb-215-168-91-point-22: rgba(215, 168, 91, .22);
+    --restaurant-color-rgb-216-173-96-point-14: rgba(216, 173, 96, .14);
+    --restaurant-color-rgb-23-76-60-0: rgba(23, 76, 60, 0);
+    --restaurant-color-rgb-23-76-60-0-point-12: rgba(23, 76, 60, 0.12);
+    --restaurant-color-rgb-23-76-60-opacity-15-percent: rgb(23 76 60 / 15%);
+    --restaurant-color-rgb-23-76-60-opacity-16-percent: rgb(23 76 60 / 16%);
+    --restaurant-color-rgb-23-76-60-opacity-17-percent: rgb(23 76 60 / 17%);
+    --restaurant-color-rgb-23-76-60-opacity-18-percent: rgb(23 76 60 / 18%);
+    --restaurant-color-rgb-23-76-60-opacity-20-percent: rgb(23 76 60 / 20%);
+    --restaurant-color-rgb-23-76-60-opacity-23-percent: rgb(23 76 60 / 23%);
+    --restaurant-color-rgb-23-76-60-opacity-25-percent: rgb(23 76 60 / 25%);
+    --restaurant-color-rgb-23-76-60-opacity-3-percent: rgb(23 76 60 / 3%);
+    --restaurant-color-rgb-23-76-60-opacity-4-percent: rgb(23 76 60 / 4%);
+    --restaurant-color-rgb-23-76-60-opacity-5-percent: rgb(23 76 60 / 5%);
+    --restaurant-color-rgb-23-76-60-opacity-8-percent: rgb(23 76 60 / 8%);
+    --restaurant-color-rgb-23-76-60-opacity-9-percent: rgb(23 76 60 / 9%);
+    --restaurant-color-rgb-23-76-60-point-055: rgba(23, 76, 60, .055);
+    --restaurant-color-rgb-23-76-60-point-06: rgba(23, 76, 60, .06);
+    --restaurant-color-rgb-23-76-60-point-08: rgba(23, 76, 60, .08);
+    --restaurant-color-rgb-23-76-60-point-09: rgba(23, 76, 60, .09);
+    --restaurant-color-rgb-23-76-60-point-1: rgba(23, 76, 60, .1);
+    --restaurant-color-rgb-23-76-60-point-12: rgba(23, 76, 60, .12);
+    --restaurant-color-rgb-23-76-60-point-13: rgba(23, 76, 60, .13);
+    --restaurant-color-rgb-23-76-60-point-15: rgba(23, 76, 60, .15);
+    --restaurant-color-rgb-23-76-60-point-16: rgba(23, 76, 60, .16);
+    --restaurant-color-rgb-23-76-60-point-2: rgba(23, 76, 60, .2);
+    --restaurant-color-rgb-23-76-60-point-23: rgba(23, 76, 60, .23);
+    --restaurant-color-rgb-23-76-60-point-24: rgba(23, 76, 60, .24);
+    --restaurant-color-rgb-232-201-140-point-04: rgba(232, 201, 140, .04);
+    --restaurant-color-rgb-232-201-140-point-05: rgba(232, 201, 140, .05);
+    --restaurant-color-rgb-232-201-140-point-08: rgba(232, 201, 140, .08);
+    --restaurant-color-rgb-232-201-140-point-09: rgba(232, 201, 140, .09);
+    --restaurant-color-rgb-232-201-140-point-12: rgba(232, 201, 140, .12);
+    --restaurant-color-rgb-232-201-140-point-13: rgba(232, 201, 140, .13);
+    --restaurant-color-rgb-232-201-140-point-14: rgba(232, 201, 140, .14);
+    --restaurant-color-rgb-232-201-140-point-15: rgba(232, 201, 140, .15);
+    --restaurant-color-rgb-232-201-140-point-18: rgba(232, 201, 140, .18);
+    --restaurant-color-rgb-232-201-140-point-25: rgba(232, 201, 140, .25);
+    --restaurant-color-rgb-232-201-140-point-28: rgba(232, 201, 140, .28);
+    --restaurant-color-rgb-232-201-140-point-4: rgba(232, 201, 140, .4);
+    --restaurant-color-rgb-232-201-140-point-6: rgba(232, 201, 140, .6);
+    --restaurant-color-rgb-232-201-140-point-65: rgba(232, 201, 140, .65);
+    --restaurant-color-rgb-232-201-140-point-7: rgba(232, 201, 140, .7);
+    --restaurant-color-rgb-250-247-240-point-65: rgba(250, 247, 240, .65);
+    --restaurant-color-rgb-255-238-197-point-32: rgba(255, 238, 197, .32);
+    --restaurant-color-rgb-255-255-255-0-point-1: rgba(255, 255, 255, 0.1);
+    --restaurant-color-rgb-255-255-255-opacity-10-percent: rgb(255 255 255 / 10%);
+    --restaurant-color-rgb-255-255-255-opacity-5-percent: rgb(255 255 255 / 5%);
+    --restaurant-color-rgb-255-255-255-opacity-6-percent: rgb(255 255 255 / 6%);
+    --restaurant-color-rgb-255-255-255-opacity-90-percent: rgb(255 255 255 / 90%);
+    --restaurant-color-rgb-255-255-255-opacity-92-percent: rgb(255 255 255 / 92%);
+    --restaurant-color-rgb-255-255-255-point-025: rgba(255, 255, 255, .025);
+    --restaurant-color-rgb-255-255-255-point-055: rgba(255, 255, 255, .055);
+    --restaurant-color-rgb-255-255-255-point-06: rgba(255, 255, 255, .06);
+    --restaurant-color-rgb-255-255-255-point-07: rgba(255, 255, 255, .07);
+    --restaurant-color-rgb-255-255-255-point-09: rgba(255, 255, 255, .09);
+    --restaurant-color-rgb-255-255-255-point-15: rgba(255, 255, 255, .15);
+    --restaurant-color-rgb-255-255-255-point-17: rgba(255, 255, 255, .17);
+    --restaurant-color-rgb-255-255-255-point-2: rgba(255, 255, 255, .2);
+    --restaurant-color-rgb-255-255-255-point-22: rgba(255, 255, 255, .22);
+    --restaurant-color-rgb-255-255-255-point-30: rgba(255,255,255,.30);
+    --restaurant-color-rgb-255-255-255-point-4: rgba(255, 255, 255, .4);
+    --restaurant-color-rgb-255-255-255-point-9: rgba(255, 255, 255, .9);
+    --restaurant-color-rgb-38-116-90-opacity-9-percent: rgb(38 116 90 / 9%);
+    --restaurant-color-rgb-52-182-154-opacity-15-percent: rgb(52 182 154 / 15%);
+    --restaurant-color-rgb-52-182-154-opacity-45-percent: rgb(52 182 154 / 45%);
+    --restaurant-cdn-gray-100: 243 244 246;
+    --restaurant-cdn-gray-200: 229 231 235;
+    --restaurant-cdn-gray-300: 209 213 219;
+    --restaurant-cdn-gray-400: 156 163 175;
+    --restaurant-cdn-gray-500: 107 114 128;
+    --restaurant-cdn-gray-600: 75 85 99;
+    --restaurant-cdn-gray-700: 55 65 81;
+    --restaurant-cdn-green-50: 240 253 244;
+    --restaurant-cdn-green-400: 74 222 128;
+    --restaurant-cdn-green-500: 34 197 94;
+    --restaurant-cdn-green-700: 21 128 61;
+    --restaurant-cdn-green-900: 20 83 45;
+    --restaurant-cdn-red-50: 254 242 242;
+    --restaurant-cdn-red-100: 254 226 226;
+    --restaurant-cdn-red-400: 248 113 113;
+    --restaurant-cdn-red-500: 239 68 68;
+    --restaurant-cdn-red-600: 220 38 38;
+    --restaurant-cdn-slate-800: 30 41 59;
+    --restaurant-cdn-white: 255 255 255;
+    --restaurant-color-rgb-94-171-126-point-17: rgba(94, 171, 126, .17);
+}
+
+:root {
+    color-scheme: light;
+    --theme-page: #f4f7f5;
+    --theme-surface: #ffffff;
+    --theme-surface-raised: #f8faf9;
+    --theme-border: #dce5e0;
+    --theme-text: #25352d;
+    --theme-text-muted: #647168;
+    --theme-toggle-background: #ffffff;
+    --theme-toggle-border: #dce5e0;
+    --theme-toggle-text: #174c3c;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --theme-page: #121a16;
+    --theme-surface: #1b2620;
+    --theme-surface-raised: #233129;
+    --theme-surface-success: #1e3528;
+    --theme-surface-danger: #3a2726;
+    --theme-surface-warning: #382f1e;
+    --theme-surface-info: #202f40;
+    --theme-surface-purple: #332940;
+    --theme-border: #34463b;
+    --theme-border-strong: #46594d;
+    --theme-border-subtle: rgb(237 243 239 / 12%);
+    --theme-text: #edf3ef;
+    --theme-text-muted: #aab8af;
+    --theme-toggle-background: #233129;
+    --theme-toggle-border: #46594d;
+    --theme-toggle-text: #f0d6a4;
+}
+
+html[data-theme="dark"] body {
+    background-color: var(--theme-page);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .bg-white {
+    background-color: var(--theme-surface) !important;
+}
+
+html[data-theme="dark"] .bg-gray-50,
+html[data-theme="dark"] .bg-slate-50,
+html[data-theme="dark"] [class~="bg-gray-50/50"],
+html[data-theme="dark"] [class~="bg-gray-50/60"],
+html[data-theme="dark"] [class~="bg-gray-50/70"],
+html[data-theme="dark"] [class~="bg-gray-50/80"],
+html[data-theme="dark"] [class~="bg-slate-50/80"],
+html[data-theme="dark"] [class~="bg-white/70"],
+html[data-theme="dark"] [class~="bg-white/90"],
+html[data-theme="dark"] [class~="bg-white/95"] {
+    background-color: var(--theme-surface-raised) !important;
+}
+
+html[data-theme="dark"] .bg-emerald-50,
+html[data-theme="dark"] .bg-green-50,
+html[data-theme="dark"] .bg-emerald-100,
+html[data-theme="dark"] .bg-green-100,
+html[data-theme="dark"] [class~="bg-emerald-50/30"],
+html[data-theme="dark"] [class~="bg-emerald-50/40"],
+html[data-theme="dark"] [class~="bg-emerald-50/70"],
+html[data-theme="dark"] [class~="bg-emerald-50/95"],
+html[data-theme="dark"] [class~="bg-emerald-100/60"],
+html[data-theme="dark"] [class~="bg-green-500/20"] {
+    background-color: var(--theme-surface-success) !important;
+}
+
+html[data-theme="dark"] .bg-red-50,
+html[data-theme="dark"] .bg-rose-50,
+html[data-theme="dark"] .bg-red-100,
+html[data-theme="dark"] [class~="bg-red-50/95"],
+html[data-theme="dark"] [class~="bg-red-100/95"],
+html[data-theme="dark"] [class~="bg-red-500/20"] {
+    background-color: var(--theme-surface-danger) !important;
+}
+
+html[data-theme="dark"] .bg-amber-50,
+html[data-theme="dark"] .bg-amber-100,
+html[data-theme="dark"] .bg-amber-200,
+html[data-theme="dark"] .bg-amber-300,
+html[data-theme="dark"] .bg-amber-400,
+html[data-theme="dark"] [class~="ring-amber-50/50"] {
+    background-color: var(--theme-surface-warning) !important;
+}
+
+html[data-theme="dark"] .bg-blue-50,
+html[data-theme="dark"] .bg-blue-100,
+html[data-theme="dark"] [class~="bg-blue-50/60"],
+html[data-theme="dark"] [class~="bg-blue-100/95"] {
+    background-color: var(--theme-surface-info) !important;
+}
+
+html[data-theme="dark"] .bg-purple-100 {
+    background-color: var(--theme-surface-purple) !important;
+}
+
+html[data-theme="dark"] .bg-gray-100,
+html[data-theme="dark"] .bg-slate-100,
+html[data-theme="dark"] .bg-gray-200,
+html[data-theme="dark"] .bg-gray-300 {
+    background-color: var(--theme-surface-raised) !important;
+}
+
+html[data-theme="dark"] .text-gray-900,
+html[data-theme="dark"] .text-gray-800,
+html[data-theme="dark"] .text-gray-700,
+html[data-theme="dark"] .text-slate-800,
+html[data-theme="dark"] .text-slate-700 {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme="dark"] .text-gray-600,
+html[data-theme="dark"] .text-gray-500,
+html[data-theme="dark"] .text-gray-400,
+html[data-theme="dark"] .text-slate-600,
+html[data-theme="dark"] .text-slate-500,
+html[data-theme="dark"] .text-slate-400 {
+    color: var(--theme-text-muted) !important;
+}
+
+html[data-theme="dark"] .text-emerald-600,
+html[data-theme="dark"] .text-emerald-700,
+html[data-theme="dark"] .text-emerald-700\/60,
+html[data-theme="dark"] .text-emerald-800,
+html[data-theme="dark"] .text-emerald-800\/80,
+html[data-theme="dark"] .text-emerald-900,
+html[data-theme="dark"] .text-green-600,
+html[data-theme="dark"] .text-green-700,
+html[data-theme="dark"] .text-green-700\/70,
+html[data-theme="dark"] .text-green-800 {
+    color: #9be0ad !important;
+}
+
+html[data-theme="dark"] .text-red-500,
+html[data-theme="dark"] .text-red-600,
+html[data-theme="dark"] .text-red-600\/70,
+html[data-theme="dark"] .text-red-700,
+html[data-theme="dark"] .text-red-700\/60,
+html[data-theme="dark"] .text-red-800,
+html[data-theme="dark"] .text-red-900 {
+    color: #ffaaa4 !important;
+}
+
+html[data-theme="dark"] .text-amber-600,
+html[data-theme="dark"] .text-amber-700,
+html[data-theme="dark"] .text-amber-800,
+html[data-theme="dark"] .text-amber-900,
+html[data-theme="dark"] .text-amber-950 {
+    color: #f0d6a4 !important;
+}
+
+html[data-theme="dark"] .text-blue-600,
+html[data-theme="dark"] .text-blue-700,
+html[data-theme="dark"] .text-blue-800 {
+    color: #a8caff !important;
+}
+
+html[data-theme="dark"] .text-rose-600,
+html[data-theme="dark"] .text-purple-600 {
+    color: #d7b8ff !important;
+}
+
+html[data-theme="dark"] .border-gray-100,
+html[data-theme="dark"] .border-gray-200,
+html[data-theme="dark"] .border-gray-200\/80,
+html[data-theme="dark"] .border-gray-300,
+html[data-theme="dark"] .border-slate-100,
+html[data-theme="dark"] .border-slate-200,
+html[data-theme="dark"] .border-amber-200,
+html[data-theme="dark"] .border-blue-100,
+html[data-theme="dark"] .border-emerald-100,
+html[data-theme="dark"] .border-emerald-200,
+html[data-theme="dark"] .border-green-100,
+html[data-theme="dark"] .border-green-200,
+html[data-theme="dark"] .border-red-100,
+html[data-theme="dark"] .border-red-200,
+html[data-theme="dark"] .border-red-300,
+html[data-theme="dark"] .border-red-400 {
+    border-color: var(--theme-border) !important;
+}
+
+html[data-theme="dark"] .border-white,
+html[data-theme="dark"] [class~="border-white/50"],
+html[data-theme="dark"] [class~="border-white/60"],
+html[data-theme="dark"] [class~="border-white/70"],
+html[data-theme="dark"] [class~="border-white/80"],
+html[data-theme="dark"] [class~="border-white/90"] {
+    border-color: var(--theme-border-strong) !important;
+}
+
+html[data-theme="dark"] [class~="border-white/10"],
+html[data-theme="dark"] [class~="border-white/15"],
+html[data-theme="dark"] [class~="border-white/20"],
+html[data-theme="dark"] [class~="border-white/30"],
+html[data-theme="dark"] [class~="border-white/40"],
+html[data-theme="dark"] [class~="border-white/5"],
+html[data-theme="dark"] [class~="border-white/[.06]"],
+html[data-theme="dark"] [class~="border-white/[.07]"],
+html[data-theme="dark"] [class~="border-white/[.08]"],
+html[data-theme="dark"] [class~="border-white/[.09]"],
+html[data-theme="dark"] [class~="border-white/[0.035]"],
+html[data-theme="dark"] [class~="border-white/[0.04]"] {
+    border-color: var(--theme-border-subtle) !important;
+}
+
+html[data-theme="dark"] [class*="border-white/"] {
+    border-color: var(--theme-border-subtle) !important;
+}
+
+html[data-theme="dark"] [class~="border-white/50"],
+html[data-theme="dark"] [class~="border-white/60"],
+html[data-theme="dark"] [class~="border-white/70"],
+html[data-theme="dark"] [class~="border-white/80"],
+html[data-theme="dark"] [class~="border-white/90"] {
+    border-color: var(--theme-border-strong) !important;
+}
+
+html[data-theme="dark"] [class*="border-[var(--restaurant-color-hex-fff)]"] {
+    border-color: var(--theme-border-strong) !important;
+}
+
+html[data-theme="dark"] [class*="border-[var(--restaurant-color-hex-174c3c)]"] {
+    border-color: var(--theme-border-strong) !important;
+}
+
+html[data-theme="dark"] .decorative-ring {
+    border-color: rgb(215 168 91 / 18%);
+}
+
+html[data-theme="dark"] .tables-page {
+    --border: var(--theme-border);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .tables-page .stat-card,
+html[data-theme="dark"] .tables-page .search-panel,
+html[data-theme="dark"] .tables-page .table-card {
+    border-color: var(--theme-border);
+    background: var(--theme-surface);
+}
+
+html[data-theme="dark"] .tables-page .search-input,
+html[data-theme="dark"] .tables-page .table-code {
+    border-color: var(--theme-border);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .tables-page .results-count,
+html[data-theme="dark"] .tables-page .btn-reset {
+    border-color: var(--theme-border);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text-muted);
+}
+
+html[data-theme="dark"] .tables-page .table-icon {
+    border-color: #365b45;
+    background: #20382a;
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .tables-page .stat-total .stat-icon,
+html[data-theme="dark"] .tables-page .stat-available .stat-icon {
+    background: #20382a;
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .tables-page .stat-busy .stat-icon {
+    background: #3a2726;
+    color: #ffaaa4;
+}
+
+html[data-theme="dark"] .tables-page .table-card.busy .table-icon {
+    border-color: #69403e;
+    background: #3a2726;
+    color: #ffaaa4;
+}
+
+html[data-theme="dark"] .tables-page .btn-edit {
+    border-color: #365b45;
+    background: #20382a;
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .tables-page .btn-edit:hover {
+    border-color: #26745a;
+    background: #26745a;
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .tables-page .btn-edit-red,
+html[data-theme="dark"] .tables-page .btn-print {
+    border-color: #69403e;
+    background: #3a2726;
+    color: #ffaaa4;
+}
+
+html[data-theme="dark"] .tables-page .btn-edit-red:hover,
+html[data-theme="dark"] .tables-page .btn-print:hover {
+    border-color: #8c4544;
+    background: #4a2d2b;
+    color: #ffd8d4;
+}
+
+html[data-theme="dark"] .tables-page .status.available {
+    border-color: #365b45;
+    background: #1e3528;
+    color: #9be0ad;
+}
+
+html[data-theme="dark"] .tables-page .status.busy {
+    border-color: #69403e;
+    background: #3a2726;
+    color: #ffaaa4;
+}
+
+html[data-theme="dark"] .tables-page .heading-title,
+html[data-theme="dark"] .tables-page .section-title,
+html[data-theme="dark"] .tables-page .table-name,
+html[data-theme="dark"] .tables-page .stat-number {
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .tables-page .heading-description,
+html[data-theme="dark"] .tables-page .stat-label,
+html[data-theme="dark"] .tables-page .table-number,
+html[data-theme="dark"] .tables-page .code-label {
+    color: var(--theme-text-muted);
+}
+
+html[data-theme="dark"] .edit-table-page {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme="dark"] .edit-table-page .page-title,
+html[data-theme="dark"] .edit-table-page .card-heading,
+html[data-theme="dark"] .edit-table-page .field-label,
+html[data-theme="dark"] .edit-table-page .status-title,
+html[data-theme="dark"] .edit-table-page .code-heading {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme="dark"] .edit-table-page .page-description,
+html[data-theme="dark"] .edit-table-page .card-subheading,
+html[data-theme="dark"] .edit-table-page .field-help,
+html[data-theme="dark"] .edit-table-page .status-description {
+    color: var(--theme-text-muted) !important;
+}
+
+html[data-theme="dark"] .edit-table-page .form-card {
+    border-color: var(--theme-border);
+    background: var(--theme-surface);
+    box-shadow: 0 8px 30px rgb(0 0 0 / 18%);
+}
+
+html[data-theme="dark"] .edit-table-page .card-header {
+    border-color: var(--theme-border);
+    background: var(--theme-surface-raised);
+}
+
+html[data-theme="dark"] .edit-table-page .card-header-icon {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-success);
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .edit-table-page .form-input {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .edit-table-page .form-input:hover,
+html[data-theme="dark"] .edit-table-page .form-input:focus {
+    border-color: #4d8b69;
+}
+
+html[data-theme="dark"] .edit-table-page .form-input:focus {
+    background: var(--theme-surface-raised);
+    box-shadow: 0 0 0 4px rgb(52 182 154 / 15%);
+}
+
+html[data-theme="dark"] .edit-table-page .form-input[readonly] {
+    border-color: var(--theme-border);
+    background: var(--theme-surface);
+    color: var(--theme-text-muted);
+}
+
+html[data-theme="dark"] .edit-table-page .status-box {
+    border-color: var(--theme-border);
+    background: var(--theme-surface-raised);
+}
+
+html[data-theme="dark"] .edit-table-page .status-box.is-available {
+    border-color: #365b45;
+    background: var(--theme-surface-success);
+}
+
+html[data-theme="dark"] .edit-table-page .status-box.is-busy {
+    border-color: #69403e;
+    background: var(--theme-surface-danger);
+}
+
+html[data-theme="dark"] .edit-table-page .status-icon {
+    background: #20382a;
+    color: #9be0ad;
+}
+
+html[data-theme="dark"] .edit-table-page .status-box.is-busy .status-icon {
+    background: #4a2d2b;
+    color: #ffaaa4;
+}
+
+html[data-theme="dark"] .edit-table-page .status-label {
+    color: #9be0ad;
+}
+
+html[data-theme="dark"] .edit-table-page .status-box.is-busy .status-label {
+    color: #ffaaa4;
+}
+
+html[data-theme="dark"] .edit-table-page .switch-track {
+    background: #526157;
+}
+
+html[data-theme="dark"] .edit-table-page .switch input:checked + .switch-track {
+    background: #26745a;
+}
+
+html[data-theme="dark"] .edit-table-page .code-panel {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+}
+
+html[data-theme="dark"] .edit-table-page .code-qr-frame {
+    border-color: var(--theme-border-strong);
+    background: #ffffff;
+}
+
+html[data-theme="dark"] .edit-table-page .code-qr-link {
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .edit-table-page .auto-badge {
+    border-color: #365b45;
+    background: var(--theme-surface-success);
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .edit-table-page .form-actions {
+    border-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .edit-table-page .btn-cancel {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .edit-table-page .btn-cancel:hover {
+    border-color: #52685a;
+    background: #2b3b31;
+}
+
+html[data-theme="dark"] .edit-table-page .btn-delete {
+    border-color: #69403e;
+    background: var(--theme-surface-danger);
+    color: #ffaaa4;
+}
+
+html[data-theme="dark"] .edit-table-page .btn-delete:hover {
+    border-color: #a74846;
+    background: #8c3738;
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .edit-table-page .status-alert,
+html[data-theme="dark"] .edit-table-page .flash-message {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-warning);
+    color: #f0d6a4;
+}
+
+html[data-theme="dark"] .edit-table-page .flash-error {
+    border-color: #69403e;
+    background: var(--theme-surface-danger);
+    color: #ffaaa4;
+}
+
+html[data-theme="dark"] .edit-table-page .flash-success {
+    border-color: #365b45;
+    background: var(--theme-surface-success);
+    color: #9be0ad;
+}
+
+html[data-theme="dark"] .add-table-page {
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .add-table-page .table-panel {
+    border-color: var(--theme-border);
+    background: var(--theme-surface);
+    box-shadow: 0 12px 40px rgb(0 0 0 / 18%);
+}
+
+html[data-theme="dark"] .add-table-page .field-label,
+html[data-theme="dark"] .add-table-page h2 {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme="dark"] .add-table-page .table-field {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .add-table-page .table-field::placeholder {
+    color: var(--theme-text-muted);
+}
+
+html[data-theme="dark"] .add-table-page .table-field:focus {
+    border-color: #4d8b69;
+    background: var(--theme-surface-raised);
+    box-shadow: 0 0 0 4px rgb(52 182 154 / 15%);
+}
+
+html[data-theme="dark"] .add-table-page .table-number-card {
+    border-color: #365b45;
+    background: linear-gradient(135deg, #1e3528, #233b2d);
+}
+
+html[data-theme="dark"] .add-table-page .table-number-card .bg-white {
+    background: #20382a !important;
+    color: #a5d7bd !important;
+}
+
+html[data-theme="dark"] .add-table-page .table-number-card > div.relative {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface);
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .add-table-page .table-status-card {
+    border-color: var(--theme-border);
+    background: var(--theme-surface-raised);
+}
+
+html[data-theme="dark"] .add-table-page #status-label {
+    color: #a5d7bd !important;
+}
+
+html[data-theme="dark"] .add-table-page #status-icon {
+    background: var(--theme-surface-success);
+    color: #9be0ad;
+}
+
+html[data-theme="dark"] .add-table-page #status-icon.bg-amber-100 {
+    background: var(--theme-surface-warning);
+    color: #f0d6a4;
+}
+
+html[data-theme="dark"] .add-table-page .table-status-slider {
+    background: #526157;
+}
+
+html[data-theme="dark"] .add-table-page .table-status-toggle input:checked + .table-status-slider {
+    background: #26745a;
+}
+
+html[data-theme="dark"] .add-table-page .table-btn-secondary {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .add-table-page .table-btn-secondary:hover {
+    border-color: #52685a;
+    background: #2b3b31;
+}
+
+html[data-theme="dark"] .add-table-page form > div.border-t {
+    border-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .add-table-page aside .table-panel > div:last-child {
+    background: var(--theme-surface);
+}
+
+html[data-theme="dark"] .add-table-page .table-note {
+    border-color: #5f5031;
+    background: var(--theme-surface-warning) !important;
+}
+
+html[data-theme="dark"] .add-table-page .table-note p:first-child {
+    color: #f0d6a4;
+}
+
+html[data-theme="dark"] .add-table-page .table-note p:last-child {
+    color: #c6b58f;
+}
+
+html[data-theme="dark"] .add-table-page .table-alert {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .add-table-page .table-alert.bg-emerald-50 {
+    border-color: #365b45;
+    background: var(--theme-surface-success);
+    color: #9be0ad;
+}
+
+html[data-theme="dark"] .add-table-page .table-alert.bg-red-50 {
+    border-color: #69403e;
+    background: var(--theme-surface-danger);
+    color: #ffaaa4;
+}
+
+html[data-theme="dark"] .category-create-page {
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .category-create-form {
+    border-color: var(--theme-border);
+    background: var(--theme-surface);
+    box-shadow: 0 8px 30px rgb(0 0 0 / 18%);
+}
+
+html[data-theme="dark"] .category-create-form > .border-b,
+html[data-theme="dark"] .category-create-actions {
+    border-color: var(--theme-border);
+    background: var(--theme-surface-raised);
+}
+
+html[data-theme="dark"] .category-create-form input:not([type="file"]),
+html[data-theme="dark"] .category-create-form textarea {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .category-create-form input:not([type="file"]):focus,
+html[data-theme="dark"] .category-create-form textarea:focus {
+    border-color: #4d8b69;
+    background: var(--theme-surface-raised);
+    --tw-ring-color: rgb(52 182 154 / 15%);
+}
+
+html[data-theme="dark"] .category-create-form input::placeholder,
+html[data-theme="dark"] .category-create-form textarea::placeholder {
+    color: var(--theme-text-muted);
+}
+
+html[data-theme="dark"] .category-image-upload {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+    background-image: none;
+}
+
+html[data-theme="dark"] .category-image-upload:hover {
+    border-color: #4d8b69;
+    background: #26372d;
+}
+
+html[data-theme="dark"] .category-image-frame {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface);
+}
+
+html[data-theme="dark"] #image-placeholder {
+    background: linear-gradient(135deg, #202f27, #26372d 50%, #20382a);
+}
+
+html[data-theme="dark"] #image-placeholder > .bg-emerald-100\/60 {
+    background: rgb(52 116 78 / 28%);
+}
+
+html[data-theme="dark"] #image-placeholder .bg-white {
+    background: var(--theme-surface) !important;
+    color: #a5d7bd !important;
+}
+
+html[data-theme="dark"] .category-image-upload [class~="border-white/80"] {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface);
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .category-status-card {
+    border-color: #365b45;
+    background: var(--theme-surface-success);
+}
+
+html[data-theme="dark"] .category-status-card .bg-\[var\(--restaurant-color-hex-174c3c\)\]\/10 {
+    background: #20382a;
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .category-create-form #image-preview-container {
+    border-color: var(--theme-border);
+    background: var(--theme-surface-raised);
+}
+
+html[data-theme="dark"] .category-create-form #image-preview-container .bg-emerald-50 {
+    background: var(--theme-surface-success);
+    color: #9be0ad;
+}
+
+html[data-theme="dark"] .category-create-form .table-btn-secondary,
+html[data-theme="dark"] .category-create-actions a {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .category-create-form .table-btn-secondary:hover,
+html[data-theme="dark"] .category-create-actions a:hover {
+    border-color: #52685a;
+    background: #2b3b31;
+}
+
+html[data-theme="dark"] .category-create-form #is_active:checked + span {
+    background: #26745a !important;
+}
+
+html[data-theme="dark"] .category-create-form #is_active + span + span {
+    background: #edf3ef !important;
+}
+
+html[data-theme="dark"] .category-create-form .border-red-200.bg-red-50 {
+    border-color: #69403e;
+    background: var(--theme-surface-danger);
+    color: #ffaaa4;
+}
+
+html[data-theme="dark"] .food-create-header {
+    background-image: linear-gradient(135deg, #17251d, #20392d 58%, #263f30) !important;
+    box-shadow: 0 12px 32px rgb(0 0 0 / 24%);
+}
+
+html[data-theme="dark"] .ring-gray-200,
+html[data-theme="dark"] .ring-gray-200\/70,
+html[data-theme="dark"] .ring-gray-200\/80,
+html[data-theme="dark"] .ring-blue-200,
+html[data-theme="dark"] .ring-red-100,
+html[data-theme="dark"] .ring-red-200 {
+    --tw-ring-color: var(--theme-border) !important;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+    border-color: var(--theme-border);
+    background-color: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+    color: var(--theme-text-muted);
+}
+
+html[data-theme="dark"] .restaurant-menu .food-card,
+html[data-theme="dark"] .restaurant-menu .menu-feature,
+html[data-theme="dark"] .restaurant-menu .menu-category,
+html[data-theme="dark"] .restaurant-menu .menu-search {
+    border-color: var(--theme-border);
+    background-color: var(--theme-surface);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .restaurant-menu .menu-search {
+    background-color: var(--theme-surface-raised);
+}
+
+html[data-theme="dark"] .restaurant-menu .categories-count-card {
+    border-color: #52675a;
+    box-shadow: 0 0 0 1px rgb(165 215 189 / 6%);
+}
+
+html[data-theme="dark"] .restaurant-menu #food-count {
+    border-color: #627b69;
+    background-color: #202d25;
+    color: #e5efe8 !important;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+}
+
+html[data-theme="dark"] .restaurant-menu #food-count svg {
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .restaurant-menu .menu-search::placeholder {
+    color: var(--theme-text-muted);
+}
+
+html[data-theme="dark"] .restaurant-menu .food-image-wrap {
+    background: linear-gradient(135deg, #28352d, #1d2922);
+}
+
+html[data-theme="dark"] .restaurant-menu .menu-category:not(.active):hover {
+    border-color: #78917f;
+    background-color: var(--theme-surface-raised);
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .restaurant-menu .menu-category:not(.active) {
+    border-color: #52675a;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 14%);
+}
+
+html[data-theme="dark"] .restaurant-menu .menu-category.active {
+    border-color: #83c9a2;
+    background-color: #205f49;
+    color: #f4fbf6;
+    box-shadow: 0 0 0 1px rgb(131 201 162 / 16%), 0 7px 20px rgb(32 95 73 / 38%);
+}
+
+html[data-theme="dark"] .restaurant-menu .menu-category.active > span:first-child > span:first-child {
+    background-color: #d8b36c !important;
+    color: #17251d !important;
+}
+
+html[data-theme="dark"] .restaurant-menu .menu-category.active > span:last-child {
+    color: #d8eadf;
+}
+
+html[data-theme="dark"] .restaurant-menu .categories-scroll-fade {
+    background-image: linear-gradient(to right, #121a16, transparent);
+}
+
+html[data-theme="dark"] .restaurant-menu #categories {
+    scrollbar-color: #52685a #1b2620 !important;
+}
+
+html[data-theme="dark"] .restaurant-menu #categories::-webkit-scrollbar {
+    height: 8px;
+}
+
+html[data-theme="dark"] .restaurant-menu #categories::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background: #1b2620;
+}
+
+html[data-theme="dark"] .restaurant-menu #categories::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #52685a;
+}
+
+html[data-theme="dark"] .restaurant-menu #categories::-webkit-scrollbar-thumb:hover {
+    background: #6f8a76;
+}
+
+html[data-theme="dark"] .restaurant-menu .bill-qr-panel {
+    border-color: #52675a;
+    background-color: #17211b;
+}
+
+html[data-theme="dark"] .restaurant-menu .bill-qr-frame {
+    border-color: #52675a;
+    background: #202d25 !important;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 28%);
+}
+
+html[data-theme="dark"] .restaurant-menu #bill-qr-code {
+    box-sizing: border-box;
+    min-width: 244px;
+    min-height: 244px;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+html[data-theme="dark"] .restaurant-menu #bill-qr-code img {
+    display: block;
+    width: 220px;
+    height: 220px;
+    background: #ffffff;
+    image-rendering: pixelated;
+}
+
+html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] {
+    border-color: #6d5141;
+    background: #17211b;
+    box-shadow: inset 0 0 0 1px rgb(240 196 119 / 12%);
+}
+
+html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-image {
+    filter: grayscale(.75) brightness(.58);
+}
+
+html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-details {
+    background: #17211b;
+}
+
+html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-details h3 {
+    color: #b7c0ba;
+}
+
+html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-details > p {
+    color: #89968e;
+}
+
+html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-details .price-value {
+    color: #c6ad78;
+}
+
+html[data-theme="dark"] .restaurant-menu .food-availability-badge {
+    border-width: 1px;
+    font-size: 10px;
+    font-weight: 800;
+    opacity: 1;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 45%);
+}
+
+html[data-theme="dark"] .restaurant-menu .food-availability-badge.is-available {
+    border-color: #75c798 !important;
+    background: rgb(20 83 45 / 94%);
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .restaurant-menu .food-availability-badge.is-unavailable {
+    border-color: #f0c477 !important;
+    background: rgb(92 53 19 / 96%);
+    color: #fff3d6;
+}
+
+html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-add,
+html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] [class~="bg-amber-50"] {
+    border-color: #a77a3d !important;
+    background: #382f1e;
+    color: #f0d6a4;
+}
+
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-e7eee5)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-e8efe8)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-e8f0e8)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-e8f3ed)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-eaf1e9)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-f0f4ef)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-f3f5f0)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-f4f7f2)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-f4f8f4)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-f5faf6)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-f7f8f5)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-f7f9f7)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-f7faf7)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-f8f6ef)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-f9faf7)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-faf7f0)]"],
+html[data-theme="dark"] [class*="bg-[var(--restaurant-color-hex-fafcfb)]"] {
+    background-color: var(--theme-surface-raised) !important;
+}
+
+html[data-theme="dark"] [class*="text-[var(--restaurant-color-hex-174c3c)]"],
+html[data-theme="dark"] [class*="text-[var(--restaurant-color-hex-10382c)]"],
+html[data-theme="dark"] [class*="text-[var(--restaurant-color-hex-10382d)]"],
+html[data-theme="dark"] [class*="text-[var(--restaurant-color-hex-26745a)]"],
+html[data-theme="dark"] .restaurant-menu .menu-section-title {
+    color: #a5d7bd !important;
+}
+
+html[data-theme="dark"] .admin-header {
+    border-color: var(--theme-border);
+    background: rgb(27 38 32 / 92%);
+    box-shadow: 0 4px 20px rgb(0 0 0 / 18%);
+}
+
+html[data-theme="dark"] .admin-header h2 {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme="dark"] .admin-header > div > div span.border-emerald-100 {
+    border-color: #365b45;
+    background: var(--theme-surface-success);
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .admin-header button[aria-label="قائمة الملف الشخصي"] {
+    border-color: var(--theme-border);
+    background: var(--theme-surface);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .admin-header button[aria-label="قائمة الملف الشخصي"]:hover {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+}
+
+html[data-theme="dark"] .admin-header button[aria-label="قائمة الملف الشخصي"] p:first-child,
+html[data-theme="dark"] .admin-header .profile-dropdown-menu p:first-child {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme="dark"] .admin-header .profile-dropdown-menu {
+    border-color: var(--theme-border);
+    background: var(--theme-surface);
+}
+
+html[data-theme="dark"] .admin-header .profile-dropdown-menu > div:first-child {
+    border-color: var(--theme-border);
+    background: linear-gradient(110deg, #1e3528, #233129) !important;
+}
+
+html[data-theme="dark"] .admin-header .profile-dropdown-menu p:nth-child(2),
+html[data-theme="dark"] .admin-header button[aria-label="قائمة الملف الشخصي"] p:nth-child(2) {
+    color: var(--theme-text-muted) !important;
+}
+
+html[data-theme="dark"] .admin-header .profile-dropdown-menu a {
+    color: var(--theme-text-muted);
+}
+
+html[data-theme="dark"] .admin-header .profile-dropdown-menu a:hover {
+    background: var(--theme-surface-raised);
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .admin-header .profile-dropdown-menu form button {
+    color: #ffaaa4 !important;
+}
+
+html[data-theme="dark"] .admin-header .profile-dropdown-menu form button:hover {
+    background: var(--theme-surface-danger);
+    color: #ffd8d4 !important;
+}
+
+html[data-theme="dark"] .admin-header .profile-dropdown-menu .border-t {
+    border-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .header-action {
+    border-color: var(--theme-border);
+    background: var(--theme-surface);
+    color: var(--theme-text-muted);
+}
+
+html[data-theme="dark"] .header-action:hover {
+    background: var(--theme-surface-raised);
+    border-color: #496252;
+}
+
+html[data-theme="dark"] .restaurant-menu .menu-section-title,
+html[data-theme="dark"] .restaurant-menu .food-card,
+html[data-theme="dark"] .restaurant-menu .menu-feature {
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .login-background {
+    background:
+        radial-gradient(ellipse at 0% 0%, rgb(215 168 91 / 8%), transparent 36%),
+        radial-gradient(ellipse at 100% 100%, rgb(23 76 60 / 24%), transparent 38%),
+        linear-gradient(135deg, #121a16 0%, #18231d 50%, #1b2620 100%);
+}
+
+html[data-theme="dark"] .iti input#phone {
+    border-color: var(--theme-border);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .bg-gradient-to-br.from-gray-50.via-white {
+    background-image: linear-gradient(135deg, #121a16, #1b2620 52%, #302a1f) !important;
+}
+
+html[data-theme="dark"] .table-qr-page .qr-surface {
+    border-color: var(--theme-border);
+    background: var(--theme-surface);
+    box-shadow: 0 12px 40px rgb(0 0 0 / 18%);
+}
+
+html[data-theme="dark"] .table-qr-page .qr-poster {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+}
+
+html[data-theme="dark"] .table-qr-page .qr-poster-content {
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .table-qr-page .qr-code-frame {
+    border-color: var(--theme-border-strong);
+    background: #ffffff;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 22%);
+}
+
+html[data-theme="dark"] .table-qr-page .qr-print-instruction,
+html[data-theme="dark"] .table-qr-page .qr-print-code,
+html[data-theme="dark"] .table-qr-page .qr-poster-content h2 {
+    color: var(--theme-text) !important;
+}
+
+html[data-theme="dark"] .table-qr-page .qr-print-code {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface);
+}
+
+html[data-theme="dark"] .table-qr-page .qr-dash {
+    background-image: linear-gradient(to right, var(--theme-border-strong) 50%, transparent 50%);
+}
+
+html[data-theme="dark"] .table-qr-page .qr-action-light {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .table-qr-page .qr-action-light:hover {
+    border-color: #52685a;
+    background: #2b3b31;
+}
+
+html[data-theme="dark"] .table-qr-page aside .border-b {
+    border-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .table-qr-page .qr-info-icon {
+    background: var(--theme-surface-success);
+    color: #a5d7bd;
+}
+
+html[data-theme="dark"] .table-qr-page .qr-tip {
+    border-color: #5f5031;
+    background: var(--theme-surface-warning);
+}
+
+html[data-theme="dark"] .table-qr-page .qr-tip p:first-child {
+    color: #f0d6a4;
+}
+
+html[data-theme="dark"] .table-qr-page .qr-tip p:last-child {
+    color: #c6b58f;
+}
+
+@media print {
+    html[data-theme="dark"] .table-qr-page .qr-surface,
+    html[data-theme="dark"] .table-qr-page .qr-poster,
+    html[data-theme="dark"] .table-qr-page .qr-poster-content,
+    html[data-theme="dark"] .table-qr-page .qr-print-code {
+        border-color: #dfe7e0 !important;
+        background: #ffffff !important;
+        color: #174c3c !important;
+        box-shadow: none !important;
+    }
+
+    html[data-theme="dark"] .table-qr-page .qr-print-instruction,
+    html[data-theme="dark"] .table-qr-page .qr-poster-content h2 {
+        color: #174c3c !important;
+    }
+
+    html[data-theme="dark"] .table-qr-page .qr-code-frame {
+        border-color: #e7eee8 !important;
+        background: #ffffff !important;
+    }
+
+    html[data-theme="dark"] .table-qr-page .qr-dash {
+        background-image: linear-gradient(to right, #dfe8e1 50%, transparent 50%) !important;
+    }
+}
+
+.theme-toggle {
+    position: fixed;
+    z-index: 1000;
+    bottom: 1rem;
+    left: 1rem;
+    display: inline-flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--theme-toggle-border);
+    border-radius: 9999px;
+    background: var(--theme-toggle-background);
+    color: var(--theme-toggle-text);
+    box-shadow: 0 4px 14px rgb(0 0 0 / 18%);
+    cursor: pointer;
+    font-size: 1.4rem;
+    line-height: 1;
+    transition: transform .2s ease, background-color .2s ease, color .2s ease;
+}
+
+body:has(.restaurant-menu) .theme-toggle {
+    top: 1rem;
+    bottom: auto;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+}
+
+.theme-toggle:focus-visible {
+    outline: 3px solid #34b69a;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-toggle {
+        transition: none;
+    }
+}

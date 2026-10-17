@@ -8,6 +8,7 @@
 
     <title>@yield('title', 'لوحة تحكم المطعم')</title>
 
+    @include('components.theme-mode')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -16,12 +17,12 @@
         }
 
         :root {
-            --brand-dark: #10382c;
-            --brand-primary: #174c3c;
-            --brand-medium: #26745a;
-            --brand-light: #e8f4ee;
-            --brand-accent: #34b69a;
-            --surface: #f5f7f6;
+            --brand-dark: var(--restaurant-color-hex-10382c);
+            --brand-primary: var(--restaurant-color-hex-174c3c);
+            --brand-medium: var(--restaurant-color-hex-26745a);
+            --brand-light: var(--restaurant-color-hex-e8f4ee);
+            --brand-accent: var(--restaurant-color-hex-34b69a);
+            --surface: var(--restaurant-color-hex-f5f7f6);
         }
 
         html {
@@ -46,13 +47,13 @@
         a:focus-visible,
         input:focus-visible,
         select:focus-visible {
-            outline: 3px solid rgb(52 182 154 / 45%);
+            outline: 3px solid var(--restaurant-color-rgb-52-182-154-opacity-45-percent);
             outline-offset: 3px;
         }
 
         .sidebar-scroll {
             scrollbar-width: thin;
-            scrollbar-color: #47685c transparent;
+            scrollbar-color: var(--restaurant-color-hex-47685c) transparent;
         }
 
         .sidebar-scroll::-webkit-scrollbar {
@@ -60,14 +61,14 @@
         }
 
         .sidebar-scroll::-webkit-scrollbar-thumb {
-            background: #47685c;
+            background: var(--restaurant-color-hex-47685c);
             border-radius: 20px;
         }
 
         .sidebar-brand {
             background:
-                radial-gradient(circle at 10% 10%, rgb(52 182 154 / 15%), transparent 40%),
-                linear-gradient(145deg, #10382c, #174c3c 65%, #1a5743);
+                radial-gradient(circle at 10% 10%, var(--restaurant-color-rgb-52-182-154-opacity-15-percent), transparent 40%),
+                linear-gradient(145deg, var(--restaurant-color-hex-10382c), var(--restaurant-color-hex-174c3c) 65%, var(--restaurant-color-hex-1a5743));
         }
 
         .sidebar-link {
@@ -79,7 +80,7 @@
             padding: 12px;
             border: 1px solid transparent;
             border-radius: 15px;
-            color: #b6c8bf;
+            color: var(--restaurant-color-hex-b6c8bf);
             transition:
                 background-color .2s ease,
                 color .2s ease,
@@ -88,9 +89,9 @@
         }
 
         .sidebar-link:hover {
-            color: #fff;
-            background: rgb(255 255 255 / 6%);
-            border-color: rgb(255 255 255 / 5%);
+            color: var(--restaurant-color-hex-fff);
+            background: var(--restaurant-color-rgb-255-255-255-opacity-6-percent);
+            border-color: var(--restaurant-color-rgb-255-255-255-opacity-5-percent);
         }
 
         .sidebar-link:active {
@@ -98,10 +99,10 @@
         }
 
         .sidebar-link.active {
-            color: #fff;
-            background: linear-gradient(110deg, #26745a, #174c3c);
-            border-color: rgb(110 231 183 / 18%);
-            box-shadow: 0 5px 16px rgb(0 0 0 / 10%);
+            color: var(--restaurant-color-hex-fff);
+            background: linear-gradient(110deg, var(--restaurant-color-hex-26745a), var(--restaurant-color-hex-174c3c));
+            border-color: var(--restaurant-color-rgb-110-231-183-opacity-18-percent);
+            box-shadow: 0 5px 16px var(--restaurant-color-rgb-0-0-0-opacity-10-percent);
         }
 
         .sidebar-link.active::before {
@@ -112,11 +113,11 @@
             width: 4px;
             height: 50%;
             border-radius: 4px 0 0 4px;
-            background: #6ee7b7;
+            background: var(--restaurant-color-hex-6ee7b7);
         }
 
         .sidebar-link.active .nav-icon {
-            color: #a7f3d0;
+            color: var(--restaurant-color-hex-a7f3d0);
         }
 
         .nav-icon {
@@ -137,23 +138,23 @@
             z-index: 70;
             transform: translateY(-50%);
             white-space: nowrap;
-            border: 1px solid rgb(255 255 255 / 10%);
+            border: 1px solid var(--restaurant-color-rgb-255-255-255-opacity-10-percent);
             border-radius: 9px;
-            background: #10382c;
+            background: var(--restaurant-color-hex-10382c);
             padding: 8px 12px;
-            color: #fff;
+            color: var(--restaurant-color-hex-fff);
             font-size: 12px;
             font-weight: 700;
-            box-shadow: 0 8px 25px rgb(0 0 0 / 15%);
+            box-shadow: 0 8px 25px var(--restaurant-color-rgb-0-0-0-opacity-15-percent);
             pointer-events: none;
         }
 
         .admin-header {
-            background: rgb(255 255 255 / 92%);
-            border: 1px solid rgb(255 255 255 / 90%);
+            background: var(--restaurant-color-rgb-255-255-255-opacity-92-percent);
+            border: 1px solid var(--restaurant-color-rgb-255-255-255-opacity-90-percent);
             box-shadow:
-                0 4px 20px rgb(16 56 44 / 4%),
-                0 1px 3px rgb(16 56 44 / 3%);
+                0 4px 20px var(--restaurant-color-rgb-16-56-44-opacity-4-percent),
+                0 1px 3px var(--restaurant-color-rgb-16-56-44-opacity-3-percent);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
         }
@@ -165,34 +166,34 @@
             flex-shrink: 0;
             align-items: center;
             justify-content: center;
-            border: 1px solid #e8eeea;
+            border: 1px solid var(--restaurant-color-hex-e8eeea);
             border-radius: 14px;
-            background: #fff;
-            color: #60736a;
+            background: var(--restaurant-color-hex-fff);
+            color: var(--restaurant-color-hex-60736a);
             transition: all .2s ease;
         }
 
         .header-action:hover {
             color: var(--brand-primary);
-            background: #f0f8f4;
-            border-color: #d5e9dd;
+            background: var(--restaurant-color-hex-f0f8f4);
+            border-color: var(--restaurant-color-hex-d5e9dd);
         }
 
         .brand-button {
-            background: linear-gradient(135deg, #26745a, #174c3c);
-            box-shadow: 0 5px 12px rgb(23 76 60 / 15%);
+            background: linear-gradient(135deg, var(--restaurant-color-hex-26745a), var(--restaurant-color-hex-174c3c));
+            box-shadow: 0 5px 12px var(--restaurant-color-rgb-23-76-60-opacity-15-percent);
             transition: all .2s ease;
         }
 
         .brand-button:hover {
-            background: linear-gradient(135deg, #1d634b, #10382c);
-            box-shadow: 0 7px 17px rgb(23 76 60 / 20%);
+            background: linear-gradient(135deg, var(--restaurant-color-hex-1d634b), var(--restaurant-color-hex-10382c));
+            box-shadow: 0 7px 17px var(--restaurant-color-rgb-23-76-60-opacity-20-percent);
         }
 
         .dropdown-menu {
             box-shadow:
-                0 18px 45px rgb(16 56 44 / 12%),
-                0 2px 8px rgb(16 56 44 / 5%);
+                0 18px 45px var(--restaurant-color-rgb-16-56-44-opacity-12-percent),
+                0 2px 8px var(--restaurant-color-rgb-16-56-44-opacity-5-percent);
         }
 
         @media (max-width: 767px) {
@@ -220,7 +221,7 @@
 
     {{-- Mobile Overlay --}}
     <div x-cloak x-show="mobile && sidebarOpen" x-transition.opacity.duration.200ms @click="closeSidebar()"
-        class="fixed inset-0 z-40 bg-[#071b14]/60 backdrop-blur-[3px] md:hidden">
+        class="fixed inset-0 z-40 bg-[var(--restaurant-color-hex-071b14)]/60 backdrop-blur-[3px] md:hidden">
     </div>
 
     <div class="min-h-screen">
@@ -228,7 +229,7 @@
         {{-- Sidebar --}}
         <aside id="admin-sidebar"
             class="fixed inset-y-0 right-0 z-50 flex flex-col overflow-hidden
-                   border-l border-white/[.06] bg-[#10382c] text-white
+                   border-l border-white/[.06] bg-[var(--restaurant-color-hex-10382c)] text-white
                    shadow-2xl transition-[width,transform] duration-300 ease-in-out
                    md:sticky md:top-0 md:float-right md:h-screen md:shadow-none"
             :class="mobile
@@ -432,7 +433,7 @@
                     <div
                         class="flex h-10 w-10 shrink-0 items-center justify-center
                                 rounded-xl bg-gradient-to-br from-emerald-300 to-teal-600
-                                text-sm font-extrabold text-[#10382c] shadow-md">
+                                text-sm font-extrabold text-[var(--restaurant-color-hex-10382c)] shadow-md">
                         A
                     </div>
 
@@ -491,7 +492,7 @@
                                 <div class="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
                                     <h2
                                         class="max-w-full truncate text-base font-extrabold
-                                               tracking-tight text-[#10382c] sm:text-2xl">
+                                               tracking-tight text-[var(--restaurant-color-hex-10382c)] sm:text-2xl">
                                         @yield('page-heading', 'لوحة تحكم المطعم')
                                     </h2>
 
@@ -499,7 +500,7 @@
                                         class="hidden items-center gap-1.5 rounded-full
                                                  border border-emerald-100 bg-emerald-50
                                                  px-2.5 py-1 text-[10px] font-bold
-                                                 text-[#174c3c] sm:inline-flex">
+                                                 text-[var(--restaurant-color-hex-174c3c)] sm:inline-flex">
                                         <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
                                         لوحة الإدارة
                                     </span>
@@ -542,7 +543,7 @@
                                     <div
                                         class="flex items-center justify-between border-b
                                                 border-slate-100 bg-slate-50/80 px-4 py-3.5">
-                                        <h3 class="text-sm font-extrabold text-[#10382c]">
+                                        <h3 class="text-sm font-extrabold text-[var(--restaurant-color-hex-10382c)]">
                                             الإشعارات
                                         </h3>
                                         <span
@@ -556,7 +557,7 @@
                                         <div
                                             class="mx-auto flex h-12 w-12 items-center
                                                     justify-center rounded-2xl bg-emerald-50
-                                                    text-[#174c3c]">
+                                                    text-[var(--restaurant-color-hex-174c3c)]">
                                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor" stroke-width="1.6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -594,7 +595,7 @@
                                     </div>
 
                                     <div class="hidden text-right sm:block">
-                                        <p class="max-w-32 truncate text-sm font-extrabold text-[#10382c]">
+                                        <p class="max-w-32 truncate text-sm font-extrabold text-[var(--restaurant-color-hex-10382c)]">
                                             مدير المطعم
                                         </p>
                                         <p class="mt-0.5 text-[11px] font-medium text-slate-500">
@@ -612,7 +613,7 @@
 
                                 {{-- Profile Menu --}}
                                 <div x-cloak x-show="profileOpen" x-transition.origin.top.left.duration.150ms
-                                    class="dropdown-menu absolute left-0 top-full z-[60] mt-3
+                                    class="profile-dropdown-menu dropdown-menu absolute left-0 top-full z-[60] mt-3
                                            w-60 max-w-[calc(100vw-2rem)] overflow-hidden
                                            rounded-2xl border border-slate-100 bg-white py-2">
 
@@ -622,13 +623,13 @@
                                         <div class="flex items-center gap-3">
                                             <div
                                                 class="flex h-11 w-11 shrink-0 items-center
-                                                        justify-center rounded-xl bg-[#174c3c]
+                                                        justify-center rounded-xl bg-[var(--restaurant-color-hex-174c3c)]
                                                         text-sm font-extrabold text-white">
                                                 A
                                             </div>
 
                                             <div class="min-w-0">
-                                                <p class="truncate text-sm font-extrabold text-[#10382c]">
+                                                <p class="truncate text-sm font-extrabold text-[var(--restaurant-color-hex-10382c)]">
                                                     مدير المطعم
                                                 </p>
                                                 <p class="mt-1 text-xs text-slate-500">
@@ -641,7 +642,7 @@
                                     <a href="#"
                                         class="flex items-center gap-3 px-4 py-3 text-sm
                                                font-medium text-slate-600 transition
-                                               hover:bg-emerald-50 hover:text-[#174c3c]">
+                                               hover:bg-emerald-50 hover:text-[var(--restaurant-color-hex-174c3c)]">
 
                                         <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor" stroke-width="1.7">
@@ -689,11 +690,11 @@
                         <div class="flex items-center gap-2">
                             <span
                                 class="flex h-7 w-7 items-center justify-center rounded-lg
-                                         bg-[#174c3c]/[.07] text-sm">
+                                         bg-[var(--restaurant-color-hex-174c3c)]/[.07] text-sm">
                                 🍽️
                             </span>
 
-                            <p class="text-xs font-bold text-[#174c3c]">
+                            <p class="text-xs font-bold text-[var(--restaurant-color-hex-174c3c)]">
                                 نظام إدارة المطعم
                             </p>
                         </div>
@@ -811,4 +812,3 @@
 </body>
 
 </html>
-

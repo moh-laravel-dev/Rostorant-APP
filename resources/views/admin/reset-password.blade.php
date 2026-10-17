@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>استعادة كلمة المرور</title>
 
+    @include('components.theme-mode')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,10 +15,10 @@
 
     <style>
         :root {
-            --primary: #174c3c;
-            --primary-dark: #10382d;
-            --gold: #d7a85b;
-            --cream: #faf7f0;
+            --primary: var(--restaurant-color-hex-174c3c);
+            --primary-dark: var(--restaurant-color-hex-10382d);
+            --gold: var(--restaurant-color-hex-d7a85b);
+            --cream: var(--restaurant-color-hex-faf7f0);
         }
 
         * {
@@ -31,13 +32,13 @@
 
         .login-background {
             background:
-                radial-gradient(circle at 10% 15%, rgba(215, 168, 91, .18), transparent 30%),
-                radial-gradient(circle at 90% 85%, rgba(23, 76, 60, .15), transparent 35%),
+                radial-gradient(circle at 10% 15%, var(--restaurant-color-rgb-215-168-91-point-18), transparent 30%),
+                radial-gradient(circle at 90% 85%, var(--restaurant-color-rgb-23-76-60-point-15), transparent 35%),
                 var(--cream);
         }
 
         .login-card {
-            box-shadow: 0 25px 80px rgba(16, 56, 45, .12);
+            box-shadow: 0 25px 80px var(--restaurant-color-rgb-16-56-45-point-12);
         }
 
         .login-button {
@@ -48,7 +49,7 @@
         .login-button:hover {
             background: var(--primary-dark);
             transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(23, 76, 60, .2);
+            box-shadow: 0 8px 20px var(--restaurant-color-rgb-23-76-60-point-2);
         }
 
         .login-input {
@@ -57,7 +58,7 @@
 
         .login-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(23, 76, 60, .09);
+            box-shadow: 0 0 0 4px var(--restaurant-color-rgb-23-76-60-point-09);
         }
 
         .gold-line {
@@ -68,27 +69,27 @@
 
 <body class="login-background flex min-h-screen items-center justify-center overflow-x-hidden px-4 py-10">
 
-    <div class="fixed -right-24 -top-24 h-72 w-72 rounded-full border border-[#d7a85b]/20"></div>
-    <div class="fixed -right-16 -top-16 h-56 w-56 rounded-full border border-[#d7a85b]/20"></div>
-    <div class="fixed -bottom-28 -left-24 h-80 w-80 rounded-full border border-[#174c3c]/10"></div>
-    <div class="fixed -bottom-16 -left-12 h-56 w-56 rounded-full border border-[#174c3c]/10"></div>
+    <div class="fixed -right-24 -top-24 h-72 w-72 rounded-full border border-[var(--restaurant-color-hex-d7a85b)]/20"></div>
+    <div class="fixed -right-16 -top-16 h-56 w-56 rounded-full border border-[var(--restaurant-color-hex-d7a85b)]/20"></div>
+    <div class="fixed -bottom-28 -left-24 h-80 w-80 rounded-full border border-[var(--restaurant-color-hex-174c3c)]/10"></div>
+    <div class="fixed -bottom-16 -left-12 h-56 w-56 rounded-full border border-[var(--restaurant-color-hex-174c3c)]/10"></div>
 
     <main class="relative z-10 w-full max-w-md">
 
         <div class="login-card overflow-hidden rounded-3xl border border-white bg-white">
 
             {{-- Header --}}
-            <div class="relative overflow-hidden bg-[#174c3c] px-8 pb-9 pt-10 text-center text-white">
+            <div class="relative overflow-hidden bg-[var(--restaurant-color-hex-174c3c)] px-8 pb-9 pt-10 text-center text-white">
 
                 <div class="absolute -left-10 -top-10 h-36 w-36 rounded-full border border-white/10"></div>
-                <div class="absolute -left-5 -top-5 h-24 w-24 rounded-full border border-[#d7a85b]/30"></div>
+                <div class="absolute -left-5 -top-5 h-24 w-24 rounded-full border border-[var(--restaurant-color-hex-d7a85b)]/30"></div>
 
                 <div
-                    class="relative mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-2xl border border-[#d7a85b]/60 bg-white/10 shadow-lg backdrop-blur">
-                    <span class="text-4xl font-extrabold text-[#d7a85b]">A</span>
+                    class="relative mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-2xl border border-[var(--restaurant-color-hex-d7a85b)]/60 bg-white/10 shadow-lg backdrop-blur">
+                    <span class="text-4xl font-extrabold text-[var(--restaurant-color-hex-d7a85b)]">A</span>
                 </div>
 
-                <p class="mb-2 text-xs font-bold tracking-[3px] text-[#d7a85b]">
+                <p class="mb-2 text-xs font-bold tracking-[3px] text-[var(--restaurant-color-hex-d7a85b)]">
                     بوابة الإدارة
                 </p>
 
@@ -122,13 +123,13 @@
                     @csrf
 
                     <div>
-                        <label for="email" class="mb-2 block text-sm font-bold text-[#174c3c]">
+                        <label for="email" class="mb-2 block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
                             البريد الإلكتروني
                         </label>
 
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required
                             autofocus autocomplete="email" placeholder="أدخل البريد الإلكتروني" dir="ltr"
-                            class="login-input w-full rounded-xl border border-gray-200 bg-[#faf7f0]/60 px-4 py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
+                            class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 px-4 py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
 
                         @error('email')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -148,7 +149,7 @@
                 </form>
 
                 <a href="{{ route('admin.login') }}"
-                    class="mt-6 block text-center text-sm font-bold text-[#174c3c] hover:text-[#b28743]">
+                    class="mt-6 block text-center text-sm font-bold text-[var(--restaurant-color-hex-174c3c)] hover:text-[var(--restaurant-color-hex-b28743)]">
                     العودة إلى تسجيل الدخول
                 </a>
             </div>
@@ -163,4 +164,3 @@
 </body>
 
 </html>
-

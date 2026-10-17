@@ -5,7 +5,7 @@
 
         {{-- Header --}}
         <div
-            class="relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-[#174c3c] via-[#1c604b] to-[#10382c] p-6 text-white shadow-xl sm:p-8">
+            class="relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-[var(--restaurant-color-hex-174c3c)] via-[var(--restaurant-color-hex-1c604b)] to-[var(--restaurant-color-hex-10382c)] p-6 text-white shadow-xl sm:p-8">
             <div class="pointer-events-none absolute -left-12 -top-16 h-52 w-52 rounded-full border-[30px] border-white/5">
             </div>
             <div class="pointer-events-none absolute -bottom-24 right-1/3 h-64 w-64 rounded-full bg-emerald-300/10 blur-3xl">
@@ -78,7 +78,7 @@
             <div
                 class="group flex items-center gap-4 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
                 <div
-                    class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-[#174c3c] transition group-hover:bg-[#174c3c] group-hover:text-white">
+                    class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-[var(--restaurant-color-hex-174c3c)] transition group-hover:bg-[var(--restaurant-color-hex-174c3c)] group-hover:text-white">
                     <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
                             d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5" />
@@ -124,7 +124,7 @@
             <div
                 class="flex items-center gap-4 border-b border-gray-100 bg-gradient-to-l from-emerald-50/80 to-white p-5 sm:p-6">
                 <div
-                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#174c3c] text-white shadow-lg shadow-emerald-900/10">
+                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-174c3c)] text-white shadow-lg shadow-emerald-900/10">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 5v14M5 12h14" />
                     </svg>
@@ -143,7 +143,7 @@
                     <label for="new-name" class="mb-2 block text-sm font-bold text-gray-700">اسم الخدمة</label>
                     <input id="new-name" name="name" type="text" value="{{ old('name') }}"
                         placeholder="مثال: خدمة الإنترنت" maxlength="255" required
-                        class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                        class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                 </div>
 
                 <div>
@@ -151,7 +151,7 @@
                     <div class="relative">
                         <input id="new-value" name="value" type="number" value="{{ old('value', 0) }}"
                             min="0" step="1" required
-                            class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 pl-16 text-sm tabular-nums outline-none transition focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                            class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 pl-16 text-sm tabular-nums outline-none transition focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-gray-400">السعر</span>
                     </div>
                 </div>
@@ -160,13 +160,13 @@
                     <label for="new-currency" class="mb-2 block text-sm font-bold text-gray-700">العملة</label>
                     <input id="new-currency" name="currency" type="text" value="{{ old('currency', 'ل.س') }}"
                         maxlength="10" required
-                        class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm uppercase outline-none transition focus:border-[#174c3c] focus:bg-white focus:ring-4 focus:ring-[#174c3c]/10">
+                        class="min-h-12 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm uppercase outline-none transition focus:border-[var(--restaurant-color-hex-174c3c)] focus:bg-white focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                     <p class="mt-1.5 text-xs text-gray-400">مثال: ل.س أو USD</p>
                 </div>
 
                 <div class="flex items-end">
                     <button type="submit"
-                        class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#174c3c] px-5 py-3 text-sm font-extrabold text-white shadow-md shadow-emerald-900/10 transition hover:-translate-y-0.5 hover:bg-[#10382c] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-[#174c3c]/20">
+                        class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-5 py-3 text-sm font-extrabold text-white shadow-md shadow-emerald-900/10 transition hover:-translate-y-0.5 hover:bg-[var(--restaurant-color-hex-10382c)] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20">
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                 d="M12 5v14M5 12h14" />
@@ -187,7 +187,7 @@
                 </div>
 
                 <span
-                    class="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-extrabold text-[#174c3c]">
+                    class="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
                     <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
                     {{ $totalServices }} خدمة
                 </span>
@@ -235,7 +235,7 @@
                                 <button type="submit" role="switch" aria-checked="{{ $isActive ? 'true' : 'false' }}"
                                     aria-label="{{ $isActive ? 'تعطيل الخدمة' : 'تفعيل الخدمة' }}"
                                     title="{{ $isActive ? 'تعطيل الخدمة' : 'تفعيل الخدمة' }}"
-                                    class="relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-[#174c3c]/15 {{ $isActive ? 'bg-emerald-600' : 'bg-gray-300' }}">
+                                    class="relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/15 {{ $isActive ? 'bg-emerald-600' : 'bg-gray-300' }}">
                                     <span
                                         class="inline-block h-5 w-5 rounded-full bg-white shadow transition-transform duration-300 {{ $isActive ? '-translate-x-6' : '-translate-x-1' }}"></span>
                                 </button>
@@ -253,7 +253,7 @@
                                 الخدمة</label>
                             <input id="name-{{ $service['id'] }}" name="name" type="text"
                                 value="{{ $service['name'] ?? '' }}" maxlength="255" required
-                                class="min-h-11 w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-[#174c3c] focus:ring-4 focus:ring-[#174c3c]/10">
+                                class="min-h-11 w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-[var(--restaurant-color-hex-174c3c)] focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                         </div>
 
                         <div class="lg:col-span-3">
@@ -261,7 +261,7 @@
                                 class="mb-2 block text-xs font-bold text-gray-600">السعر</label>
                             <input id="value-{{ $service['id'] }}" name="value" type="number"
                                 value="{{ $service['value'] ?? 0 }}" min="0" step="1" required
-                                class="min-h-11 w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm tabular-nums outline-none transition focus:border-[#174c3c] focus:ring-4 focus:ring-[#174c3c]/10">
+                                class="min-h-11 w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm tabular-nums outline-none transition focus:border-[var(--restaurant-color-hex-174c3c)] focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                         </div>
 
                         <div class="lg:col-span-2">
@@ -269,12 +269,12 @@
                                 class="mb-2 block text-xs font-bold text-gray-600">العملة</label>
                             <input id="currency-{{ $service['id'] }}" name="currency" type="text"
                                 value="{{ $service['currency'] ?? 'ل.س' }}" maxlength="10" required
-                                class="min-h-11 w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm uppercase outline-none transition focus:border-[#174c3c] focus:ring-4 focus:ring-[#174c3c]/10">
+                                class="min-h-11 w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm uppercase outline-none transition focus:border-[var(--restaurant-color-hex-174c3c)] focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                         </div>
 
                         <div class="flex flex-wrap gap-2 sm:col-span-2 lg:col-span-2">
                             <button type="submit"
-                                class="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-[#174c3c] px-4 py-2.5 text-sm font-extrabold text-white transition hover:bg-[#10382c] focus:outline-none focus:ring-4 focus:ring-[#174c3c]/15">
+                                class="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-4 py-2.5 text-sm font-extrabold text-white transition hover:bg-[var(--restaurant-color-hex-10382c)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/15">
                                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
                                         d="m5 12 4 4L19 6" />
@@ -304,7 +304,7 @@
             @empty
                 <div class="px-5 py-14 text-center sm:py-20">
                     <div
-                        class="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-emerald-50 text-[#174c3c]">
+                        class="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-emerald-50 text-[var(--restaurant-color-hex-174c3c)]">
                         <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"
                                 d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5" />

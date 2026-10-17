@@ -5,7 +5,7 @@
     <div class="mx-auto w-full max-w-5xl space-y-6 p-3 sm:p-5 lg:p-7" dir="rtl">
 
         {{-- Header --}}
-        <div class="relative overflow-hidden rounded-3xl bg-[#174c3c] p-6 text-white shadow-lg sm:p-8">
+        <div class="relative overflow-hidden rounded-3xl bg-[var(--restaurant-color-hex-174c3c)] p-6 text-white shadow-lg sm:p-8">
             <div class="pointer-events-none absolute -left-12 -top-16 h-48 w-48 rounded-full bg-white/5"></div>
             <div class="pointer-events-none absolute -bottom-20 right-1/3 h-56 w-56 rounded-full bg-white/5"></div>
 
@@ -76,7 +76,7 @@
                         <div class="border-b border-gray-100 px-5 py-4">
                             <div class="flex items-center gap-3">
                                 <div
-                                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#174c3c]/10 text-[#174c3c]">
+                                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-174c3c)]/10 text-[var(--restaurant-color-hex-174c3c)]">
                                     <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
                                             d="M4 4h16v16H4zM8 14l3-3 5 5m-5-2l2-2 3 3M9 8h.01" />
@@ -120,7 +120,7 @@
 
                             {{-- Upload Button --}}
                             <label for="photo"
-                                class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-[#174c3c]/30 bg-[#174c3c]/5 px-4 py-3.5 text-sm font-bold text-[#174c3c] transition hover:border-[#174c3c] hover:bg-[#174c3c]/10">
+                                class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-[var(--restaurant-color-hex-174c3c)]/30 bg-[var(--restaurant-color-hex-174c3c)]/5 px-4 py-3.5 text-sm font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:border-[var(--restaurant-color-hex-174c3c)] hover:bg-[var(--restaurant-color-hex-174c3c)]/10">
                                 <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 4v12m0-12L7 9m5-5l5 5" />
@@ -141,7 +141,7 @@
                             @enderror
 
                             <div class="flex items-start gap-2 rounded-xl bg-gray-50 p-3 text-xs leading-6 text-gray-500">
-                                <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#174c3c]" fill="none" stroke="currentColor"
+                                <svg class="mt-0.5 h-4 w-4 shrink-0 text-[var(--restaurant-color-hex-174c3c)]" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 16h-1v-4h-1m1-4h.01M12 22a10 10 0 110-20 10 10 0 010 20z" />
@@ -180,7 +180,7 @@
                     <div class="border-b border-gray-100 px-5 py-4 sm:px-6">
                         <div class="flex items-center gap-3">
                             <div
-                                class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#174c3c]/10 text-[#174c3c]">
+                                class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-174c3c)]/10 text-[var(--restaurant-color-hex-174c3c)]">
                                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
                                         d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
@@ -213,7 +213,7 @@
 
                                 <input id="name" name="name" type="text" required maxlength="255"
                                     value="{{ old('name', $category->name) }}" placeholder="مثال: الوجبات الرئيسية"
-                                    class="w-full rounded-xl border border-gray-200 bg-white py-3.5 pe-12 ps-4 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[#174c3c] focus:ring-4 focus:ring-[#174c3c]/10">
+                                    class="w-full rounded-xl border border-gray-200 bg-white py-3.5 pe-12 ps-4 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[var(--restaurant-color-hex-174c3c)] focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
                             </div>
 
                             @error('name')
@@ -232,7 +232,7 @@
 
                             <textarea id="description" name="description" rows="5"
                                 placeholder="اكتب وصفاً مختصراً يوضح محتويات هذا التصنيف..."
-                                class="w-full resize-y rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-sm leading-7 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[#174c3c] focus:ring-4 focus:ring-[#174c3c]/10">{{ old('description', $category->description) }}</textarea>
+                                class="w-full resize-y rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-sm leading-7 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[var(--restaurant-color-hex-174c3c)] focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">{{ old('description', $category->description) }}</textarea>
 
                             @error('description')
                                 <p class="mt-2 text-xs font-medium text-red-600">{{ $message }}</p>
@@ -256,7 +256,7 @@
                                         @checked(old('is_active', $category->is_active ? '1' : '0') == '1') class="peer sr-only">
 
                                     <span
-                                        class="h-7 w-12 rounded-full bg-gray-300 transition-colors duration-200 peer-checked:bg-[#174c3c] peer-focus-visible:ring-4 peer-focus-visible:ring-[#174c3c]/20"></span>
+                                        class="h-7 w-12 rounded-full bg-gray-300 transition-colors duration-200 peer-checked:bg-[var(--restaurant-color-hex-174c3c)] peer-focus-visible:ring-4 peer-focus-visible:ring-[var(--restaurant-color-hex-174c3c)]/20"></span>
 
                                     <span
                                         class="absolute right-1 h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-200 peer-checked:-translate-x-5"></span>
@@ -278,7 +278,7 @@
                         </a>
 
                         <button type="submit"
-                            class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#174c3c] px-6 py-3.5 text-sm font-extrabold text-white shadow-sm transition hover:bg-[#10382c] focus:outline-none focus:ring-4 focus:ring-[#174c3c]/20 sm:w-auto">
+                            class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-6 py-3.5 text-sm font-extrabold text-white shadow-sm transition hover:bg-[var(--restaurant-color-hex-10382c)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20 sm:w-auto">
                             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 13l4 4L19 7" />
@@ -291,8 +291,8 @@
         </form>
 
         {{-- Footer Note --}}
-        <div class="flex items-start gap-3 rounded-2xl border border-[#174c3c]/10 bg-[#174c3c]/5 p-4">
-            <svg class="mt-0.5 h-5 w-5 shrink-0 text-[#174c3c]" fill="none" stroke="currentColor"
+        <div class="flex items-start gap-3 rounded-2xl border border-[var(--restaurant-color-hex-174c3c)]/10 bg-[var(--restaurant-color-hex-174c3c)]/5 p-4">
+            <svg class="mt-0.5 h-5 w-5 shrink-0 text-[var(--restaurant-color-hex-174c3c)]" fill="none" stroke="currentColor"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

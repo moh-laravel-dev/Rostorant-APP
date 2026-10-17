@@ -22,11 +22,11 @@
                     </div>
                     @if ($tableName || $tableNumber)
                         <div
-                            class="relative mb-6 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-l from-[#174c3c] via-[#123e32] to-[#0d3027] p-4 shadow-xl sm:p-5">
+                            class="relative mb-6 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-l from-[var(--restaurant-color-hex-174c3c)] via-[var(--restaurant-color-hex-123e32)] to-[var(--restaurant-color-hex-0d3027)] p-4 shadow-xl sm:p-5">
 
                             {{-- Decorative Background --}}
                             <div
-                                class="pointer-events-none absolute -left-10 -top-12 h-32 w-32 rounded-full bg-[#e8c98c]/10 blur-2xl">
+                                class="pointer-events-none absolute -left-10 -top-12 h-32 w-32 rounded-full bg-[var(--restaurant-color-hex-e8c98c)]/10 blur-2xl">
                             </div>
                             <div
                                 class="pointer-events-none absolute -bottom-12 right-1/3 h-28 w-28 rounded-full bg-emerald-300/10 blur-2xl">
@@ -35,7 +35,7 @@
                             {{-- Header --}}
                             <div class="relative mb-4 flex items-center gap-3">
                                 <div
-                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#e8c98c]/30 bg-[#e8c98c]/10 text-[#e8c98c]">
+                                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--restaurant-color-hex-e8c98c)]/30 bg-[var(--restaurant-color-hex-e8c98c)]/10 text-[var(--restaurant-color-hex-e8c98c)]">
                                     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M3 10h18M5 10V6h14v4M5 10v9m14-9v9M3 19h18" />
@@ -64,10 +64,10 @@
                                 {{-- Table Name --}}
                                 @if ($tableName)
                                     <div
-                                        class="group flex min-w-0 items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] p-3.5 transition-all duration-300 hover:border-[#e8c98c]/40 hover:bg-white/[0.09] sm:p-4">
+                                        class="group flex min-w-0 items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] p-3.5 transition-all duration-300 hover:border-[var(--restaurant-color-hex-e8c98c)]/40 hover:bg-white/[0.09] sm:p-4">
 
                                         <div
-                                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#e8c98c]/25 bg-gradient-to-br from-[#e8c98c]/20 to-[#e8c98c]/5 text-[#e8c98c] transition-transform duration-300 group-hover:scale-105">
+                                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--restaurant-color-hex-e8c98c)]/25 bg-gradient-to-br from-[var(--restaurant-color-hex-e8c98c)]/20 to-[var(--restaurant-color-hex-e8c98c)]/5 text-[var(--restaurant-color-hex-e8c98c)] transition-transform duration-300 group-hover:scale-105">
                                             {{-- Table Icon --}}
                                             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
@@ -87,8 +87,8 @@
                                         </div>
 
                                         <div
-                                            class="shrink-0 rounded-lg border border-[#e8c98c]/20 bg-[#e8c98c]/10 px-2.5 py-1.5">
-                                            <span class="text-[10px] font-extrabold tracking-widest text-[#e8c98c]">
+                                            class="shrink-0 rounded-lg border border-[var(--restaurant-color-hex-e8c98c)]/20 bg-[var(--restaurant-color-hex-e8c98c)]/10 px-2.5 py-1.5">
+                                            <span class="text-[10px] font-extrabold tracking-widest text-[var(--restaurant-color-hex-e8c98c)]">
                                                 TABLE
                                             </span>
                                         </div>
@@ -98,10 +98,10 @@
                                 {{-- Table Number --}}
                                 @if ($tableNumber !== null)
                                     <div
-                                        class="group flex min-w-0 items-center gap-3 rounded-xl border border-[#e8c98c]/20 bg-gradient-to-l from-[#e8c98c]/[0.10] to-white/[0.03] p-3.5 transition-all duration-300 hover:border-[#e8c98c]/45 hover:bg-[#e8c98c]/[0.12] sm:p-4">
+                                        class="group flex min-w-0 items-center gap-3 rounded-xl border border-[var(--restaurant-color-hex-e8c98c)]/20 bg-gradient-to-l from-[var(--restaurant-color-hex-e8c98c)]/[0.10] to-white/[0.03] p-3.5 transition-all duration-300 hover:border-[var(--restaurant-color-hex-e8c98c)]/45 hover:bg-[var(--restaurant-color-hex-e8c98c)]/[0.12] sm:p-4">
 
                                         <div
-                                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#e8c98c]/30 bg-[#e8c98c]/10 text-[#e8c98c] transition-transform duration-300 group-hover:scale-105">
+                                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--restaurant-color-hex-e8c98c)]/30 bg-[var(--restaurant-color-hex-e8c98c)]/10 text-[var(--restaurant-color-hex-e8c98c)] transition-transform duration-300 group-hover:scale-105">
                                             {{-- Number / Hash Icon --}}
                                             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
@@ -115,7 +115,7 @@
                                                 رقم الطاولة
                                             </p>
                                             <p
-                                                class="text-base font-black tabular-nums tracking-wider text-[#e8c98c] sm:text-lg">
+                                                class="text-base font-black tabular-nums tracking-wider text-[var(--restaurant-color-hex-e8c98c)] sm:text-lg">
                                                 {{ $tableNumber }}
                                             </p>
                                         </div>
@@ -136,11 +136,11 @@
                             {{-- QR Code --}}
                             @if ($billCode)
                                 <div
-                                    class="mt-3 overflow-hidden rounded-2xl border border-[#e8c98c]/25 bg-[#0c241d] p-5 shadow-xl">
+                                    class="bill-qr-panel mt-3 overflow-hidden rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/25 bg-[var(--restaurant-color-hex-0c241d)] p-5 shadow-xl">
 
                                     <div class="flex items-center gap-4">
                                         <div
-                                            class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[#e8c98c]/30 bg-[#e8c98c]/10 text-[#e8c98c]">
+                                            class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/30 bg-[var(--restaurant-color-hex-e8c98c)]/10 text-[var(--restaurant-color-hex-e8c98c)]">
                                             <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                                                 stroke-linejoin="round">
@@ -162,7 +162,7 @@
                                     </div>
 
                                     <div
-                                        class="mt-5 flex flex-col items-center rounded-2xl border border-[#e8c98c]/20 bg-white p-5">
+                                        class="bill-qr-frame mt-5 flex flex-col items-center rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/20 bg-white p-5">
                                         <div id="bill-qr-code"
                                             class="flex min-h-[220px] min-w-[220px] items-center justify-center"
                                             data-url="{{ route('menu.login', ['code' => $billCode]) }}">
@@ -201,7 +201,7 @@
                     @endif
                     <h1 class="max-w-2xl text-4xl font-black leading-[1.35] tracking-tight sm:text-5xl lg:text-6xl">
                         لحظتك المفضلة
-                        <span class="block text-[#e8c98c]">تبدأ من هنا.</span>
+                        <span class="block text-[var(--restaurant-color-hex-e8c98c)]">تبدأ من هنا.</span>
                     </h1>
 
                     <p class="mt-5 max-w-xl text-sm leading-8 text-white/70 sm:text-base">
@@ -210,7 +210,7 @@
 
                     <div class="mt-7 flex flex-col gap-3 sm:flex-row">
                         <a href="#menu-items"
-                            class="menu-btn bg-[#e8c98c] text-[#26372b] shadow-lg shadow-black/10 hover:-translate-y-0.5 hover:bg-[#f3dba9]">
+                            class="menu-btn bg-[var(--restaurant-color-hex-e8c98c)] text-[var(--restaurant-color-hex-26372b)] shadow-lg shadow-black/10 hover:-translate-y-0.5 hover:bg-[var(--restaurant-color-hex-f3dba9)]">
                             اكتشف قائمة الطعام
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -231,7 +231,7 @@
                     <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-6">
                         <div class="flex items-center gap-2.5">
                             <div
-                                class="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.08] text-[#e8c98c]">
+                                class="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.08] text-[var(--restaurant-color-hex-e8c98c)]">
                                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M12 3v18M3 12h18" />
@@ -247,7 +247,7 @@
 
                         <div class="flex items-center gap-2.5">
                             <div
-                                class="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.08] text-[#e8c98c]">
+                                class="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.08] text-[var(--restaurant-color-hex-e8c98c)]">
                                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="12" cy="12" r="9" />
@@ -267,15 +267,15 @@
                     <div class="absolute inset-6 rounded-[2.5rem] bg-emerald-200/10 blur-2xl"></div>
 
                     <div class="menu-glass relative rounded-[2rem] p-4 shadow-2xl">
-                        <div class="overflow-hidden rounded-[1.5rem] bg-[#f8f6ef] p-5 text-[#174c3c]">
+                        <div class="overflow-hidden rounded-[1.5rem] bg-[var(--restaurant-color-hex-f8f6ef)] p-5 text-[var(--restaurant-color-hex-174c3c)]">
                             <div class="flex items-center justify-between gap-3">
                                 <div>
-                                    <p class="text-xs font-bold text-[#7e8d80]">من قائمتنا إلى مائدتك</p>
+                                    <p class="text-xs font-bold text-[var(--restaurant-color-hex-7e8d80)]">من قائمتنا إلى مائدتك</p>
                                     <h2 class="mt-1 text-2xl font-black">اختر ما تحب</h2>
                                 </div>
 
                                 <div
-                                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#174c3c] text-[#e8c98c]">
+                                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-174c3c)] text-[var(--restaurant-color-hex-e8c98c)]">
                                     <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M3 3v6a3 3 0 0 0 6 0V3M6 3v18M15 3v18m0-18c3 2 4 5 4 8h-4" />
@@ -287,7 +287,7 @@
                                 <div
                                     class="flex items-center gap-4 rounded-2xl border border-gray-100 bg-white p-3 shadow-sm">
                                     <div
-                                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#e7eee5] text-[#174c3c]">
+                                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-e7eee5)] text-[var(--restaurant-color-hex-174c3c)]">
                                         <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none"
                                             stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                                             stroke-linejoin="round">
@@ -298,7 +298,7 @@
                                         <p class="font-extrabold">أطباق لكل مزاج</p>
                                         <p class="mt-1 text-xs text-gray-500">اكتشف النكهات المفضلة لديك</p>
                                     </div>
-                                    <svg class="mr-auto h-4 w-4 shrink-0 text-[#9aab9d]" viewBox="0 0 24 24"
+                                    <svg class="mr-auto h-4 w-4 shrink-0 text-[var(--restaurant-color-hex-9aab9d)]" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="m9 18 6-6-6-6" />
                                     </svg>
@@ -307,7 +307,7 @@
                                 <div
                                     class="flex items-center gap-4 rounded-2xl border border-gray-100 bg-white p-3 shadow-sm">
                                     <div
-                                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#f5ead4] text-[#95743a]">
+                                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-f5ead4)] text-[var(--restaurant-color-hex-95743a)]">
                                         <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none"
                                             stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                                             stroke-linejoin="round">
@@ -319,16 +319,16 @@
                                         <p class="font-extrabold">طلبك على ذوقك</p>
                                         <p class="mt-1 text-xs text-gray-500">أضف اختياراتك بكل سهولة</p>
                                     </div>
-                                    <svg class="mr-auto h-4 w-4 shrink-0 text-[#9aab9d]" viewBox="0 0 24 24"
+                                    <svg class="mr-auto h-4 w-4 shrink-0 text-[var(--restaurant-color-hex-9aab9d)]" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="m9 18 6-6-6-6" />
                                     </svg>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-3 rounded-xl bg-[#e7eee5] p-3">
+                            <div class="flex items-center gap-3 rounded-xl bg-[var(--restaurant-color-hex-e7eee5)] p-3">
                                 <span
-                                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-[#174c3c]">
+                                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-[var(--restaurant-color-hex-174c3c)]">
                                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m5 12 4 4L19 6" />
@@ -340,7 +340,7 @@
                     </div>
 
                     <div
-                        class="mt-5 hidden rounded-2xl border border-white/15 bg-[#e8c98c] px-4 py-3 text-[#26372b] shadow-xl xl:block">
+                        class="mt-5 hidden rounded-2xl border border-white/15 bg-[var(--restaurant-color-hex-e8c98c)] px-4 py-3 text-[var(--restaurant-color-hex-26372b)] shadow-xl xl:block">
                         <p class="text-[10px] font-bold">تجربة مميزة</p>
                         <p class="mt-1 text-sm font-black">اختيارك يصنع الفرق</p>
                     </div>
