@@ -27,6 +27,16 @@
             --cream: var(--restaurant-color-hex-faf7f0);
         }
 
+        .login-role-tab {
+            color: #64748b;
+        }
+
+        .login-role-tab.is-active {
+            color: var(--restaurant-color-hex-174c3c);
+            background: white;
+            box-shadow: 0 1px 3px rgb(15 23 42 / 12%);
+        }
+
         * {
             box-sizing: border-box;
             font-family: 'Cairo', sans-serif;
@@ -342,8 +352,28 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('admin.login.action') }}" class="space-y-5">
+                @php
+                    $requestedLoginTab = old('login_type', request()->query('type'));
+                    $loginTabLocked = in_array($requestedLoginTab, ['admin', 'cashier'], true);
+                    $activeLoginTab = $loginTabLocked ? $requestedLoginTab : 'admin';
+                @endphp
+                <div class="mb-6 grid grid-cols-2 gap-2 rounded-xl bg-gray-100 p-1" role="tablist"
+                    aria-label="نوع تسجيل الدخول" data-login-tab-locked="{{ $loginTabLocked ? 'true' : 'false' }}">
+                    <button type="button" id="admin-login-tab" role="tab"
+                        aria-controls="admin-login-panel" aria-selected="{{ $activeLoginTab !== 'cashier' ? 'true' : 'false' }}"
+                        class="login-role-tab rounded-lg px-3 py-3 text-sm font-bold transition {{ $activeLoginTab !== 'cashier' ? 'is-active' : '' }}"
+                        data-login-tab="admin">دخول الأدمن</button>
+                    <button type="button" id="cashier-login-tab" role="tab"
+                        aria-controls="cashier-login-panel" aria-selected="{{ $activeLoginTab === 'cashier' ? 'true' : 'false' }}"
+                        class="login-role-tab rounded-lg px-3 py-3 text-sm font-bold transition {{ $activeLoginTab === 'cashier' ? 'is-active' : '' }}"
+                        data-login-tab="cashier">دخول الكاشير</button>
+                </div>
+
+                <div id="admin-login-panel" role="tabpanel" aria-labelledby="admin-login-tab"
+                    {{ $activeLoginTab === 'cashier' ? 'hidden' : '' }}>
+                <form id="admin-login-form" method="POST" action="{{ route('admin.login.action') }}" class="space-y-5">
                     @csrf
+                    <input type="hidden" name="login_type" value="admin">
 
                     {{-- Phone --}}
                     <div>
@@ -427,6 +457,56 @@
                         </svg>
                     </button>
                 </form>
+                </div>
+
+                <div id="cashier-login-panel" role="tabpanel" aria-labelledby="cashier-login-tab"
+                    {{ $activeLoginTab === 'cashier' ? '' : 'hidden' }}>
+                    <form id="cashier-login-form" method="POST" action="{{ route('cashier.login.action') }}"
+                        class="space-y-5">
+                        @csrf
+                        <input type="hidden" name="login_type" value="cashier">
+
+                        <div>
+                            <label for="cashier-phone"
+                                class="mb-2 block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
+                                رقم الهاتف
+                            </label>
+                            <input id="cashier-phone" type="tel" name="phone" value="{{ old('cashier_phone', old('phone')) }}" required
+                                autocomplete="tel" inputmode="numeric" placeholder="أدخل رقم الهاتف"
+                                class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 px-4 py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
+                            <input type="hidden" name="country_code" id="cashier_country_code"
+                                value="{{ old('cashier_country_code', old('country_code', '+963')) }}">
+                        </div>
+
+                        <div x-data="{ showPassword: false }">
+                            <label for="cashier-password"
+                                class="mb-2 block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
+                                كلمة المرور
+                            </label>
+                            <div class="relative">
+                                <input id="cashier-password" :type="showPassword ? 'text' : 'password'"
+                                    name="password" required autocomplete="current-password"
+                                    placeholder="أدخل كلمة المرور" dir="ltr"
+                                    class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 py-3.5 pl-20 pr-12 text-left text-gray-800 outline-none placeholder:text-gray-400">
+                                <button type="button" @click="showPassword = !showPassword"
+                                    :aria-label="showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'"
+                                    class="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-lg px-2.5 py-2 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:bg-[var(--restaurant-color-hex-174c3c)]/10 focus:outline-none focus:ring-2 focus:ring-[var(--restaurant-color-hex-174c3c)]/30"
+                                    x-text="showPassword ? 'إخفاء' : 'إظهار'"></button>
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            class="login-button group flex min-h-[54px] w-full items-center justify-center gap-3 rounded-xl px-5 py-3.5 font-bold text-white focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20">
+                            <span>دخول لوحة الكاشير</span>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14" stroke-linecap="round" />
+                                <path d="m12 5 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
 
                 {{-- Security Notice --}}
                 <div
@@ -472,45 +552,99 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const phoneInput = document.querySelector('#phone');
-            const countryCodeInput = document.querySelector('#country_code');
-            const loginForm = document.querySelector('form');
+            const loginTabStorageKey = 'restaurant-login-tab';
+            const tabList = document.querySelector('[role="tablist"][data-login-tab-locked]');
+            const adminPanel = document.querySelector('#admin-login-panel');
+            const cashierPanel = document.querySelector('#cashier-login-panel');
+            const phoneForms = {
+                admin: { phone: '#phone', countryCode: '#country_code', form: '#admin-login-form' },
+                cashier: { phone: '#cashier-phone', countryCode: '#cashier_country_code', form: '#cashier-login-form' },
+            };
+            const initializedPhoneForms = {};
 
-            if (!phoneInput || !countryCodeInput || !loginForm || !window.intlTelInput) {
-                return;
+            function selectLoginTab(role) {
+                document.querySelectorAll('.login-role-tab').forEach(function(tab) {
+                    const selected = tab.dataset.loginTab === role;
+                    tab.classList.toggle('is-active', selected);
+                    tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+                });
+                adminPanel.hidden = role !== 'admin';
+                cashierPanel.hidden = role !== 'cashier';
             }
 
-            const iti = window.intlTelInput(phoneInput, {
-                initialCountry: 'sy',
-                separateDialCode: true,
-                nationalMode: true,
-                showFlags: true,
-                countrySearch: true,
-                useFullscreenPopup: false,
-                loadUtils: () => import(
-                    'https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.5/build/js/utils.js'
-                ),
-            });
+            function initializePhoneForm(role) {
+                const fields = phoneForms[role];
+                if (!fields || initializedPhoneForms[role] || !window.intlTelInput) {
+                    return;
+                }
 
-            function updateCountryCode() {
-                const country = iti.getSelectedCountryData();
-                countryCodeInput.value = country && country.dialCode ?
-                    '+' + country.dialCode :
-                    '';
-            }
+                const phoneInput = document.querySelector(fields.phone);
+                const countryCodeInput = document.querySelector(fields.countryCode);
+                const loginForm = document.querySelector(fields.form);
 
-            phoneInput.addEventListener('input', function() {
-                this.value = this.value.replace(/\D/g, '');
-            });
+                if (!phoneInput || !countryCodeInput || !loginForm) {
+                    return;
+                }
 
-            phoneInput.addEventListener('countrychange', updateCountryCode);
+                const iti = window.intlTelInput(phoneInput, {
+                    initialCountry: 'sy',
+                    separateDialCode: true,
+                    nationalMode: true,
+                    showFlags: true,
+                    countrySearch: true,
+                    useFullscreenPopup: false,
+                    loadUtils: () => import(
+                        'https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.5/build/js/utils.js'
+                    ),
+                });
 
-            loginForm.addEventListener('submit', function() {
+                function updateCountryCode() {
+                    const country = iti.getSelectedCountryData();
+                    countryCodeInput.value = country && country.dialCode ?
+                        '+' + country.dialCode :
+                        '';
+                }
+
+                phoneInput.addEventListener('input', function() {
+                    this.value = this.value.replace(/\D/g, '');
+                });
+                phoneInput.addEventListener('countrychange', updateCountryCode);
+                loginForm.addEventListener('submit', function() {
+                    updateCountryCode();
+                    phoneInput.value = phoneInput.value.replace(/\D/g, '');
+                });
                 updateCountryCode();
-                phoneInput.value = phoneInput.value.replace(/\D/g, '');
+                initializedPhoneForms[role] = true;
+            }
+
+            document.querySelectorAll('.login-role-tab').forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    const selectedRole = tab.dataset.loginTab;
+                    selectLoginTab(selectedRole);
+                    try {
+                        localStorage.setItem(loginTabStorageKey, selectedRole);
+                    } catch (error) {
+                        console.warn('Could not save the login tab preference.', error);
+                    }
+                    window.setTimeout(function() {
+                        initializePhoneForm(selectedRole);
+                    }, 0);
+                });
             });
 
-            updateCountryCode();
+            let selectedRole = document.querySelector('.login-role-tab.is-active')?.dataset.loginTab || 'admin';
+            if (tabList.dataset.loginTabLocked !== 'true') {
+                try {
+                    const savedRole = localStorage.getItem(loginTabStorageKey);
+                    if (savedRole === 'admin' || savedRole === 'cashier') {
+                        selectedRole = savedRole;
+                    }
+                } catch (error) {
+                    console.warn('Could not read the saved login tab preference.', error);
+                }
+                selectLoginTab(selectedRole);
+            }
+            initializePhoneForm(selectedRole);
         });
     </script>
 

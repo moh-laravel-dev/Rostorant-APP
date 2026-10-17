@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CashierDashboardUpdated;
 use App\Models\Bill;
 use App\Models\CategoryFood;
 use App\Models\Food;
@@ -11,33 +12,29 @@ use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class MenuController extends Controller
 {
-
     private function filePath(): string
     {
         return storage_path('app/table_services.json');
     }
+
     public function index(string $billNumber): View
     {
         $categories = CategoryFood::query()
             // ->where('is_active', 1)
             ->orderBy('name')
             ->with([
-                'foods'
+                'foods',
             ])
             ->get();
-
 
         $bill = Bill::where('number', $billNumber)
             ->with('orders.food')
             ->first();
-
-
 
         if (!$bill) {
             abort(404, 'هذه الفاتورة غير صحيحة');
@@ -78,7 +75,8 @@ class MenuController extends Controller
                         $totalSeconds = $statusOrders->sum($getDurationInSeconds);
 
                         return [
-                            'status' => config('status.order.' . $status),
+                            'status_code' => (string) $status,
+                            'status' => config('status.order.'.$status),
                             'amount' => $statusOrders->sum('amount'),
                             'amount_price' => $statusOrders->sum('total_price'),
                             'expected_time' => $formatDuration($totalSeconds),
@@ -98,6 +96,18 @@ class MenuController extends Controller
 
                     'amount' => $orders->sum('amount'),
                     'total_price' => $orders->sum('total_price'),
+                    'notes' => $orders
+                        ->pluck('note')
+                        ->filter(fn($note) => filled($note))
+                        ->unique()
+                        ->values(),
+                    'order_notes' => $orders
+                        ->filter(fn($order) => filled($order->note))
+                        ->map(fn($order) => [
+                            'amount' => (int) $order->amount,
+                            'note' => $order->note,
+                        ])
+                        ->values(),
                     'expected_time' => $formatDuration($totalSeconds),
 
                     'statuses' => $statuses,
@@ -111,6 +121,7 @@ class MenuController extends Controller
             ->toArray();
         $tableName = $bill->table->name;
         $tableNumber = $bill->table->number;
+        $tableId = (int) $bill->table_id;
         $billCode = $bill->code;
         $path = $this->filePath();
 
@@ -127,7 +138,8 @@ class MenuController extends Controller
                 ->values()
                 ->all();
         }
-        return view('Menu.menu', compact('categories', 'services', 'billNumber', 'billCode', 'tableName', 'tableNumber', 'data'));
+
+        return view('Menu.menu', compact('categories', 'services', 'billNumber', 'billCode', 'tableId', 'tableName', 'tableNumber', 'data'));
     }
 
     public function createToken(string $code)
@@ -236,7 +248,7 @@ class MenuController extends Controller
             'table_ip_address' => $ipAddress,
             'table_session_expires_at' => now()->addDay()->timestamp,
         ]);
-
+        event(new CashierDashboardUpdated((int) $bill->table_id));
         return redirect()->route('menu.index', $bill->number);
     }
 
@@ -247,8 +259,8 @@ class MenuController extends Controller
             'items' => ['required', 'array', 'min:1'],
             'items.*.id' => ['required', 'integer', 'exists:foods,id'],
             'items.*.quantity' => ['required', 'integer', 'min:1'],
+            'items.*.note' => ['nullable', 'string', 'max:1000'],
         ]);
-
 
         $bill = Bill::where('number', $validated['billNumber'])->first();
 
@@ -259,19 +271,22 @@ class MenuController extends Controller
             ], 400);
         }
 
-        foreach ($validated['items'] as $item) {
-            $food = Food::findOrFail($item['id']);
+        DB::transaction(function () use ($validated, $bill): void {
+            foreach ($validated['items'] as $item) {
+                $food = Food::findOrFail($item['id']);
 
-            $order = Order::firstOrNew([
-                'food_id' => $food->id,
-                'bill_id' => $bill->id,
-                'status' => '0',
-            ]);
+                Order::create([
+                    'food_id' => $food->id,
+                    'bill_id' => $bill->id,
+                    'status' => '0',
+                    'amount' => $item['quantity'],
+                    'total_price' => $item['quantity'] * $food->price,
+                    'note' => filled($item['note'] ?? null) ? trim($item['note']) : null,
+                ]);
+            }
+        });
 
-            $order->amount = ($order->amount ?? 0) + $item['quantity'];
-            $order->total_price = $order->amount * $food->price;
-            $order->save();
-        }
+        event(new CashierDashboardUpdated((int) $bill->table_id));
 
         return response()->json([
             'success' => true,
@@ -318,7 +333,8 @@ class MenuController extends Controller
                         $totalSeconds = $statusOrders->sum($getDurationInSeconds);
 
                         return [
-                            'status' => config('status.order.' . $status),
+                            'status_code' => (string) $status,
+                            'status' => config('status.order.'.$status),
                             'amount' => $statusOrders->sum('amount'),
                             'amount_price' => $statusOrders->sum('total_price'),
                             'expected_time' => $formatDuration($totalSeconds),
@@ -338,6 +354,18 @@ class MenuController extends Controller
 
                     'amount' => $orders->sum('amount'),
                     'total_price' => $orders->sum('total_price'),
+                    'notes' => $orders
+                        ->pluck('note')
+                        ->filter(fn($note) => filled($note))
+                        ->unique()
+                        ->values(),
+                    'order_notes' => $orders
+                        ->filter(fn($order) => filled($order->note))
+                        ->map(fn($order) => [
+                            'amount' => (int) $order->amount,
+                            'note' => $order->note,
+                        ])
+                        ->values(),
                     'expected_time' => $formatDuration($totalSeconds),
 
                     'statuses' => $statuses,

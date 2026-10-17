@@ -1,59 +1,193 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# نظام إدارة المطعم
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+تطبيق لإدارة قائمة الطعام والطلبات والطاولات، مع واجهات للإدارة والكاشير وتحديث فوري لحالات الطلبات باستخدام Laravel Reverb.
 
-## About Laravel
+## المتطلبات
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- PHP 8.2 أو أحدث مع إضافات PHP المطلوبة من Laravel وقاعدة البيانات المستخدمة.
+- Composer.
+- Node.js وnpm لبناء ملفات الواجهة.
+- قاعدة بيانات مضبوطة في ملف `.env`.
+- خادم ويب مثل Nginx أو Apache في الإنتاج.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## إعداد المشروع لأول مرة
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+من مجلد المشروع:
 
-## Learning Laravel
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+في Windows PowerShell، استخدم `Copy-Item .env.example .env` بدل `cp`.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+عدّل `.env` وأدخل إعدادات قاعدة البيانات وإعدادات Reverb الموضحة أدناه، ثم نفّذ:
 
-## Laravel Sponsors
+```bash
+php artisan migrate
+npm install
+npm run build
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+لا تستخدم `migrate:fresh` على قاعدة بيانات تحتوي بيانات مهمة؛ هذا الأمر يحذف الجداول والبيانات.
 
-### Premium Partners
+## إعداد Reverb والتحديثات الفورية
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+يستخدم التطبيق Reverb لإرسال تحديثات حالات الطلبات إلى صفحة الطاولة ولوحة الكاشير. أضف بيانات تطبيق Reverb إلى `.env` من دون مشاركة المفتاح السري أو حفظه في Git:
 
-## Contributing
+عند الإعداد لأول مرة، أنشئ إعدادات التطبيق ومفاتيحه باستخدام الأمر التالي، ثم راجع قيم Reverb في `.env`:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan reverb:install
+```
 
-## Code of Conduct
+```dotenv
+BROADCAST_CONNECTION=reverb
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+REVERB_APP_ID=ضع_معرف_التطبيق
+REVERB_APP_KEY=ضع_المفتاح_العام
+REVERB_APP_SECRET=ضع_المفتاح_السري
 
-## Security Vulnerabilities
+# عنوان Reverb الذي يستطيع Laravel الوصول إليه.
+REVERB_HOST=restaurant.example.com
+REVERB_PORT=443
+REVERB_SCHEME=https
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# عنوان ومنفذ الاستماع الداخلي لخادم Reverb.
+REVERB_SERVER_HOST=0.0.0.0
+REVERB_SERVER_PORT=8081
 
-## License
+# هذه القيم تُضمّن في ملفات JavaScript عند تنفيذ npm run build.
+VITE_REVERB_APP_KEY="${REVERB_APP_KEY}"
+VITE_REVERB_HOST="${REVERB_HOST}"
+VITE_REVERB_PORT="${REVERB_PORT}"
+VITE_REVERB_SCHEME="${REVERB_SCHEME}"
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+استبدل `restaurant.example.com` باسم النطاق الفعلي. يجب أن يوجّه إعداد الوكيل العكسي (مثل Nginx) اتصالات WebSocket الآمنة `wss://` من المنفذ العام 443 إلى Reverb على المنفذ الداخلي 8081. افتح المنفذ الداخلي مباشرةً على الإنترنت فقط إذا كان ذلك مقصودًا ومؤمّنًا.
+
+بعد تغيير أي قيمة `VITE_REVERB_*`، أعد بناء ملفات الواجهة:
+
+```bash
+npm run build
+```
+
+## تشغيل محلي للتطوير
+
+لتشغيل خادم Laravel وVite وReverb معًا:
+
+```bash
+composer run dev
+```
+
+أو شغّل كل عملية في نافذة طرفية منفصلة:
+
+```bash
+php artisan serve
+npm run dev
+php artisan reverb:start --host=0.0.0.0 --port=8081
+```
+
+هذه أوامر تطوير محلي؛ لا تستخدم `php artisan serve` كخادم إنتاج.
+
+## تشغيل النظام على خادم إنتاج
+
+بعد رفع إصدار التطبيق إلى الخادم وضبط `.env` وقاعدة البيانات وإعدادات النطاق وReverb:
+
+```bash
+composer install --no-dev --optimize-autoloader
+npm ci
+npm run build
+php artisan migrate --force
+php artisan optimize
+```
+
+وجّه Nginx أو Apache إلى مجلد `public`، واضبط HTTPS، واجعل `storage` و`bootstrap/cache` قابلين للكتابة من مستخدم PHP. في إعداد الإنتاج يجب أن يكون:
+
+```dotenv
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://restaurant.example.com
+```
+
+احتفظ بنسخة احتياطية من قاعدة البيانات قبل تشغيل الترحيلات على بيانات فعلية. بعد تغيير `.env` أو ملفات الإعدادات، أعد تحميل إعدادات Laravel عند الحاجة:
+
+```bash
+php artisan optimize:clear
+php artisan config:cache
+```
+
+### تشغيل Reverb باستمرار
+
+يجب أن يبقى Reverb عاملًا في الخلفية. شغّله مؤقتًا للاختبار باستخدام:
+
+```bash
+php artisan reverb:start --host=0.0.0.0 --port=8081
+```
+
+في الإنتاج، شغّله بواسطة مدير عمليات مثل Supervisor أو systemd كي يعيد تشغيله تلقائيًا بعد إعادة تشغيل الخادم أو تعطل العملية. مثال Supervisor (عدّل المسارات والمستخدم لتناسب الخادم):
+
+```ini
+[program:restaurant-reverb]
+directory=/var/www/restaurant
+command=/usr/bin/php artisan reverb:start --host=0.0.0.0 --port=8081
+user=www-data
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+stdout_logfile=/var/log/restaurant-reverb.log
+redirect_stderr=true
+```
+
+بعد حفظ ملف Supervisor:
+
+```bash
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start restaurant-reverb
+sudo supervisorctl status restaurant-reverb
+```
+
+### تشغيل المهمة المجدولة
+
+المهمة `orders:mark-ready` تفحص كل خمس دقائق الطلبات النشطة التي حالتها `1`، وتنقل الطلبات التي انقضى وقت تحضيرها إلى الحالة `3`، ثم تبث تحديثًا للطاولة. شغّل مجدول Laravel من cron **مرة واحدة كل دقيقة**؛ Laravel هو الذي يقرر أن الأمر المجدول ينفذ كل خمس دقائق:
+
+```cron
+* * * * * cd /var/www/restaurant && /usr/bin/php artisan schedule:run >> /dev/null 2>&1
+```
+
+استبدل المسار ومسار PHP بالقيم الصحيحة على الخادم. لا تضف هذا السطر أكثر من مرة. لا تستخدم `schedule:work` كبديل دائم عن cron في خادم الإنتاج.
+
+للتحقق من الجدولة يدويًا:
+
+```bash
+php artisan schedule:list
+php artisan orders:mark-ready
+```
+
+الأمر الثاني ينفذ الفحص فورًا للاختبار؛ وهو لا يغيّر إلا الطلبات التي حان وقتها.
+
+## دورة الطلب والحالات
+
+| الحالة | المعنى |
+| --- | --- |
+| `0` | بانتظار تأكيد الكاشير |
+| `1` | في المطبخ؛ يبدأ حساب وقت التحضير بعد تأكيد الكاشير |
+| `2` | على الطاولة |
+| `3` | على الطاولة؛ الحالة التي تعيّنها المهمة المجدولة عند انتهاء التحضير |
+
+يظهر زر **«طلب الحساب»** في قائمة الطلبات عندما توجد طلبات سابقة، وتكون كل حالاتها `2` أو `3`، ولا توجد وجبات جديدة غير مرسلة في سلة الطلب الحالية. الطلب الجديد يخفي الزر حتى تُرسل الطلبات وتصل كل الحالات إلى الطاولة. عند استلام تحديث حالة من Reverb، يعيد المتصفح جلب بيانات الطلبات ويحدّث إظهار الزر.
+
+زر «طلب الحساب» يعرض حاليًا رسالة تطلب إبلاغ الموظف؛ لا ينشئ فاتورة دفع أو يغلق الحساب من النظام.
+
+## أوامر مفيدة
+
+```bash
+php artisan schedule:list
+php artisan orders:mark-ready
+php artisan reverb:start --host=0.0.0.0 --port=8081
+php artisan test
+php artisan optimize:clear
+```

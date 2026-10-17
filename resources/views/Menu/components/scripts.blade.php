@@ -96,6 +96,8 @@
         const ordersModal = document.getElementById('orders-modal');
         const ordersList = document.getElementById('current-order-items');
         const ordersEmpty = document.getElementById('orders-empty');
+        const requestBillButton = document.getElementById('request-bill');
+        const requestBillHint = document.getElementById('request-bill-hint');
 
         const previousSummary = document.getElementById(
             'previous-order-summary'
@@ -114,10 +116,6 @@
 
         const previousOrdersContainer = document.getElementById(
             'previous-order-items'
-        );
-
-        const previousOrdersEmpty = document.getElementById(
-            'previous-orders-empty'
         );
 
         const previousOrdersCount = document.getElementById(
@@ -167,6 +165,7 @@
         // =========================================================
 
         const billNumber = @json($billNumber);
+        const tableId = @json($tableId);
 
         const refreshUrl = @json(route('menu.index.data', ['number' => $billNumber]));
 
@@ -190,6 +189,8 @@
         // حالة عمليات الإرسال والتحديث
         let isSubmitting = false;
         let isRefreshingOrders = false;
+        let refreshOrdersPromise = null;
+        let refreshOrdersAgain = false;
 
         // متغيرات الضغط المطول على زر التأكيد
         let confirmPressTimer = null;
@@ -350,6 +351,43 @@
             });
         }
 
+        function areAllPreviousOrdersOnTable() {
+            const items = getExistingOrders().filter(function(item) {
+                return getExistingOrderQuantity(item) > 0;
+            });
+
+            return items.length > 0 && items.every(function(item) {
+                const statuses = normalizeOrderStatuses(item);
+
+                return statuses.length > 0 && statuses.every(function(status) {
+                    return ['2', '3'].includes(String(status?.status_code ?? ''));
+                });
+            });
+        }
+
+        function updateRequestBillVisibility() {
+            const hasOldOrders = hasPreviousOrders();
+            const hasNewOrders = order.size > 0;
+            const allPreviousOrdersOnTable = areAllPreviousOrdersOnTable();
+            const canRequestBill = hasOldOrders &&
+                !hasNewOrders &&
+                allPreviousOrdersOnTable;
+
+            if (requestBillButton) {
+                requestBillButton.hidden = !canRequestBill;
+                requestBillButton.classList.toggle('hidden', !canRequestBill);
+            }
+
+            if (requestBillHint) {
+                requestBillHint.hidden = canRequestBill;
+                requestBillHint.textContent = hasNewOrders ?
+                    'أرسل الطلبات الجديدة أولًا؛ سيظهر زر «طلب الحساب» بعد تأكيدها، عند وجود طلبات سابقة.' :
+                    hasOldOrders && !allPreviousOrdersOnTable ?
+                        'لا يظهر زر «طلب الحساب» إلا بعد وصول جميع الطلبات إلى الطاولة.' :
+                        'يظهر زر «طلب الحساب» بعد إرسال أول طلب ووصول جميع الطلبات إلى الطاولة.';
+            }
+        }
+
         function getPreviousOrdersQuantity() {
             return getExistingOrders().reduce(function(total, item) {
                 return total + getExistingOrderQuantity(item);
@@ -389,6 +427,7 @@
 
             if (item?.status) {
                 return [{
+                    status_code: item.status_code,
                     status: item.status,
                     expected_time: item.expected_time,
                     created_at: item.created_at
@@ -690,7 +729,60 @@
                 createInfoBox('إجمالي الصنف', formatCurrency(total))
             );
 
+            const orderNotes = Array.isArray(item?.order_notes) ?
+                item.order_notes :
+                (Array.isArray(item?.notes) ?
+                    item.notes.map(note => ({
+                        amount: quantity,
+                        note
+                    })) :
+                    (item?.note ? [{
+                        amount: quantity,
+                        note: item.note
+                    }] : []));
+            const validOrderNotes = orderNotes.filter(orderNote =>
+                orderNote &&
+                typeof orderNote.note === 'string' &&
+                orderNote.note.trim()
+            );
+            if (validOrderNotes.length) {
+                const notesContainer = document.createElement('div');
+                notesContainer.className =
+                    'order-customer-note rounded-xl border p-3';
+
+                const notesTitle = document.createElement('p');
+                notesTitle.className = 'mb-2 text-xs font-extrabold';
+                notesTitle.textContent = 'ملاحظات الوجبة';
+                notesContainer.appendChild(notesTitle);
+
+                const notesList = document.createElement('div');
+                notesList.className = 'space-y-2';
+
+                validOrderNotes.forEach(function(orderNote) {
+                    const noteRow = document.createElement('div');
+                    noteRow.className =
+                        'order-note-entry flex flex-wrap items-start gap-2 rounded-lg border p-2 text-xs leading-5';
+
+                    const amount = document.createElement('span');
+                    amount.className =
+                        'order-note-amount shrink-0 rounded-full px-2 py-0.5 font-bold';
+                    amount.textContent =
+                        `الكمية: ${Number(orderNote.amount) || quantity}`;
+
+                    const text = document.createElement('span');
+                    text.className = 'order-note-text min-w-0 flex-1';
+                    text.textContent = orderNote.note.trim();
+
+                    noteRow.append(amount, text);
+                    notesList.appendChild(noteRow);
+                });
+
+                notesContainer.appendChild(notesList);
+                row.appendChild(notesContainer);
+            }
+
             const statusInfo = getOrderStatusInfo(item);
+            const statusEntries = normalizeOrderStatuses(item);
 
             const statusContainer = document.createElement('div');
 
@@ -708,37 +800,55 @@
                 'text-xs font-semibold text-gray-600';
 
             statusLabel.textContent = 'حالة الطلب:';
+            statusLine.appendChild(statusLabel);
 
-            const statusBadge = document.createElement('span');
+            const displayedStatuses = statusEntries.length ?
+                statusEntries :
+                [statusInfo];
 
-            statusBadge.className =
-                'inline-flex items-center rounded-full px-3 py-1 text-xs font-bold ' +
-                getStatusBadgeClasses(statusInfo.status);
+            displayedStatuses.forEach(function(statusEntry) {
+                const statusName = String(statusEntry?.status ?? 'غير محدد').trim();
+                const statusBadge = document.createElement('span');
 
-            statusBadge.textContent = statusInfo.status;
+                statusBadge.className =
+                    'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold ' +
+                    getStatusBadgeClasses(statusName);
 
-            statusLine.append(statusLabel, statusBadge);
-            statusContainer.appendChild(statusLine);
+                statusBadge.textContent = statusName;
 
-            if (normalize(statusInfo.status) === normalize('في المطبخ')) {
-                const remainingLine = document.createElement('p');
-
-                remainingLine.className =
-                    'text-xs font-medium text-gray-600';
-
-                remainingLine.dataset.remainingTime = 'true';
-
-                if (statusInfo.endTime !== null) {
-                    remainingLine.dataset.endTime = String(
-                        statusInfo.endTime
-                    );
+                if (statusEntry?.amount !== undefined) {
+                    const amount = document.createElement('span');
+                    amount.className = 'opacity-75';
+                    amount.textContent = `× ${Number(statusEntry.amount) || 0}`;
+                    statusBadge.appendChild(amount);
                 }
 
-                remainingLine.textContent =
-                    `الوقت المتوقع للانتهاء: ${formatRemainingTime(statusInfo.remaining)}`;
+                statusLine.appendChild(statusBadge);
 
-                statusContainer.appendChild(remainingLine);
-            }
+                if (normalize(statusName) === normalize('في المطبخ')) {
+                    const kitchenStatusInfo = getOrderStatusInfo({
+                        statuses: [statusEntry]
+                    });
+                    const remainingLine = document.createElement('p');
+
+                    remainingLine.className =
+                        'basis-full text-xs font-medium text-gray-600';
+                    remainingLine.dataset.remainingTime = 'true';
+
+                    if (kitchenStatusInfo.endTime !== null) {
+                        remainingLine.dataset.endTime = String(
+                            kitchenStatusInfo.endTime
+                        );
+                    }
+
+                    remainingLine.textContent =
+                        `الوقت المتوقع للانتهاء: ${formatRemainingTime(kitchenStatusInfo.remaining)}`;
+
+                    statusLine.appendChild(remainingLine);
+                }
+            });
+
+            statusContainer.appendChild(statusLine);
 
             row.append(name, details, statusContainer);
 
@@ -796,13 +906,8 @@
                 previousOrdersCount.textContent = `${items.length} صنف`;
             }
 
-            if (previousOrdersEmpty) {
-                previousOrdersEmpty.classList.toggle('hidden', hasOrders);
-            }
-
             if (previousOrdersSection) {
-                previousOrdersSection.classList.remove('hidden');
-                previousOrdersSection.style.removeProperty('display');
+                toggleSection(previousOrdersSection, hasOrders);
             }
 
             updatePreviousOrderCountdowns();
@@ -994,6 +1099,7 @@
             price,
             quantity,
             total,
+            note = '',
             isNew = false,
             canEdit = false
         }) {
@@ -1094,6 +1200,27 @@
             row.append(header, priceDetails);
 
             if (canEdit && isNew) {
+                const noteField = document.createElement('label');
+                noteField.className = 'block w-full text-xs font-bold text-gray-600';
+                noteField.textContent = 'ملاحظة للوجبة (اختياري)';
+
+                const noteInput = document.createElement('textarea');
+                noteInput.rows = 2;
+                noteInput.maxLength = 1000;
+                noteInput.value = String(note ?? '');
+                noteInput.placeholder = 'اكتب ملاحظاتك هنا';
+                noteInput.className =
+                    'order-note-input mt-1 block w-full resize-y rounded-xl border border-gray-200 bg-white p-3 text-sm font-normal text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[var(--restaurant-color-hex-59816d)] focus:ring-2 focus:ring-[var(--restaurant-color-hex-59816d)]/20';
+                noteInput.setAttribute('aria-label', `ملاحظة لوجبة ${name}`);
+                noteInput.addEventListener('input', function() {
+                    const item = order.get(String(id));
+                    if (item) {
+                        item.note = noteInput.value;
+                    }
+                });
+                noteField.appendChild(noteInput);
+                row.appendChild(noteField);
+
                 const actions = document.createElement('div');
 
                 actions.className =
@@ -1226,6 +1353,7 @@
                         price: item.price,
                         quantity: item.quantity,
                         total: Number(item.price) * Number(item.quantity),
+                        note: item.note,
                         isNew: true,
                         canEdit: true
                     }));
@@ -1233,12 +1361,17 @@
             }
 
             const hasNewOrders = order.size > 0;
-            const hasOldOrders = getExistingOrders().length > 0;
+            const hasOldOrders = hasPreviousOrders();
+            updateRequestBillVisibility();
 
             currentOrdersSection?.classList.toggle(
                 'hidden',
                 !hasNewOrders
             );
+
+            if (previousOrdersSection) {
+                toggleSection(previousOrdersSection, hasOldOrders && !hasNewOrders);
+            }
 
             ordersEmpty?.classList.toggle(
                 'hidden',
@@ -1493,7 +1626,33 @@
         }
 
         document.getElementById('submit-order')
-            ?.addEventListener('click', openOrdersModal);
+            ?.addEventListener('click', async function() {
+                openOrdersModal();
+
+                if (isSubmitting) return;
+
+                try {
+                    await refreshOrders();
+                } catch (error) {
+                    console.error(
+                        'Failed to refresh orders when opening the order list:',
+                        error
+                    );
+
+                    showMessage(
+                        error.message || 'تعذر تحديث حالات الطلبات.',
+                        'error'
+                    );
+                }
+            });
+
+        document.getElementById('request-bill')
+            ?.addEventListener('click', function() {
+                showMessage(
+                    'يرجى إبلاغ أحد الموظفين بطلب الحساب. لا يتم إرسال الطلب من النظام حاليًا.',
+                    'info'
+                );
+            });
 
         document.getElementById('close-orders-modal')
             ?.addEventListener('click', closeOrdersModal);
@@ -1824,8 +1983,10 @@
         // =========================================================
 
         async function refreshOrders() {
-            if (isRefreshingOrders) {
-                return getExistingOrders();
+            if (refreshOrdersPromise) {
+                refreshOrdersAgain = true;
+
+                return refreshOrdersPromise;
             }
 
             isRefreshingOrders = true;
@@ -1836,53 +1997,66 @@
 
             refreshPreviousOrdersIcon?.classList.add('animate-spin');
 
+            refreshOrdersPromise = (async function() {
+                let refreshedOrders = oldOrders;
+
+                do {
+                    refreshOrdersAgain = false;
+
+                    const response = await fetch(refreshUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        credentials: 'same-origin',
+                        cache: 'no-store'
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(
+                            `تعذر تحديث الطلبات (${response.status}).`
+                        );
+                    }
+
+                    const result = await response.json();
+                    const refreshedData = normalizeOrdersResponse(result);
+
+                    if (!refreshedData) {
+                        console.error(
+                            'Unexpected orders response:',
+                            result
+                        );
+
+                        throw new Error(
+                            'تعذر قراءة الطلبات من الخادم. تحقق من تنسيق الاستجابة.'
+                        );
+                    }
+
+                    oldOrders = refreshedData;
+                    updateRequestBillVisibility();
+
+                    const responseServices =
+                        result?.services ??
+                        result?.data?.services ??
+                        result?.data?.data?.services;
+
+                    if (Array.isArray(responseServices)) {
+                        tableServices = responseServices;
+                    }
+
+                    updateOrderSummary();
+                    refreshedOrders = oldOrders;
+                } while (refreshOrdersAgain);
+
+                return refreshedOrders;
+            })();
+
             try {
-                const response = await fetch(refreshUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    credentials: 'same-origin',
-                    cache: 'no-store'
-                });
-
-                if (!response.ok) {
-                    throw new Error(
-                        `تعذر تحديث الطلبات (${response.status}).`
-                    );
-                }
-
-                const result = await response.json();
-
-                const refreshedData = normalizeOrdersResponse(result);
-
-                if (!refreshedData) {
-                    console.error(
-                        'Unexpected orders response:',
-                        result
-                    );
-
-                    throw new Error(
-                        'تعذر قراءة الطلبات من الخادم. تحقق من تنسيق الاستجابة.'
-                    );
-                }
-
-                oldOrders = refreshedData;
-
-                const responseServices =
-                    result?.services ??
-                    result?.data?.services ??
-                    result?.data?.data?.services;
-
-                if (Array.isArray(responseServices)) {
-                    tableServices = responseServices;
-                }
-
-                updateOrderSummary();
-
-                return oldOrders;
+                return await refreshOrdersPromise;
             } finally {
+                refreshOrdersPromise = null;
+                refreshOrdersAgain = false;
                 isRefreshingOrders = false;
 
                 if (refreshPreviousOrdersButton) {
@@ -1894,6 +2068,35 @@
         }
 
         window.refreshOrders = refreshOrders;
+
+        let isSubscribedToTableUpdates = false;
+
+        function subscribeToTableUpdates() {
+            if (!window.Echo) {
+                return;
+            }
+
+            if (isSubscribedToTableUpdates) {
+                return;
+            }
+
+            isSubscribedToTableUpdates = true;
+            window.Echo
+                .channel(`table.${tableId}`)
+                .listen('.cashier.dashboard.updated', function() {
+                    refreshOrders().catch(function(error) {
+                        console.error('Failed to refresh order statuses after a live update:', error);
+                    });
+                });
+        }
+
+        window.addEventListener('restaurant:echo-ready', subscribeToTableUpdates);
+
+        if (window.Echo) {
+            subscribeToTableUpdates();
+        } else {
+            console.info('Waiting for Laravel Echo before subscribing to live menu order updates.');
+        }
 
         refreshPreviousOrdersButton?.addEventListener(
             'click',
@@ -1947,7 +2150,8 @@
                         items: [...order.values()].map(function(item) {
                             return {
                                 id: item.id,
-                                quantity: item.quantity
+                                quantity: item.quantity,
+                                note: item.note?.trim() ?? ''
                             };
                         })
                     })

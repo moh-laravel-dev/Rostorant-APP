@@ -9,6 +9,11 @@
         $servicesTotal = collect($services ?? [])->sum(fn($service) => (float) ($service['price'] ?? 0));
 
         $initialFinalTotal = $previousOrdersTotal + $servicesTotal;
+        $initialOrderStatuses = collect($data ?? [])
+            ->filter(fn($item) => (int) ($item['amount'] ?? 0) > 0)
+            ->flatMap(fn($item) => collect($item['statuses'] ?? []));
+        $canRequestBillInitially = $initialOrderStatuses->isNotEmpty()
+            && $initialOrderStatuses->every(fn($status) => in_array((string) ($status['status_code'] ?? ''), ['2', '3'], true));
     @endphp
 
     <div
@@ -52,7 +57,8 @@
         <div id="orders-list" class="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain p-4 sm:p-5">
 
             {{-- Previous Orders --}}
-            <section id="previous-orders-section" class="space-y-3">
+            <section id="previous-orders-section"
+                class="{{ count($data ?? []) > 0 ? '' : 'hidden' }} space-y-3">
                 <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                     <div class="flex min-w-0 items-center gap-2">
                         <h3 class="text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
@@ -79,11 +85,6 @@
                 </div>
 
                 <div id="previous-order-items" class="space-y-3"></div>
-
-                <div id="previous-orders-empty"
-                    class="{{ count($data ?? []) > 0 ? 'hidden' : '' }} rounded-xl border border-dashed border-gray-200 px-4 py-3 text-center text-xs text-gray-500">
-                    لا توجد طلبات سابقة لهذه الفاتورة.
-                </div>
 
                 {{-- <div class="flex items-center justify-between rounded-xl bg-gray-50 px-3 py-2.5">
         <span class="text-xs font-bold text-gray-600">مجموع الطلبات السابقة</span>
@@ -231,6 +232,22 @@
                     <span class="text-xs">ل.س</span>
                 </span>
             </div>
+
+            <button id="request-bill" type="button" @if (!$canRequestBillInitially) hidden @endif
+                class="{{ $canRequestBillInitially ? '' : 'hidden ' }}mb-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-[var(--restaurant-color-hex-174c3c)]/20 bg-white px-5 py-3 text-sm font-black text-[var(--restaurant-color-hex-174c3c)] transition hover:bg-[var(--restaurant-color-hex-e8f0e8)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 3h16v18l-3-2-3 2-3-2-3 2-4-2V3Z" />
+                    <path d="M8 8h8M8 12h8M8 16h4" />
+                </svg>
+                طلب الحساب
+            </button>
+
+            <p id="request-bill-hint"
+                @if ($canRequestBillInitially) hidden @endif
+                class="mb-3 rounded-xl border border-[var(--restaurant-color-hex-174c3c)]/10 bg-[var(--restaurant-color-hex-e8f0e8)]/60 px-3 py-2 text-center text-xs leading-5 text-gray-600">
+                {{ $canRequestBillInitially ? '' : 'يظهر زر «طلب الحساب» بعد وصول جميع الطلبات إلى الطاولة.' }}
+            </p>
 
             <button id="confirm-order-list" type="button" disabled
                 class="confirm-order-button flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--restaurant-color-hex-174c3c)] px-5 py-4 text-sm font-black text-white shadow-lg shadow-[var(--restaurant-color-hex-174c3c)]/15 transition hover:bg-[var(--restaurant-color-hex-10382c)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20 disabled:cursor-not-allowed disabled:opacity-50">

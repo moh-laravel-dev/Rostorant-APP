@@ -1337,6 +1337,43 @@ html[data-theme="dark"] .restaurant-menu #bill-qr-code img {
     image-rendering: pixelated;
 }
 
+html[data-theme="dark"] #orders-modal .order-note-input {
+    border-color: var(--theme-border-strong);
+    background: var(--theme-surface-raised);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] #orders-modal .order-note-input::placeholder {
+    color: var(--theme-text-muted);
+}
+
+html[data-theme="dark"] #orders-modal .order-customer-note {
+    border-color: #52675a;
+    background: #233129;
+    color: #dce9e0;
+}
+
+html[data-theme="dark"] #orders-modal .order-note-entry {
+    border-color: #405348;
+    background: #1b2620;
+}
+
+html[data-theme="dark"] #orders-modal .order-note-amount {
+    background: #334a3b;
+    color: #c2e3ce;
+}
+
+html[data-theme="dark"] #orders-modal #request-bill {
+    border-color: #52675a;
+    background: #202d25;
+    color: #dce9e0;
+}
+
+html[data-theme="dark"] #orders-modal #request-bill:hover {
+    border-color: #78917f;
+    background: #2b3b31;
+}
+
 html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] {
     border-color: #6d5141;
     background: #17211b;
@@ -1640,6 +1677,10 @@ html[data-theme="dark"] .table-qr-page .qr-tip p:last-child {
 body:has(.restaurant-menu) .theme-toggle {
     top: 1rem;
     bottom: auto;
+}
+
+body:has(#orders-modal[aria-hidden="false"]) .theme-toggle {
+    display: none;
 }
 
 .theme-toggle:hover {

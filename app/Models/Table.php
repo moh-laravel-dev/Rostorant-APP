@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Table extends Model
@@ -16,6 +17,11 @@ class Table extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    public function bills(): HasMany
+    {
+        return $this->hasMany(Bill::class);
+    }
 
     protected static function booted(): void
     {

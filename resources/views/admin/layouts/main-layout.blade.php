@@ -380,6 +380,17 @@
                     <span x-cloak x-show="!sidebarOpen && !mobile" class="sidebar-tooltip">الطاولات</span>
                 </a>
 
+                <a href="{{ route('admin.cashiers.index') }}" @click="navigateSidebar()"
+                    class="sidebar-link {{ request()->routeIs('admin.cashiers.*') ? 'active' : '' }}"
+                    :class="!sidebarOpen && !mobile ? 'justify-center px-0' : ''" title="الكاشير">
+                    <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 8h18v12H3zM7 8V5h10v3M7 13h4m2 0h4" />
+                    </svg>
+                    <span x-show="sidebarOpen || mobile" class="whitespace-nowrap text-sm font-semibold">الكاشير</span>
+                    <span x-cloak x-show="!sidebarOpen && !mobile" class="sidebar-tooltip">الكاشير</span>
+                </a>
+
                 {{-- Reports --}}
                 <a href="#" @click="navigateSidebar()" class="sidebar-link"
                     :class="!sidebarOpen && !mobile ? 'justify-center px-0' : ''" title="التقارير">
