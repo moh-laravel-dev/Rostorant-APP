@@ -1,6 +1,6 @@
 @extends('admin.layouts.main-layout')
 
-@section('title','إدارة قائمة الطعام')
+@section('title', 'إدارة قائمة الطعام')
 @section('content')
     <div class="space-y-6 p-3 sm:p-5 lg:p-7" dir="rtl">
 
@@ -48,7 +48,8 @@
 
                 <a href="{{ route('admin.category-food.create') }}"
                     class="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3.5 text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)] shadow-lg transition hover:-translate-y-0.5 hover:bg-emerald-50 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-white/30 sm:w-auto">
-                    <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--restaurant-color-hex-174c3c)]/10">
+                    <span
+                        class="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--restaurant-color-hex-174c3c)]/10">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-7-7h14" />
                         </svg>
@@ -133,6 +134,7 @@
         {{-- Filters --}}
         <div class="overflow-hidden rounded-3xl border border-gray-200/80 bg-white shadow-sm" dir="rtl">
             <form method="GET" action="{{ route('admin.category-food.index') }}">
+                @csrf
                 <input type="hidden" name="limit" value="{{ request('limit', $categories->perPage()) }}">
 
                 <div class="flex flex-col gap-4 border-b border-gray-100 p-4 sm:p-5 lg:flex-row lg:items-end">
@@ -446,7 +448,8 @@
                                     </td>
 
                                     <td class="min-w-[170px] px-5 py-4">
-                                        <div class="font-extrabold text-gray-800 transition group-hover:text-[var(--restaurant-color-hex-174c3c)]">
+                                        <div
+                                            class="font-extrabold text-gray-800 transition group-hover:text-[var(--restaurant-color-hex-174c3c)]">
                                             {{ $category->name }}
                                         </div>
                                         <div class="mt-1 text-[11px] text-gray-400">تصنيف
@@ -582,7 +585,8 @@
             <div class="mt-8 overflow-hidden rounded-3xl border border-gray-200/80 bg-white shadow-sm" dir="rtl">
 
                 {{-- Top Accent --}}
-                <div class="h-1 bg-gradient-to-l from-[var(--restaurant-color-hex-174c3c)] via-emerald-500 to-emerald-100"></div>
+                <div class="h-1 bg-gradient-to-l from-[var(--restaurant-color-hex-174c3c)] via-emerald-500 to-emerald-100">
+                </div>
 
                 <div class="p-4 sm:p-5">
                     <div class="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
@@ -604,9 +608,11 @@
                                 <p class="mt-1 text-xs text-gray-500">
                                     @if ($categories->total() > 0)
                                         عرض
-                                        <span class="font-bold text-[var(--restaurant-color-hex-174c3c)]">{{ $categories->firstItem() }}</span>
+                                        <span
+                                            class="font-bold text-[var(--restaurant-color-hex-174c3c)]">{{ $categories->firstItem() }}</span>
                                         إلى
-                                        <span class="font-bold text-[var(--restaurant-color-hex-174c3c)]">{{ $categories->lastItem() }}</span>
+                                        <span
+                                            class="font-bold text-[var(--restaurant-color-hex-174c3c)]">{{ $categories->lastItem() }}</span>
                                         من أصل
                                         <span class="font-bold text-gray-700">{{ $categories->total() }}</span>
                                         تصنيف
@@ -622,7 +628,7 @@
                             {{-- Items Per Page --}}
                             <form method="GET" action="{{ route('admin.category-food.index') }}"
                                 class="flex items-center justify-between gap-3 rounded-2xl border border-gray-200 bg-gray-50/80 p-2 sm:justify-start">
-
+                                @csrf
                                 @foreach (request()->except(['limit', 'page']) as $key => $value)
                                     @if (is_array($value))
                                         @foreach ($value as $subKey => $subValue)
@@ -638,8 +644,8 @@
 
                                 <label for="categories-limit"
                                     class="flex items-center gap-2 pr-1 text-xs font-semibold text-gray-600">
-                                    <svg class="h-4 w-4 text-[var(--restaurant-color-hex-174c3c)]" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor" stroke-width="1.8">
+                                    <svg class="h-4 w-4 text-[var(--restaurant-color-hex-174c3c)]" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
                                     </svg>

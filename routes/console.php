@@ -9,5 +9,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('orders:mark-ready')
-    ->everyFiveMinutes()
+    ->everyMinute()
     ->withoutOverlapping();

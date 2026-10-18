@@ -32,7 +32,11 @@
             <h1 class="mb-4 text-2xl font-extrabold leading-relaxed text-gray-900 sm:text-3xl">
                 توجد جلسة نشطة لهذه الطاولة
             </h1>
-
+            <div class="mt-4 text-center text-sm leading-7 text-gray-600 p-3 rounded-lg"
+                style="border: 1px #ff00005f solid;background-color: #ff000013">
+                للانضمام إلى فاتورة أصدقائك، يرجى مسح رمز QR الموجود على صفحة المنيو من هاتف صديقك باستخدام كاميرا
+                هاتفك.
+            </div>
             <p class="mx-auto mb-8 max-w-sm text-sm leading-8 text-gray-500 sm:text-base">
                 الطاولة مستخدمة حالياً، ولا يمكن إنشاء جلسة جديدة قبل انتهاء الجلسة الحالية.
                 يمكنك إعادة التحقق من حالة الطاولة أو الدخول باستخدام رمز خاص من شريكك.
@@ -41,7 +45,7 @@
             <div class="flex flex-col gap-3">
 
                 <button type="button" onclick="window.location.reload()"
-                    class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-amber-500 px-5 py-3 font-bold text-white shadow-sm transition duration-200 hover:bg-amber-600 active:scale-[0.98]">
+                    class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-amber-500 px-5 py-3 font-bold text-white shadow-sm transition duration-200 hover:bg-amber-800 active:scale-[0.98]">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -49,10 +53,25 @@
                     </svg>
                     التحقق مرة أخرى
                 </button>
+                <a href="{{ $from ? route('menu.page') : route('welcome') }}"
+                    class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-red-500 px-5 py-3 font-bold text-white shadow-sm transition duration-200 hover:bg-red-950 active:scale-[0.98]">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
 
-                <div class="mt-4 text-center text-sm leading-7 text-gray-600">
-                    للانضمام إلى فاتورة أصدقائك، يرجى مسح رمز QR الموجود على الفاتورة باستخدام كاميرا هاتفك.
-                </div>
+                    العودة إلى الصفحة السابقة
+                </a>
+
+                <a href="{{ route('jone.to.bill') }}"
+                    class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-green-800 px-5 py-3 font-bold text-white shadow-sm transition duration-200 hover:bg-green-950 active:scale-[0.98]">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+
+                    انظم لهذه الفاتورة عبر الرمز
+                </a>
 
             </div>
 

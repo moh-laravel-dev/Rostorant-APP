@@ -240,7 +240,8 @@
         </style>
 
         {{-- Page Header --}}
-        <div class="relative overflow-hidden rounded-3xl bg-[var(--restaurant-color-hex-10382d)] p-5 text-white shadow-lg sm:p-8">
+        <div
+            class="relative overflow-hidden rounded-3xl bg-[var(--restaurant-color-hex-10382d)] p-5 text-white shadow-lg sm:p-8">
             <div
                 class="pointer-events-none absolute -left-10 -top-16 h-48 w-48 rounded-full border-[28px] border-white/[0.04]">
             </div>
@@ -249,8 +250,8 @@
                 <div class="flex items-start gap-4">
                     <div
                         class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/10">
-                        <svg class="h-8 w-8 text-[var(--restaurant-color-hex-d8ad60)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="h-8 w-8 text-[var(--restaurant-color-hex-d8ad60)]" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="3" width="7" height="7" rx="1" />
                             <rect x="14" y="3" width="7" height="7" rx="1" />
                             <rect x="3" y="14" width="7" height="7" rx="1" />
@@ -316,13 +317,15 @@
                     <div class="qr-poster-head px-5 py-6 text-center sm:px-8 sm:py-8">
                         <div
                             class="relative z-10 mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/15 bg-white/10">
-                            <svg class="h-7 w-7 text-[var(--restaurant-color-hex-e9cc91)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M3 10h18M5 10V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 10v10M19 10v10M3 15h18" />
+                            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4 10h16M6 10v10m12-10v10M3 7h18v3H3z"></path>
                             </svg>
                         </div>
 
-                        <p class="relative z-10 text-xs font-bold tracking-[.2em] text-[var(--restaurant-color-hex-e9cc91)]">
+                        <p
+                            class="relative z-10 text-xs font-bold tracking-[.2em] text-[var(--restaurant-color-hex-e9cc91)]">
                             أهلاً وسهلاً بكم
                         </p>
 
@@ -334,7 +337,8 @@
                         <div
                             class="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2">
                             <span class="text-xs font-semibold text-white/65">رقم الطاولة</span>
-                            <span class="qr-print-number text-lg font-black text-[var(--restaurant-color-hex-f0d5a1)]">{{ $table->number }}</span>
+                            <span
+                                class="qr-print-number text-lg font-black text-[var(--restaurant-color-hex-f0d5a1)]">{{ $table->number }}</span>
                         </div>
                     </div>
 
@@ -354,12 +358,19 @@
                         </p>
 
                         <div class="qr-dash my-6 h-px w-full"></div>
+                        <div class="mx-auto max-w-sm">
+                            <p class="text-[13px] font-bold tracking-[.18em] text-gray-400">
+                                في حال ان جوالك لا يدعم الـQR ادخل على الرابط التالي : <span
+                                    class="text-[15px]">{{ env('APP_URL') . '/menu-page' }}</span>
+                            </p>
+                        </div>
+                        <div class="qr-dash my-6 h-px w-full"></div>
 
                         <div class="mx-auto max-w-sm">
+
                             <p class="text-[10px] font-extrabold tracking-[.18em] text-gray-400">
                                 TABLE ACCESS CODE
                             </p>
-
                             <div class="qr-print-code mt-2 break-all rounded-xl border border-dashed border-[var(--restaurant-color-hex-d9e4db)] bg-[var(--restaurant-color-hex-f7faf7)] px-3 py-3 font-mono text-base font-bold tracking-wider text-[var(--restaurant-color-hex-174c3c)] sm:text-lg"
                                 dir="ltr">
                                 {{ $table->code }}
@@ -387,8 +398,8 @@
                     </button>
 
                     <a href="{{ route('tables.index') }}" class="qr-action qr-action-light">
-                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                            stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M19 12H5m7 7-7-7 7-7" />
                         </svg>
                         العودة للقائمة
@@ -401,7 +412,8 @@
                 <div class="qr-surface overflow-hidden">
                     <div class="border-b border-gray-100 px-5 py-5">
                         <div class="flex items-center gap-3">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-e8f3ed)] text-[var(--restaurant-color-hex-174c3c)]">
+                            <div
+                                class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--restaurant-color-hex-e8f3ed)] text-[var(--restaurant-color-hex-174c3c)]">
                                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="12" cy="12" r="9" />
@@ -446,9 +458,10 @@
                 </div>
 
                 <div class="qr-surface p-5">
-                    <h3 class="mb-4 flex items-center gap-2 text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
-                        <svg class="h-5 w-5 text-[var(--restaurant-color-hex-d0a34f)]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <h3
+                        class="mb-4 flex items-center gap-2 text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
+                        <svg class="h-5 w-5 text-[var(--restaurant-color-hex-d0a34f)]" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 3 14.8 8.7 21 9.6l-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" />
                         </svg>
                         تفاصيل الطاولة
@@ -466,7 +479,8 @@
 
                         <div class="flex items-center justify-between gap-3">
                             <span class="text-xs text-gray-500">رقم الطاولة</span>
-                            <span class="text-sm font-black tabular-nums text-[var(--restaurant-color-hex-174c3c)]">{{ $table->number }}</span>
+                            <span
+                                class="text-sm font-black tabular-nums text-[var(--restaurant-color-hex-174c3c)]">{{ $table->number }}</span>
                         </div>
 
                         <div class="h-px bg-gray-100"></div>
@@ -490,16 +504,19 @@
                     </div>
                 </div>
 
-                <div class="qr-tip rounded-2xl border border-[var(--restaurant-color-hex-e8e1d2)] bg-[var(--restaurant-color-hex-faf7f0)] p-5">
+                <div
+                    class="qr-tip rounded-2xl border border-[var(--restaurant-color-hex-e8e1d2)] bg-[var(--restaurant-color-hex-faf7f0)] p-5">
                     <div class="flex items-start gap-3">
-                        <svg class="mt-0.5 h-5 w-5 shrink-0 text-[var(--restaurant-color-hex-a47b37)]" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="mt-0.5 h-5 w-5 shrink-0 text-[var(--restaurant-color-hex-a47b37)]" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <path d="M12 9v4m0 4h.01" />
                             <path
                                 d="M10.3 3.9 1.8 18.5A1.7 1.7 0 0 0 3.3 21h17.4a1.7 1.7 0 0 0 1.5-2.5L13.7 3.9a2 2 0 0 0-3.4 0Z" />
                         </svg>
                         <div>
-                            <p class="text-sm font-extrabold text-[var(--restaurant-color-hex-765b2e)]">حافظ على وضوح الرمز</p>
+                            <p class="text-sm font-extrabold text-[var(--restaurant-color-hex-765b2e)]">حافظ على وضوح الرمز
+                            </p>
                             <p class="mt-1 text-xs leading-6 text-[var(--restaurant-color-hex-8d7956)]">
                                 اطبع الرمز بجودة عالية، وتجنب تغطيته أو وضعه على سطح يعكس الضوء حتى يسهل مسحه بالهاتف.
                             </p>

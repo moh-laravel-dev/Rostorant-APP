@@ -36,7 +36,7 @@ class MenuController extends Controller
             ->with('orders.food')
             ->first();
 
-        if (!$bill) {
+        if (! $bill) {
             abort(404, 'هذه الفاتورة غير صحيحة');
         }
 
@@ -98,12 +98,12 @@ class MenuController extends Controller
                     'total_price' => $orders->sum('total_price'),
                     'notes' => $orders
                         ->pluck('note')
-                        ->filter(fn($note) => filled($note))
+                        ->filter(fn ($note) => filled($note))
                         ->unique()
                         ->values(),
                     'order_notes' => $orders
-                        ->filter(fn($order) => filled($order->note))
-                        ->map(fn($order) => [
+                        ->filter(fn ($order) => filled($order->note))
+                        ->map(fn ($order) => [
                             'amount' => (int) $order->amount,
                             'note' => $order->note,
                         ])
@@ -129,8 +129,8 @@ class MenuController extends Controller
 
         if (File::exists($path)) {
             $services = collect(json_decode(File::get($path), true) ?? [])
-                ->filter(fn($service) => $service['active'] ?? false)
-                ->map(fn($service) => [
+                ->filter(fn ($service) => $service['active'] ?? false)
+                ->map(fn ($service) => [
                     'name' => $service['name'] ?? '',
                     'price' => ($service['value'] ?? 0),
                     'currency' => $service['currency'],
@@ -142,12 +142,16 @@ class MenuController extends Controller
         return view('Menu.menu', compact('categories', 'services', 'billNumber', 'billCode', 'tableId', 'tableName', 'tableNumber', 'data'));
     }
 
-    public function createToken(string $code)
+    public function createToken(string $code, ?int $from = 0)
     {
-
         $bill = Bill::where('code', $code)->first();
-        if (!$bill) {
-            $table = Table::where('code', '#' . $code)->firstOrFail();
+        $is_new = false;
+        if (! $bill) {
+            $is_new = true;
+            $table = Table::where('code', '#'.$code)->first();
+            if (! $table && ($from == '1' || $from == '2')) {
+                return back()->withErrors(['code' => 'تحقق من صحة الرمز المدخل']);
+            }
 
             $ipAddress = request()->ip();
 
@@ -173,7 +177,7 @@ class MenuController extends Controller
                     ) {
                         return response()->view(
                             'errors.table-session-active',
-                            ['tableCode' => $code],
+                            ['tableCode' => $code, 'from' => $from],
                             403
                         );
                     }
@@ -187,7 +191,7 @@ class MenuController extends Controller
                         ->where('status', 'active')
                         ->first();
 
-                    if (!$bill) {
+                    if (! $bill) {
                         abort(404);
                     }
 
@@ -200,7 +204,7 @@ class MenuController extends Controller
                     ->lockForUpdate()
                     ->firstOrFail();
 
-                if (!$lockedTable->status) {
+                if (! $lockedTable->status) {
                     return false;
                 }
 
@@ -211,10 +215,10 @@ class MenuController extends Controller
                 return true;
             });
 
-            if (!$opened) {
+            if (! $opened) {
                 return response()->view(
                     'errors.table-session-active',
-                    ['tableCode' => $code],
+                    ['tableCode' => $code, 'from' => $from],
                     403
                 );
             }
@@ -231,9 +235,10 @@ class MenuController extends Controller
             $bill = Bill::create([
                 'start_time' => now(),
                 'code' => Str::upper(Str::random(12)),
-                'number' => now()->format('YmdHis') . Str::upper(Str::random(18)),
+                'number' => now()->format('YmdHis').Str::upper(Str::random(18)),
                 'table_id' => $table->id,
             ]);
+            event(new CashierDashboardUpdated((int) $bill->table_id));
 
             return redirect()->route('menu.index', $bill->number);
         }
@@ -248,7 +253,10 @@ class MenuController extends Controller
             'table_ip_address' => $ipAddress,
             'table_session_expires_at' => now()->addDay()->timestamp,
         ]);
-        event(new CashierDashboardUpdated((int) $bill->table_id));
+        if ($is_new) {
+            event(new CashierDashboardUpdated((int) $bill->table_id));
+        }
+
         return redirect()->route('menu.index', $bill->number);
     }
 
@@ -264,7 +272,7 @@ class MenuController extends Controller
 
         $bill = Bill::where('number', $validated['billNumber'])->first();
 
-        if (!$bill) {
+        if (! $bill) {
             return response()->json([
                 'success' => false,
                 'message' => 'هذه الفاتورة غير موجودة.',
@@ -356,12 +364,12 @@ class MenuController extends Controller
                     'total_price' => $orders->sum('total_price'),
                     'notes' => $orders
                         ->pluck('note')
-                        ->filter(fn($note) => filled($note))
+                        ->filter(fn ($note) => filled($note))
                         ->unique()
                         ->values(),
                     'order_notes' => $orders
-                        ->filter(fn($order) => filled($order->note))
-                        ->map(fn($order) => [
+                        ->filter(fn ($order) => filled($order->note))
+                        ->map(fn ($order) => [
                             'amount' => (int) $order->amount,
                             'note' => $order->note,
                         ])
@@ -382,5 +390,11 @@ class MenuController extends Controller
             'success' => true,
             'data' => $data,
         ]);
+    }
+
+    public function menuPage(Request $request)
+    {
+        return view('Menu.join-to-menu');
+
     }
 }

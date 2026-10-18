@@ -146,6 +146,7 @@
                                                                         التحضير ثم أكّد كل طلب لإرساله إلى المطبخ.</p>
                                                                 </div>
                                                                 <form method="dialog">
+                                                                    @csrf
                                                                     <button type="submit" aria-label="إغلاق النافذة"
                                                                         class="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-xl font-bold text-gray-600 shadow-sm transition hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">
                                                                         &times;
@@ -247,7 +248,8 @@
                                                                             <p
                                                                                 class="mt-1 break-words text-xs leading-5 text-gray-500">
                                                                                 ملاحظة
-                                                                                ({{ $ordersWithNote->sum('amount') }}):
+                                                                                ({{ $ordersWithNote->sum('amount') }})
+                                                                                :
                                                                                 {{ $note }}
                                                                             </p>
                                                                         @endif
@@ -367,7 +369,8 @@
                 if (openButton) {
                     const dialog = document.getElementById(openButton.dataset.openDialog);
                     if (!(dialog instanceof HTMLDialogElement)) {
-                        console.error('Pending orders dialog could not be opened.', openButton.dataset.openDialog);
+                        console.error('Pending orders dialog could not be opened.', openButton.dataset
+                            .openDialog);
                         return;
                     }
 
@@ -421,7 +424,8 @@
                         errorMessage = document.createElement('p');
                         errorMessage.dataset.confirmError = '';
                         errorMessage.setAttribute('role', 'alert');
-                        errorMessage.className = 'mt-2 rounded-lg bg-red-50 px-3 py-2 text-xs font-semibold text-red-700';
+                        errorMessage.className =
+                            'mt-2 rounded-lg bg-red-50 px-3 py-2 text-xs font-semibold text-red-700';
                         form.insertAdjacentElement('afterend', errorMessage);
                     }
                     errorMessage.textContent = error.message || 'تعذر تأكيد الطلب.';

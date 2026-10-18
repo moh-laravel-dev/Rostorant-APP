@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryFoodController;
 use App\Http\Controllers\Admin\FoodController;
 use App\Http\Controllers\Admin\TableController;
 use App\Http\Controllers\Admin\TableServiceController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\CashierAuthController;
 use App\Http\Controllers\CashierDashboardController;
 use App\Http\Controllers\MenuController;
@@ -21,7 +22,10 @@ Route::get('/menu/bill/{number}', [MenuController::class, 'index'])->middleware(
 Route::get('/menu/bill/data/{number}', [MenuController::class, 'updateData'])->middleware('table.session')->name('menu.index.data');
 Route::post('/bill/new/orders', [MenuController::class, 'newOrders'])
     ->name('bill.new.orders');
+Route::get('menu-page', [MenuController::class, 'menuPage'])->name('menu.page');
+Route::get('menu-page/{code}/{from?}', [MenuController::class, 'createToken'])->name('menu.page_login');
 Route::get('menu/{code}', [MenuController::class, 'createToken'])->name('menu.login');
+Route::get('jone-to-bill', [BillController::class, 'joneToBill'])->name('jone.to.bill');
 
 Route::get('/cashier/login', fn () => redirect()->route('admin.login', ['type' => 'cashier']))
     ->name('cashier.login');

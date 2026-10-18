@@ -133,12 +133,12 @@
 
                             </div>
 
-
                             {{-- QR Code --}}
                             @if ($billCode)
                                 <div
-                                    class="bill-qr-panel mt-3 overflow-hidden rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/25 bg-[var(--restaurant-color-hex-0c241d)] p-5 shadow-xl">
+                                    class="bill-qr-panel mt-3 overflow-hidden rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/25 bg-[var(--restaurant-color-hex-0c241d)] p-4 shadow-xl sm:p-5">
 
+                                    {{-- Header --}}
                                     <div class="flex items-center gap-4">
                                         <div
                                             class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/30 bg-[var(--restaurant-color-hex-e8c98c)]/10 text-[var(--restaurant-color-hex-e8c98c)]">
@@ -156,43 +156,144 @@
                                             <p class="text-sm font-bold text-white/85">
                                                 امسح رمز QR للانضمام
                                             </p>
+
                                             <p class="mt-1 text-xs leading-6 text-white/40">
                                                 شارك هذا الرمز مع أصدقائك للانضمام إلى الفاتورة نفسها.
                                             </p>
                                         </div>
                                     </div>
 
+                                    {{-- QR Code --}}
                                     <div
-                                        class="bill-qr-frame mt-5 flex flex-col items-center rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/20 bg-white p-5">
+                                        class="bill-qr-frame mt-5 flex flex-col items-center rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/20 bg-white p-4 sm:p-5">
+
                                         <div id="bill-qr-code"
                                             class="flex min-h-[220px] min-w-[220px] items-center justify-center"
                                             data-url="{{ route('menu.login', ['code' => $billCode]) }}">
                                         </div>
                                     </div>
 
-                                    <p class="mt-4 text-center text-xs text-white/35">
-                                        رمز خاص بهذه الفاتورة
-                                    </p>
+                                    {{-- Bill Join Code --}}
+                                    <div class="mt-5">
+                                        <p class="text-center text-xs font-semibold text-white/50">
+                                            رمز الانضمام لهذه الفاتورة
+                                        </p>
+
+                                        <div class="mx-auto mt-3 grid w-full max-w-sm grid-cols-6 gap-2 sm:gap-3"
+                                            dir="ltr">
+
+                                            @foreach (str_split($billCode) as $character)
+                                                @if ($loop->index === 6)
+                                                    <div class="col-span-6 flex items-center gap-3 py-1">
+                                                        <div
+                                                            class="h-px flex-1 bg-[var(--restaurant-color-hex-e8c98c)]/30">
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                <div
+                                                    class="flex aspect-square min-w-0 flex-1 items-center justify-center rounded-xl border border-[var(--restaurant-color-hex-e8c98c)]/20 bg-white p-0.5 font-mono text-xl font-bold uppercase text-[var(--restaurant-color-hex-174c3c)] sm:text-2xl">
+                                                    {{ $character }}
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        {{-- Copy Bill Code --}}
+                                        <button type="button" id="copy-bill-code"
+                                            class="mx-auto mt-4 flex w-full max-w-sm items-center justify-center gap-2 rounded-xl border border-[var(--restaurant-color-hex-e8c98c)]/30 bg-[var(--restaurant-color-hex-e8c98c)]/10 px-4 py-3 text-sm font-bold text-[var(--restaurant-color-hex-e8c98c)] transition hover:bg-[var(--restaurant-color-hex-e8c98c)]/20 active:scale-[0.98]">
+
+                                            <svg id="copy-bill-code-icon" class="h-5 w-5" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="1.8"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                                <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" />
+                                            </svg>
+
+                                            <span id="copy-bill-code-label">نسخ رمز الفاتورة</span>
+                                        </button>
+
+                                        <p id="copy-bill-code-feedback"
+                                            class="mt-3 hidden text-center text-xs font-semibold text-[var(--restaurant-color-hex-e8c98c)]"
+                                            role="status" aria-live="polite">
+                                        </p>
+
+                                        <span id="bill-join-code" class="sr-only">{{ $billCode }}</span>
+                                    </div>
                                 </div>
 
+                                {{-- QR Code Library --}}
                                 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         const container = document.getElementById('bill-qr-code');
 
-                                        if (!container || typeof QRCode === 'undefined') return;
+                                        if (container && typeof QRCode !== 'undefined') {
+                                            new QRCode(container, {
+                                                text: container.dataset.url,
+                                                width: 220,
+                                                height: 220,
+                                                colorDark: '#0c241d',
+                                                colorLight: '#ffffff',
+                                                correctLevel: QRCode.CorrectLevel.H
+                                            });
+                                        }
 
-                                        const url = new URL(container.dataset.url, window.location.origin);
-                                        url.searchParams.set('bill_code', container.dataset.code);
+                                        const button = document.getElementById('copy-bill-code');
+                                        const codeElement = document.getElementById('bill-join-code');
+                                        const label = document.getElementById('copy-bill-code-label');
+                                        const icon = document.getElementById('copy-bill-code-icon');
+                                        const feedback = document.getElementById('copy-bill-code-feedback');
 
-                                        new QRCode(container, {
-                                            text: url.toString(),
-                                            width: 220,
-                                            height: 220,
-                                            colorDark: '#0c241d',
-                                            colorLight: '#ffffff',
-                                            correctLevel: QRCode.CorrectLevel.H
+                                        if (!button || !codeElement || !label || !icon || !feedback) {
+                                            return;
+                                        }
+
+                                        button.addEventListener('click', async function() {
+                                            const code = codeElement.textContent.trim();
+
+                                            try {
+                                                if (navigator.clipboard && window.isSecureContext) {
+                                                    await navigator.clipboard.writeText(code);
+                                                } else {
+                                                    const textarea = document.createElement('textarea');
+
+                                                    textarea.value = code;
+                                                    textarea.setAttribute('readonly', '');
+                                                    textarea.style.position = 'fixed';
+                                                    textarea.style.left = '-9999px';
+
+                                                    document.body.appendChild(textarea);
+                                                    textarea.select();
+
+                                                    const copied = document.execCommand('copy');
+                                                    textarea.remove();
+
+                                                    if (!copied) {
+                                                        throw new Error('Copy failed');
+                                                    }
+                                                }
+
+                                                label.textContent = 'تم النسخ';
+                                                feedback.textContent = 'تم نسخ رمز الفاتورة بنجاح';
+                                                feedback.classList.remove('hidden');
+
+                                                icon.innerHTML = '<path d="m5 12 4 4L19 6" />';
+
+                                                setTimeout(function() {
+                                                    label.textContent = 'نسخ رمز الفاتورة';
+
+                                                    feedback.classList.add('hidden');
+
+                                                    icon.innerHTML = `
+                            <rect x="8" y="8" width="12" height="12" rx="2" />
+                            <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" />
+                        `;
+                                                }, 2000);
+
+                                            } catch (error) {
+                                                feedback.textContent = 'تعذر النسخ، يرجى نسخ الرمز يدويًا';
+                                                feedback.classList.remove('hidden');
+                                            }
                                         });
                                     });
                                 </script>

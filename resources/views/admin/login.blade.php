@@ -141,8 +141,7 @@
             border: 1px solid var(--restaurant-color-hex-e5e7eb);
             border-radius: 12px;
             background: var(--restaurant-color-rgb-250-247-240-point-65);
-            padding-left: 120px !important;
-            padding-right: 16px !important;
+            padding-left: 112px !important;
             text-align: left;
             color: var(--restaurant-color-hex-1f2937);
             font-size: 16px;
@@ -256,6 +255,13 @@
                 animation-iteration-count: 1 !important;
             }
         }
+
+        [dir=rtl] .iti input.iti__tel-input,
+        [dir=rtl] .iti input.iti__tel-input[type=text],
+        [dir=rtl] .iti input.iti__tel-input[type=tel] {
+            text-align: left;
+            padding-left: 112px;
+        }
     </style>
 </head>
 
@@ -266,10 +272,14 @@
     <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
         <div class="decorative-ring -right-28 -top-28 h-80 w-80"></div>
         <div class="decorative-ring -right-16 -top-16 h-56 w-56"></div>
-        <div class="decorative-ring -bottom-32 -left-28 h-96 w-96" style="border-color: var(--restaurant-color-rgb-23-76-60-point-12)"></div>
-        <div class="decorative-ring -bottom-16 -left-12 h-64 w-64" style="border-color: var(--restaurant-color-rgb-23-76-60-point-09)"></div>
-        <div class="absolute left-[12%] top-[18%] h-2 w-2 rounded-full bg-[var(--restaurant-color-hex-d7a85b)]/50"></div>
-        <div class="absolute bottom-[22%] right-[10%] h-3 w-3 rounded-full bg-[var(--restaurant-color-hex-174c3c)]/20"></div>
+        <div class="decorative-ring -bottom-32 -left-28 h-96 w-96"
+            style="border-color: var(--restaurant-color-rgb-23-76-60-point-12)"></div>
+        <div class="decorative-ring -bottom-16 -left-12 h-64 w-64"
+            style="border-color: var(--restaurant-color-rgb-23-76-60-point-09)"></div>
+        <div class="absolute left-[12%] top-[18%] h-2 w-2 rounded-full bg-[var(--restaurant-color-hex-d7a85b)]/50">
+        </div>
+        <div class="absolute bottom-[22%] right-[10%] h-3 w-3 rounded-full bg-[var(--restaurant-color-hex-174c3c)]/20">
+        </div>
     </div>
 
     <main class="relative z-10 mx-auto w-full max-w-md">
@@ -279,7 +289,8 @@
             <div
                 class="mb-3 inline-flex items-center gap-2 rounded-full border border-[var(--restaurant-color-hex-174c3c)]/10 bg-white/70 px-4 py-2 shadow-sm">
                 <span class="h-2 w-2 rounded-full bg-[var(--restaurant-color-hex-d7a85b)]"></span>
-                <span class="text-xs font-bold tracking-wide text-[var(--restaurant-color-hex-174c3c)]">بوابة الإدارة الرسمية</span>
+                <span class="text-xs font-bold tracking-wide text-[var(--restaurant-color-hex-174c3c)]">بوابة الإدارة
+                    الرسمية</span>
             </div>
             <p class="text-sm font-medium text-gray-500">
                 تسجيل دخول آمن وسهل إلى لوحة التحكم
@@ -359,84 +370,89 @@
                 @endphp
                 <div class="mb-6 grid grid-cols-2 gap-2 rounded-xl bg-gray-100 p-1" role="tablist"
                     aria-label="نوع تسجيل الدخول" data-login-tab-locked="{{ $loginTabLocked ? 'true' : 'false' }}">
-                    <button type="button" id="admin-login-tab" role="tab"
-                        aria-controls="admin-login-panel" aria-selected="{{ $activeLoginTab !== 'cashier' ? 'true' : 'false' }}"
+                    <button type="button" id="admin-login-tab" role="tab" aria-controls="admin-login-panel"
+                        aria-selected="{{ $activeLoginTab !== 'cashier' ? 'true' : 'false' }}"
                         class="login-role-tab rounded-lg px-3 py-3 text-sm font-bold transition {{ $activeLoginTab !== 'cashier' ? 'is-active' : '' }}"
                         data-login-tab="admin">دخول الأدمن</button>
-                    <button type="button" id="cashier-login-tab" role="tab"
-                        aria-controls="cashier-login-panel" aria-selected="{{ $activeLoginTab === 'cashier' ? 'true' : 'false' }}"
+                    <button type="button" id="cashier-login-tab" role="tab" aria-controls="cashier-login-panel"
+                        aria-selected="{{ $activeLoginTab === 'cashier' ? 'true' : 'false' }}"
                         class="login-role-tab rounded-lg px-3 py-3 text-sm font-bold transition {{ $activeLoginTab === 'cashier' ? 'is-active' : '' }}"
                         data-login-tab="cashier">دخول الكاشير</button>
                 </div>
 
                 <div id="admin-login-panel" role="tabpanel" aria-labelledby="admin-login-tab"
                     {{ $activeLoginTab === 'cashier' ? 'hidden' : '' }}>
-                <form id="admin-login-form" method="POST" action="{{ route('admin.login.action') }}" class="space-y-5">
-                    @csrf
-                    <input type="hidden" name="login_type" value="admin">
+                    <form id="admin-login-form" method="POST" action="{{ route('admin.login.action') }}"
+                        class="space-y-5">
+                        @csrf
+                        <input type="hidden" name="login_type" value="admin">
 
-                    {{-- Phone --}}
-                    <div>
-                        <label for="phone" class="mb-2 block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
-                            رقم الهاتف
-                        </label>
-
-                        <div class="relative">
-                            <input id="phone" type="tel" name="phone" value="{{ old('phone') }}" required
-                                autofocus autocomplete="tel" inputmode="numeric" placeholder="أدخل رقم الهاتف"
-                                class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 px-4 py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
-
-                            <input type="hidden" name="country_code" id="country_code"
-                                value="{{ old('country_code', '+963') }}">
-                        </div>
-
-                        @error('phone')
-                            <p class="mt-1.5 text-xs font-semibold text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- Password --}}
-                    <div x-data="{ showPassword: false }">
-                        <div class="mb-2 flex items-center justify-between gap-3">
-                            <label for="password" class="block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
-                                كلمة المرور
+                        {{-- Phone --}}
+                        <div>
+                            <label for="phone"
+                                class="mb-2 block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
+                                رقم الهاتف
                             </label>
 
-                            <a href="{{ route('password.request') }}"
-                                class="text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:text-[var(--restaurant-color-hex-b28743)]">
-                                نسيت كلمة المرور؟
-                            </a>
+                            <div class="relative">
+                                <input id="phone" type="tel" name="phone" value="{{ old('phone') }}"
+                                    required autofocus autocomplete="tel" inputmode="numeric"
+                                    placeholder="أدخل رقم الهاتف"
+                                    class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60  py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
+
+                                <input type="hidden" name="country_code" id="country_code"
+                                    value="{{ old('country_code', '+963') }}">
+                            </div>
+
+                            @error('phone')
+                                <p class="mt-1.5 text-xs font-semibold text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
 
-                        <div class="relative">
-                            <span
-                                class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[var(--restaurant-color-hex-174c3c)]/60">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="1.8">
-                                    <rect x="4" y="10" width="16" height="11" rx="2" />
-                                    <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-                                    <path d="M12 14v3" />
-                                </svg>
-                            </span>
+                        {{-- Password --}}
+                        <div x-data="{ showPassword: false }">
+                            <div class="mb-2 flex items-center justify-between gap-3">
+                                <label for="password"
+                                    class="block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
+                                    كلمة المرور
+                                </label>
 
-                            <input id="password" :type="showPassword ? 'text' : 'password'" name="password" required
-                                autocomplete="current-password" placeholder="أدخل كلمة المرور" dir="ltr"
-                                class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 py-3.5 pl-20 pr-12 text-left text-gray-800 outline-none placeholder:text-gray-400">
+                                <a href="{{ route('password.request') }}"
+                                    class="text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:text-[var(--restaurant-color-hex-b28743)]">
+                                    نسيت كلمة المرور؟
+                                </a>
+                            </div>
 
-                            <button type="button" @click="showPassword = !showPassword"
-                                :aria-label="showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'"
-                                class="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-lg px-2.5 py-2 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:bg-[var(--restaurant-color-hex-174c3c)]/10 focus:outline-none focus:ring-2 focus:ring-[var(--restaurant-color-hex-174c3c)]/30"
-                                x-text="showPassword ? 'إخفاء' : 'إظهار'">
-                            </button>
+                            <div class="relative">
+                                <span
+                                    class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[var(--restaurant-color-hex-174c3c)]/60">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.8">
+                                        <rect x="4" y="10" width="16" height="11" rx="2" />
+                                        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                                        <path d="M12 14v3" />
+                                    </svg>
+                                </span>
+
+                                <input id="password" :type="showPassword ? 'text' : 'password'" name="password"
+                                    required autocomplete="current-password" placeholder="أدخل كلمة المرور"
+                                    dir="ltr"
+                                    class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 py-3.5 pl-20 pr-12 text-left text-gray-800 outline-none placeholder:text-gray-400">
+
+                                <button type="button" @click="showPassword = !showPassword"
+                                    :aria-label="showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'"
+                                    class="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-lg px-2.5 py-2 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:bg-[var(--restaurant-color-hex-174c3c)]/10 focus:outline-none focus:ring-2 focus:ring-[var(--restaurant-color-hex-174c3c)]/30"
+                                    x-text="showPassword ? 'إخفاء' : 'إظهار'">
+                                </button>
+                            </div>
+
+                            @error('password')
+                                <p class="mt-1.5 text-xs font-semibold text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
 
-                        @error('password')
-                            <p class="mt-1.5 text-xs font-semibold text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- Remember Me --}}
-                    {{--
+                        {{-- Remember Me --}}
+                        {{--
                     <label class="flex cursor-pointer items-center gap-2 text-sm text-gray-600">
                         <input type="checkbox" name="remember" value="1" @checked(old('remember'))
                             class="h-4 w-4 rounded border-gray-300 accent-[var(--restaurant-color-hex-174c3c)] focus:ring-[var(--restaurant-color-hex-174c3c)]">
@@ -444,19 +460,19 @@
                     </label>
                     --}}
 
-                    {{-- Submit --}}
-                    <button type="submit"
-                        class="login-button group flex min-h-[54px] w-full items-center justify-center gap-3 rounded-xl px-5 py-3.5 font-bold text-white focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20">
-                        <span>تسجيل الدخول</span>
+                        {{-- Submit --}}
+                        <button type="submit"
+                            class="login-button group flex min-h-[54px] w-full items-center justify-center gap-3 rounded-xl px-5 py-3.5 font-bold text-white focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20">
+                            <span>تسجيل الدخول</span>
 
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14" stroke-linecap="round" />
-                            <path d="m12 5 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                </form>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14" stroke-linecap="round" />
+                                <path d="m12 5 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </form>
                 </div>
 
                 <div id="cashier-login-panel" role="tabpanel" aria-labelledby="cashier-login-tab"
@@ -471,8 +487,9 @@
                                 class="mb-2 block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
                                 رقم الهاتف
                             </label>
-                            <input id="cashier-phone" type="tel" name="phone" value="{{ old('cashier_phone', old('phone')) }}" required
-                                autocomplete="tel" inputmode="numeric" placeholder="أدخل رقم الهاتف"
+                            <input id="cashier-phone" type="tel" name="phone"
+                                value="{{ old('cashier_phone', old('phone')) }}" required autocomplete="tel"
+                                inputmode="numeric" placeholder="أدخل رقم الهاتف"
                                 class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 px-4 py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
                             <input type="hidden" name="country_code" id="cashier_country_code"
                                 value="{{ old('cashier_country_code', old('country_code', '+963')) }}">
@@ -484,6 +501,15 @@
                                 كلمة المرور
                             </label>
                             <div class="relative">
+                                <span
+                                    class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[var(--restaurant-color-hex-174c3c)]/60">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.8">
+                                        <rect x="4" y="10" width="16" height="11" rx="2" />
+                                        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                                        <path d="M12 14v3" />
+                                    </svg>
+                                </span>
                                 <input id="cashier-password" :type="showPassword ? 'text' : 'password'"
                                     name="password" required autocomplete="current-password"
                                     placeholder="أدخل كلمة المرور" dir="ltr"
@@ -511,8 +537,9 @@
                 {{-- Security Notice --}}
                 <div
                     class="mt-6 flex items-center justify-center gap-2 rounded-xl border border-[var(--restaurant-color-hex-174c3c)]/[0.08] bg-[var(--restaurant-color-hex-174c3c)]/[0.035] px-3 py-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0 text-[var(--restaurant-color-hex-174c3c)]/70"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 shrink-0 text-[var(--restaurant-color-hex-174c3c)]/70" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="1.8">
                         <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" stroke-linecap="round"
                             stroke-linejoin="round" />
                         <path d="m9 12 2 2 4-4" stroke-linecap="round" stroke-linejoin="round" />
@@ -557,8 +584,16 @@
             const adminPanel = document.querySelector('#admin-login-panel');
             const cashierPanel = document.querySelector('#cashier-login-panel');
             const phoneForms = {
-                admin: { phone: '#phone', countryCode: '#country_code', form: '#admin-login-form' },
-                cashier: { phone: '#cashier-phone', countryCode: '#cashier_country_code', form: '#cashier-login-form' },
+                admin: {
+                    phone: '#phone',
+                    countryCode: '#country_code',
+                    form: '#admin-login-form'
+                },
+                cashier: {
+                    phone: '#cashier-phone',
+                    countryCode: '#cashier_country_code',
+                    form: '#cashier-login-form'
+                },
             };
             const initializedPhoneForms = {};
 

@@ -159,7 +159,8 @@
         <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
 
             <a href="#home" class="flex items-center gap-3 text-white">
-                <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--restaurant-color-hex-d7a85b)] text-2xl">
+                <div
+                    class="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--restaurant-color-hex-d7a85b)] text-2xl">
                     <i class="fa-solid fa-utensils"></i>
                 </div>
 
@@ -175,6 +176,9 @@
 
             {{-- Desktop Navigation --}}
             <div class="hidden items-center gap-7 text-sm font-semibold text-white/90 md:flex">
+                <a href="{{ route('menu.page') }}" class="transition hover:text-[var(--restaurant-color-hex-d7a85b)]">
+                    المينيو
+                </a>
                 <a href="#home" class="transition hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.home') }}
                 </a>
@@ -187,7 +191,8 @@
                 <a href="#contact" class="transition hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.contact') }}
                 </a>
-                <a href="{{ route('admin.login') }}" class="transition hover:text-[var(--restaurant-color-hex-d7a85b)]">
+                <a href="{{ route('admin.login') }}"
+                    class="transition hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.login') }}
                 </a>
             </div>
@@ -204,6 +209,11 @@
         <div id="mobile-menu"
             class="hidden border-t border-white/10 bg-[var(--restaurant-color-hex-0d2b20f0)] px-5 py-4 backdrop-blur-xl md:hidden">
             <div class="mx-auto flex max-w-7xl flex-col gap-1 text-sm font-semibold text-white/90">
+
+                <a href="{{ route('menu.page') }}"
+                    class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[var(--restaurant-color-hex-d7a85b)]">
+                    المينيو
+                </a>
                 <a href="#home"
                     class="mobile-menu-link rounded-lg px-4 py-3 transition hover:bg-white/5 hover:text-[var(--restaurant-color-hex-d7a85b)]">
                     {{ config('restaurant.navigation.home') }}
@@ -432,7 +442,8 @@
                     {{ config('restaurant.about.eyebrow') }}
                 </p>
 
-                <h2 class="heading-font text-4xl font-bold leading-tight text-[var(--restaurant-color-hex-174c3c)] sm:text-5xl">
+                <h2
+                    class="heading-font text-4xl font-bold leading-tight text-[var(--restaurant-color-hex-174c3c)] sm:text-5xl">
                     {{ config('restaurant.about.title') }}
 
                     <span class="block italic">
@@ -505,7 +516,8 @@
     </section>
 
     {{-- Contact Section --}}
-    <section id="contact" class="bg-[var(--restaurant-color-hex-174c3c)] px-5 py-16 text-center text-white sm:px-8 lg:py-20">
+    <section id="contact"
+        class="bg-[var(--restaurant-color-hex-174c3c)] px-5 py-16 text-center text-white sm:px-8 lg:py-20">
 
         <p class="mb-4 text-xs font-bold tracking-widest text-[var(--restaurant-color-hex-d7a85b)]">
             {{ config('restaurant.contact.eyebrow') }}

@@ -849,6 +849,7 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+
             .tables-page *,
             .tables-page *::before,
             .tables-page *::after {
@@ -906,11 +907,11 @@
         <div class="page-heading">
             <div class="heading-content">
                 <div class="heading-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 8h18v3H3z"/>
-                        <path d="M5 11v9M19 11v9"/>
-                        <path d="M8 8V5h8v3"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M3 8h18v3H3z" />
+                        <path d="M5 11v9M19 11v9" />
+                        <path d="M8 8V5h8v3" />
                     </svg>
                 </div>
 
@@ -923,9 +924,8 @@
             </div>
 
             <a href="{{ route('tables.create') }}" class="btn-add">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round">
-                    <path d="M12 5v14M5 12h14"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M12 5v14M5 12h14" />
                 </svg>
                 إضافة طاولة جديدة
             </a>
@@ -940,10 +940,10 @@
         <div class="stats">
             <div class="stat-card stat-total">
                 <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="16" rx="3"/>
-                        <path d="M3 10h18M9 4v6M15 4v6"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="16" rx="3" />
+                        <path d="M3 10h18M9 4v6M15 4v6" />
                     </svg>
                 </div>
                 <div>
@@ -954,10 +954,10 @@
 
             <div class="stat-card stat-available">
                 <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="9"/>
-                        <path d="m8 12 2.5 2.5L16 9"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="m8 12 2.5 2.5L16 9" />
                     </svg>
                 </div>
                 <div>
@@ -968,10 +968,10 @@
 
             <div class="stat-card stat-busy">
                 <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="9"/>
-                        <path d="M12 7v5l3 2"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 7v5l3 2" />
                     </svg>
                 </div>
                 <div>
@@ -983,30 +983,25 @@
 
         <div class="search-panel">
             <div class="search-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="7"/>
-                    <path d="m16 16 4 4"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m16 16 4 4" />
                 </svg>
                 البحث عن طاولة
             </div>
 
             <form method="GET" action="{{ route('tables.index') }}" class="search-form">
+                @csrf
                 <div class="search-input-wrap">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="7"/>
-                        <path d="m16 16 4 4"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="m16 16 4 4" />
                     </svg>
 
-                    <input
-                        type="text"
-                        name="search"
-                        value="{{ request('search') }}"
-                        placeholder="ابحث برقم الطاولة أو كود QR..."
-                        autocomplete="off"
-                        class="search-input"
-                    >
+                    <input type="text" name="search" value="{{ request('search') }}"
+                        placeholder="ابحث برقم الطاولة أو كود QR..." autocomplete="off" class="search-input">
                 </div>
 
                 <button type="submit" class="btn-search">
@@ -1031,27 +1026,23 @@
         @if ($tables->isNotEmpty())
             <div class="tables-grid">
                 @foreach ($tables as $table)
-                    <div
-                        class="table-card {{ $table->status ? '' : 'busy' }}"
-                        id="table-card-{{ $table->id }}"
-                    >
+                    <div class="table-card {{ $table->status ? '' : 'busy' }}" id="table-card-{{ $table->id }}">
                         <div class="table-card-header">
                             <div class="table-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
-                                    aria-label="أيقونة طاولة">
-                                    <path d="M3 8h18v3H3z"/>
-                                    <path d="M5 11v9M19 11v9"/>
-                                    <path d="M8 8V5h8v3"/>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-label="أيقونة طاولة">
+                                    <path d="M3 8h18v3H3z" />
+                                    <path d="M5 11v9M19 11v9" />
+                                    <path d="M8 8V5h8v3" />
                                 </svg>
                             </div>
 
                             <a href="{{ route('tables.edit', $table->code) }}"
                                 class="{{ $table->status ? 'btn-edit' : 'btn-edit-red' }}">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 20h9"/>
-                                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 20h9" />
+                                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z" />
                                 </svg>
                                 تعديل
                             </a>
@@ -1062,10 +1053,10 @@
                         </div>
 
                         <div class="table-number">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="4" y="3" width="16" height="18" rx="2"/>
-                                <path d="M9 8h6M9 12h6M9 16h3"/>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="3" width="16" height="18" rx="2" />
+                                <path d="M9 8h6M9 12h6M9 16h3" />
                             </svg>
                             <span>رقم الطاولة: {{ $table->number }}</span>
                         </div>
@@ -1083,26 +1074,24 @@
                         </div>
 
                         <div class="actions">
-                            <a
-                                href="{{ route('tables.qr', $table->id) }}"
-                                class="btn {{ $table->status ? 'btn-show' : 'btn-show-red' }}"
-                            >
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="3" width="7" height="7" rx="1"/>
-                                    <rect x="14" y="3" width="7" height="7" rx="1"/>
-                                    <rect x="3" y="14" width="7" height="7" rx="1"/>
-                                    <path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20v1"/>
+                            <a href="{{ route('tables.qr', $table->id) }}"
+                                class="btn {{ $table->status ? 'btn-show' : 'btn-show-red' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="7" height="7" rx="1" />
+                                    <rect x="14" y="3" width="7" height="7" rx="1" />
+                                    <rect x="3" y="14" width="7" height="7" rx="1" />
+                                    <path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20v1" />
                                 </svg>
                                 عرض رمز QR
                             </a>
 
                             @if (!$table->status)
                                 <a href="" class="btn btn-print">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M4 4h16v16H4z"/>
-                                        <path d="M8 8h8M8 12h8M8 16h5"/>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 4h16v16H4z" />
+                                        <path d="M8 8h8M8 12h8M8 16h5" />
                                     </svg>
                                     عرض الفاتورة الحالية
                                 </a>
@@ -1114,12 +1103,12 @@
         @else
             <div class="empty">
                 <div class="empty-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 8h18v3H3z"/>
-                        <path d="M5 11v9M19 11v9"/>
-                        <path d="M8 8V5h8v3"/>
-                        <path d="M12 13v3M12 18h.01"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 8h18v3H3z" />
+                        <path d="M5 11v9M19 11v9" />
+                        <path d="M8 8V5h8v3" />
+                        <path d="M12 13v3M12 18h.01" />
                     </svg>
                 </div>
 
@@ -1135,9 +1124,9 @@
 
                 @if (!request()->filled('search'))
                     <a href="{{ route('tables.create') }}" class="btn-add">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round">
-                            <path d="M12 5v14M5 12h14"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round">
+                            <path d="M12 5v14M5 12h14" />
                         </svg>
                         إضافة أول طاولة
                     </a>

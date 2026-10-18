@@ -1,5 +1,5 @@
  @extends('admin.layouts.main-layout')
-@section('title','إدارة قائمة الطعام')
+ @section('title', 'إدارة قائمة الطعام')
 
  @section('content')
      <div class="space-y-6 sm:space-y-8" dir="rtl">
@@ -75,7 +75,7 @@
          <div class="rounded-3xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
              <form action="{{ route('admin.category-food.food.index', $category) }}" method="GET"
                  class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-
+                 @csrf
                  {{-- Search --}}
                  <div class="sm:col-span-2">
                      <label for="search" class="mb-2 block text-sm font-bold text-gray-700">
@@ -267,7 +267,8 @@
                              </svg>
                              سعر الوجبة
                          </div>
-                         <div class="mt-0.5 truncate text-base font-extrabold tabular-nums text-[var(--restaurant-color-hex-174c3c)] sm:text-lg">
+                         <div
+                             class="mt-0.5 truncate text-base font-extrabold tabular-nums text-[var(--restaurant-color-hex-174c3c)] sm:text-lg">
                              {{ number_format($food->price, 0) }}
                              <span class="text-xs font-bold">ل.س</span>
                          </div>
