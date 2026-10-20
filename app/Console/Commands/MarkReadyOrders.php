@@ -20,13 +20,12 @@ class MarkReadyOrders extends Command
         Order::query()
             ->with('bill:id,table_id')
             ->where('status', '1')
-            // ->where('expected_time', '>', '00:00:00')
-            ->whereHas('bill', fn($query) => $query->where('status', 'active'))
+            ->whereHas('bill', fn ($query) => $query->where('status', 'active'))
             ->get()
             ->each(function (Order $order) use ($now, &$updatedTableIds): void {
                 $durationParts = array_map('intval', explode(':', (string) $order->expected_time));
 
-                if (count($durationParts) !== 3) {
+                if (count($durationParts) !== 3 || $order->created_at === null) {
                     return;
                 }
 
@@ -34,17 +33,19 @@ class MarkReadyOrders extends Command
                     + ($durationParts[1] * 60)
                     + $durationParts[2];
 
-                if ($expectedSeconds < 1 || $order->updated_at->copy()->addSeconds($expectedSeconds)->isAfter($now)) {
+                if (
+                    $expectedSeconds < 1 ||
+                    $order->created_at->copy()->addSeconds($expectedSeconds)->isAfter($now)
+                ) {
                     return;
                 }
 
                 $updated = Order::query()
                     ->whereKey($order->getKey())
                     ->where('status', '1')
-                    ->where('updated_at', $order->updated_at)
+                    ->where('created_at', $order->created_at)
                     ->update([
                         'status' => '3',
-                        // 'updated_at' => $now,
                     ]);
 
                 if ($updated && $order->bill?->table_id !== null) {
@@ -56,7 +57,9 @@ class MarkReadyOrders extends Command
             event(new CashierDashboardUpdated($tableId));
         }
 
-        $this->info('Updated ' . count(array_unique($updatedTableIds)) . ' table(s) with completed orders.');
+        $this->info(
+            'Updated '.count(array_unique($updatedTableIds)).' table(s) with completed orders.'
+        );
 
         return self::SUCCESS;
     }

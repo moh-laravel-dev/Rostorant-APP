@@ -342,33 +342,35 @@
     --restaurant-color-hex-fff6f5: #fff6f5;
     --restaurant-color-hex-fffaf0: #fffaf0;
     --restaurant-color-hex-ffffff: #ffffff;
-    --restaurant-color-rgb-0-0-0-0-point-08: rgba(0,0,0,0.08);
+    --restaurant-color-rgb-0-0-0-0-point-08: rgba(0, 0, 0, 0.08);
     --restaurant-color-rgb-0-0-0-opacity-10-percent: rgb(0 0 0 / 10%);
     --restaurant-color-rgb-0-0-0-opacity-15-percent: rgb(0 0 0 / 15%);
     --restaurant-color-rgb-0-0-0-opacity-18-percent: rgb(0 0 0 / 18%);
-    --restaurant-color-rgb-0-0-0-point-08: rgba(0,0,0,.08);
-    --restaurant-color-rgb-0-0-0-point-12: rgba(0, 0, 0, .12);
-    --restaurant-color-rgb-110-231-183-opacity-18-percent: rgb(110 231 183 / 18%);
-    --restaurant-color-rgb-110-231-183-point-6: rgba(110, 231, 183, .6);
+    --restaurant-color-rgb-0-0-0-point-08: rgba(0, 0, 0, 0.08);
+    --restaurant-color-rgb-0-0-0-point-12: rgba(0, 0, 0, 0.12);
+    --restaurant-color-rgb-110-231-183-opacity-18-percent: rgb(
+        110 231 183 / 18%
+    );
+    --restaurant-color-rgb-110-231-183-point-6: rgba(110, 231, 183, 0.6);
     --restaurant-color-rgb-13-43-32-0-point-58: rgba(13, 43, 32, 0.58);
     --restaurant-color-rgb-16-56-44-opacity-12-percent: rgb(16 56 44 / 12%);
     --restaurant-color-rgb-16-56-44-opacity-3-percent: rgb(16 56 44 / 3%);
     --restaurant-color-rgb-16-56-44-opacity-4-percent: rgb(16 56 44 / 4%);
     --restaurant-color-rgb-16-56-44-opacity-5-percent: rgb(16 56 44 / 5%);
-    --restaurant-color-rgb-16-56-45-point-05: rgba(16, 56, 45, .05);
-    --restaurant-color-rgb-16-56-45-point-06: rgba(16, 56, 45, .06);
-    --restaurant-color-rgb-16-56-45-point-07: rgba(16, 56, 45, .07);
-    --restaurant-color-rgb-16-56-45-point-10: rgba(16, 56, 45, .10);
-    --restaurant-color-rgb-16-56-45-point-12: rgba(16, 56, 45, .12);
-    --restaurant-color-rgb-16-56-45-point-16: rgba(16, 56, 45, .16);
-    --restaurant-color-rgb-20-55-38-point-025: rgba(20, 55, 38, .025);
-    --restaurant-color-rgb-20-55-38-point-045: rgba(20, 55, 38, .045);
-    --restaurant-color-rgb-20-55-38-point-09: rgba(20, 55, 38, .09);
-    --restaurant-color-rgb-215-168-91-point-15: rgba(215, 168, 91, .15);
-    --restaurant-color-rgb-215-168-91-point-17: rgba(215, 168, 91, .17);
-    --restaurant-color-rgb-215-168-91-point-18: rgba(215, 168, 91, .18);
-    --restaurant-color-rgb-215-168-91-point-22: rgba(215, 168, 91, .22);
-    --restaurant-color-rgb-216-173-96-point-14: rgba(216, 173, 96, .14);
+    --restaurant-color-rgb-16-56-45-point-05: rgba(16, 56, 45, 0.05);
+    --restaurant-color-rgb-16-56-45-point-06: rgba(16, 56, 45, 0.06);
+    --restaurant-color-rgb-16-56-45-point-07: rgba(16, 56, 45, 0.07);
+    --restaurant-color-rgb-16-56-45-point-10: rgba(16, 56, 45, 0.1);
+    --restaurant-color-rgb-16-56-45-point-12: rgba(16, 56, 45, 0.12);
+    --restaurant-color-rgb-16-56-45-point-16: rgba(16, 56, 45, 0.16);
+    --restaurant-color-rgb-20-55-38-point-025: rgba(20, 55, 38, 0.025);
+    --restaurant-color-rgb-20-55-38-point-045: rgba(20, 55, 38, 0.045);
+    --restaurant-color-rgb-20-55-38-point-09: rgba(20, 55, 38, 0.09);
+    --restaurant-color-rgb-215-168-91-point-15: rgba(215, 168, 91, 0.15);
+    --restaurant-color-rgb-215-168-91-point-17: rgba(215, 168, 91, 0.17);
+    --restaurant-color-rgb-215-168-91-point-18: rgba(215, 168, 91, 0.18);
+    --restaurant-color-rgb-215-168-91-point-22: rgba(215, 168, 91, 0.22);
+    --restaurant-color-rgb-216-173-96-point-14: rgba(216, 173, 96, 0.14);
     --restaurant-color-rgb-23-76-60-0: rgba(23, 76, 60, 0);
     --restaurant-color-rgb-23-76-60-0-point-12: rgba(23, 76, 60, 0.12);
     --restaurant-color-rgb-23-76-60-opacity-15-percent: rgb(23 76 60 / 15%);
@@ -383,53 +385,59 @@
     --restaurant-color-rgb-23-76-60-opacity-5-percent: rgb(23 76 60 / 5%);
     --restaurant-color-rgb-23-76-60-opacity-8-percent: rgb(23 76 60 / 8%);
     --restaurant-color-rgb-23-76-60-opacity-9-percent: rgb(23 76 60 / 9%);
-    --restaurant-color-rgb-23-76-60-point-055: rgba(23, 76, 60, .055);
-    --restaurant-color-rgb-23-76-60-point-06: rgba(23, 76, 60, .06);
-    --restaurant-color-rgb-23-76-60-point-08: rgba(23, 76, 60, .08);
-    --restaurant-color-rgb-23-76-60-point-09: rgba(23, 76, 60, .09);
-    --restaurant-color-rgb-23-76-60-point-1: rgba(23, 76, 60, .1);
-    --restaurant-color-rgb-23-76-60-point-12: rgba(23, 76, 60, .12);
-    --restaurant-color-rgb-23-76-60-point-13: rgba(23, 76, 60, .13);
-    --restaurant-color-rgb-23-76-60-point-15: rgba(23, 76, 60, .15);
-    --restaurant-color-rgb-23-76-60-point-16: rgba(23, 76, 60, .16);
-    --restaurant-color-rgb-23-76-60-point-2: rgba(23, 76, 60, .2);
-    --restaurant-color-rgb-23-76-60-point-23: rgba(23, 76, 60, .23);
-    --restaurant-color-rgb-23-76-60-point-24: rgba(23, 76, 60, .24);
-    --restaurant-color-rgb-232-201-140-point-04: rgba(232, 201, 140, .04);
-    --restaurant-color-rgb-232-201-140-point-05: rgba(232, 201, 140, .05);
-    --restaurant-color-rgb-232-201-140-point-08: rgba(232, 201, 140, .08);
-    --restaurant-color-rgb-232-201-140-point-09: rgba(232, 201, 140, .09);
-    --restaurant-color-rgb-232-201-140-point-12: rgba(232, 201, 140, .12);
-    --restaurant-color-rgb-232-201-140-point-13: rgba(232, 201, 140, .13);
-    --restaurant-color-rgb-232-201-140-point-14: rgba(232, 201, 140, .14);
-    --restaurant-color-rgb-232-201-140-point-15: rgba(232, 201, 140, .15);
-    --restaurant-color-rgb-232-201-140-point-18: rgba(232, 201, 140, .18);
-    --restaurant-color-rgb-232-201-140-point-25: rgba(232, 201, 140, .25);
-    --restaurant-color-rgb-232-201-140-point-28: rgba(232, 201, 140, .28);
-    --restaurant-color-rgb-232-201-140-point-4: rgba(232, 201, 140, .4);
-    --restaurant-color-rgb-232-201-140-point-6: rgba(232, 201, 140, .6);
-    --restaurant-color-rgb-232-201-140-point-65: rgba(232, 201, 140, .65);
-    --restaurant-color-rgb-232-201-140-point-7: rgba(232, 201, 140, .7);
-    --restaurant-color-rgb-250-247-240-point-65: rgba(250, 247, 240, .65);
-    --restaurant-color-rgb-255-238-197-point-32: rgba(255, 238, 197, .32);
+    --restaurant-color-rgb-23-76-60-point-055: rgba(23, 76, 60, 0.055);
+    --restaurant-color-rgb-23-76-60-point-06: rgba(23, 76, 60, 0.06);
+    --restaurant-color-rgb-23-76-60-point-08: rgba(23, 76, 60, 0.08);
+    --restaurant-color-rgb-23-76-60-point-09: rgba(23, 76, 60, 0.09);
+    --restaurant-color-rgb-23-76-60-point-1: rgba(23, 76, 60, 0.1);
+    --restaurant-color-rgb-23-76-60-point-12: rgba(23, 76, 60, 0.12);
+    --restaurant-color-rgb-23-76-60-point-13: rgba(23, 76, 60, 0.13);
+    --restaurant-color-rgb-23-76-60-point-15: rgba(23, 76, 60, 0.15);
+    --restaurant-color-rgb-23-76-60-point-16: rgba(23, 76, 60, 0.16);
+    --restaurant-color-rgb-23-76-60-point-2: rgba(23, 76, 60, 0.2);
+    --restaurant-color-rgb-23-76-60-point-23: rgba(23, 76, 60, 0.23);
+    --restaurant-color-rgb-23-76-60-point-24: rgba(23, 76, 60, 0.24);
+    --restaurant-color-rgb-232-201-140-point-04: rgba(232, 201, 140, 0.04);
+    --restaurant-color-rgb-232-201-140-point-05: rgba(232, 201, 140, 0.05);
+    --restaurant-color-rgb-232-201-140-point-08: rgba(232, 201, 140, 0.08);
+    --restaurant-color-rgb-232-201-140-point-09: rgba(232, 201, 140, 0.09);
+    --restaurant-color-rgb-232-201-140-point-12: rgba(232, 201, 140, 0.12);
+    --restaurant-color-rgb-232-201-140-point-13: rgba(232, 201, 140, 0.13);
+    --restaurant-color-rgb-232-201-140-point-14: rgba(232, 201, 140, 0.14);
+    --restaurant-color-rgb-232-201-140-point-15: rgba(232, 201, 140, 0.15);
+    --restaurant-color-rgb-232-201-140-point-18: rgba(232, 201, 140, 0.18);
+    --restaurant-color-rgb-232-201-140-point-25: rgba(232, 201, 140, 0.25);
+    --restaurant-color-rgb-232-201-140-point-28: rgba(232, 201, 140, 0.28);
+    --restaurant-color-rgb-232-201-140-point-4: rgba(232, 201, 140, 0.4);
+    --restaurant-color-rgb-232-201-140-point-6: rgba(232, 201, 140, 0.6);
+    --restaurant-color-rgb-232-201-140-point-65: rgba(232, 201, 140, 0.65);
+    --restaurant-color-rgb-232-201-140-point-7: rgba(232, 201, 140, 0.7);
+    --restaurant-color-rgb-250-247-240-point-65: rgba(250, 247, 240, 0.65);
+    --restaurant-color-rgb-255-238-197-point-32: rgba(255, 238, 197, 0.32);
     --restaurant-color-rgb-255-255-255-0-point-1: rgba(255, 255, 255, 0.1);
-    --restaurant-color-rgb-255-255-255-opacity-10-percent: rgb(255 255 255 / 10%);
+    --restaurant-color-rgb-255-255-255-opacity-10-percent: rgb(
+        255 255 255 / 10%
+    );
     --restaurant-color-rgb-255-255-255-opacity-5-percent: rgb(255 255 255 / 5%);
     --restaurant-color-rgb-255-255-255-opacity-6-percent: rgb(255 255 255 / 6%);
-    --restaurant-color-rgb-255-255-255-opacity-90-percent: rgb(255 255 255 / 90%);
-    --restaurant-color-rgb-255-255-255-opacity-92-percent: rgb(255 255 255 / 92%);
-    --restaurant-color-rgb-255-255-255-point-025: rgba(255, 255, 255, .025);
-    --restaurant-color-rgb-255-255-255-point-055: rgba(255, 255, 255, .055);
-    --restaurant-color-rgb-255-255-255-point-06: rgba(255, 255, 255, .06);
-    --restaurant-color-rgb-255-255-255-point-07: rgba(255, 255, 255, .07);
-    --restaurant-color-rgb-255-255-255-point-09: rgba(255, 255, 255, .09);
-    --restaurant-color-rgb-255-255-255-point-15: rgba(255, 255, 255, .15);
-    --restaurant-color-rgb-255-255-255-point-17: rgba(255, 255, 255, .17);
-    --restaurant-color-rgb-255-255-255-point-2: rgba(255, 255, 255, .2);
-    --restaurant-color-rgb-255-255-255-point-22: rgba(255, 255, 255, .22);
-    --restaurant-color-rgb-255-255-255-point-30: rgba(255,255,255,.30);
-    --restaurant-color-rgb-255-255-255-point-4: rgba(255, 255, 255, .4);
-    --restaurant-color-rgb-255-255-255-point-9: rgba(255, 255, 255, .9);
+    --restaurant-color-rgb-255-255-255-opacity-90-percent: rgb(
+        255 255 255 / 90%
+    );
+    --restaurant-color-rgb-255-255-255-opacity-92-percent: rgb(
+        255 255 255 / 92%
+    );
+    --restaurant-color-rgb-255-255-255-point-025: rgba(255, 255, 255, 0.025);
+    --restaurant-color-rgb-255-255-255-point-055: rgba(255, 255, 255, 0.055);
+    --restaurant-color-rgb-255-255-255-point-06: rgba(255, 255, 255, 0.06);
+    --restaurant-color-rgb-255-255-255-point-07: rgba(255, 255, 255, 0.07);
+    --restaurant-color-rgb-255-255-255-point-09: rgba(255, 255, 255, 0.09);
+    --restaurant-color-rgb-255-255-255-point-15: rgba(255, 255, 255, 0.15);
+    --restaurant-color-rgb-255-255-255-point-17: rgba(255, 255, 255, 0.17);
+    --restaurant-color-rgb-255-255-255-point-2: rgba(255, 255, 255, 0.2);
+    --restaurant-color-rgb-255-255-255-point-22: rgba(255, 255, 255, 0.22);
+    --restaurant-color-rgb-255-255-255-point-30: rgba(255, 255, 255, 0.3);
+    --restaurant-color-rgb-255-255-255-point-4: rgba(255, 255, 255, 0.4);
+    --restaurant-color-rgb-255-255-255-point-9: rgba(255, 255, 255, 0.9);
     --restaurant-color-rgb-38-116-90-opacity-9-percent: rgb(38 116 90 / 9%);
     --restaurant-color-rgb-52-182-154-opacity-15-percent: rgb(52 182 154 / 15%);
     --restaurant-color-rgb-52-182-154-opacity-45-percent: rgb(52 182 154 / 45%);
@@ -452,7 +460,7 @@
     --restaurant-cdn-red-600: 220 38 38;
     --restaurant-cdn-slate-800: 30 41 59;
     --restaurant-cdn-white: 255 255 255;
-    --restaurant-color-rgb-94-171-126-point-17: rgba(94, 171, 126, .17);
+    --restaurant-color-rgb-94-171-126-point-17: rgba(94, 171, 126, 0.17);
 }
 
 :root {
@@ -471,6 +479,7 @@
 html[data-theme="dark"] {
     color-scheme: dark;
     --theme-page: #121a16;
+    --notiy-count: #e69508;
     --theme-surface: #1b2620;
     --theme-surface-raised: #233129;
     --theme-surface-success: #1e3528;
@@ -1021,7 +1030,11 @@ html[data-theme="dark"] .add-table-page .table-status-slider {
     background: #526157;
 }
 
-html[data-theme="dark"] .add-table-page .table-status-toggle input:checked + .table-status-slider {
+html[data-theme="dark"]
+    .add-table-page
+    .table-status-toggle
+    input:checked
+    + .table-status-slider {
     background: #26745a;
 }
 
@@ -1150,7 +1163,9 @@ html[data-theme="dark"] .category-status-card {
     background: var(--theme-surface-success);
 }
 
-html[data-theme="dark"] .category-status-card .bg-\[var\(--restaurant-color-hex-174c3c\)\]\/10 {
+html[data-theme="dark"]
+    .category-status-card
+    .bg-\[var\(--restaurant-color-hex-174c3c\)\]\/10 {
     background: #20382a;
     color: #a5d7bd;
 }
@@ -1160,7 +1175,10 @@ html[data-theme="dark"] .category-create-form #image-preview-container {
     background: var(--theme-surface-raised);
 }
 
-html[data-theme="dark"] .category-create-form #image-preview-container .bg-emerald-50 {
+html[data-theme="dark"]
+    .category-create-form
+    #image-preview-container
+    .bg-emerald-50 {
     background: var(--theme-surface-success);
     color: #9be0ad;
 }
@@ -1193,7 +1211,12 @@ html[data-theme="dark"] .category-create-form .border-red-200.bg-red-50 {
 }
 
 html[data-theme="dark"] .food-create-header {
-    background-image: linear-gradient(135deg, #17251d, #20392d 58%, #263f30) !important;
+    background-image: linear-gradient(
+        135deg,
+        #17251d,
+        #20392d 58%,
+        #263f30
+    ) !important;
     box-shadow: 0 12px 32px rgb(0 0 0 / 24%);
 }
 
@@ -1271,15 +1294,24 @@ html[data-theme="dark"] .restaurant-menu .menu-category.active {
     border-color: #83c9a2;
     background-color: #205f49;
     color: #f4fbf6;
-    box-shadow: 0 0 0 1px rgb(131 201 162 / 16%), 0 7px 20px rgb(32 95 73 / 38%);
+    box-shadow:
+        0 0 0 1px rgb(131 201 162 / 16%),
+        0 7px 20px rgb(32 95 73 / 38%);
 }
 
-html[data-theme="dark"] .restaurant-menu .menu-category.active > span:first-child > span:first-child {
+html[data-theme="dark"]
+    .restaurant-menu
+    .menu-category.active
+    > span:first-child
+    > span:first-child {
     background-color: #d8b36c !important;
     color: #17251d !important;
 }
 
-html[data-theme="dark"] .restaurant-menu .menu-category.active > span:last-child {
+html[data-theme="dark"]
+    .restaurant-menu
+    .menu-category.active
+    > span:last-child {
     color: #d8eadf;
 }
 
@@ -1305,7 +1337,9 @@ html[data-theme="dark"] .restaurant-menu #categories::-webkit-scrollbar-thumb {
     background: #52685a;
 }
 
-html[data-theme="dark"] .restaurant-menu #categories::-webkit-scrollbar-thumb:hover {
+html[data-theme="dark"]
+    .restaurant-menu
+    #categories::-webkit-scrollbar-thumb:hover {
     background: #6f8a76;
 }
 
@@ -1380,23 +1414,41 @@ html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] {
     box-shadow: inset 0 0 0 1px rgb(240 196 119 / 12%);
 }
 
-html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-image {
-    filter: grayscale(.75) brightness(.58);
+html[data-theme="dark"]
+    .restaurant-menu
+    .food-card[data-is-active="0"]
+    .food-image {
+    filter: grayscale(0.75) brightness(0.58);
 }
 
-html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-details {
+html[data-theme="dark"]
+    .restaurant-menu
+    .food-card[data-is-active="0"]
+    .food-details {
     background: #17211b;
 }
 
-html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-details h3 {
+html[data-theme="dark"]
+    .restaurant-menu
+    .food-card[data-is-active="0"]
+    .food-details
+    h3 {
     color: #b7c0ba;
 }
 
-html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-details > p {
+html[data-theme="dark"]
+    .restaurant-menu
+    .food-card[data-is-active="0"]
+    .food-details
+    > p {
     color: #89968e;
 }
 
-html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-details .price-value {
+html[data-theme="dark"]
+    .restaurant-menu
+    .food-card[data-is-active="0"]
+    .food-details
+    .price-value {
     color: #c6ad78;
 }
 
@@ -1414,14 +1466,22 @@ html[data-theme="dark"] .restaurant-menu .food-availability-badge.is-available {
     color: #ffffff;
 }
 
-html[data-theme="dark"] .restaurant-menu .food-availability-badge.is-unavailable {
+html[data-theme="dark"]
+    .restaurant-menu
+    .food-availability-badge.is-unavailable {
     border-color: #f0c477 !important;
     background: rgb(92 53 19 / 96%);
     color: #fff3d6;
 }
 
-html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] .food-add,
-html[data-theme="dark"] .restaurant-menu .food-card[data-is-active="0"] [class~="bg-amber-50"] {
+html[data-theme="dark"]
+    .restaurant-menu
+    .food-card[data-is-active="0"]
+    .food-add,
+html[data-theme="dark"]
+    .restaurant-menu
+    .food-card[data-is-active="0"]
+    [class~="bg-amber-50"] {
     border-color: #a77a3d !important;
     background: #382f1e;
     color: #f0d6a4;
@@ -1477,12 +1537,17 @@ html[data-theme="dark"] .admin-header button[aria-label="قائمة الملف �
     color: var(--theme-text);
 }
 
-html[data-theme="dark"] .admin-header button[aria-label="قائمة الملف الشخصي"]:hover {
+html[data-theme="dark"]
+    .admin-header
+    button[aria-label="قائمة الملف الشخصي"]:hover {
     border-color: var(--theme-border-strong);
     background: var(--theme-surface-raised);
 }
 
-html[data-theme="dark"] .admin-header button[aria-label="قائمة الملف الشخصي"] p:first-child,
+html[data-theme="dark"]
+    .admin-header
+    button[aria-label="قائمة الملف الشخصي"]
+    p:first-child,
 html[data-theme="dark"] .admin-header .profile-dropdown-menu p:first-child {
     color: var(--theme-text) !important;
 }
@@ -1498,7 +1563,10 @@ html[data-theme="dark"] .admin-header .profile-dropdown-menu > div:first-child {
 }
 
 html[data-theme="dark"] .admin-header .profile-dropdown-menu p:nth-child(2),
-html[data-theme="dark"] .admin-header button[aria-label="قائمة الملف الشخصي"] p:nth-child(2) {
+html[data-theme="dark"]
+    .admin-header
+    button[aria-label="قائمة الملف الشخصي"]
+    p:nth-child(2) {
     color: var(--theme-text-muted) !important;
 }
 
@@ -1543,8 +1611,16 @@ html[data-theme="dark"] .restaurant-menu .menu-feature {
 
 html[data-theme="dark"] .login-background {
     background:
-        radial-gradient(ellipse at 0% 0%, rgb(215 168 91 / 8%), transparent 36%),
-        radial-gradient(ellipse at 100% 100%, rgb(23 76 60 / 24%), transparent 38%),
+        radial-gradient(
+            ellipse at 0% 0%,
+            rgb(215 168 91 / 8%),
+            transparent 36%
+        ),
+        radial-gradient(
+            ellipse at 100% 100%,
+            rgb(23 76 60 / 24%),
+            transparent 38%
+        ),
         linear-gradient(135deg, #121a16 0%, #18231d 50%, #1b2620 100%);
 }
 
@@ -1555,7 +1631,12 @@ html[data-theme="dark"] .iti input#phone {
 }
 
 html[data-theme="dark"] .bg-gradient-to-br.from-gray-50.via-white {
-    background-image: linear-gradient(135deg, #121a16, #1b2620 52%, #302a1f) !important;
+    background-image: linear-gradient(
+        135deg,
+        #121a16,
+        #1b2620 52%,
+        #302a1f
+    ) !important;
 }
 
 html[data-theme="dark"] .table-qr-page .qr-surface {
@@ -1591,7 +1672,11 @@ html[data-theme="dark"] .table-qr-page .qr-print-code {
 }
 
 html[data-theme="dark"] .table-qr-page .qr-dash {
-    background-image: linear-gradient(to right, var(--theme-border-strong) 50%, transparent 50%);
+    background-image: linear-gradient(
+        to right,
+        var(--theme-border-strong) 50%,
+        transparent 50%
+    );
 }
 
 html[data-theme="dark"] .table-qr-page .qr-action-light {
@@ -1649,7 +1734,11 @@ html[data-theme="dark"] .table-qr-page .qr-tip p:last-child {
     }
 
     html[data-theme="dark"] .table-qr-page .qr-dash {
-        background-image: linear-gradient(to right, #dfe8e1 50%, transparent 50%) !important;
+        background-image: linear-gradient(
+            to right,
+            #dfe8e1 50%,
+            transparent 50%
+        ) !important;
     }
 }
 
@@ -1671,7 +1760,10 @@ html[data-theme="dark"] .table-qr-page .qr-tip p:last-child {
     cursor: pointer;
     font-size: 1.4rem;
     line-height: 1;
-    transition: transform .2s ease, background-color .2s ease, color .2s ease;
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
 body:has(.restaurant-menu) .theme-toggle {

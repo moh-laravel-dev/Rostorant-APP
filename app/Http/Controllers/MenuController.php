@@ -282,7 +282,6 @@ class MenuController extends Controller
         DB::transaction(function () use ($validated, $bill): void {
             foreach ($validated['items'] as $item) {
                 $food = Food::findOrFail($item['id']);
-
                 Order::create([
                     'food_id' => $food->id,
                     'bill_id' => $bill->id,

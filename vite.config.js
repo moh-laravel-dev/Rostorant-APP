@@ -24,9 +24,14 @@ export default defineConfig({
         strictPort: true,
         hmr: {
             host: "192.168.1.137",
+            // host: "192.168.8.100",
         },
         cors: {
-            origin: ["http://192.168.1.137:8000", "http://localhost:8000"],
+            origin: [
+                "http://192.168.1.137:8000",
+                "http://192.168.8.100:8000",
+                "http://localhost:8000",
+            ],
         },
     },
 });

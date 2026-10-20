@@ -383,8 +383,8 @@
                 requestBillHint.textContent = hasNewOrders ?
                     'أرسل الطلبات الجديدة أولًا؛ سيظهر زر «طلب الحساب» بعد تأكيدها، عند وجود طلبات سابقة.' :
                     hasOldOrders && !allPreviousOrdersOnTable ?
-                        'لا يظهر زر «طلب الحساب» إلا بعد وصول جميع الطلبات إلى الطاولة.' :
-                        'يظهر زر «طلب الحساب» بعد إرسال أول طلب ووصول جميع الطلبات إلى الطاولة.';
+                    'لا يظهر زر «طلب الحساب» إلا بعد وصول جميع الطلبات إلى الطاولة.' :
+                    'يظهر زر «طلب الحساب» بعد إرسال أول طلب ووصول جميع الطلبات إلى الطاولة.';
             }
         }
 
@@ -803,8 +803,7 @@
             statusLine.appendChild(statusLabel);
 
             const displayedStatuses = statusEntries.length ?
-                statusEntries :
-                [statusInfo];
+                statusEntries : [statusInfo];
 
             displayedStatuses.forEach(function(statusEntry) {
                 const statusName = String(statusEntry?.status ?? 'غير محدد').trim();
@@ -1647,13 +1646,35 @@
             });
 
         document.getElementById('request-bill')
-            ?.addEventListener('click', function() {
-                showMessage(
-                    'يرجى إبلاغ أحد الموظفين بطلب الحساب. لا يتم إرسال الطلب من النظام حاليًا.',
-                    'info'
-                );
-            });
+            ?.addEventListener('click', async function() {
+                try {
+                    const response = await fetch(@json(route('bill.finalize')), {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector(
+                                'meta[name="csrf-token"]'
+                            ).content,
+                        },
+                        body: JSON.stringify({
+                            billNumber: @json($billNumber),
+                        }),
+                    });
 
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        alert(data.message ?? 'حدث خطأ أثناء إرسال طلب الفاتورة');
+                        return;
+                    }
+
+                    alert(data.message ?? 'تم إرسال طلب الفاتورة بنجاح');
+                } catch (error) {
+                    alert('تعذر الاتصال بالخادم، يرجى المحاولة مرة أخرى');
+                    console.error('Bill finalization request failed:', error);
+                }
+            });
         document.getElementById('close-orders-modal')
             ?.addEventListener('click', closeOrdersModal);
 
@@ -2085,7 +2106,8 @@
                 .channel(`table.${tableId}`)
                 .listen('.cashier.dashboard.updated', function() {
                     refreshOrders().catch(function(error) {
-                        console.error('Failed to refresh order statuses after a live update:', error);
+                        console.error('Failed to refresh order statuses after a live update:',
+                            error);
                     });
                 });
         }

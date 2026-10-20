@@ -17,7 +17,7 @@ class CashierDashboardController extends Controller
     {
         $tables = Table::with([
             'bills' => fn ($query) => $query
-                ->where('status', 'active')
+                ->whereIn('status', ['active', 'payment'])
                 ->with('orders.food')
                 ->orderByDesc('created_at'),
         ])
@@ -59,17 +59,22 @@ class CashierDashboardController extends Controller
             'expected_minutes.max' => 'مدة التحضير لا يمكن أن تتجاوز 50399 دقيقة.',
         ]);
 
-        $tableId = DB::transaction(function () use ($order, $validated): int {
+        $tableId = DB::transaction(function () use ($order, $validated) {
             $pendingOrder = Order::query()
                 ->whereKey($order->getKey())
                 ->where('status', '0')
-                ->whereHas('bill', fn ($query) => $query->where('status', 'active'))
+                ->whereHas('bill', fn ($query) => $query->whereIn('status', ['active', 'payment']))
                 ->with('bill')
                 ->lockForUpdate()
-                ->firstOrFail();
+                ->first();
+
+            if (! $pendingOrder) {
+                return null;
+            }
 
             $pendingOrder->update([
                 'status' => '1',
+                'create_at' => now(),
                 'expected_time' => sprintf(
                     '%02d:%02d:00',
                     intdiv((int) $validated['expected_minutes'], 60),
@@ -77,8 +82,19 @@ class CashierDashboardController extends Controller
                 ),
             ]);
 
+            $pendingOrder->bill->update([
+                'status' => 'active',
+            ]);
+
             return (int) $pendingOrder->bill->table_id;
         });
+
+        if ($tableId === null) {
+            return response()->json([
+                'success' => false,
+                'message' => 'لا يمكن تعديل الطلب أو تعديل فاتورة منتهية.',
+            ], 400);
+        }
 
         event(new CashierDashboardUpdated($tableId));
 
