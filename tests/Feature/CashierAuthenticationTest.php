@@ -530,7 +530,7 @@ class CashierAuthenticationTest extends TestCase
                 'total_price' => 100,
                 'status' => '1',
                 'expected_time' => '00:15:00',
-                'created_at' => now(),
+                'created_at' => now()->subHour(),
                 'updated_at' => now(),
             ],
             [
@@ -548,7 +548,7 @@ class CashierAuthenticationTest extends TestCase
         $response = app(MenuController::class)->updateData('TEST-BILL');
         $statuses = $response->getData(true)['data'][0]['statuses'];
 
-        $this->assertSame(['1', '3'], array_column($statuses, 'status_code'));
+        $this->assertSame(['3', '1'], array_column($statuses, 'status_code'));
     }
 
     public function test_bill_request_button_is_visible_on_initial_render_when_all_orders_are_on_table(): void
@@ -604,6 +604,22 @@ class CashierAuthenticationTest extends TestCase
         preg_match('/<button id="request-bill"[^>]*>/', $htmlWithKitchenOrders, $hiddenButtonMatch);
         $this->assertNotEmpty($hiddenButtonMatch);
         $this->assertStringContainsString('hidden', $hiddenButtonMatch[0]);
+    }
+
+    public function test_confirm_order_button_is_hidden_until_new_orders_are_added(): void
+    {
+        $html = view('Menu.components.orders-modal', [
+            'data' => [],
+            'services' => [],
+        ])->render();
+
+        preg_match('/<button id="confirm-order-list"[^>]*>/', $html, $buttonMatch);
+        $this->assertNotEmpty($buttonMatch);
+        $this->assertStringContainsString('hidden', $buttonMatch[0]);
+        $this->assertStringContainsString(
+            '<p id="confirm-order-list-text" hidden',
+            $html
+        );
     }
 
     public function test_cashier_can_confirm_a_pending_order_with_an_expected_preparation_time(): void

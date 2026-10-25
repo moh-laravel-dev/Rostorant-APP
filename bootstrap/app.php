@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\BillRateLimit;
+use App\Http\Middleware\RedirectCaptainToLogin;
 use App\Http\Middleware\CheckAdminToLogin;
 use App\Http\Middleware\EnsureTableSession;
 use App\Http\Middleware\GlobalRateLimit;
@@ -23,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin.auth' => RedirectAdminToLogin::class,
             'cashier.auth' => RedirectCashierToLogin::class,
+            'captain.auth' => RedirectCaptainToLogin::class,
             'check.auth' => CheckAdminToLogin::class,
             'table.session' => EnsureTableSession::class,
             'verify.csrf.token' => VerifyCsrfToken::class,

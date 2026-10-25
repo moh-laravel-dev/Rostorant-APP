@@ -34,10 +34,10 @@
         </p>
 
         <div class="flex flex-col justify-center gap-3 sm:flex-row">
-            <button type="button" onclick="window.history.back()"
+            <a href="{{ route('welcome') }}"
                 class="rounded-xl border border-gray-200 px-6 py-3 font-bold text-gray-700 transition hover:bg-gray-50">
-                العودة إلى الصفحة السابقة
-            </button>
+                العودة إلى الصفحة الرئيسية
+            </a>
         </div>
 
         <p class="mt-8 text-xs text-gray-400">

@@ -9,10 +9,16 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 
 class CashierDashboardController extends Controller
 {
+    private function filePath(): string
+    {
+        return storage_path('app/table_services.json');
+    }
+
     public function index(): View
     {
         $tables = Table::with([
@@ -44,8 +50,23 @@ class CashierDashboardController extends Controller
             ->orderByDesc('latest_active_bill_at')
             ->orderBy('number')
             ->get();
+        $path = $this->filePath();
 
-        return view('cashier.tables', compact('tables'));
+        $services = [];
+
+        if (File::exists($path)) {
+            $services = collect(json_decode(File::get($path), true) ?? [])
+                ->filter(fn ($service) => $service['active'] ?? false)
+                ->map(fn ($service) => [
+                    'name' => $service['name'] ?? '',
+                    'price' => ($service['value'] ?? 0),
+                    'currency' => $service['currency'],
+                ])
+                ->values()
+                ->all();
+        }
+
+        return view('cashier.tables', compact('tables', 'services'));
     }
 
     public function confirmOrder(Request $request, Order $order): JsonResponse|RedirectResponse

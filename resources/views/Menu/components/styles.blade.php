@@ -298,6 +298,10 @@
         -webkit-tap-highlight-color: transparent !important;
     }
 
+    #confirm-order-list[hidden] {
+        display: none !important;
+    }
+
     /* منع قائمة السياق */
     img,
     #confirm-order-list,

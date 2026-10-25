@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Events\CashierDashboardUpdated;
+use App\Events\CashierEndBill;
 use App\Models\Bill;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class BillController extends Controller
 {
+    private function filePath(): string
+    {
+        return storage_path('app/table_services.json');
+    }
+
     public function joneToBill()
     {
         return view('Menu.join-to-bill');
@@ -65,13 +73,44 @@ class BillController extends Controller
                 'message' => 'لا يمكن إنهاء الفاتورة بالحالة الحالية.',
             ], Response::HTTP_BAD_REQUEST);
         }
+        $path = $this->filePath();
 
-        $bill->update([
-            'status' => 'completed',
-        ]);
-        $bill->table->update(['status' => 1]);
+        $servicesPrice = 0;
+        $services = [];
+
+        if (File::exists($path)) {
+            $servicesPrice = collect(json_decode(File::get($path), true) ?? [])
+                ->filter(fn ($service) => $service['active'] ?? false)
+                ->sum(fn ($service) => $service['value'] ?? 0);
+            $services = collect(json_decode(File::get($path), true) ?? [])
+                ->filter(fn ($service) => $service['active'] ?? false)
+                ->map(fn ($service) => [
+                    'name' => $service['name'] ?? '',
+                    'price' => ($service['value'] ?? 0),
+                    'currency' => $service['currency'],
+                ])
+                ->values()
+                ->all();
+        }
+
+        $totalPrice = $bill->orders()->sum('total_price') + $servicesPrice;
+        DB::transaction(function () use ($bill, $totalPrice, $services): void {
+            $bill->update([
+                'status' => 'completed',
+                'total_price' => $totalPrice,
+                'services' => $services,
+                'end_time' => now(),
+            ]);
+
+            $bill->table->update([
+                'status' => 1,
+            ]);
+        });
+
+        DB::table('sessions')->where('table_id', $bill->table->id)->delete();
 
         event(new CashierDashboardUpdated($bill->table->id));
+        event(new CashierEndBill($bill->number));
 
         return response()->json([
             'success' => true,

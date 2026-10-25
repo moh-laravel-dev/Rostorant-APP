@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Table extends Model
 {
     protected $fillable = [
+        'captain_id',
         'name',
         'number',
         'status',
@@ -21,6 +23,11 @@ class Table extends Model
     public function bills(): HasMany
     {
         return $this->hasMany(Bill::class);
+    }
+
+    public function captain(): BelongsTo
+    {
+        return $this->belongsTo(Captain::class);
     }
 
     protected static function booted(): void

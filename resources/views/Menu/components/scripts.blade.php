@@ -1,6 +1,6 @@
 <script>
     // =============================================================
-    // منع القائمة السياقية وسحب الصور وتحديد النصوص في العناصر المحددة
+    // منع القائمة السياقية وسحب الصور وتحديد النصوص
     // =============================================================
 
     document.addEventListener('contextmenu', function(event) {
@@ -31,7 +31,7 @@
     document.addEventListener('DOMContentLoaded', function() {
 
         // =========================================================
-        // تحديد عناصر الصفحة والأقسام والأزرار
+        // عناصر الصفحة
         // =========================================================
 
         const searchInput = document.getElementById('menu-search');
@@ -48,61 +48,43 @@
         const foodCount = document.getElementById('food-count');
         const foodCountTop = document.getElementById('food-count-top');
 
-        // عناصر ملخص الطلبات الحالية
-        const currentOrderSummary = document.getElementById(
-            'current-order-summary'
-        );
+        const currentOrderSummary = document.getElementById('current-order-summary');
+        const currentOrderCount = document.getElementById('current-order-count');
+        const currentOrderBadge = document.getElementById('current-order-badge');
+        const currentOrderTotal = document.getElementById('current-order-total');
 
-        const currentOrderCount = document.getElementById(
-            'current-order-count'
-        );
+        const previousOrderSummary = document.getElementById('previous-order-summary');
+        const previousOrderCount = document.getElementById('previous-order-count');
+        const previousOrderBadge = document.getElementById('previous-order-badge');
+        const previousOrderTotal = document.getElementById('previous-order-total');
 
-        const currentOrderBadge = document.getElementById(
-            'current-order-badge'
-        );
-
-        const currentOrderTotal = document.getElementById(
-            'current-order-total'
-        );
-
-        // عناصر ملخص الطلبات السابقة
-        const previousOrderSummary = document.getElementById(
-            'previous-order-summary'
-        );
-
-        const previousOrderCount = document.getElementById(
-            'previous-order-count'
-        );
-
-        const previousOrderBadge = document.getElementById(
-            'previous-order-badge'
-        );
-
-        const previousOrderTotal = document.getElementById(
-            'previous-order-total'
-        );
-
-        // عناصر عدد الطلبات والإجمالي
         const orderCount = document.getElementById('order-count');
         const orderBadge = document.getElementById('order-badge');
         const buttonOrderCount = document.getElementById('button-order-count');
 
         const orderTotal = document.getElementById('order-total');
-        const orderTotalDesktop = document.getElementById(
-            'order-total-desktop'
-        );
+        const orderTotalDesktop = document.getElementById('order-total-desktop');
 
-        // عناصر نافذة عرض الطلبات
         const ordersModal = document.getElementById('orders-modal');
         const ordersList = document.getElementById('current-order-items');
         const ordersEmpty = document.getElementById('orders-empty');
+
         const requestBillButton = document.getElementById('request-bill');
         const requestBillHint = document.getElementById('request-bill-hint');
 
-        const previousSummary = document.getElementById(
-            'previous-order-summary'
+        const requestBillConfirmModal = document.getElementById(
+            'request-bill-confirm-modal'
         );
 
+        const cancelRequestBillButton = document.getElementById(
+            'cancel-request-bill'
+        );
+
+        const confirmRequestBillButton = document.getElementById(
+            'confirm-request-bill'
+        );
+
+        const previousSummary = document.getElementById('previous-order-summary');
         const orderSummary = document.getElementById('order-summary');
         const previousOrders = document.getElementById('previousOrders');
 
@@ -122,7 +104,6 @@
             'previous-orders-count'
         );
 
-        // زر تحديث الطلبات السابقة وأيقونة التحديث
         const refreshPreviousOrdersButton = document.getElementById(
             'refresh-previous-orders'
         );
@@ -131,7 +112,6 @@
             'refresh-previous-orders-icon'
         );
 
-        // عناصر تأكيد إرسال الطلب
         const confirmOrderList = document.getElementById('confirm-order-list');
         const confirmOrderModal = document.getElementById('confirm-order-modal');
 
@@ -155,56 +135,59 @@
             'cancel-confirm-order'
         );
 
-        // إشعار نجاح إرسال الطلب
         const orderSuccessToast = document.getElementById(
             'order-success-toast'
         );
 
         // =========================================================
-        // استلام البيانات والمسارات من Laravel
+        // بيانات Laravel
         // =========================================================
 
         const billNumber = @json($billNumber);
         const tableId = @json($tableId);
 
         const refreshUrl = @json(route('menu.index.data', ['number' => $billNumber]));
-
         const submitUrl = @json(route('bill.new.orders'));
+        const finalizeBillUrl = @json(route('bill.finalize'));
 
         const csrfToken = document.querySelector(
             'meta[name="csrf-token"]'
         )?.content ?? '';
 
-        // الخدمات والطلبات السابقة القادمة من الخادم
         let tableServices = @json($services ?? []);
         let oldOrders = @json($data ?? []);
 
-        // تخزين الوجبات الجديدة قبل إرسالها
+        // حالة الفاتورة الحالية القادمة من Laravel.
+        const initialBillStatus = @json($bill->status ?? null);
+
         const order = new Map();
 
-        // حالة الفلترة والعناصر التي كان التركيز عليها
         let selectedCategory = 'all';
         let previousFocusedElement = null;
+        let previousFocusedBillElement = null;
 
-        // حالة عمليات الإرسال والتحديث
         let isSubmitting = false;
         let isRefreshingOrders = false;
         let refreshOrdersPromise = null;
         let refreshOrdersAgain = false;
 
-        // متغيرات الضغط المطول على زر التأكيد
+        let isFinalizingBill = false;
+
+        // payment تعني أن المستخدم طلب الحساب بالفعل.
+        // يسمح بعرض الطلبات، لكن يمنع إضافة أو إرسال طلبات جديدة.
+        let isBillFinalized = String(initialBillStatus ?? '') === 'payment';
+
         let confirmPressTimer = null;
         let confirmAnimationFrame = null;
         let confirmPressStart = 0;
         let confirmPressTriggered = false;
 
-        // مدة الضغط المطول بالميلي ثانية
         const CONFIRM_PRESS_DURATION = 1500;
 
         let confirmProgressLayer = null;
 
         // =========================================================
-        // دوال مساعدة عامة
+        // دوال مساعدة
         // =========================================================
 
         function normalize(value) {
@@ -306,7 +289,68 @@
         }
 
         // =========================================================
-        // دوال التعامل مع الطلبات السابقة
+        // تحديث حالة الفاتورة ومنع الإضافة
+        // =========================================================
+
+        function lockOrdering() {
+            isBillFinalized = true;
+
+            // حذف العناصر غير المرسلة من سلة المتصفح.
+            order.clear();
+
+            document.querySelectorAll('.add-to-order').forEach(function(button) {
+                button.disabled = true;
+                button.classList.add('opacity-50', 'cursor-not-allowed');
+                button.setAttribute('aria-disabled', 'true');
+            });
+
+            requestBillButton?.classList.add('hidden');
+
+            if (requestBillButton) {
+                requestBillButton.hidden = true;
+                requestBillButton.disabled = true;
+            }
+
+            if (requestBillHint) {
+                requestBillHint.hidden = true;
+            }
+            submitButton = document.getElementById('confirm-order-list');
+            if (submitButton) {
+                submitButton.hidden = true;
+                submitButton.disabled = true;
+            }
+            submitText = document.getElementById('confirm-order-list-text');
+            if (submitText) {
+                submitText.hidden = true;
+                submitText.disabled = true;
+            }
+
+            updateOrderSummary();
+        }
+
+        function syncBillStatusFromResponse(result) {
+            const status =
+                result?.bill?.status ??
+                result?.data?.bill?.status ??
+                result?.data?.data?.bill?.status ??
+                result?.bill_status ??
+                result?.data?.bill_status;
+
+            if (String(status ?? '') === 'payment') {
+                lockOrdering();
+            }
+        }
+
+        if (isBillFinalized) {
+            document.querySelectorAll('.add-to-order').forEach(function(button) {
+                button.disabled = true;
+                button.classList.add('opacity-50', 'cursor-not-allowed');
+                button.setAttribute('aria-disabled', 'true');
+            });
+        }
+
+        // =========================================================
+        // الطلبات السابقة
         // =========================================================
 
         function getExistingOrders() {
@@ -339,15 +383,45 @@
                 }
             }
 
-            return (
-                getExistingOrderPrice(item) *
-                getExistingOrderQuantity(item)
-            );
+            return getExistingOrderPrice(item) * getExistingOrderQuantity(item);
         }
 
         function hasPreviousOrders() {
             return getExistingOrders().some(function(item) {
                 return getExistingOrderQuantity(item) > 0;
+            });
+        }
+
+        function normalizeOrderStatuses(item) {
+            const statuses = item?.statuses;
+            let normalizedStatuses = [];
+
+            if (Array.isArray(statuses)) {
+                normalizedStatuses = statuses;
+            } else if (statuses && typeof statuses === 'object') {
+                const collectionKey = Object.keys(statuses).find(function(key) {
+                    return Array.isArray(statuses[key]);
+                });
+
+                if (collectionKey) {
+                    normalizedStatuses = statuses[collectionKey];
+                } else if (statuses.status) {
+                    normalizedStatuses = [statuses];
+                }
+            } else if (item?.status) {
+                normalizedStatuses = [{
+                    status_code: item.status_code,
+                    status: item.status,
+                    expected_time: item.expected_time,
+                    created_at: item.created_at
+                }];
+            }
+
+            return normalizedStatuses.slice().sort(function(left, right) {
+                const leftCreatedAt = parseServerDate(left?.created_at)?.getTime() ?? 0;
+                const rightCreatedAt = parseServerDate(right?.created_at)?.getTime() ?? 0;
+
+                return rightCreatedAt - leftCreatedAt;
             });
         }
 
@@ -360,7 +434,9 @@
                 const statuses = normalizeOrderStatuses(item);
 
                 return statuses.length > 0 && statuses.every(function(status) {
-                    return ['2', '3'].includes(String(status?.status_code ?? ''));
+                    return ['2', '3'].includes(
+                        String(status?.status_code ?? '')
+                    );
                 });
             });
         }
@@ -369,22 +445,28 @@
             const hasOldOrders = hasPreviousOrders();
             const hasNewOrders = order.size > 0;
             const allPreviousOrdersOnTable = areAllPreviousOrdersOnTable();
-            const canRequestBill = hasOldOrders &&
+
+            const canRequestBill = !isBillFinalized &&
+                !isFinalizingBill &&
+                hasOldOrders &&
                 !hasNewOrders &&
                 allPreviousOrdersOnTable;
 
             if (requestBillButton) {
                 requestBillButton.hidden = !canRequestBill;
                 requestBillButton.classList.toggle('hidden', !canRequestBill);
+                requestBillButton.disabled =
+                    isFinalizingBill || isBillFinalized;
             }
 
             if (requestBillHint) {
-                requestBillHint.hidden = canRequestBill;
+                requestBillHint.hidden = canRequestBill || isBillFinalized;
+
                 requestBillHint.textContent = hasNewOrders ?
                     'أرسل الطلبات الجديدة أولًا؛ سيظهر زر «طلب الحساب» بعد تأكيدها، عند وجود طلبات سابقة.' :
                     hasOldOrders && !allPreviousOrdersOnTable ?
-                    'لا يظهر زر «طلب الحساب» إلا بعد وصول جميع الطلبات إلى الطاولة.' :
-                    'يظهر زر «طلب الحساب» بعد إرسال أول طلب ووصول جميع الطلبات إلى الطاولة.';
+                    'سيظهر زر «طلب الحساب» بعد وصول جميع الطلبات إلى الطاولة.' :
+                    'سيظهر زر «طلب الحساب» بعد إرسال أول طلب ووصول جميع الطلبات إلى الطاولة.';
             }
         }
 
@@ -401,41 +483,206 @@
         }
 
         // =========================================================
-        // استخراج حالة الطلب والوقت المتوقع للانتهاء
+        // نافذة تأكيد طلب الحساب
         // =========================================================
 
-        function normalizeOrderStatuses(item) {
-            const statuses = item?.statuses;
-
-            if (Array.isArray(statuses)) {
-                return statuses;
+        function openRequestBillConfirmModal() {
+            if (
+                isBillFinalized ||
+                isFinalizingBill ||
+                order.size > 0 ||
+                !hasPreviousOrders() ||
+                !areAllPreviousOrdersOnTable() ||
+                !requestBillConfirmModal
+            ) {
+                return;
             }
 
-            if (statuses && typeof statuses === 'object') {
-                const collectionKey = Object.keys(statuses).find(function(key) {
-                    return Array.isArray(statuses[key]);
+            previousFocusedBillElement = document.activeElement;
+
+            requestBillConfirmModal.classList.remove('hidden');
+            requestBillConfirmModal.classList.add('flex');
+            requestBillConfirmModal.setAttribute('aria-hidden', 'false');
+
+            document.body.classList.add('overflow-hidden');
+
+            confirmRequestBillButton?.focus();
+        }
+
+        function closeRequestBillConfirmModal(restoreFocus = true) {
+            if (!requestBillConfirmModal) return;
+
+            requestBillConfirmModal.classList.add('hidden');
+            requestBillConfirmModal.classList.remove('flex');
+            requestBillConfirmModal.setAttribute('aria-hidden', 'true');
+
+            if (
+                !confirmOrderModal?.classList.contains('flex') &&
+                !ordersModal?.classList.contains('flex')
+            ) {
+                document.body.classList.remove('overflow-hidden');
+            }
+
+            if (restoreFocus && !isBillFinalized) {
+                if (requestBillButton && !requestBillButton.hidden) {
+                    requestBillButton.focus();
+                } else {
+                    previousFocusedBillElement?.focus?.();
+                }
+            }
+        }
+
+        async function finalizeBill() {
+            if (
+                isFinalizingBill ||
+                isBillFinalized ||
+                !requestBillConfirmModal
+            ) {
+                return;
+            }
+
+            if (
+                order.size > 0 ||
+                !hasPreviousOrders() ||
+                !areAllPreviousOrdersOnTable()
+            ) {
+                closeRequestBillConfirmModal();
+
+                showMessage(
+                    'لا يمكنك طلب الحساب الآن. أرسل الطلبات الجديدة وانتظر حتى تصل جميع الطلبات إلى الطاولة.',
+                    'error'
+                );
+
+                updateOrderSummary();
+                return;
+            }
+
+            isFinalizingBill = true;
+
+            if (confirmRequestBillButton) {
+                confirmRequestBillButton.disabled = true;
+                confirmRequestBillButton.dataset.originalText =
+                    confirmRequestBillButton.textContent;
+                confirmRequestBillButton.textContent = 'جارٍ إرسال طلب الحساب...';
+            }
+
+            if (cancelRequestBillButton) {
+                cancelRequestBillButton.disabled = true;
+            }
+
+            updateRequestBillVisibility();
+
+            try {
+                const response = await fetch(finalizeBillUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        billNumber: billNumber
+                    })
                 });
 
-                if (collectionKey) {
-                    return statuses[collectionKey];
+                const contentType =
+                    response.headers.get('content-type') || '';
+
+                const data = contentType.includes('application/json') ?
+                    await response.json() : {
+                        message: await response.text()
+                    };
+
+                if (
+                    !response.ok ||
+                    data.status === false ||
+                    data.status === 'failed' ||
+                    data.success === false
+                ) {
+                    if (response.status === 419) {
+                        throw new Error(
+                            'انتهت صلاحية الجلسة. حدّث الصفحة ثم حاول مجددًا.'
+                        );
+                    }
+
+                    if (response.status === 422 && data.errors) {
+                        throw new Error(
+                            Object.values(data.errors).flat().join('\n')
+                        );
+                    }
+
+                    throw new Error(
+                        data.message || 'تعذر إرسال طلب الحساب. يرجى المحاولة مجددًا.'
+                    );
                 }
 
-                if (statuses.status) {
-                    return [statuses];
+                // لا نقفل الطلبات إلا بعد نجاح استجابة الخادم.
+                lockOrdering();
+
+                closeRequestBillConfirmModal(false);
+
+                showMessage(
+                    data.message ||
+                    'تم إرسال طلب الحساب بنجاح. يمكنك مراجعة طلباتك، ولن تتمكن من إضافة وجبات جديدة.',
+                    'success'
+                );
+
+            } catch (error) {
+                console.error('Bill finalization request failed:', error);
+
+                showMessage(
+                    error.message ||
+                    'تعذر الاتصال بالخادم. تحقق من اتصالك بالإنترنت وحاول مجددًا.',
+                    'error'
+                );
+            } finally {
+                isFinalizingBill = false;
+
+                if (confirmRequestBillButton) {
+                    confirmRequestBillButton.disabled = isBillFinalized;
+
+                    confirmRequestBillButton.textContent =
+                        confirmRequestBillButton.dataset.originalText ||
+                        'تأكيد طلب الحساب';
+
+                    delete confirmRequestBillButton.dataset.originalText;
                 }
-            }
 
-            if (item?.status) {
-                return [{
-                    status_code: item.status_code,
-                    status: item.status,
-                    expected_time: item.expected_time,
-                    created_at: item.created_at
-                }];
-            }
+                if (cancelRequestBillButton) {
+                    cancelRequestBillButton.disabled = false;
+                }
 
-            return [];
+                updateRequestBillVisibility();
+            }
         }
+
+        requestBillButton?.addEventListener('click', function(event) {
+            event.preventDefault();
+            openRequestBillConfirmModal();
+        });
+
+        cancelRequestBillButton?.addEventListener('click', function() {
+            if (!isFinalizingBill) {
+                closeRequestBillConfirmModal();
+            }
+        });
+
+        confirmRequestBillButton?.addEventListener('click', finalizeBill);
+
+        requestBillConfirmModal?.addEventListener('click', function(event) {
+            if (
+                event.target === requestBillConfirmModal &&
+                !isFinalizingBill
+            ) {
+                closeRequestBillConfirmModal();
+            }
+        });
+
+        // =========================================================
+        // الوقت المتوقع للطلبات
+        // =========================================================
 
         function parseServerDate(value) {
             if (!value) return null;
@@ -448,7 +695,6 @@
 
             if (!match) {
                 const parsed = new Date(input);
-
                 return Number.isNaN(parsed.getTime()) ? null : parsed;
             }
 
@@ -480,11 +726,7 @@
         }
 
         function parseExpectedTime(value) {
-            if (
-                value === null ||
-                value === undefined ||
-                value === ''
-            ) {
+            if (value === null || value === undefined || value === '') {
                 return 0;
             }
 
@@ -492,26 +734,18 @@
 
             if (
                 parts.length !== 3 ||
-                parts.some(function(part) {
-                    return !Number.isFinite(part) || part < 0;
-                })
+                parts.some(part => !Number.isFinite(part) || part < 0)
             ) {
                 return 0;
             }
 
-            return (
-                parts[0] * 3600 +
-                parts[1] * 60 +
-                parts[2]
-            );
+            return parts[0] * 3600 + parts[1] * 60 + parts[2];
         }
 
         function getOrderStatusInfo(item) {
             const statuses = normalizeOrderStatuses(item);
 
-            const latestStatus = statuses.length ?
-                statuses[statuses.length - 1] :
-                null;
+            const latestStatus = statuses.length ? statuses[0] : null;
 
             if (!latestStatus) {
                 return {
@@ -525,13 +759,7 @@
                 latestStatus?.status ?? 'غير محدد'
             ).trim();
 
-            const normalizedStatus = normalize(status);
-
-            const timedStatuses = [
-                normalize('في المطبخ')
-            ];
-
-            if (!timedStatuses.includes(normalizedStatus)) {
+            if (normalize(status) !== normalize('في المطبخ')) {
                 return {
                     status,
                     remaining: null,
@@ -547,8 +775,7 @@
             );
 
             const createdAt = parseServerDate(
-                latestStatus?.created_at ??
-                item?.created_at
+                latestStatus?.created_at ?? item?.created_at
             );
 
             if (!createdAt || expectedTime <= 0) {
@@ -619,24 +846,14 @@
 
             const parts = [];
 
-            if (hours > 0) {
-                parts.push(formatArabicNumber(hours, 'hour'));
-            }
-
-            if (minutes > 0) {
-                parts.push(formatArabicNumber(minutes, 'minute'));
-            }
-
+            if (hours > 0) parts.push(formatArabicNumber(hours, 'hour'));
+            if (minutes > 0) parts.push(formatArabicNumber(minutes, 'minute'));
             if (remainingSeconds > 0) {
                 parts.push(formatArabicNumber(remainingSeconds, 'second'));
             }
 
             return parts.join(' و');
         }
-
-        // =========================================================
-        // ألوان شارات الحالات
-        // =========================================================
 
         function getStatusBadgeClasses(status) {
             const normalizedStatus = normalize(status);
@@ -673,6 +890,7 @@
         // =========================================================
         // إنشاء بطاقة الطلب السابق
         // =========================================================
+
         function createPreviousOrderRow(item) {
             const row = document.createElement('div');
 
@@ -681,37 +899,23 @@
 
             const name = document.createElement('p');
 
-            name.className =
-                'break-words text-sm font-extrabold text-gray-800';
-
-            name.textContent = String(
-                item?.food_name ??
-                item?.name ??
-                'وجبة'
-            );
+            name.className = 'break-words text-sm font-extrabold text-gray-800';
+            name.textContent = String(item?.food_name ?? item?.name ?? 'وجبة');
 
             const details = document.createElement('div');
-
-            details.className =
-                'flex flex-wrap gap-2';
+            details.className = 'flex flex-wrap gap-2';
 
             function createInfoBox(label, value) {
                 const box = document.createElement('div');
-
                 box.className = 'min-w-0 w-[30%] rounded-xl bg-white p-2';
 
                 const labelElement = document.createElement('p');
-
-                labelElement.className =
-                    'text-[10px] font-medium text-gray-500';
-
+                labelElement.className = 'text-[10px] font-medium text-gray-500';
                 labelElement.textContent = label;
 
                 const valueElement = document.createElement('p');
-
                 valueElement.className =
                     'mt-1 break-words text-xs font-bold text-gray-800';
-
                 valueElement.textContent = String(value);
 
                 box.append(labelElement, valueElement);
@@ -731,20 +935,22 @@
 
             const orderNotes = Array.isArray(item?.order_notes) ?
                 item.order_notes :
-                (Array.isArray(item?.notes) ?
-                    item.notes.map(note => ({
-                        amount: quantity,
-                        note
-                    })) :
-                    (item?.note ? [{
-                        amount: quantity,
-                        note: item.note
-                    }] : []));
+                Array.isArray(item?.notes) ?
+                item.notes.map(note => ({
+                    amount: quantity,
+                    note
+                })) :
+                item?.note ? [{
+                    amount: quantity,
+                    note: item.note
+                }] : [];
+
             const validOrderNotes = orderNotes.filter(orderNote =>
                 orderNote &&
                 typeof orderNote.note === 'string' &&
                 orderNote.note.trim()
             );
+
             if (validOrderNotes.length) {
                 const notesContainer = document.createElement('div');
                 notesContainer.className =
@@ -753,7 +959,6 @@
                 const notesTitle = document.createElement('p');
                 notesTitle.className = 'mb-2 text-xs font-extrabold';
                 notesTitle.textContent = 'ملاحظات الوجبة';
-                notesContainer.appendChild(notesTitle);
 
                 const notesList = document.createElement('div');
                 notesList.className = 'space-y-2';
@@ -777,7 +982,7 @@
                     notesList.appendChild(noteRow);
                 });
 
-                notesContainer.appendChild(notesList);
+                notesContainer.append(notesTitle, notesList);
                 row.appendChild(notesContainer);
             }
 
@@ -785,34 +990,30 @@
             const statusEntries = normalizeOrderStatuses(item);
 
             const statusContainer = document.createElement('div');
-
             statusContainer.className =
                 'flex flex-col gap-2 border-t border-[var(--restaurant-color-hex-d1d5db)] pt-3';
 
             const statusLine = document.createElement('div');
-
-            statusLine.className =
-                'flex flex-wrap items-center gap-2';
+            statusLine.className = 'flex flex-wrap items-center gap-2';
 
             const statusLabel = document.createElement('span');
-
-            statusLabel.className =
-                'text-xs font-semibold text-gray-600';
-
+            statusLabel.className = 'text-xs font-semibold text-gray-600';
             statusLabel.textContent = 'حالة الطلب:';
+
             statusLine.appendChild(statusLabel);
 
             const displayedStatuses = statusEntries.length ?
                 statusEntries : [statusInfo];
 
             displayedStatuses.forEach(function(statusEntry) {
-                const statusName = String(statusEntry?.status ?? 'غير محدد').trim();
-                const statusBadge = document.createElement('span');
+                const statusName = String(
+                    statusEntry?.status ?? 'غير محدد'
+                ).trim();
 
+                const statusBadge = document.createElement('span');
                 statusBadge.className =
                     'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold ' +
                     getStatusBadgeClasses(statusName);
-
                 statusBadge.textContent = statusName;
 
                 if (statusEntry?.amount !== undefined) {
@@ -828,16 +1029,15 @@
                     const kitchenStatusInfo = getOrderStatusInfo({
                         statuses: [statusEntry]
                     });
-                    const remainingLine = document.createElement('p');
 
+                    const remainingLine = document.createElement('p');
                     remainingLine.className =
                         'basis-full text-xs font-medium text-gray-600';
                     remainingLine.dataset.remainingTime = 'true';
 
                     if (kitchenStatusInfo.endTime !== null) {
-                        remainingLine.dataset.endTime = String(
-                            kitchenStatusInfo.endTime
-                        );
+                        remainingLine.dataset.endTime =
+                            String(kitchenStatusInfo.endTime);
                     }
 
                     remainingLine.textContent =
@@ -848,13 +1048,10 @@
             });
 
             statusContainer.appendChild(statusLine);
-
             row.append(name, details, statusContainer);
 
             return row;
-        } // =========================================================
-        // تحديث الوقت المتبقي دون إعادة إنشاء البطاقات
-        // =========================================================
+        }
 
         function updatePreviousOrderCountdowns() {
             if (!previousOrdersContainer) return;
@@ -880,10 +1077,6 @@
                 });
         }
 
-        // =========================================================
-        // عرض الطلبات السابقة
-        // =========================================================
-
         function renderPreviousOrders() {
             if (!previousOrdersContainer) return;
 
@@ -905,15 +1098,12 @@
                 previousOrdersCount.textContent = `${items.length} صنف`;
             }
 
-            if (previousOrdersSection) {
-                toggleSection(previousOrdersSection, hasOrders);
-            }
-
+            toggleSection(previousOrdersSection, hasOrders);
             updatePreviousOrderCountdowns();
         }
 
         // =========================================================
-        // حساب الطلبات الحالية
+        // إجماليات الطلبات
         // =========================================================
 
         function getCurrentOrdersQuantity() {
@@ -930,32 +1120,23 @@
             let total = 0;
 
             order.forEach(function(item) {
-                total += (
-                    (Number(item.price) || 0) *
-                    (Number(item.quantity) || 0)
-                );
+                total += (Number(item.price) || 0) * (Number(item.quantity) || 0);
             });
 
             return total;
         }
 
         function getTotalOrdersQuantity() {
-            return (
-                getPreviousOrdersQuantity() +
-                getCurrentOrdersQuantity()
-            );
+            return getPreviousOrdersQuantity() + getCurrentOrdersQuantity();
         }
 
         function getServicesTotal() {
-            const services = Array.isArray(tableServices) ?
-                tableServices : [];
+            const services = Array.isArray(tableServices) ? tableServices : [];
 
             return services.reduce(function(total, service) {
                 const price = Number(service?.price ?? 0);
 
-                return total + (
-                    Number.isFinite(price) ? price : 0
-                );
+                return total + (Number.isFinite(price) ? price : 0);
             }, 0);
         }
 
@@ -968,7 +1149,7 @@
         }
 
         // =========================================================
-        // البحث والفلترة حسب التصنيف والاسم والحالة
+        // البحث والفلترة
         // =========================================================
 
         function filterFoods() {
@@ -982,9 +1163,7 @@
                     selectedCategory === 'all' ||
                     card.dataset.category === selectedCategory;
 
-                const matchesSearch = normalize(
-                    card.dataset.name
-                ).includes(query);
+                const matchesSearch = normalize(card.dataset.name).includes(query);
 
                 const foodStatus = String(card.dataset.isActive ?? '');
 
@@ -993,15 +1172,11 @@
                     foodStatus === selectedStatus;
 
                 const visible =
-                    matchesCategory &&
-                    matchesSearch &&
-                    matchesStatus;
+                    matchesCategory && matchesSearch && matchesStatus;
 
                 card.classList.toggle('hidden', !visible);
 
-                if (visible) {
-                    visibleCount++;
-                }
+                if (visible) visibleCount++;
             });
 
             if (foodCount) {
@@ -1020,12 +1195,10 @@
 
             noResults?.classList.toggle('hidden', visibleCount === 0);
 
-            if (clearSearch) {
-                clearSearch.classList.toggle(
-                    'hidden',
-                    !(searchInput?.value.length)
-                );
-            }
+            clearSearch?.classList.toggle(
+                'hidden',
+                !(searchInput?.value.length)
+            );
         }
 
         statusFilter?.addEventListener('change', filterFoods);
@@ -1037,11 +1210,7 @@
                 const active = item === button;
 
                 item.classList.toggle('active', active);
-
-                item.setAttribute(
-                    'aria-pressed',
-                    active ? 'true' : 'false'
-                );
+                item.setAttribute('aria-pressed', active ? 'true' : 'false');
             });
 
             filterFoods();
@@ -1055,27 +1224,18 @@
 
         searchInput?.addEventListener('input', filterFoods);
 
-        statusFilter?.addEventListener('change', filterFoods);
-
         clearSearch?.addEventListener('click', function() {
             if (!searchInput) return;
 
             searchInput.value = '';
-
             filterFoods();
-
             searchInput.focus();
         });
 
         document.getElementById('reset-filters')
             ?.addEventListener('click', function() {
-                if (searchInput) {
-                    searchInput.value = '';
-                }
-
-                if (statusFilter) {
-                    statusFilter.value = 'all';
-                }
+                if (searchInput) searchInput.value = '';
+                if (statusFilter) statusFilter.value = 'all';
 
                 const allButton = categoryButtons.find(function(button) {
                     return button.dataset.category === 'all';
@@ -1089,7 +1249,7 @@
             });
 
         // =========================================================
-        // إنشاء بطاقة الوجبة ضمن الطلبات الجديدة
+        // إنشاء بطاقة الطلب الحالي
         // =========================================================
 
         function createOrderRow({
@@ -1114,29 +1274,18 @@
 
             row.dataset.orderId = String(id ?? '');
 
-            if (isNew && row.dataset.animateAdded === 'true') {
-                row.classList.add('food-added-animation');
-            }
-
             const header = document.createElement('div');
-
             header.className =
                 'flex w-full min-w-0 items-start justify-between gap-3';
 
             const titleRow = document.createElement('div');
-
-            titleRow.className =
-                'flex min-w-0 flex-wrap items-center gap-2';
+            titleRow.className = 'flex min-w-0 flex-wrap items-center gap-2';
 
             const title = document.createElement('p');
-
-            title.className =
-                'break-words text-sm font-extrabold text-gray-800';
-
+            title.className = 'break-words text-sm font-extrabold text-gray-800';
             title.textContent = String(name ?? 'وجبة');
 
             const status = document.createElement('span');
-
             status.className =
                 'inline-flex shrink-0 items-center rounded-full px-2 py-1 text-[10px] font-bold ' +
                 (
@@ -1144,35 +1293,25 @@
                     'bg-[var(--restaurant-color-hex-174c3c)] text-white' :
                     'bg-gray-200 text-gray-700'
                 );
-
             status.textContent = isNew ? 'طلب جديد' : 'طلب سابق';
 
             titleRow.append(title, status);
             header.appendChild(titleRow);
 
             const priceDetails = document.createElement('div');
-
-            priceDetails.className =
-                'grid w-full grid-cols-3 gap-2';
+            priceDetails.className = 'grid w-full grid-cols-3 gap-2';
 
             function createPriceBox(label, value, classes = '') {
                 const box = document.createElement('div');
-
-                box.className =
-                    'min-w-0 rounded-xl bg-white p-2 ' + classes;
+                box.className = 'min-w-0 rounded-xl bg-white p-2 ' + classes;
 
                 const labelElement = document.createElement('p');
-
-                labelElement.className =
-                    'text-[10px] font-medium text-gray-500';
-
+                labelElement.className = 'text-[10px] font-medium text-gray-500';
                 labelElement.textContent = label;
 
                 const valueElement = document.createElement('p');
-
                 valueElement.className =
                     'mt-1 break-words text-xs font-bold text-gray-800';
-
                 valueElement.textContent = String(value);
 
                 box.append(labelElement, valueElement);
@@ -1181,14 +1320,8 @@
             }
 
             priceDetails.append(
-                createPriceBox(
-                    'سعر الوجبة',
-                    `${formatPrice(price)} ل.س`
-                ),
-                createPriceBox(
-                    'الكمية',
-                    Number(quantity) || 0
-                ),
+                createPriceBox('سعر الوجبة', `${formatPrice(price)} ل.س`),
+                createPriceBox('الكمية', Number(quantity) || 0),
                 createPriceBox(
                     'إجمالي الصنف',
                     `${formatPrice(total)} ل.س`,
@@ -1200,7 +1333,8 @@
 
             if (canEdit && isNew) {
                 const noteField = document.createElement('label');
-                noteField.className = 'block w-full text-xs font-bold text-gray-600';
+                noteField.className =
+                    'block w-full text-xs font-bold text-gray-600';
                 noteField.textContent = 'ملاحظة للوجبة (اختياري)';
 
                 const noteInput = document.createElement('textarea');
@@ -1211,44 +1345,38 @@
                 noteInput.className =
                     'order-note-input mt-1 block w-full resize-y rounded-xl border border-gray-200 bg-white p-3 text-sm font-normal text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[var(--restaurant-color-hex-59816d)] focus:ring-2 focus:ring-[var(--restaurant-color-hex-59816d)]/20';
                 noteInput.setAttribute('aria-label', `ملاحظة لوجبة ${name}`);
+                noteInput.disabled = isBillFinalized || isFinalizingBill;
+
                 noteInput.addEventListener('input', function() {
                     const item = order.get(String(id));
-                    if (item) {
+
+                    if (item && !isBillFinalized && !isFinalizingBill) {
                         item.note = noteInput.value;
                     }
                 });
+
                 noteField.appendChild(noteInput);
                 row.appendChild(noteField);
 
                 const actions = document.createElement('div');
-
                 actions.className =
                     'flex w-full items-center justify-between gap-3 border-t border-[var(--restaurant-color-hex-174c3c)]/10 pt-3';
 
                 const quantityControls = document.createElement('div');
-
-                quantityControls.className =
-                    'flex items-center gap-2';
+                quantityControls.className = 'flex items-center gap-2';
 
                 const decrease = document.createElement('button');
-
                 decrease.type = 'button';
-
                 decrease.className =
                     'flex h-9 w-9 items-center justify-center rounded-lg bg-gray-100 text-lg font-black text-gray-700';
-
                 decrease.textContent = '−';
-
-                decrease.setAttribute(
-                    'aria-label',
-                    `تقليل كمية ${name}`
-                );
+                decrease.setAttribute('aria-label', `تقليل كمية ${name}`);
+                decrease.disabled = isBillFinalized || isFinalizingBill;
 
                 decrease.addEventListener('click', function() {
-                    if (isSubmitting) return;
+                    if (isSubmitting || isBillFinalized || isFinalizingBill) return;
 
                     const item = order.get(String(id));
-
                     if (!item) return;
 
                     if (item.quantity > 1) {
@@ -1261,55 +1389,36 @@
                 });
 
                 const quantityElement = document.createElement('span');
-
                 quantityElement.className =
                     'min-w-6 text-center text-sm font-black text-gray-800';
-
                 quantityElement.textContent = String(quantity);
 
                 const increase = document.createElement('button');
-
                 increase.type = 'button';
-
                 increase.className =
                     'flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--restaurant-color-hex-e8f0e8)] text-lg font-black text-[var(--restaurant-color-hex-174c3c)]';
-
                 increase.textContent = '+';
-
-                increase.setAttribute(
-                    'aria-label',
-                    `زيادة كمية ${name}`
-                );
+                increase.setAttribute('aria-label', `زيادة كمية ${name}`);
+                increase.disabled = isBillFinalized || isFinalizingBill;
 
                 increase.addEventListener('click', function() {
-                    if (isSubmitting) return;
+                    if (isSubmitting || isBillFinalized || isFinalizingBill) return;
 
                     const item = order.get(String(id));
-
                     if (!item) return;
 
                     item.quantity++;
-
                     updateOrderSummary();
                 });
 
-                quantityControls.append(
-                    decrease,
-                    quantityElement,
-                    increase
-                );
+                quantityControls.append(decrease, quantityElement, increase);
 
                 const remove = document.createElement('button');
-
                 remove.type = 'button';
-
                 remove.className =
                     'flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-bold text-red-600 hover:bg-red-50';
-
-                remove.setAttribute(
-                    'aria-label',
-                    `حذف ${name} من الطلب`
-                );
+                remove.setAttribute('aria-label', `حذف ${name} من الطلب`);
+                remove.disabled = isBillFinalized || isFinalizingBill;
 
                 remove.innerHTML = `
                     <svg class="h-4 w-4" viewBox="0 0 24 24"
@@ -1322,15 +1431,13 @@
                 `;
 
                 remove.addEventListener('click', function() {
-                    if (isSubmitting) return;
+                    if (isSubmitting || isBillFinalized || isFinalizingBill) return;
 
                     order.delete(String(id));
-
                     updateOrderSummary();
                 });
 
                 actions.append(quantityControls, remove);
-
                 row.appendChild(actions);
             }
 
@@ -1338,7 +1445,7 @@
         }
 
         // =========================================================
-        // عرض الطلبات الحالية
+        // عرض الطلبات
         // =========================================================
 
         function renderOrders() {
@@ -1361,12 +1468,10 @@
 
             const hasNewOrders = order.size > 0;
             const hasOldOrders = hasPreviousOrders();
+
             updateRequestBillVisibility();
 
-            currentOrdersSection?.classList.toggle(
-                'hidden',
-                !hasNewOrders
-            );
+            currentOrdersSection?.classList.toggle('hidden', !hasNewOrders);
 
             if (previousOrdersSection) {
                 toggleSection(previousOrdersSection, hasOldOrders && !hasNewOrders);
@@ -1378,14 +1483,15 @@
             );
         }
 
-        // =========================================================
-        // تحديث زر تأكيد الطلب
-        // =========================================================
-
         function updateConfirmButton() {
+            const hasNewOrders = order.size > 0;
+
             if (confirmOrderList) {
-                confirmOrderList.disabled =
-                    order.size === 0 || isSubmitting;
+                confirmOrderList.hidden = !hasNewOrders;
+                confirmOrderList.disabled = !hasNewOrders ||
+                    isSubmitting ||
+                    isBillFinalized ||
+                    isFinalizingBill;
 
                 confirmOrderList.setAttribute(
                     'aria-disabled',
@@ -1393,60 +1499,37 @@
                 );
             }
 
+            const confirmOrderListText = document.getElementById('confirm-order-list-text');
+            if (confirmOrderListText) {
+                confirmOrderListText.hidden = !hasNewOrders;
+            }
+
             if (approveConfirmOrder) {
-                approveConfirmOrder.disabled =
-                    order.size === 0 || isSubmitting;
+                approveConfirmOrder.disabled = !hasNewOrders ||
+                    isSubmitting ||
+                    isBillFinalized ||
+                    isFinalizingBill;
             }
         }
-
-        // =========================================================
-        // تحديث إجماليات نافذة الطلبات
-        // =========================================================
 
         function updateOrdersModalTotals() {
             const previousTotal = getPreviousOrdersTotal();
             const currentTotal = getCurrentOrdersTotal();
             const servicesTotal = getServicesTotal();
 
-            const finalTotal =
-                previousTotal + currentTotal + servicesTotal;
+            const finalTotal = previousTotal + currentTotal + servicesTotal;
 
             const previousQuantity = getPreviousOrdersQuantity();
             const currentQuantity = getCurrentOrdersQuantity();
 
-            const totalQuantity =
-                previousQuantity + currentQuantity;
+            const totalQuantity = previousQuantity + currentQuantity;
 
-            setText(
-                'modal-previous-orders-total',
-                formatCurrency(previousTotal)
-            );
-
-            setText(
-                'footer-previous-orders-total',
-                formatCurrency(previousTotal)
-            );
-
-            setText(
-                'modal-current-orders-total',
-                formatCurrency(currentTotal)
-            );
-
-            setText(
-                'footer-current-orders-total',
-                formatCurrency(currentTotal)
-            );
-
-            setText(
-                'order-services-total',
-                formatCurrency(servicesTotal)
-            );
-
-            setText(
-                'footer-services-total',
-                formatCurrency(servicesTotal)
-            );
-
+            setText('modal-previous-orders-total', formatCurrency(previousTotal));
+            setText('footer-previous-orders-total', formatCurrency(previousTotal));
+            setText('modal-current-orders-total', formatCurrency(currentTotal));
+            setText('footer-current-orders-total', formatCurrency(currentTotal));
+            setText('order-services-total', formatCurrency(servicesTotal));
+            setText('footer-services-total', formatCurrency(servicesTotal));
             setText('modal-order-total', formatPrice(finalTotal));
 
             setText('current-orders-count', `${currentQuantity} وجبة`);
@@ -1464,15 +1547,8 @@
                 hasPreviousOrders()
             );
 
-            toggleSection(
-                currentOrdersSection,
-                currentQuantity > 0
-            );
+            toggleSection(currentOrdersSection, currentQuantity > 0);
         }
-
-        // =========================================================
-        // تحديث الملخصات والعدادات
-        // =========================================================
 
         function updateOrderSummary() {
             const currentQuantity = getCurrentOrdersQuantity();
@@ -1484,8 +1560,12 @@
             const hasOldOrders = hasPreviousOrders();
             const hasCurrentOrders = currentQuantity > 0;
 
-            const totalQuantity =
-                currentQuantity + previousQuantity;
+            const totalQuantity = currentQuantity + previousQuantity;
+
+            toggleSection(
+                document.getElementById('order-services'),
+                !(hasOldOrders && hasCurrentOrders)
+            );
 
             toggleSection(previousOrderSummary, hasOldOrders);
             toggleSection(currentOrderSummary, hasCurrentOrders);
@@ -1512,22 +1592,15 @@
                 );
             }
 
-            if (currentOrderCount) {
-                currentOrderCount.textContent = currentQuantity;
-            }
+            if (currentOrderCount) currentOrderCount.textContent = currentQuantity;
 
             if (currentOrderBadge) {
                 currentOrderBadge.textContent = currentQuantity;
-
-                currentOrderBadge.classList.toggle(
-                    'hidden',
-                    !hasCurrentOrders
-                );
+                currentOrderBadge.classList.toggle('hidden', !hasCurrentOrders);
             }
 
             if (currentOrderTotal) {
-                currentOrderTotal.textContent =
-                    formatPrice(currentTotal);
+                currentOrderTotal.textContent = formatPrice(currentTotal);
             }
 
             if (previousOrderCount) {
@@ -1536,59 +1609,42 @@
 
             if (previousOrderBadge) {
                 previousOrderBadge.textContent = previousQuantity;
-
-                previousOrderBadge.classList.toggle(
-                    'hidden',
-                    !hasOldOrders
-                );
+                previousOrderBadge.classList.toggle('hidden', !hasOldOrders);
             }
 
             if (previousOrderTotal) {
-                previousOrderTotal.textContent =
-                    formatPrice(previousTotal);
+                previousOrderTotal.textContent = formatPrice(previousTotal);
             }
 
-            if (orderCount) {
-                orderCount.textContent = totalQuantity;
-            }
+            if (orderCount) orderCount.textContent = totalQuantity;
 
             if (orderBadge) {
                 orderBadge.textContent = totalQuantity;
-
-                orderBadge.classList.toggle(
-                    'hidden',
-                    totalQuantity === 0
-                );
+                orderBadge.classList.toggle('hidden', totalQuantity === 0);
             }
 
             if (buttonOrderCount) {
                 buttonOrderCount.textContent = totalQuantity;
-
-                buttonOrderCount.classList.toggle(
-                    'hidden',
-                    totalQuantity === 0
-                );
+                buttonOrderCount.classList.toggle('hidden', totalQuantity === 0);
             }
 
             const finalTotal = getFinalTotal();
 
-            if (orderTotal) {
-                orderTotal.textContent = formatPrice(finalTotal);
-            }
-
+            if (orderTotal) orderTotal.textContent = formatPrice(finalTotal);
             if (orderTotalDesktop) {
                 orderTotalDesktop.textContent = formatPrice(finalTotal);
             }
 
             renderPreviousOrders();
             renderOrders();
-
             updateOrdersModalTotals();
             updateConfirmButton();
+            updateRequestBillVisibility();
         }
 
         // =========================================================
-        // فتح وإغلاق نافذة الطلبات
+        // فتح نافذة الطلبات
+        // السماح بفتحها حتى عندما تكون الفاتورة payment
         // =========================================================
 
         function openOrdersModal() {
@@ -1598,12 +1654,10 @@
 
             renderPreviousOrders();
             renderOrders();
-
             updateOrdersModalTotals();
 
             ordersModal.classList.remove('hidden');
             ordersModal.classList.add('flex');
-
             ordersModal.setAttribute('aria-hidden', 'false');
 
             document.body.classList.add('overflow-hidden');
@@ -1616,19 +1670,26 @@
 
             ordersModal.classList.add('hidden');
             ordersModal.classList.remove('flex');
-
             ordersModal.setAttribute('aria-hidden', 'true');
 
-            document.body.classList.remove('overflow-hidden');
+            if (
+                !requestBillConfirmModal?.classList.contains('flex') &&
+                !confirmOrderModal?.classList.contains('flex')
+            ) {
+                document.body.classList.remove('overflow-hidden');
+            }
 
             previousFocusedElement?.focus?.();
         }
 
         document.getElementById('submit-order')
             ?.addEventListener('click', async function() {
+                // لا تمنع فتح النافذة عندما تكون الفاتورة payment.
                 openOrdersModal();
 
-                if (isSubmitting) return;
+                if (isBillFinalized || isSubmitting) {
+                    return;
+                }
 
                 try {
                     await refreshOrders();
@@ -1645,42 +1706,20 @@
                 }
             });
 
-        document.getElementById('request-bill')
-            ?.addEventListener('click', async function() {
-                try {
-                    const response = await fetch(@json(route('bill.finalize')), {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector(
-                                'meta[name="csrf-token"]'
-                            ).content,
-                        },
-                        body: JSON.stringify({
-                            billNumber: @json($billNumber),
-                        }),
-                    });
-
-                    const data = await response.json();
-
-                    if (!response.ok) {
-                        alert(data.message ?? 'حدث خطأ أثناء إرسال طلب الفاتورة');
-                        return;
-                    }
-
-                    alert(data.message ?? 'تم إرسال طلب الفاتورة بنجاح');
-                } catch (error) {
-                    alert('تعذر الاتصال بالخادم، يرجى المحاولة مرة أخرى');
-                    console.error('Bill finalization request failed:', error);
-                }
-            });
         document.getElementById('close-orders-modal')
             ?.addEventListener('click', closeOrdersModal);
 
         document.getElementById('browse-menu')
             ?.addEventListener('click', function() {
                 closeOrdersModal();
+
+                if (isBillFinalized) {
+                    showMessage(
+                        'تم طلب الحساب لهذه الفاتورة. يمكنك مراجعة طلباتك السابقة، لكن لا يمكنك إضافة وجبات جديدة.',
+                        'error'
+                    );
+                    return;
+                }
 
                 document.getElementById('menu-items')?.scrollIntoView({
                     behavior: 'smooth',
@@ -1695,11 +1734,23 @@
         });
 
         // =========================================================
-        // إضافة الوجبات إلى الطلب
+        // إضافة الوجبات
         // =========================================================
 
         document.querySelectorAll('.add-to-order').forEach(function(button) {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function(event) {
+                if (isBillFinalized || isFinalizingBill) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+
+                    showMessage(
+                        'تم طلب الحساب لهذه الفاتورة، لذلك لا يمكنك إضافة وجبات جديدة. يمكنك فتح قائمة الطلبات لمراجعة طلباتك السابقة.',
+                        'error'
+                    );
+
+                    return;
+                }
+
                 if (isSubmitting) return;
 
                 const id = String(button.dataset.id ?? '');
@@ -1746,38 +1797,33 @@
                     button.innerHTML = originalHtml;
                     button.classList.remove('!bg-emerald-700');
                 }, 1000);
-            });
+            }, true);
         });
 
         // =========================================================
-        // فتح وإغلاق نافذة تأكيد الطلب
+        // نافذة تأكيد إرسال الطلب
         // =========================================================
 
         function openConfirmOrderModal() {
             if (
                 order.size === 0 ||
                 isSubmitting ||
+                isBillFinalized ||
+                isFinalizingBill ||
                 !confirmOrderModal
             ) {
                 return;
             }
 
             setText('confirm-order-items-count', order.size);
-
-            setText(
-                'confirm-order-quantity',
-                getCurrentOrdersQuantity()
-            );
-
-            setText(
-                'confirm-order-total',
-                formatPrice(getCurrentOrdersTotal())
-            );
+            setText('confirm-order-quantity', getCurrentOrdersQuantity());
+            setText('confirm-order-total', formatPrice(getCurrentOrdersTotal()));
 
             confirmOrderModal.classList.remove('hidden');
             confirmOrderModal.classList.add('flex');
-
             confirmOrderModal.setAttribute('aria-hidden', 'false');
+
+            document.body.classList.add('overflow-hidden');
 
             cancelConfirmOrder?.focus();
         }
@@ -1787,16 +1833,19 @@
 
             confirmOrderModal.classList.add('hidden');
             confirmOrderModal.classList.remove('flex');
-
             confirmOrderModal.setAttribute('aria-hidden', 'true');
 
             resetConfirmPress();
+
+            if (
+                !ordersModal?.classList.contains('flex') &&
+                !requestBillConfirmModal?.classList.contains('flex')
+            ) {
+                document.body.classList.remove('overflow-hidden');
+            }
         }
 
-        cancelConfirmOrder?.addEventListener(
-            'click',
-            closeConfirmOrderModal
-        );
+        cancelConfirmOrder?.addEventListener('click', closeConfirmOrderModal);
 
         confirmOrderModal?.addEventListener('click', function(event) {
             if (event.target === confirmOrderModal) {
@@ -1820,7 +1869,6 @@
             confirmOrderList.replaceChildren();
 
             const buttonContent = document.createElement('span');
-
             buttonContent.className =
                 'relative z-[2] inline-flex items-center gap-2';
 
@@ -1835,7 +1883,6 @@
             confirmOrderList.appendChild(buttonContent);
 
             confirmProgressLayer = document.createElement('span');
-
             confirmProgressLayer.setAttribute('aria-hidden', 'true');
 
             confirmProgressLayer.style.cssText = `
@@ -1898,6 +1945,8 @@
         function startConfirmPress(event) {
             if (
                 isSubmitting ||
+                isBillFinalized ||
+                isFinalizingBill ||
                 order.size === 0 ||
                 confirmPressTimer !== null ||
                 confirmPressTriggered
@@ -1905,9 +1954,7 @@
                 return;
             }
 
-            if (event.cancelable) {
-                event.preventDefault();
-            }
+            if (event.cancelable) event.preventDefault();
 
             confirmPressStart = performance.now();
 
@@ -1937,7 +1984,12 @@
                 confirmOrderList?.classList.remove('confirm-pressing');
 
                 try {
-                    if (!isSubmitting && order.size > 0) {
+                    if (
+                        !isSubmitting &&
+                        !isBillFinalized &&
+                        !isFinalizingBill &&
+                        order.size > 0
+                    ) {
                         await sendOrder();
                     }
                 } finally {
@@ -1954,39 +2006,18 @@
         }
 
         function endConfirmPress(event) {
-            if (event?.cancelable) {
-                event.preventDefault();
-            }
+            if (event?.cancelable) event.preventDefault();
 
             if (confirmPressTimer !== null) {
                 resetConfirmPress();
             }
         }
 
-        confirmOrderList?.addEventListener(
-            'pointerdown',
-            startConfirmPress
-        );
-
-        confirmOrderList?.addEventListener(
-            'pointerup',
-            endConfirmPress
-        );
-
-        confirmOrderList?.addEventListener(
-            'pointercancel',
-            endConfirmPress
-        );
-
-        confirmOrderList?.addEventListener(
-            'pointerleave',
-            endConfirmPress
-        );
-
-        confirmOrderList?.addEventListener(
-            'lostpointercapture',
-            endConfirmPress
-        );
+        confirmOrderList?.addEventListener('pointerdown', startConfirmPress);
+        confirmOrderList?.addEventListener('pointerup', endConfirmPress);
+        confirmOrderList?.addEventListener('pointercancel', endConfirmPress);
+        confirmOrderList?.addEventListener('pointerleave', endConfirmPress);
+        confirmOrderList?.addEventListener('lostpointercapture', endConfirmPress);
 
         confirmOrderList?.addEventListener('click', function(event) {
             event.preventDefault();
@@ -1994,19 +2025,16 @@
         });
 
         document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                resetConfirmPress();
-            }
+            if (document.hidden) resetConfirmPress();
         });
 
         // =========================================================
-        // تحديث الطلبات السابقة من الخادم
+        // تحديث الطلبات من الخادم
         // =========================================================
 
         async function refreshOrders() {
             if (refreshOrdersPromise) {
                 refreshOrdersAgain = true;
-
                 return refreshOrdersPromise;
             }
 
@@ -2041,13 +2069,14 @@
                     }
 
                     const result = await response.json();
+
+                    // اكتشاف حالة payment من استجابة الخادم.
+                    // syncBillStatusFromResponse(result);
+
                     const refreshedData = normalizeOrdersResponse(result);
 
                     if (!refreshedData) {
-                        console.error(
-                            'Unexpected orders response:',
-                            result
-                        );
+                        console.error('Unexpected orders response:', result);
 
                         throw new Error(
                             'تعذر قراءة الطلبات من الخادم. تحقق من تنسيق الاستجابة.'
@@ -2055,7 +2084,6 @@
                     }
 
                     oldOrders = refreshedData;
-                    updateRequestBillVisibility();
 
                     const responseServices =
                         result?.services ??
@@ -2067,6 +2095,7 @@
                     }
 
                     updateOrderSummary();
+
                     refreshedOrders = oldOrders;
                 } while (refreshOrdersAgain);
 
@@ -2090,24 +2119,25 @@
 
         window.refreshOrders = refreshOrders;
 
+        // =========================================================
+        // التحديث المباشر عبر Laravel Echo
+        // =========================================================
+
         let isSubscribedToTableUpdates = false;
 
         function subscribeToTableUpdates() {
-            if (!window.Echo) {
-                return;
-            }
-
-            if (isSubscribedToTableUpdates) {
-                return;
-            }
+            if (!window.Echo || isSubscribedToTableUpdates) return;
 
             isSubscribedToTableUpdates = true;
+
             window.Echo
                 .channel(`table.${tableId}`)
                 .listen('.cashier.dashboard.updated', function() {
                     refreshOrders().catch(function(error) {
-                        console.error('Failed to refresh order statuses after a live update:',
-                            error);
+                        console.error(
+                            'Failed to refresh order statuses after a live update:',
+                            error
+                        );
                     });
                 });
         }
@@ -2117,36 +2147,46 @@
         if (window.Echo) {
             subscribeToTableUpdates();
         } else {
-            console.info('Waiting for Laravel Echo before subscribing to live menu order updates.');
+            console.info(
+                'Waiting for Laravel Echo before subscribing to live menu order updates.'
+            );
         }
 
-        refreshPreviousOrdersButton?.addEventListener(
-            'click',
-            async function() {
-                if (isRefreshingOrders || isSubmitting) return;
+        refreshPreviousOrdersButton?.addEventListener('click', async function() {
+            if (isRefreshingOrders || isSubmitting) return;
 
-                try {
-                    await refreshOrders();
-                } catch (error) {
-                    console.error(
-                        'Failed to refresh previous orders:',
-                        error
-                    );
+            try {
+                await refreshOrders();
+            } catch (error) {
+                console.error('Failed to refresh previous orders:', error);
 
-                    showMessage(
-                        error.message || 'تعذر تحديث حالات الطلبات.',
-                        'error'
-                    );
-                }
+                showMessage(
+                    error.message || 'تعذر تحديث حالات الطلبات.',
+                    'error'
+                );
             }
-        );
+        });
 
         // =========================================================
-        // إرسال الطلبات الجديدة إلى الخادم
+        // إرسال الطلبات الجديدة
         // =========================================================
 
         async function sendOrder() {
-            if (isSubmitting || order.size === 0) return;
+            if (
+                isSubmitting ||
+                isBillFinalized ||
+                isFinalizingBill ||
+                order.size === 0
+            ) {
+                if (isBillFinalized) {
+                    showMessage(
+                        'تم طلب الحساب لهذه الفاتورة، ولا يمكنك إرسال طلبات جديدة.',
+                        'error'
+                    );
+                }
+
+                return;
+            }
 
             isSubmitting = true;
 
@@ -2201,13 +2241,25 @@
 
                     if (response.status === 419) {
                         throw new Error(
-                            'انتهت صلاحية الجلسة. حدّث الصفحة وحاول مجددًا.'
+                            'انتهت صلاحية الجلسة. حدّث الصفحة ثم حاول مجددًا.'
                         );
                     }
 
-                    throw new Error(
-                        data.message || 'فشل إرسال الطلب.'
-                    );
+                    if (response.status === 400 || response.status === 409) {
+                        if (
+                            String(data.billStatus ?? data.bill_status ?? '') ===
+                            'payment'
+                        ) {
+                            lockOrdering();
+                        }
+
+                        throw new Error(
+                            data.message ||
+                            'تم طلب الحساب لهذه الفاتورة، ولا يمكنك إضافة طلبات جديدة.'
+                        );
+                    }
+
+                    throw new Error(data.message || 'تعذر إرسال الطلب.');
                 }
 
                 order.clear();
@@ -2227,6 +2279,7 @@
                 closeOrdersModal();
 
                 showOrderSuccessToast();
+
             } catch (error) {
                 hideOrderSuccessToast();
 
@@ -2262,28 +2315,64 @@
         document.addEventListener('keydown', function(event) {
             if (event.key !== 'Escape') return;
 
+            if (
+                requestBillConfirmModal &&
+                !requestBillConfirmModal.classList.contains('hidden') &&
+                !isFinalizingBill
+            ) {
+                closeRequestBillConfirmModal();
+                return;
+            }
+
             if (confirmOrderModal?.classList.contains('flex')) {
                 closeConfirmOrderModal();
                 return;
             }
 
-            if (
-                ordersModal &&
-                !ordersModal.classList.contains('hidden')
-            ) {
+            if (ordersModal && !ordersModal.classList.contains('hidden')) {
                 closeOrdersModal();
             }
         });
 
         // =========================================================
-        // تهيئة الواجهة عند تحميل الصفحة
+        // تهيئة الواجهة
         // =========================================================
 
         filterFoods();
 
         updateOrderSummary();
 
+        // عند فتح الصفحة، إذا كانت الفاتورة payment، لا تسمح بالإضافة.
+        if (isBillFinalized) {
+            document.querySelectorAll('.add-to-order').forEach(function(button) {
+                button.disabled = true;
+                button.classList.add('opacity-50', 'cursor-not-allowed');
+                button.setAttribute('aria-disabled', 'true');
+            });
+
+            requestBillButton?.classList.add('hidden');
+
+            if (requestBillButton) {
+                requestBillButton.hidden = true;
+                requestBillButton.disabled = true;
+            }
+
+            if (requestBillHint) {
+                requestBillHint.hidden = true;
+            }
+
+            updateOrderSummary();
+        }
+
+        // تحديث حالة الفاتورة عند التحميل للتأكد من حالة الخادم.
+        refreshOrders().catch(function(error) {
+            console.error('Failed to load initial order status:', error);
+        });
+
         window.setInterval(updatePreviousOrderCountdowns, 1000);
+        if (@json($billStatus === 'payment')) {
+            lockOrdering();
+        }
     });
 
     // =============================================================

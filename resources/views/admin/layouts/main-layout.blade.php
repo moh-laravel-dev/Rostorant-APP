@@ -321,7 +321,7 @@
                 </a>
 
                 {{-- Orders --}}
-                <a href="#" @click="navigateSidebar()" class="sidebar-link"
+                <a href="{{ route('admin.bills.index') }}" @click="navigateSidebar()" class="sidebar-link"
                     :class="!sidebarOpen && !mobile ? 'justify-center px-0' : ''" title="الطلبات">
 
                     <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
@@ -383,16 +383,30 @@
                 <a href="{{ route('admin.cashiers.index') }}" @click="navigateSidebar()"
                     class="sidebar-link {{ request()->routeIs('admin.cashiers.*') ? 'active' : '' }}"
                     :class="!sidebarOpen && !mobile ? 'justify-center px-0' : ''" title="الكاشير">
-                    <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                    <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="1.8">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3 8h18v12H3zM7 8V5h10v3M7 13h4m2 0h4" />
                     </svg>
-                    <span x-show="sidebarOpen || mobile" class="whitespace-nowrap text-sm font-semibold">الكاشير</span>
+                    <span x-show="sidebarOpen || mobile"
+                        class="whitespace-nowrap text-sm font-semibold">الكاشير</span>
                     <span x-cloak x-show="!sidebarOpen && !mobile" class="sidebar-tooltip">الكاشير</span>
                 </a>
 
+                <a href="{{ route('admin.captains.index') }}" @click="navigateSidebar()"
+                    class="sidebar-link {{ request()->routeIs('admin.captains.*') ? 'active' : '' }}"
+                    :class="!sidebarOpen && !mobile ? 'justify-center px-0' : ''" title="الكباتن">
+                    <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m6-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm10 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    <span x-show="sidebarOpen || mobile" class="whitespace-nowrap text-sm font-semibold">الكباتن</span>
+                    <span x-cloak x-show="!sidebarOpen && !mobile" class="sidebar-tooltip">الكباتن</span>
+                </a>
+
                 {{-- Reports --}}
-                <a href="#" @click="navigateSidebar()" class="sidebar-link"
+                <a href="{{ route('admin.reports.index') }}" @click="navigateSidebar()" class="sidebar-link"
                     :class="!sidebarOpen && !mobile ? 'justify-center px-0' : ''" title="التقارير">
 
                     <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -527,7 +541,7 @@
                         <div class="flex shrink-0 items-center gap-2 sm:gap-3">
 
                             {{-- Notifications --}}
-                            <div class="relative" @click.outside="notificationsOpen = false"
+                            {{-- <div class="relative" @click.outside="notificationsOpen = false"
                                 @keydown.escape.window="notificationsOpen = false">
 
                                 <button type="button"
@@ -584,7 +598,7 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             {{-- Profile Dropdown --}}
                             <div class="relative" @click.outside="profileOpen = false"
@@ -606,7 +620,8 @@
                                     </div>
 
                                     <div class="hidden text-right sm:block">
-                                        <p class="max-w-32 truncate text-sm font-extrabold text-[var(--restaurant-color-hex-10382c)]">
+                                        <p
+                                            class="max-w-32 truncate text-sm font-extrabold text-[var(--restaurant-color-hex-10382c)]">
                                             مدير المطعم
                                         </p>
                                         <p class="mt-0.5 text-[11px] font-medium text-slate-500">
@@ -640,7 +655,8 @@
                                             </div>
 
                                             <div class="min-w-0">
-                                                <p class="truncate text-sm font-extrabold text-[var(--restaurant-color-hex-10382c)]">
+                                                <p
+                                                    class="truncate text-sm font-extrabold text-[var(--restaurant-color-hex-10382c)]">
                                                     مدير المطعم
                                                 </p>
                                                 <p class="mt-1 text-xs text-slate-500">

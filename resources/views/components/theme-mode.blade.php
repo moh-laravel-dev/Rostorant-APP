@@ -8,7 +8,7 @@
         const readTheme = () => {
             try {
                 const theme = localStorage.getItem(storageKey);
-                return theme === 'dark' || theme === 'light' ? theme : 'light';
+                return theme === 'dark' || theme === 'light' ? theme : 'dark';
             } catch (error) {
                 console.warn('Could not read the saved theme preference.', error);
                 return 'light';
@@ -58,7 +58,9 @@
         };
 
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', addToggle, { once: true });
+            document.addEventListener('DOMContentLoaded', addToggle, {
+                once: true
+            });
         } else {
             addToggle();
         }

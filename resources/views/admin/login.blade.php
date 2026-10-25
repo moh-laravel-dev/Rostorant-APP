@@ -365,23 +365,27 @@
 
                 @php
                     $requestedLoginTab = old('login_type', request()->query('type'));
-                    $loginTabLocked = in_array($requestedLoginTab, ['admin', 'cashier'], true);
+                    $loginTabLocked = in_array($requestedLoginTab, ['admin', 'cashier', 'captain'], true);
                     $activeLoginTab = $loginTabLocked ? $requestedLoginTab : 'admin';
                 @endphp
-                <div class="mb-6 grid grid-cols-2 gap-2 rounded-xl bg-gray-100 p-1" role="tablist"
+                <div class="mb-6 grid grid-cols-3 gap-2 rounded-xl bg-gray-100 p-1" role="tablist"
                     aria-label="نوع تسجيل الدخول" data-login-tab-locked="{{ $loginTabLocked ? 'true' : 'false' }}">
                     <button type="button" id="admin-login-tab" role="tab" aria-controls="admin-login-panel"
-                        aria-selected="{{ $activeLoginTab !== 'cashier' ? 'true' : 'false' }}"
-                        class="login-role-tab rounded-lg px-3 py-3 text-sm font-bold transition {{ $activeLoginTab !== 'cashier' ? 'is-active' : '' }}"
+                        aria-selected="{{ $activeLoginTab === 'admin' ? 'true' : 'false' }}"
+                        class="login-role-tab rounded-lg px-3 py-3 text-sm font-bold transition {{ $activeLoginTab === 'admin' ? 'is-active' : '' }}"
                         data-login-tab="admin">دخول الأدمن</button>
                     <button type="button" id="cashier-login-tab" role="tab" aria-controls="cashier-login-panel"
                         aria-selected="{{ $activeLoginTab === 'cashier' ? 'true' : 'false' }}"
                         class="login-role-tab rounded-lg px-3 py-3 text-sm font-bold transition {{ $activeLoginTab === 'cashier' ? 'is-active' : '' }}"
                         data-login-tab="cashier">دخول الكاشير</button>
+                    <button type="button" id="captain-login-tab" role="tab" aria-controls="captain-login-panel"
+                        aria-selected="{{ $activeLoginTab === 'captain' ? 'true' : 'false' }}"
+                        class="login-role-tab rounded-lg px-3 py-3 text-sm font-bold transition {{ $activeLoginTab === 'captain' ? 'is-active' : '' }}"
+                        data-login-tab="captain">دخول الكابتن</button>
                 </div>
 
                 <div id="admin-login-panel" role="tabpanel" aria-labelledby="admin-login-tab"
-                    {{ $activeLoginTab === 'cashier' ? 'hidden' : '' }}>
+                    {{ $activeLoginTab !== 'admin' ? 'hidden' : '' }}>
                     <form id="admin-login-form" method="POST" action="{{ route('admin.login.action') }}"
                         class="space-y-5">
                         @csrf
@@ -534,6 +538,65 @@
                     </form>
                 </div>
 
+                <div id="captain-login-panel" role="tabpanel" aria-labelledby="captain-login-tab"
+                    {{ $activeLoginTab === 'captain' ? '' : 'hidden' }}>
+                    <form id="captain-login-form" method="POST" action="{{ route('captain.login.action') }}"
+                        class="space-y-5">
+                        @csrf
+                        <input type="hidden" name="login_type" value="captain">
+
+                        <div>
+                            <label for="captain-phone"
+                                class="mb-2 block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
+                                رقم الهاتف
+                            </label>
+                            <input id="captain-phone" type="tel" name="phone"
+                                value="{{ old('captain_phone', old('phone')) }}" required autocomplete="tel"
+                                inputmode="numeric" placeholder="أدخل رقم الهاتف"
+                                class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 px-4 py-3.5 text-left text-gray-800 outline-none placeholder:text-gray-400">
+                            <input type="hidden" name="country_code" id="captain_country_code"
+                                value="{{ old('captain_country_code', old('country_code', '+963')) }}">
+                        </div>
+
+                        <div x-data="{ showPassword: false }">
+                            <label for="captain-password"
+                                class="mb-2 block text-sm font-bold text-[var(--restaurant-color-hex-174c3c)]">
+                                كلمة المرور
+                            </label>
+                            <div class="relative">
+                                <span
+                                    class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[var(--restaurant-color-hex-174c3c)]/60">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.8">
+                                        <rect x="4" y="10" width="16" height="11" rx="2" />
+                                        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                                        <path d="M12 14v3" />
+                                    </svg>
+                                </span>
+                                <input id="captain-password" :type="showPassword ? 'text' : 'password'"
+                                    name="password" required autocomplete="current-password"
+                                    placeholder="أدخل كلمة المرور" dir="ltr"
+                                    class="login-input w-full rounded-xl border border-gray-200 bg-[var(--restaurant-color-hex-faf7f0)]/60 py-3.5 pl-20 pr-12 text-left text-gray-800 outline-none placeholder:text-gray-400">
+                                <button type="button" @click="showPassword = !showPassword"
+                                    :aria-label="showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'"
+                                    class="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-lg px-2.5 py-2 text-xs font-bold text-[var(--restaurant-color-hex-174c3c)] transition hover:bg-[var(--restaurant-color-hex-174c3c)]/10 focus:outline-none focus:ring-2 focus:ring-[var(--restaurant-color-hex-174c3c)]/30"
+                                    x-text="showPassword ? 'إخفاء' : 'إظهار'"></button>
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            class="login-button group flex min-h-[54px] w-full items-center justify-center gap-3 rounded-xl px-5 py-3.5 font-bold text-white focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20">
+                            <span>دخول لوحة الكابتن</span>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14" stroke-linecap="round" />
+                                <path d="m12 5 7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
                 {{-- Security Notice --}}
                 <div
                     class="mt-6 flex items-center justify-center gap-2 rounded-xl border border-[var(--restaurant-color-hex-174c3c)]/[0.08] bg-[var(--restaurant-color-hex-174c3c)]/[0.035] px-3 py-3">
@@ -583,6 +646,7 @@
             const tabList = document.querySelector('[role="tablist"][data-login-tab-locked]');
             const adminPanel = document.querySelector('#admin-login-panel');
             const cashierPanel = document.querySelector('#cashier-login-panel');
+            const captainPanel = document.querySelector('#captain-login-panel');
             const phoneForms = {
                 admin: {
                     phone: '#phone',
@@ -593,6 +657,11 @@
                     phone: '#cashier-phone',
                     countryCode: '#cashier_country_code',
                     form: '#cashier-login-form'
+                },
+                captain: {
+                    phone: '#captain-phone',
+                    countryCode: '#captain_country_code',
+                    form: '#captain-login-form'
                 },
             };
             const initializedPhoneForms = {};
@@ -605,6 +674,7 @@
                 });
                 adminPanel.hidden = role !== 'admin';
                 cashierPanel.hidden = role !== 'cashier';
+                captainPanel.hidden = role !== 'captain';
             }
 
             function initializePhoneForm(role) {
@@ -671,7 +741,7 @@
             if (tabList.dataset.loginTabLocked !== 'true') {
                 try {
                     const savedRole = localStorage.getItem(loginTabStorageKey);
-                    if (savedRole === 'admin' || savedRole === 'cashier') {
+                    if (savedRole === 'admin' || savedRole === 'cashier' || savedRole === 'captain') {
                         selectedRole = savedRole;
                     }
                 } catch (error) {

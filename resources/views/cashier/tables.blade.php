@@ -88,39 +88,90 @@
         @else
             {{-- Table Filters --}}
             <section class="rounded-2xl border border-gray-200 bg-white p-3 shadow-sm sm:p-4">
-                <div class="flex justify-around gap-2 overflow-x-auto pb-1" role="tablist" aria-label="فلترة الطاولات">
+                <div class="flex justify-around flex-wrap gap-2 overflow-x-auto pb-1" role="tablist"
+                    aria-label="فلترة الطاولات">
 
+                    <!-- جميع الطاولات -->
                     <button type="button" data-table-filter="all" aria-pressed="true"
                         class="hoverclass inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#174c3c] px-4 py-3 text-sm font-bold text-white transition">
+                        <svg class="h-6 w-6 shrink-0 text-[#f4d28c]" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                            <path d="m15.5 17.5 1.5 1.5 3-3" stroke="#174c3c" stroke-width="2" />
+                        </svg>
                         <span>جميع الطاولات</span>
-                        <span data-filter-count="all" class="rounded-full bg-white/20 px-2 py-0.5 text-xs">0</span>
+                        <span data-filter-count="all"
+                            class="rounded-full bg-white/15 px-2 py-0.5 text-xs text-white">0</span>
                     </button>
 
+                    <!-- فواتير مفتوحة -->
                     <button type="button" data-table-filter="active" aria-pressed="false"
                         class="hoverclass inline-flex shrink-0 items-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-sm font-bold text-gray-600 transition hover:bg-emerald-50">
+                        <svg class="h-6 w-6 shrink-0 text-[#f4d28c]" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <path d="M6 2.75h8l4.25 4.25V21H6a2 2 0 0 1-2-2V4.75a2 2 0 0 1 2-2Z" />
+                            <path d="M14 3v5h5M8 12h7M8 16h4" />
+                            <circle cx="17.5" cy="17.5" r="4" fill="#174c3c" stroke="#174c3c" />
+                            <path d="M17.5 15.5v2l1.25 1" stroke="#f4d28c" />
+                        </svg>
                         <span>فواتير مفتوحة</span>
-                        <span data-filter-count="active" class="rounded-full bg-white px-2 py-0.5 text-xs">0</span>
+                        <span data-filter-count="active"
+                            class="rounded-full bg-gray-200 px-2 py-0.5 text-xs text-[#174c3c]">0</span>
                     </button>
 
+                    <!-- بانتظار الحساب -->
                     <button type="button" data-table-filter="payment" aria-pressed="false"
-                        class="hoverclass inline-flex shrink-0 items-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-sm font-bold text-gray-600 transition hover:bg-amber-50">
+                        class="hoverclass inline-flex shrink-0 items-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-sm font-bold text-gray-600 transition hover:bg-emerald-50">
+                        <svg class="h-6 w-6 shrink-0 text-[#f4d28c]" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+                            <path d="M2.5 10h19M6 15h3" />
+                            <circle cx="16.5" cy="14.5" r="4.5" fill="#174c3c" stroke="#174c3c" />
+                            <path d="M16.5 12v2.5l1.5 1" stroke="#f4d28c" />
+                        </svg>
                         <span>بانتظار الحساب</span>
-                        <span data-filter-count="payment" class="rounded-full bg-white px-2 py-0.5 text-xs">0</span>
+                        <span data-filter-count="payment"
+                            class="rounded-full bg-gray-200 px-2 py-0.5 text-xs text-[#174c3c]">0</span>
                     </button>
 
+                    <!-- طلبات جديدة -->
                     <button type="button" data-table-filter="new-orders" aria-pressed="false"
-                        class="hoverclass inline-flex shrink-0 items-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-sm font-bold text-gray-600 transition hover:bg-amber-50">
+                        class="hoverclass inline-flex shrink-0 items-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-sm font-bold text-gray-600 transition hover:bg-emerald-50">
+                        <svg class="h-6 w-6 shrink-0 text-[#f4d28c]" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 7v5l3.5 2" />
+                            <circle cx="18.5" cy="5.5" r="3.5" fill="#174c3c" stroke="#174c3c" />
+                            <path d="M18.5 3.8v1.9l1.2.8" stroke="#f4d28c" />
+                        </svg>
                         <span>طلبات جديدة</span>
-                        <span data-filter-count="new-orders" class="rounded-full bg-white px-2 py-0.5 text-xs">0</span>
+                        <span data-filter-count="new-orders"
+                            class="rounded-full bg-gray-200 px-2 py-0.5 text-xs text-[#174c3c]">0</span>
                     </button>
 
+                    <!-- طاولات فارغة -->
                     <button type="button" data-table-filter="empty" aria-pressed="false"
-                        class="hoverclass inline-flex shrink-0 items-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-sm font-bold text-gray-600 transition hover:bg-gray-200">
+                        class="hoverclass inline-flex shrink-0 items-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-sm font-bold text-gray-600 transition hover:bg-emerald-50">
+                        <svg class="h-6 w-6 shrink-0 text-[#f4d28c]" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <path d="M3 9h18v3H3z" />
+                            <path d="M5 12v8M19 12v8M3 20h18" />
+                            <path d="M9 14l6 4M15 14l-6 4" stroke="#174c3c" stroke-width="2.2" />
+                        </svg>
                         <span>طاولات فارغة</span>
-                        <span data-filter-count="empty" class="rounded-full bg-white px-2 py-0.5 text-xs">0</span>
+                        <span data-filter-count="empty"
+                            class="rounded-full bg-gray-200 px-2 py-0.5 text-xs text-[#174c3c]">0</span>
                     </button>
-                </div>
 
+                </div>
                 <p id="table-filter-empty" class="hidden py-8 text-center text-sm font-semibold text-gray-500">
                     لا توجد طاولات تطابق هذا الفلتر.
                 </p>
@@ -132,11 +183,15 @@
 
                 @foreach ($tables as $table)
                     @php
-                        $tableOrders = $table->bills->flatMap(fn($bill) => $bill->orders);
+                        $tableBills = $table->bills->contains(fn($bill) => $bill->status === 'active')
+                            ? $table->bills->where('status', 'active')
+                            : $table->bills;
+
+                        $tableOrders = $tableBills->flatMap(fn($bill) => $bill->orders);
 
                         $hasPendingConfirmation = $tableOrders->contains(fn($order) => (string) $order->status === '0');
 
-                        $hasActiveBill = $table->bills->contains(fn($bill) => $bill->status === 'active');
+                        $hasActiveBill = $tableBills->contains(fn($bill) => $bill->status === 'active');
 
                         $hasPaymentBill = $table->bills->contains(fn($bill) => $bill->status === 'payment');
 
@@ -148,7 +203,7 @@
                         data-has-active-bill="{{ $hasActiveBill ? 'true' : 'false' }}"
                         data-has-payment-bill="{{ $hasPaymentBill ? 'true' : 'false' }}"
                         data-is-empty-table="{{ $isEmptyTable ? 'true' : 'false' }}" @class([
-                            'min-w-0 overflow-hidden rounded-2xl border bg-white shadow-sm',
+                            'min-w-0 h-fit max-h-max overflow-hidden rounded-2xl border bg-white shadow-sm',
                             'border-amber-300 ring-2 ring-amber-200 shadow-amber-100' => $hasPendingConfirmation,
                             'border-gray-200' => !$hasPendingConfirmation,
                         ])>
@@ -183,7 +238,7 @@
                         <div class="space-y-4 p-5">
 
                             {{-- Bills --}}
-                            @forelse ($table->bills as $bill)
+                            @forelse ($tableBills as $bill)
                                 @if ($bill->status === 'payment')
                                     <form action="{{ route('confirm.bill.finalize') }}" method="POST"
                                         class="flex justify-center" data-finalize-bill>
@@ -205,7 +260,7 @@
                                 @endif
 
                                 <section class="rounded-xl border border-gray-200 bg-gray-50/70 p-4">
-                                    <div class="flex flex-wrap items-center justify-between gap-2">
+                                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
                                         <div>
                                             <p class="text-xs font-bold text-gray-500">
                                                 فاتورة #{{ $bill->number }}
@@ -222,214 +277,218 @@
                                             {{ $bill->status === 'payment' ? 'بانتظار الحساب' : 'فاتورة مفتوحة' }}
                                         </span>
                                     </div>
+                                    @if ($tableBills->isNotEmpty())
+                                        @if ($tableOrders->isEmpty())
+                                            <p class="rounded-xl bg-gray-50 p-4 text-sm text-gray-500">
+                                                لا توجد طلبات على فواتير هذه الطاولة.
+                                            </p>
+                                        @else
+                                            <div class="space-y-4">
 
-                                    <div class="mt-4 flex items-center justify-between border-t border-gray-200 pt-3">
-                                        <span class="text-sm font-bold text-gray-600">الإجمالي</span>
-                                        <span
-                                            class="text-base font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
-                                            {{ number_format((float) $bill->orders->sum('total_price'), 0) }}
-                                            ل.س
-                                        </span>
-                                    </div>
+                                                {{-- Orders grouped by status --}}
+                                                @foreach ($tableOrders->groupBy('status')->sortKeys() as $status => $statusOrders)
+                                                    <section
+                                                        class="rounded-xl border border-gray-200 bg-gray-50/70 p-4">
 
-                                </section>
-                            @empty
-                                <p class="rounded-xl bg-gray-50 p-4 text-sm text-gray-500">
-                                    لا توجد فاتورة مسجلة لهذه الطاولة.
-                                </p>
-                            @endforelse
+                                                        <div class="flex items-center justify-between gap-2">
+                                                            <h3 class="text-sm font-extrabold text-gray-700">
+                                                                {{ config('status.order')[(string) $status] ?? $status }}
+                                                            </h3>
 
-                            @if ($table->bills->isNotEmpty())
-                                @if ($tableOrders->isEmpty())
-                                    <p class="rounded-xl bg-gray-50 p-4 text-sm text-gray-500">
-                                        لا توجد طلبات على فواتير هذه الطاولة.
-                                    </p>
-                                @else
-                                    <div class="space-y-4">
+                                                            <span class="text-xs font-semibold text-gray-500">
+                                                                {{ $statusOrders->sum('amount') }} وجبة
+                                                            </span>
+                                                        </div>
 
-                                        {{-- Orders grouped by status --}}
-                                        @foreach ($tableOrders->groupBy('status')->sortKeys() as $status => $statusOrders)
-                                            <section class="rounded-xl border border-gray-200 bg-gray-50/70 p-4">
+                                                        @if ((string) $status === '0')
+                                                            @php
+                                                                $pendingOrdersDialogId =
+                                                                    'pending-orders-dialog-' . $table->id;
+                                                            @endphp
 
-                                                <div class="flex items-center justify-between gap-2">
-                                                    <h3 class="text-sm font-extrabold text-gray-700">
-                                                        {{ config('status.order')[(string) $status] ?? $status }}
-                                                    </h3>
+                                                            <button type="button"
+                                                                data-open-dialog="{{ $pendingOrdersDialogId }}"
+                                                                class="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-amber-300 bg-white px-4 py-3 text-sm font-bold text-amber-800 shadow-sm transition hover:bg-amber-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">
+                                                                <span>فتح الطلبات المعلّقة</span>
+                                                                <span
+                                                                    class="rounded-full bg-amber-100 px-2 py-0.5 text-xs">
+                                                                    {{ $statusOrders->count() }}
+                                                                </span>
+                                                            </button>
 
-                                                    <span class="text-xs font-semibold text-gray-500">
-                                                        {{ $statusOrders->sum('amount') }} وجبة
-                                                    </span>
-                                                </div>
+                                                            <dialog id="{{ $pendingOrdersDialogId }}"
+                                                                aria-labelledby="{{ $pendingOrdersDialogId }}-title"
+                                                                class="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-2xl overflow-hidden rounded-2xl border-0 bg-white p-0 shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm">
 
-                                                @if ((string) $status === '0')
-                                                    @php
-                                                        $pendingOrdersDialogId = 'pending-orders-dialog-' . $table->id;
-                                                    @endphp
+                                                                <div class="flex max-h-[calc(100dvh-2rem)] flex-col">
+                                                                    <header
+                                                                        class="flex shrink-0 items-center justify-between gap-3 border-b border-gray-200 bg-amber-50 px-4 py-4 sm:px-6">
+                                                                        <div>
+                                                                            <h4 id="{{ $pendingOrdersDialogId }}-title"
+                                                                                class="text-base font-extrabold text-gray-800">
+                                                                                الطلبات المعلّقة — الطاولة
+                                                                                {{ $table->number }}
+                                                                            </h4>
+                                                                            <p class="mt-1 text-xs text-gray-600">
+                                                                                أدخل وقت التحضير ثم أكّد كل طلب لإرساله
+                                                                                إلى
+                                                                                المطبخ.
+                                                                            </p>
+                                                                        </div>
 
-                                                    <button type="button"
-                                                        data-open-dialog="{{ $pendingOrdersDialogId }}"
-                                                        class="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-amber-300 bg-white px-4 py-3 text-sm font-bold text-amber-800 shadow-sm transition hover:bg-amber-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">
-                                                        <span>فتح الطلبات المعلّقة</span>
-                                                        <span class="rounded-full bg-amber-100 px-2 py-0.5 text-xs">
-                                                            {{ $statusOrders->count() }}
-                                                        </span>
-                                                    </button>
+                                                                        <form method="dialog">
+                                                                            <button type="submit"
+                                                                                aria-label="إغلاق النافذة"
+                                                                                class="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-xl font-bold text-gray-600 shadow-sm transition hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">
+                                                                                &times;
+                                                                            </button>
+                                                                        </form>
+                                                                    </header>
 
-                                                    <dialog id="{{ $pendingOrdersDialogId }}"
-                                                        aria-labelledby="{{ $pendingOrdersDialogId }}-title"
-                                                        class="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-2xl overflow-hidden rounded-2xl border-0 bg-white p-0 shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm">
+                                                                    <div class="overflow-y-auto p-4 sm:p-6">
+                                                        @endif
 
-                                                        <div class="flex max-h-[calc(100dvh-2rem)] flex-col">
-                                                            <header
-                                                                class="flex shrink-0 items-center justify-between gap-3 border-b border-gray-200 bg-amber-50 px-4 py-4 sm:px-6">
-                                                                <div>
-                                                                    <h4 id="{{ $pendingOrdersDialogId }}-title"
-                                                                        class="text-base font-extrabold text-gray-800">
-                                                                        الطلبات المعلّقة — الطاولة {{ $table->number }}
-                                                                    </h4>
-                                                                    <p class="mt-1 text-xs text-gray-600">
-                                                                        أدخل وقت التحضير ثم أكّد كل طلب لإرساله إلى
-                                                                        المطبخ.
-                                                                    </p>
-                                                                </div>
+                                                        <ul
+                                                            class="{{ (string) $status === '0' ? 'space-y-3' : 'mt-2 divide-y divide-gray-200' }}">
+                                                            @foreach ($statusOrders->groupBy('food_id') as $foodOrders)
+                                                                @php
+                                                                    $notesByValue = $foodOrders->groupBy(
+                                                                        fn($order) => filled($order->note)
+                                                                            ? trim($order->note)
+                                                                            : '',
+                                                                    );
 
-                                                                <form method="dialog">
-                                                                    <button type="submit" aria-label="إغلاق النافذة"
-                                                                        class="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-xl font-bold text-gray-600 shadow-sm transition hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500">
-                                                                        &times;
-                                                                    </button>
-                                                                </form>
-                                                            </header>
+                                                                    $expectedSeconds = $foodOrders->sum(function (
+                                                                        $order,
+                                                                    ) {
+                                                                        $parts = array_map(
+                                                                            'intval',
+                                                                            explode(
+                                                                                ':',
+                                                                                (string) $order->expected_time,
+                                                                            ),
+                                                                        );
 
-                                                            <div class="overflow-y-auto p-4 sm:p-6">
-                                                @endif
+                                                                        return count($parts) === 3
+                                                                            ? $parts[0] * 3600 +
+                                                                                    $parts[1] * 60 +
+                                                                                    $parts[2]
+                                                                            : 0;
+                                                                    });
 
-                                                <ul
-                                                    class="{{ (string) $status === '0' ? 'space-y-3' : 'mt-2 divide-y divide-gray-200' }}">
-                                                    @foreach ($statusOrders->groupBy('food_id') as $foodOrders)
-                                                        @php
-                                                            $notesByValue = $foodOrders->groupBy(
-                                                                fn($order) => filled($order->note)
-                                                                    ? trim($order->note)
-                                                                    : '',
-                                                            );
+                                                                    $expectedDuration = sprintf(
+                                                                        '%02d:%02d',
+                                                                        intdiv($expectedSeconds, 3600),
+                                                                        intdiv($expectedSeconds % 3600, 60),
+                                                                    );
+                                                                @endphp
 
-                                                            $expectedSeconds = $foodOrders->sum(function ($order) {
-                                                                $parts = array_map(
-                                                                    'intval',
-                                                                    explode(':', (string) $order->expected_time),
-                                                                );
+                                                                <li
+                                                                    class="{{ (string) $status === '0' ? 'rounded-lg border border-amber-100 bg-white p-3' : 'flex items-start justify-between gap-3 py-3 first:pt-0 last:pb-0' }}">
 
-                                                                return count($parts) === 3
-                                                                    ? $parts[0] * 3600 + $parts[1] * 60 + $parts[2]
-                                                                    : 0;
-                                                            });
+                                                                    <div class="min-w-0">
+                                                                        <p class="font-bold text-gray-800">
+                                                                            {{ $foodOrders->first()->food?->name ?? 'وجبة محذوفة' }}
+                                                                            <span class="text-gray-500">
+                                                                                × {{ $foodOrders->sum('amount') }}
+                                                                            </span>
+                                                                        </p>
 
-                                                            $expectedDuration = sprintf(
-                                                                '%02d:%02d',
-                                                                intdiv($expectedSeconds, 3600),
-                                                                intdiv($expectedSeconds % 3600, 60),
-                                                            );
-                                                        @endphp
-
-                                                        <li
-                                                            class="{{ (string) $status === '0' ? 'rounded-lg border border-amber-100 bg-white p-3' : 'flex items-start justify-between gap-3 py-3 first:pt-0 last:pb-0' }}">
-
-                                                            <div class="min-w-0">
-                                                                <p class="font-bold text-gray-800">
-                                                                    {{ $foodOrders->first()->food?->name ?? 'وجبة محذوفة' }}
-                                                                    <span class="text-gray-500">
-                                                                        × {{ $foodOrders->sum('amount') }}
-                                                                    </span>
-                                                                </p>
-
-                                                                @if ((string) $status !== '0' && $expectedSeconds > 0)
-                                                                    <p
-                                                                        class="mt-1 text-xs font-semibold text-emerald-700">
-                                                                        مدة التحضير المجمّعة: {{ $expectedDuration }}
-                                                                    </p>
-                                                                @endif
-
-                                                                @if ((string) $status === '0')
-                                                                    <ul class="mt-3 space-y-3">
-                                                                        @foreach ($foodOrders as $pendingOrder)
-                                                                            <li
-                                                                                class="rounded-lg border border-gray-200 bg-white p-3">
-                                                                                <div
-                                                                                    class="text-sm font-bold text-gray-800">
-                                                                                    طلب #{{ $pendingOrder->id }}
-                                                                                    <span class="text-gray-500">
-                                                                                        × {{ $pendingOrder->amount }}
-                                                                                    </span>
-                                                                                </div>
-
-                                                                                @if (filled($pendingOrder->note))
-                                                                                    <p
-                                                                                        class="mt-1 break-words text-xs text-gray-600">
-                                                                                        ملاحظة:
-                                                                                        {{ $pendingOrder->note }}
-                                                                                    </p>
-                                                                                @endif
-
-                                                                                <form data-confirm-order
-                                                                                    action="{{ route('cashier.orders.confirm', $pendingOrder) }}"
-                                                                                    method="POST"
-                                                                                    class="mt-3 flex flex-col gap-2 sm:flex-row sm:items-end">
-                                                                                    @csrf
-
-                                                                                    <label
-                                                                                        class="block flex-1 text-xs font-bold text-gray-700">
-                                                                                        مدة التحضير بالدقائق
-                                                                                        <input type="number"
-                                                                                            name="expected_minutes"
-                                                                                            min="1"
-                                                                                            max="50399" required
-                                                                                            value="{{ old('expected_minutes', 0) }}"
-                                                                                            inputmode="numeric"
-                                                                                            placeholder="مثال: 62"
-                                                                                            class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-200">
-                                                                                    </label>
-
-                                                                                    <button type="submit"
-                                                                                        class="inline-flex shrink-0 items-center justify-center rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
-                                                                                        تأكيد وإرسال للمطبخ
-                                                                                    </button>
-                                                                                </form>
-
-                                                                                @error('expected_minutes')
-                                                                                    <p role="alert"
-                                                                                        class="mt-2 rounded-lg bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">
-                                                                                        {{ $message }}
-                                                                                    </p>
-                                                                                @enderror
-                                                                            </li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                @else
-                                                                    @foreach ($notesByValue as $note => $ordersWithNote)
-                                                                        @if (filled($note))
+                                                                        @if ((string) $status < 2 && $expectedSeconds > 0)
                                                                             <p
-                                                                                class="mt-1 break-words text-xs leading-5 text-gray-500">
-                                                                                ملاحظة
-                                                                                ({{ $ordersWithNote->sum('amount') }})
-                                                                                :
-                                                                                {{ $note }}
+                                                                                class="mt-1 text-xs font-semibold text-emerald-700">
+                                                                                مدة التحضير المجمّعة:
+                                                                                {{ $expectedDuration }}
                                                                             </p>
                                                                         @endif
-                                                                    @endforeach
-                                                                @endif
-                                                            </div>
 
-                                                            <span class="shrink-0 text-sm font-bold text-gray-700">
-                                                                {{ number_format((float) $foodOrders->sum('total_price'), 0) }}
-                                                                ل.س
-                                                            </span>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
+                                                                        @if ((string) $status === '0')
+                                                                            <ul class="mt-3 space-y-3">
+                                                                                @foreach ($foodOrders as $pendingOrder)
+                                                                                    <li
+                                                                                        class="rounded-lg border border-gray-200 bg-white p-3">
+                                                                                        <div
+                                                                                            class="text-sm font-bold text-gray-800">
+                                                                                            طلب
+                                                                                            #{{ $pendingOrder->id }}
+                                                                                            <span
+                                                                                                class="text-gray-500">
+                                                                                                ×
+                                                                                                {{ $pendingOrder->amount }}
+                                                                                            </span>
+                                                                                        </div>
 
-                                                @if ((string) $status === '0')
-                                    </div>
+                                                                                        @if (filled($pendingOrder->note))
+                                                                                            <p
+                                                                                                class="mt-1 break-words text-xs text-gray-600">
+                                                                                                ملاحظة:
+                                                                                                {{ $pendingOrder->note }}
+                                                                                            </p>
+                                                                                        @endif
+
+                                                                                        <form data-confirm-order
+                                                                                            action="{{ route('cashier.orders.confirm', $pendingOrder) }}"
+                                                                                            method="POST"
+                                                                                            class="mt-3 flex flex-col gap-2 sm:flex-row sm:items-end">
+                                                                                            @csrf
+
+                                                                                            <label
+                                                                                                class="block flex-1 text-xs font-bold text-gray-700">
+                                                                                                مدة التحضير بالدقائق
+                                                                                                <input type="number"
+                                                                                                    name="expected_minutes"
+                                                                                                    min="1"
+                                                                                                    max="50399"
+                                                                                                    required
+                                                                                                    value="{{ old('expected_minutes', 0) }}"
+                                                                                                    inputmode="numeric"
+                                                                                                    placeholder="مثال: 62"
+                                                                                                    class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-200">
+                                                                                            </label>
+
+                                                                                            <button type="submit"
+                                                                                                class="inline-flex shrink-0 items-center justify-center rounded-lg bg-emerald-700 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+                                                                                                تأكيد وإرسال للمطبخ
+                                                                                            </button>
+                                                                                        </form>
+
+                                                                                        @error('expected_minutes')
+                                                                                            <p role="alert"
+                                                                                                class="mt-2 rounded-lg bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">
+                                                                                                {{ $message }}
+                                                                                            </p>
+                                                                                        @enderror
+                                                                                    </li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        @else
+                                                                            @foreach ($notesByValue as $note => $ordersWithNote)
+                                                                                @if (filled($note))
+                                                                                    <p
+                                                                                        class="mt-1 break-words text-xs leading-5 text-gray-500">
+                                                                                        ملاحظة
+                                                                                        ({{ $ordersWithNote->sum('amount') }})
+                                                                                        :
+                                                                                        {{ $note }}
+                                                                                    </p>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        @endif
+                                                                    </div>
+
+                                                                    <span
+                                                                        class="shrink-0 text-sm font-bold text-gray-700">
+                                                                        الاجمالي :
+                                                                        {{ number_format((float) $foodOrders->sum('total_price'), 0) }}
+
+                                                                        ل.س
+                                                                    </span>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+
+                                                        @if ((string) $status === '0')
+                                            </div>
                         </div>
                         </dialog>
                 @endif
@@ -440,6 +499,49 @@
         </div>
         @endif
         @endif
+        @php
+            $totalServicePrice = 0;
+
+            if ((int) $table->status !== 1 && !empty($services)) {
+                $totalServicePrice = collect($services)->sum('price');
+            }
+        @endphp
+
+        @if ((int) $table->status !== 1 && !empty($services))
+            <div class="min-w-0">
+                @foreach ($services as $service)
+                    <div class="mt-1 flex items-center justify-between border-t border-gray-200 pt-1">
+                        <span class="font-semibold text-gray-700">
+                            {{ $service['name'] }}
+                        </span>
+
+                        <span class="shrink-0 font-bold text-gray-500">
+                            {{ number_format((float) $service['price'], 0) }}
+                            {{ $service['currency'] }}
+                        </span>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+        <div class="mt-2 flex items-center justify-between border-t border-gray-200 pt-3">
+            <span class="text-sm font-bold text-gray-600">الإجمالي</span>
+
+            <span class="text-base font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
+                {{ number_format(
+                    (float) $bill->orders->whereNotIn('status', [0, '0'])->sum('total_price') + $totalServicePrice,
+                    0,
+                ) }}
+                ل.س
+            </span>
+        </div>
+
+        </section>
+    @empty
+        <p class="rounded-xl bg-gray-50 p-4 text-sm text-gray-500">
+            لا توجد فاتورة مسجلة لهذه الطاولة.
+        </p>
+        @endforelse
 
         </div>
         </article>

@@ -54,47 +54,14 @@
                                 <div
                                     class="mr-auto hidden items-center gap-1.5 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1.5 sm:flex">
                                     <span class="h-1.5 w-1.5 rounded-full bg-emerald-300"></span>
-                                    <span class="text-[11px] font-bold text-emerald-200">معلومات الطلب</span>
+                                    <span class="text-[11px] font-bold text-emerald-200">معلومات الجلسة</span>
                                 </div>
                             </div>
 
                             {{-- Table Information --}}
                             <div class="relative grid grid-cols-1 gap-3 sm:grid-cols-2">
 
-                                {{-- Table Name --}}
-                                @if ($tableName)
-                                    <div
-                                        class="group flex min-w-0 items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] p-3.5 transition-all duration-300 hover:border-[var(--restaurant-color-hex-e8c98c)]/40 hover:bg-white/[0.09] sm:p-4">
 
-                                        <div
-                                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--restaurant-color-hex-e8c98c)]/25 bg-gradient-to-br from-[var(--restaurant-color-hex-e8c98c)]/20 to-[var(--restaurant-color-hex-e8c98c)]/5 text-[var(--restaurant-color-hex-e8c98c)] transition-transform duration-300 group-hover:scale-105">
-                                            {{-- Table Icon --}}
-                                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <rect x="3" y="7" width="18" height="5" rx="1.5" />
-                                                <path d="M5 12v7m14-7v7M8 7V5h8v2M3 19h18" />
-                                            </svg>
-                                        </div>
-
-                                        <div class="min-w-0 flex-1">
-                                            <p class="mb-1 text-xs font-medium text-white/55">
-                                                اسم الطاولة
-                                            </p>
-                                            <p class="truncate text-base font-extrabold text-white sm:text-lg">
-                                                {{ $tableName }}
-                                            </p>
-                                        </div>
-
-                                        <div
-                                            class="shrink-0 rounded-lg border border-[var(--restaurant-color-hex-e8c98c)]/20 bg-[var(--restaurant-color-hex-e8c98c)]/10 px-2.5 py-1.5">
-                                            <span
-                                                class="text-[10px] font-extrabold tracking-widest text-[var(--restaurant-color-hex-e8c98c)]">
-                                                TABLE
-                                            </span>
-                                        </div>
-                                    </div>
-                                @endif
 
                                 {{-- Table Number --}}
                                 @if ($tableNumber !== null)
@@ -132,9 +99,35 @@
                                 @endif
 
                             </div>
+                            @if ($billStatus === 'payment')
+                                <div
+                                    class="bill-qr-panel mt-3 overflow-hidden rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/25 bg-[var(--restaurant-color-hex-0c241d)] p-4 shadow-xl sm:p-5">
 
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/30 bg-[var(--restaurant-color-hex-e8c98c)]/10 text-[var(--restaurant-color-hex-e8c98c)]">
+                                            <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                width="24" height="24" fill="none">
+                                                <circle cx="12" cy="12" r="10" s stroke="currentColor"
+                                                    stroke-width="1.8" />
+                                                <path d="m7.5 12.2 3 3 6-6.4" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+
+                                        <div class="min-w-0 flex-1">
+                                            <p class="text-sm font-bold text-white/85">
+                                                تم طلب الحساب لهذه الفاتورة </p>
+
+                                            <p class="mt-1 text-xs leading-6 text-white/40">
+                                                الرجاء انتظار النتظار الموافقة على طلب الحساب
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             {{-- QR Code --}}
-                            @if ($billCode)
+                            @if ($billCode && $billStatus !== 'payment')
                                 <div
                                     class="bill-qr-panel mt-3 overflow-hidden rounded-2xl border border-[var(--restaurant-color-hex-e8c98c)]/25 bg-[var(--restaurant-color-hex-0c241d)] p-4 shadow-xl sm:p-5">
 

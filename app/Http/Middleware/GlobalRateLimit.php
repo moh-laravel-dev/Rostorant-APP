@@ -9,29 +9,46 @@ use Symfony\Component\HttpFoundation\Response;
 
 class GlobalRateLimit
 {
-    public function handle(Request $request, Closure $next): Response
-    {
+    public function handle(
+        Request $request,
+        Closure $next,
+        int $maxAttempts = 60,
+        int $decaySeconds = 60
+    ): Response {
         $key = 'global-rate-limit:'.(
             $request->user()
                 ? 'user:'.$request->user()->getAuthIdentifier()
                 : 'ip:'.$request->ip()
         );
 
-        $maxAttempts = 60;
-        $decaySeconds = 60;
-
         if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
             $retryAfter = RateLimiter::availableIn($key);
 
-            return response()->json([
-                'status' => 'failed',
-                'message' => 'لقد تجاوزت الحد المسموح من الطلبات، يرجى المحاولة لاحقًا.',
-                'retry_after' => $retryAfter,
-            ], Response::HTTP_TOO_MANY_REQUESTS, [
+            $headers = [
                 'Retry-After' => $retryAfter,
                 'X-RateLimit-Limit' => $maxAttempts,
                 'X-RateLimit-Remaining' => 0,
-            ]);
+                'Cache-Control' => 'no-store, no-cache, must-revalidate',
+            ];
+
+            if (
+                $request->expectsJson() ||
+                $request->ajax() ||
+                $request->is('api/*')
+            ) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'لقد تجاوزت الحد المسموح من الطلبات، يرجى المحاولة لاحقًا.',
+                    'retry_after' => $retryAfter,
+                ], Response::HTTP_TOO_MANY_REQUESTS, $headers);
+            }
+
+            return response()->view(
+                'errors.rate-limit',
+                ['retryAfter' => $retryAfter],
+                Response::HTTP_TOO_MANY_REQUESTS,
+                $headers
+            );
         }
 
         RateLimiter::hit($key, $decaySeconds);

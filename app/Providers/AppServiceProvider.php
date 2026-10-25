@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\DB; // For working with database
-use Illuminate\Support\ServiceProvider; // Base service provider class
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request; // For working with database
+use Illuminate\Http\Resources\Json\JsonResource; // Base service provider class
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,8 +33,9 @@ class AppServiceProvider extends ServiceProvider
         } catch (\Exception $e) {
             // If the database connection fails, display an error message and stop the execution
             echo "❌ [DATABASE ERROR] MySQL is not running or .env config is invalid.\n";
-            echo "Reason: " . $e->getMessage() . "\n";
+            echo 'Reason: '.$e->getMessage()."\n";
             exit(1); // Stop the execution of the app
         }
+
     }
 }

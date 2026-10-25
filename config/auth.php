@@ -50,6 +50,10 @@ return [
             'driver' => 'session',
             'provider' => 'cashiers',
         ],
+        'captain' => [
+            'driver' => 'session',
+            'provider' => 'captains',
+        ],
     ],
 
     /*
@@ -81,6 +85,10 @@ return [
         'cashiers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Cashier::class,
+        ],
+        'captains' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Captain::class,
         ],
 
 

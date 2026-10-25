@@ -1001,7 +1001,7 @@
                     </svg>
 
                     <input type="text" name="search" value="{{ request('search') }}"
-                        placeholder="ابحث برقم الطاولة أو كود QR..." autocomplete="off" class="search-input">
+                        placeholder="ابحث برقم الطاولة QR..." autocomplete="off" class="search-input">
                 </div>
 
                 <button type="submit" class="btn-search">

@@ -467,6 +467,9 @@
     color-scheme: light;
     --theme-page: #f4f7f5;
     --theme-surface: #ffffff;
+    --theme-table: #e8e8e8;
+    --theme-table-hover: #cecece;
+    --theme-surface-50: #e0e0e0;
     --theme-surface-raised: #f8faf9;
     --theme-border: #dce5e0;
     --theme-text: #25352d;
@@ -481,6 +484,9 @@ html[data-theme="dark"] {
     --theme-page: #121a16;
     --notiy-count: #e69508;
     --theme-surface: #1b2620;
+    --theme-table: #27372e;
+    --theme-table-hover: #151d19;
+    --theme-surface-50: #1f3026;
     --theme-surface-raised: #233129;
     --theme-surface-success: #1e3528;
     --theme-surface-danger: #3a2726;
@@ -506,6 +512,15 @@ html[data-theme="dark"] .bg-white {
     background-color: var(--theme-surface) !important;
 }
 
+html[data-theme="dark"] .bg-white-50 {
+    background-color: var(--theme-surface-50) !important;
+}
+html[data-theme="dark"] .bg-table {
+    background-color: var(--theme-table) !important;
+}
+html[data-theme="dark"] .bg-table-hover {
+    background-color: var(--theme-table-hover) !important;
+}
 html[data-theme="dark"] .bg-gray-50,
 html[data-theme="dark"] .bg-slate-50,
 html[data-theme="dark"] [class~="bg-gray-50/50"],

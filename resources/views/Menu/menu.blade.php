@@ -27,4 +27,31 @@
     </div>
     @include('Menu.components.orders-modal')
     @include('Menu.components.scripts')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const billNumber = @json($billNumber);
+
+            if (!billNumber || typeof Echo === 'undefined') {
+                return;
+            }
+
+            Echo.channel(`bill.${billNumber}`)
+                .listen('.user.bill.end', function(event) {
+                    if (String(event.billNumber) !== String(billNumber)) {
+                        return;
+                    }
+
+                    // Clear application storage
+                    // localStorage.clear();
+                    sessionStorage.clear();
+
+                    // Replace current history entry with a fresh URL
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('_refresh', Date.now().toString());
+
+                    window.location.replace(url.toString());
+                });
+        });
+    </script>
 @endsection

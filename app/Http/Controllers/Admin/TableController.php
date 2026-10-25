@@ -9,7 +9,6 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TableController extends Controller
 {
-
     public function index(Request $request)
     {
         $query = Table::query();
@@ -18,8 +17,8 @@ class TableController extends Controller
             $search = trim($request->search);
 
             $query->where(function ($q) use ($search) {
-                $q->Where('number', 'like', "%{$search}%")->orwhere('code', 'like', "%{$search}%")
-                ;
+                $q->Where('number', 'like', "%{$search}%");
+                // ->orwhere('code', 'like', "%{$search}%")
             });
         }
 
@@ -34,6 +33,7 @@ class TableController extends Controller
 
         return view('tables.qr', compact('table', 'qrCode'));
     }
+
     // public function qrPrint(Table $table)
     // {
     //     $qrCode = base64_encode(
@@ -42,8 +42,8 @@ class TableController extends Controller
     //             ->margin(2)
     //             ->generate(url(env('QR_URL') . $table->code))
     //     );
-//
-//
+    //
+    //
     // }
     public function edit(string $code)
     {
@@ -59,7 +59,7 @@ class TableController extends Controller
             QrCode::format('svg')
                 ->size(300)
                 ->margin(2)
-                ->generate(url(env('QR_URL') . ltrim($table->code, '#')))
+                ->generate(url(env('QR_URL').ltrim($table->code, '#')))
         );
     }
 
@@ -68,6 +68,7 @@ class TableController extends Controller
         $nextNumber = (int) Table::max('number') + 1;
 
         return view('tables.create', compact('nextNumber'));
+
         return view('tables.create');
     }
 
@@ -125,12 +126,11 @@ class TableController extends Controller
     public function destroy(string $code)
     {
         $table = Table::where('code', $code)->firstOrFail();
-        if (!$table->status) {
+        if (! $table->status) {
             return redirect()->route('tables.edit', $table->code)->withErrors(['لا يمكن حذف الطاولة لأنها مشغولة حاليًا.']);
         }
         $table->delete();
 
         return redirect()->route('tables.index')->with('success', 'تم حذف الطاولة بنجاح.');
     }
-
 }

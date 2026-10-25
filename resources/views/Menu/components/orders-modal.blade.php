@@ -12,17 +12,22 @@
         $initialOrderStatuses = collect($data ?? [])
             ->filter(fn($item) => (int) ($item['amount'] ?? 0) > 0)
             ->flatMap(fn($item) => collect($item['statuses'] ?? []));
-        $canRequestBillInitially = $initialOrderStatuses->isNotEmpty()
-            && $initialOrderStatuses->every(fn($status) => in_array((string) ($status['status_code'] ?? ''), ['2', '3'], true));
+        $canRequestBillInitially =
+            $initialOrderStatuses->isNotEmpty() &&
+            $initialOrderStatuses->every(
+                fn($status) => in_array((string) ($status['status_code'] ?? ''), ['2', '3'], true),
+            );
     @endphp
 
     <div
         class="orders-dialog my-auto flex max-h-[94dvh] w-full max-w-lg flex-col overflow-hidden rounded-3xl bg-white shadow-2xl">
 
         {{-- Header --}}
-        <div class="flex shrink-0 items-center justify-between gap-4 border-b border-gray-100 bg-[var(--restaurant-color-hex-f7f8f5)] p-4 sm:p-6">
+        <div
+            class="flex shrink-0 items-center justify-between gap-4 border-b border-gray-100 bg-[var(--restaurant-color-hex-f7f8f5)] p-4 sm:p-6">
             <div class="flex min-w-0 items-center gap-3">
-                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-174c3c)] text-[var(--restaurant-color-hex-e8c98c)]">
+                <div
+                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-174c3c)] text-[var(--restaurant-color-hex-e8c98c)]">
                     {{-- Food Icon --}}
                     <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -34,7 +39,8 @@
                 </div>
 
                 <div class="min-w-0">
-                    <h2 id="orders-modal-title" class="text-lg font-black text-[var(--restaurant-color-hex-174c3c)] sm:text-xl">
+                    <h2 id="orders-modal-title"
+                        class="text-lg font-black text-[var(--restaurant-color-hex-174c3c)] sm:text-xl">
                         قائمة طلباتي
                     </h2>
                     <p class="mt-1 text-xs text-gray-500 sm:text-sm">
@@ -57,8 +63,7 @@
         <div id="orders-list" class="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain p-4 sm:p-5">
 
             {{-- Previous Orders --}}
-            <section id="previous-orders-section"
-                class="{{ count($data ?? []) > 0 ? '' : 'hidden' }} space-y-3">
+            <section id="previous-orders-section" class="{{ count($data ?? []) > 0 ? '' : 'hidden' }} space-y-3">
                 <div class="flex items-center justify-between border-b border-gray-200 pb-3">
                     <div class="flex min-w-0 items-center gap-2">
                         <h3 class="text-sm font-extrabold text-[var(--restaurant-color-hex-174c3c)]">
@@ -118,11 +123,14 @@
             </section>
 
             {{-- Table Services --}}
-            <section id="order-services" class="rounded-2xl border border-[var(--restaurant-color-hex-174c3c)]/10 bg-[var(--restaurant-color-hex-e8f0e8)]/50 p-4">
+            <section id="order-services"
+                class="rounded-2xl border border-[var(--restaurant-color-hex-174c3c)]/10 bg-[var(--restaurant-color-hex-e8f0e8)]/50 p-4">
 
-                <div class="mb-3 flex items-center justify-between border-b border-[var(--restaurant-color-hex-174c3c)]/10 pb-3">
+                <div
+                    class=" mb-3 flex items-center justify-between border-b border-[var(--restaurant-color-hex-174c3c)]/10 pb-3">
                     <div class="flex items-center gap-2">
-                        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-[var(--restaurant-color-hex-174c3c)]">
+                        <div
+                            class="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-[var(--restaurant-color-hex-174c3c)]">
                             {{-- Services Icon --}}
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -162,7 +170,8 @@
                     </p>
                 @endif
 
-                <div class="mt-3 flex items-center justify-between border-t border-[var(--restaurant-color-hex-174c3c)]/10 pt-3">
+                <div
+                    class="mt-3 flex items-center justify-between border-t border-[var(--restaurant-color-hex-174c3c)]/10 pt-3">
                     <span class="text-sm font-bold text-gray-600">مجموع الخدمات</span>
                     <span id="order-services-total" class="font-black text-[var(--restaurant-color-hex-174c3c)]">
                         {{ number_format($servicesTotal, 0) }} ل.س
@@ -173,7 +182,8 @@
             {{-- Empty Current Basket --}}
             <div id="orders-empty" class="flex flex-col items-center justify-center px-4 py-7 text-center">
                 {{-- Food Icon --}}
-                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-e8f0e8)] text-[var(--restaurant-color-hex-174c3c)]">
+                <div
+                    class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--restaurant-color-hex-e8f0e8)] text-[var(--restaurant-color-hex-174c3c)]">
                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 11h18" />
@@ -196,25 +206,48 @@
 
         {{-- Footer --}}
         <div class="shrink-0 border-t border-gray-100 bg-[var(--restaurant-color-hex-f9faf7)] p-4 sm:p-5">
-            <div class="mb- flex items-center justify-between gap-3">
-                <span class="text-sm font-bold text-gray-600">الطلبات السابقة</span>
-                <span id="footer-previous-orders-total" class="font-bold text-gray-700">
-                    {{ number_format($previousOrdersTotal, 0) }} ل.س
-                </span>
-            </div>
+            <div>
+                <button type="button" id="toggle-price-details" aria-expanded="false" aria-controls="price-details"
+                    class="flex w-full items-center justify-between gap-3 rounded-lg py-2 text-right">
 
-            <div class="mb-3 flex items-center justify-between gap-3">
-                <span class="text-sm font-bold text-gray-600">الطلبات الحالية</span>
-                <span id="footer-current-orders-total" class="font-bold text-gray-700">
-                    0 ل.س
-                </span>
-            </div>
+                    <span class="text-sm font-bold text-gray-700">تفاصيل الفاتورة</span>
 
-            <div class="mb-4 flex items-center justify-between gap-3">
-                <span class="text-sm font-bold text-gray-600">الخدمات</span>
-                <span id="footer-services-total" class="font-bold text-gray-700">
-                    {{ number_format($servicesTotal, 0) }} ل.س
-                </span>
+                    <svg id="price-details-icon"
+                        class="h-5 w-5 shrink-0 text-gray-500 transition-transform duration-300 ease-in-out"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m5 15 7-7 7 7" />
+                    </svg>
+                </button>
+
+                <div id="price-details-wrapper"
+                    class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out">
+
+                    <div class="overflow-hidden">
+                        <div id="price-details">
+                            <div class="mb-3 flex items-center justify-between gap-3">
+                                <span class="text-sm font-bold text-gray-600">الطلبات السابقة</span>
+                                <span id="footer-previous-orders-total" class="font-bold text-gray-700">
+                                    {{ number_format($previousOrdersTotal, 0) }} ل.س
+                                </span>
+                            </div>
+
+                            <div class="mb-3 flex items-center justify-between gap-3">
+                                <span class="text-sm font-bold text-gray-600">الطلبات الحالية</span>
+                                <span id="footer-current-orders-total" class="font-bold text-gray-700">
+                                    0 ل.س
+                                </span>
+                            </div>
+
+                            <div class="mb-4 flex items-center justify-between gap-3">
+                                <span class="text-sm font-bold text-gray-600">الخدمات</span>
+                                <span id="footer-services-total" class="font-bold text-gray-700">
+                                    {{ number_format($servicesTotal, 0) }} ل.س
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="mb-4 flex items-center justify-between gap-3 border-t border-gray-200 pt-4">
@@ -235,21 +268,20 @@
 
             <button id="request-bill" type="button" @if (!$canRequestBillInitially) hidden @endif
                 class="{{ $canRequestBillInitially ? '' : 'hidden ' }}mb-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-[var(--restaurant-color-hex-174c3c)]/20 bg-white px-5 py-3 text-sm font-black text-[var(--restaurant-color-hex-174c3c)] transition hover:bg-[var(--restaurant-color-hex-e8f0e8)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/10">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M4 3h16v18l-3-2-3 2-3-2-3 2-4-2V3Z" />
                     <path d="M8 8h8M8 12h8M8 16h4" />
                 </svg>
                 طلب الحساب
             </button>
 
-            <p id="request-bill-hint"
-                @if ($canRequestBillInitially) hidden @endif
+            <p id="request-bill-hint" @if ($canRequestBillInitially) hidden @endif
                 class="mb-3 rounded-xl border border-[var(--restaurant-color-hex-174c3c)]/10 bg-[var(--restaurant-color-hex-e8f0e8)]/60 px-3 py-2 text-center text-xs leading-5 text-gray-600">
                 {{ $canRequestBillInitially ? '' : 'يظهر زر «طلب الحساب» بعد وصول جميع الطلبات إلى الطاولة.' }}
             </p>
 
-            <button id="confirm-order-list" type="button" disabled
+            <button id="confirm-order-list" type="button" disabled hidden
                 class="confirm-order-button flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--restaurant-color-hex-174c3c)] px-5 py-4 text-sm font-black text-white shadow-lg shadow-[var(--restaurant-color-hex-174c3c)]/15 transition hover:bg-[var(--restaurant-color-hex-10382c)] focus:outline-none focus:ring-4 focus:ring-[var(--restaurant-color-hex-174c3c)]/20 disabled:cursor-not-allowed disabled:opacity-50">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -258,9 +290,75 @@
                 اضغط مطولاً لتأكيد الطلب
             </button>
 
-            <p class="mt-3 text-center text-xs leading-5 text-gray-400">
+            <p id="confirm-order-list-text" hidden class="mt-3 text-center text-xs leading-5 text-gray-400">
                 عند التأكيد سيتم إرسال الوجبات المحددة حالياً.
             </p>
         </div>
     </div>
 </div>
+
+
+{{-- Request Bill Confirmation Modal --}}
+<div id="request-bill-confirm-modal"
+    class="fixed inset-0 z-[120] hidden items-center justify-center bg-black/60 p-4 backdrop-blur-sm" role="dialog"
+    aria-modal="true" aria-labelledby="request-bill-confirm-title" aria-hidden="true">
+
+    <div class="w-full max-w-sm overflow-hidden rounded-3xl bg-white p-6 text-center shadow-2xl">
+
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-50 text-amber-600">
+            <svg id="price-details-icon"
+                class="h-5 w-5 shrink-0 rotate-180 text-gray-500 transition-transform duration-300 ease-in-out"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7" />
+            </svg>
+        </div>
+
+        <h3 id="request-bill-confirm-title" class="mt-4 text-xl font-black text-[var(--restaurant-color-hex-174c3c)]">
+            تأكيد طلب الحساب
+        </h3>
+
+        <p class="mt-3 text-sm leading-7 text-gray-600">
+            هل أنت متأكد من طلب الحساب؟
+        </p>
+
+        <p class="mt-2 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm font-bold leading-6 text-amber-800">
+            تنبيه: بعد تأكيد طلب الحساب، لن تتمكن من إضافة وجبات أو طلبات جديدة إلى الطاولة.
+        </p>
+
+        <div class="mt-6 flex gap-3">
+            <button id="cancel-request-bill" type="button"
+                class="flex-1 rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-bold text-gray-700 transition hover:bg-gray-50">
+                إلغاء
+            </button>
+
+            <button id="confirm-request-bill" type="button"
+                class="flex-1 rounded-xl bg-[var(--restaurant-color-hex-174c3c)] px-4 py-3 text-sm font-black text-white transition hover:bg-[var(--restaurant-color-hex-10382c)] disabled:cursor-not-allowed disabled:opacity-50">
+                تأكيد الطلب
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleButton = document.getElementById('toggle-price-details');
+        const wrapper = document.getElementById('price-details-wrapper');
+        const icon = document.getElementById('price-details-icon');
+
+        toggleButton.addEventListener('click', function() {
+            const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+
+            toggleButton.setAttribute('aria-expanded', String(!isExpanded));
+
+            wrapper.classList.toggle('grid-rows-[0fr]', isExpanded);
+            wrapper.classList.toggle('grid-rows-[1fr]', !isExpanded);
+
+            wrapper.classList.toggle('opacity-0', isExpanded);
+            wrapper.classList.toggle('opacity-100', !isExpanded);
+
+            icon.classList.toggle('rotate-180', !isExpanded);
+        });
+    });
+</script>

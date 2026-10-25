@@ -16,6 +16,7 @@ class Bill extends Model
         'status',
         'table_id',
         'total_price',
+        'services',
     ];
 
     protected function casts(): array
@@ -24,6 +25,7 @@ class Bill extends Model
             'start' => 'datetime',
             'end' => 'datetime',
             'total_price' => 'decimal:2',
+            'services' => 'array',
         ];
     }
 
@@ -31,9 +33,9 @@ class Bill extends Model
     {
         return $this->belongsTo(Table::class);
     }
+
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
-
 }

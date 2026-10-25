@@ -13,6 +13,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class MenuController extends Controller
@@ -71,6 +72,9 @@ class MenuController extends Controller
 
                 $statuses = $orders
                     ->groupBy('status')
+                    ->sortByDesc(fn ($statusOrders) => Carbon::parse(
+                        $statusOrders->min('created_at')
+                    )->getTimestamp())
                     ->map(function ($statusOrders, $status) use ($formatDuration, $getDurationInSeconds) {
                         $totalSeconds = $statusOrders->sum($getDurationInSeconds);
 
@@ -123,6 +127,7 @@ class MenuController extends Controller
         $tableNumber = $bill->table->number;
         $tableId = (int) $bill->table_id;
         $billCode = $bill->code;
+        $billStatus = $bill->status;
         $path = $this->filePath();
 
         $services = [];
@@ -139,7 +144,7 @@ class MenuController extends Controller
                 ->all();
         }
 
-        return view('Menu.menu', compact('categories', 'services', 'billNumber', 'billCode', 'tableId', 'tableName', 'tableNumber', 'data'));
+        return view('Menu.menu', compact('categories', 'services', 'billNumber', 'billStatus', 'billCode', 'tableId', 'tableName', 'tableNumber', 'data'));
     }
 
     public function createToken(string $code, ?int $from = 0)
@@ -158,7 +163,6 @@ class MenuController extends Controller
             $tableId = session('table_id');
             $tableCode = session('table_code');
             $expiresAt = session('table_session_expires_at');
-
             if (
                 $tableId &&
                 $tableCode &&
@@ -188,7 +192,7 @@ class MenuController extends Controller
                     }
 
                     $bill = Bill::where('table_id', $table->id)
-                        ->where('status', 'active')
+                        ->whereIn('status', ['active', 'payment'])
                         ->first();
 
                     if (! $bill) {
@@ -231,7 +235,13 @@ class MenuController extends Controller
                 'table_ip_address' => $ipAddress,
                 'table_session_expires_at' => now()->addDay()->timestamp,
             ]);
+            session()->save();
 
+            DB::table('sessions')
+                ->where('id', session()->getId())
+                ->update([
+                    'table_id' => $table->id,
+                ]);
             $bill = Bill::create([
                 'start_time' => now(),
                 'code' => Str::upper(Str::random(12)),
@@ -239,6 +249,7 @@ class MenuController extends Controller
                 'table_id' => $table->id,
             ]);
             event(new CashierDashboardUpdated((int) $bill->table_id));
+            Log::info('token', [session('_token')]);
 
             return redirect()->route('menu.index', $bill->number);
         }
@@ -253,6 +264,14 @@ class MenuController extends Controller
             'table_ip_address' => $ipAddress,
             'table_session_expires_at' => now()->addDay()->timestamp,
         ]);
+
+        session()->save();
+
+        DB::table('sessions')
+            ->where('id', session()->getId())
+            ->update([
+                'table_id' => $table->id,
+            ]);
         if ($is_new) {
             event(new CashierDashboardUpdated((int) $bill->table_id));
         }
@@ -276,6 +295,12 @@ class MenuController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'هذه الفاتورة غير موجودة.',
+            ], 400);
+        }
+        if ($bill->status === 'payment') {
+            return response()->json([
+                'success' => false,
+                'message' => 'عذراً، لقد طلبت الحساب بالفعل! لا يمكنك إضافة طلبات جديدة إلى هذه الفاتورة.',
             ], 400);
         }
 
@@ -307,6 +332,9 @@ class MenuController extends Controller
 
         $data = $bill->orders
             ->groupBy('food_id')
+            ->sortByDesc(fn ($statusOrders) => Carbon::parse(
+                $statusOrders->min('created_at')
+            )->getTimestamp())
             ->map(function ($orders) {
                 $firstOrder = $orders->first();
 
@@ -336,6 +364,9 @@ class MenuController extends Controller
 
                 $statuses = $orders
                     ->groupBy('status')
+                    ->sortByDesc(fn ($statusOrders) => Carbon::parse(
+                        $statusOrders->min('created_at')
+                    )->getTimestamp())
                     ->map(function ($statusOrders, $status) use ($formatDuration, $getDurationInSeconds) {
                         $totalSeconds = $statusOrders->sum($getDurationInSeconds);
 
@@ -393,7 +424,22 @@ class MenuController extends Controller
 
     public function menuPage(Request $request)
     {
-        return view('Menu.join-to-menu');
+        $code = $request->query('code');
 
+        if (filled($code)) {
+            $segments = is_array($code) ? $code : [$code];
+            $rawCode = strtoupper(implode('', array_map(static fn ($segment) => (string) $segment, $segments)));
+            $normalizedCode = preg_replace('/^#/', '', $rawCode);
+
+            if (! is_string($normalizedCode) || ! preg_match('/^[A-Z0-9]{6}$/', $normalizedCode)) {
+                return redirect()->route('menu.page')->withErrors([
+                    'code' => 'يرجى إدخال رمز طاولة صالح مكوّن من 6 خانات.',
+                ]);
+            }
+
+            return redirect()->route('menu.login', ['code' => $normalizedCode]);
+        }
+
+        return view('Menu.join-to-menu');
     }
 }
