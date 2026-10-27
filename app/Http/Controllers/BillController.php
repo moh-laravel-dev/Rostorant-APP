@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\CashierDashboardUpdated;
 use App\Events\CashierEndBill;
 use App\Models\Bill;
+use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -93,8 +94,9 @@ class BillController extends Controller
                 ->all();
         }
 
+        $newCode = Table::generateUniqueCode();
         $totalPrice = $bill->orders()->sum('total_price') + $servicesPrice;
-        DB::transaction(function () use ($bill, $totalPrice, $services): void {
+        DB::transaction(function () use ($bill, $totalPrice, $services, $newCode): void {
             $bill->update([
                 'status' => 'completed',
                 'total_price' => $totalPrice,
@@ -102,9 +104,10 @@ class BillController extends Controller
                 'end_time' => now(),
             ]);
 
-            $bill->table->update([
-                'status' => 1,
-            ]);
+            $table = $bill->table;
+            $table->status = true;
+            $table->code = $newCode;
+            $table->save();
         });
 
         DB::table('sessions')->where('table_id', $bill->table->id)->delete();

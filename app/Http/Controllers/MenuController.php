@@ -9,7 +9,6 @@ use App\Models\Food;
 use App\Models\Order;
 use App\Models\Table;
 use Carbon\Carbon;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -23,7 +22,7 @@ class MenuController extends Controller
         return storage_path('app/table_services.json');
     }
 
-    public function index(string $billNumber): View
+    public function index(string $billNumber)
     {
         $categories = CategoryFood::query()
             // ->where('is_active', 1)
@@ -38,7 +37,12 @@ class MenuController extends Controller
             ->first();
 
         if (! $bill) {
-            abort(404, 'هذه الفاتورة غير صحيحة');
+            return response()->view('errors.404', [
+                'title' => 'عذراً، لم يتم العثور على الفاتورة',
+                'message' => 'لا توجد فاتورة نشطة مرتبطة بهذه الطاولة.',
+                'route' => 'menu.page',
+                'routeName' => 'إدخال رمز الطاولة',
+            ], 404);
         }
 
         $data = $bill->orders
@@ -156,6 +160,13 @@ class MenuController extends Controller
             $table = Table::where('code', '#'.$code)->first();
             if (! $table && ($from == '1' || $from == '2')) {
                 return back()->withErrors(['code' => 'تحقق من صحة الرمز المدخل']);
+            } elseif (! $table) {
+                return response()->view('errors.404', [
+                    'title' => ' عذراً، لم يتم العثور على الطاولة',
+                    'message' => ' رمز الطاولة غير صحيح أو أن الصفحة التي تبحث عنها غير متاحة. تحقق من الرمز وحاول مرة أخرى.',
+                    'route' => 'menu.page',
+                    'routeName' => 'إدخال رمز الطاولة',
+                ], 404);
             }
 
             $ipAddress = request()->ip();
@@ -196,7 +207,12 @@ class MenuController extends Controller
                         ->first();
 
                     if (! $bill) {
-                        abort(404);
+                        return response()->view('errors.404', [
+                            'title' => 'عذراً، لم يتم العثور على الفاتورة',
+                            'message' => 'لا توجد فاتورة نشطة مرتبطة بهذه الطاولة.',
+                            'route' => 'menu.page',
+                            'routeName' => 'إدخال رمز الطاولة',
+                        ], 404);
                     }
 
                     return redirect()->route('menu.index', $bill->number);

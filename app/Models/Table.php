@@ -33,12 +33,18 @@ class Table extends Model
     protected static function booted(): void
     {
         static::creating(function (Table $table) {
-            do {
-                $code = '#' . strtoupper(Str::random(6));
-            } while (static::where('code', $code)->exists());
             $number = static::max('number') + 1;
-            $table->code = $code;
+            $table->code = static::generateUniqueCode();
             $table->number = $number;
         });
+    }
+
+    public static function generateUniqueCode(): string
+    {
+        do {
+            $code = '#' . strtoupper(Str::random(6));
+        } while (static::where('code', $code)->exists());
+
+        return $code;
     }
 }
